@@ -3,19 +3,28 @@
   "theme": "luma",
   "name": "Oviond",
   "colors": {
-    "primary": "#5B5BD6",
-    "light": "#7B7FE8",
-    "dark": "#4747B8"
+    "primary": "#0000ff",
+    "light": "#4d4dff",
+    "dark": "#6666ff"
   },
+  "favicon": "/favicon.svg",
   "logo": {
-    "light": "https://v2.oviond.com/img/oviond-logo.svg",
-    "dark": "https://v2.oviond.com/img/oviond-logo.svg"
+    "light": "/logo/oviond.svg",
+    "dark": "/logo/oviond.svg"
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude"
+    ]
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:support@oviond.com"
+        "label": "Talk to US",
+        "href": "https://www.oviond.com/contact/"
       }
     ],
     "primary": {
@@ -38,118 +47,224 @@
             ]
           },
           {
-            "group": "Account & Team",
+            "group": "Clients",
+            "pages": [
+              "clients/add",
+              "clients/list",
+              "clients/folders",
+              "clients/bulk-delete",
+              "clients/archive"
+            ]
+          },
+          {
+            "group": "Projects",
+            "pages": [
+              "projects/add",
+              "projects/list",
+              "projects/update",
+              "projects/duplicate",
+              "projects/bulk-delete",
+              "projects/archive",
+              "projects/share",
+              "projects/pages",
+              "projects/widgets"
+            ]
+          },
+          {
+            "group": "Agency",
+            "pages": [
+              "agency/add",
+              "agency/list"
+            ]
+          },
+          {
+            "group": "Templates",
+            "pages": [
+              "templates/add",
+              "templates/list",
+              "templates/apply",
+              "templates/delete"
+            ]
+          },
+          {
+            "group": "Themes",
+            "pages": [
+              "themes/add",
+              "themes/list",
+              "themes/apply",
+              "themes/update",
+              "themes/delete"
+            ]
+          },
+          {
+            "group": "Automations",
+            "pages": [
+              "automations/add",
+              "automations/list",
+              "automations/scheduled",
+              "automations/email",
+              "automations/pdf",
+              "automations/test",
+              "automations/history",
+              "automations/delete"
+            ]
+          },
+          {
+            "group": "Account",
             "pages": [
               "account/overview",
-              "account/team-members",
-              "account/clients-folders"
+              "account/usage",
+              "account/delete"
             ]
           },
           {
-            "group": "Reports",
+            "group": "Users",
             "pages": [
-              "reports/overview",
-              "reports/pages-widgets",
-              "reports/templates",
-              "reports/themes"
+              "users/invite",
+              "users/list",
+              "users/update",
+              "users/remove",
+              "users/profile"
             ]
           },
           {
-            "group": "Integrations",
+            "group": "Company",
             "pages": [
-              "integrations/overview",
-              "integrations/connecting-data-sources",
-              "integrations/metrics"
+              "company/overview",
+              "company/branding"
             ]
           },
           {
-            "group": "White Label",
-            "pages": [
-              "white-label/overview",
-              "white-label/custom-domains",
-              "white-label/branding"
-            ]
-          },
-          {
-            "group": "Automation & Delivery",
-            "pages": [
-              "automation/scheduled-reports",
-              "automation/email-delivery",
-              "automation/pdf-export"
-            ]
-          },
-          {
-            "group": "Billing & Plans",
+            "group": "Billing",
             "pages": [
               "billing/plans",
-              "billing/manage-subscription"
+              "billing/subscription",
+              "billing/invoices"
             ]
           },
           {
             "group": "API Keys",
             "pages": [
-              "api-keys/overview"
+              "api-keys/add",
+              "api-keys/list",
+              "api-keys/revoke",
+              "api-keys/delete"
+            ]
+          },
+          {
+            "group": "Activity Log",
+            "pages": [
+              "activity-log/overview"
+            ]
+          },
+          {
+            "group": "Custom Domains",
+            "pages": [
+              "custom-domains/add",
+              "custom-domains/list",
+              "custom-domains/verify",
+              "custom-domains/delete"
+            ]
+          },
+          {
+            "group": "Email Settings",
+            "pages": [
+              "email-settings/defaults",
+              "email-settings/senders",
+              "email-settings/smtp",
+              "email-settings/domains",
+              "email-settings/logs"
+            ]
+          },
+          {
+            "group": "Data Sources",
+            "pages": [
+              "data-sources/connect",
+              "data-sources/list",
+              "data-sources/profiles",
+              "data-sources/test",
+              "data-sources/link",
+              "data-sources/delete",
+              "data-sources/metrics"
+            ]
+          },
+          {
+            "group": "Custom Data",
+            "pages": [
+              "custom-data/upload",
+              "custom-data/list",
+              "custom-data/update",
+              "custom-data/duplicate",
+              "custom-data/delete"
+            ]
+          },
+          {
+            "group": "Archive",
+            "pages": [
+              "archive/view",
+              "archive/restore",
+              "archive/delete"
+            ]
+          },
+          {
+            "group": "Notifications",
+            "pages": [
+              "notifications/view",
+              "notifications/preferences"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/overview",
+              "guides/first-report",
+              "guides/connect-ga4",
+              "guides/monthly-report"
             ]
           }
         ]
       },
       {
         "tab": "API Reference",
+        "openapi": {
+          "source": "api/openapi.json",
+          "directory": "api"
+        },
         "groups": [
           {
             "group": "Overview",
             "pages": [
-              "api-reference/introduction"
+              "api/introduction"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "MCP",
+        "groups": [
           {
-            "group": "Authentication",
+            "group": "MCP",
             "pages": [
-              "api-reference/auth/signup",
-              "api-reference/auth/verify"
+              "mcp/overview",
+              "mcp/connect",
+              "mcp/auth",
+              "mcp/tools"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "groups": [
           {
-            "group": "Reports",
+            "group": "Releases",
             "pages": [
-              "api-reference/projects/list",
-              "api-reference/projects/create",
-              "api-reference/projects/update",
-              "api-reference/projects/delete",
-              "api-reference/projects/duplicate",
-              "api-reference/projects/save",
-              "api-reference/widgets/create",
-              "api-reference/widgets/delete"
-            ]
-          },
-          {
-            "group": "Integrations",
-            "pages": [
-              "api-reference/integrations/auth-url",
-              "api-reference/integrations/auth",
-              "api-reference/integrations/list",
-              "api-reference/integrations/delete",
-              "api-reference/data/query",
-              "api-reference/data/test"
-            ]
-          },
-          {
-            "group": "Automations",
-            "pages": [
-              "api-reference/automations/list",
-              "api-reference/automations/create",
-              "api-reference/automations/update",
-              "api-reference/automations/delete",
-              "api-reference/automations/pause",
-              "api-reference/automations/history"
-            ]
-          },
-          {
-            "group": "Public API",
-            "pages": [
-              "api-reference/public/report",
-              "api-reference/public/resolve",
-              "api-reference/public/branding"
+              "changelog/2026-04"
             ]
           }
         ]

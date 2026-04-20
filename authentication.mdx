@@ -1,5 +1,5 @@
 ---
-title: "Authenticate with the Oviond API"
+title: "Authentication"
 description: "Oviond authenticates API requests with Bearer tokens. Learn how to generate an API key, set the Authorization header, and handle auth errors."
 ---
 
@@ -28,7 +28,7 @@ Oviond's REST API uses Bearer token authentication. Every request must include y
 Include your API key in the `Authorization` header as a Bearer token on every request:
 
 ```bash
-curl -X GET https://backend.oviond.com/v1/users/me \
+curl -X GET https://api.oviond.com/v1/users/me \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -37,7 +37,7 @@ Replace `YOUR_API_KEY` with the key you generated above.
 ## Example: Fetch your account
 
 ```bash
-curl https://backend.oviond.com/v1/users/me \
+curl https://api.oviond.com/v1/users/me \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -63,7 +63,7 @@ If you receive a `401`, double-check that you've included the `Authorization: Be
 
 ## Manage your API keys
 
-You can list, create, and revoke API keys at any time from **Settings → API Keys** in the app, or via the [API Keys API](/api-keys/overview).
+You can list, create, and revoke API keys at any time from **Settings → API Keys** in the app, or via the [API Keys API](/api-keys/list).
 
 <Note>
   Each API key is scoped to your account. Keys created by team members operate within their permission level.
