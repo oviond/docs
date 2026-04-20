@@ -1,0 +1,133 @@
+---
+title: "Add Pages and Widgets to Reports"
+description: "Learn how to add pages to your Oviond reports and populate them with data widgets — charts, tables, KPIs, and more connected to your integrations."
+---
+
+Inside every Oviond project, your report content lives on **pages**, and each page is built from **widgets**. Pages give you separate sections within a single report — for example, one page per channel or one per campaign — while widgets are the individual data visualizations that pull live data from your connected integrations.
+
+## What are pages?
+
+Pages are tabs within a project. Each page has its own independent layout and can hold as many widgets as you need. When a client views your shared report link, they can switch between pages to explore different sections of the data.
+
+A project always starts with at least one page. You can add more pages at any time.
+
+## Add and rename pages
+
+<Steps>
+  <Step title="Open your project">
+    From the **Reports** screen, click the project you want to edit.
+  </Step>
+  <Step title="Add a new page">
+    Click the **+ Add Page** button in the page tab bar at the top of the editor. A new page appears with a default name such as "Page 2".
+  </Step>
+  <Step title="Rename the page">
+    Double-click the page tab to edit its name, then press **Enter** to confirm. Use clear, descriptive names like "Google Ads Overview" or "SEO Performance" so both you and your client can navigate the report easily.
+  </Step>
+</Steps>
+
+<Tip>
+  Plan your page structure before adding widgets. Grouping related data on dedicated pages (for example, one page per marketing channel) keeps reports easier to read.
+</Tip>
+
+## What are widgets?
+
+A widget is an individual data visualization placed on a page. Each widget connects to one of your data integrations and displays a specific metric. Oviond supports several widget types:
+
+- **KPI tile** — displays a single headline metric with optional comparison to a previous period.
+- **Chart** — visualizes trends over time as a line, bar, or area chart.
+- **Table** — shows multiple metrics or dimensions in rows and columns.
+- **Pie / donut chart** — breaks down a metric by dimension (for example, traffic by source).
+- **Text block** — freeform text for headings, notes, or commentary.
+
+## Add a widget to a page
+
+<Steps>
+  <Step title="Select the page">
+    Click the page tab you want to add the widget to.
+  </Step>
+  <Step title="Open the widget panel">
+    Click **+ Add Widget** (or the equivalent insert button) in the editor toolbar. The widget panel slides open on the right side.
+  </Step>
+  <Step title="Choose a visualization type">
+    Select the type of widget you want to add — for example, **KPI**, **Chart**, or **Table**.
+  </Step>
+  <Step title="Select a data source">
+    Choose the **integration** the widget should pull data from, such as Google Analytics 4, Google Ads, or Facebook Ads. Only integrations you've connected to this client's account are available.
+
+    <Note>
+      If the integration you need isn't listed, connect it first via **Integrations** in the sidebar. See [Integrations overview](/integrations/overview) for instructions.
+    </Note>
+  </Step>
+  <Step title="Pick a metric">
+    Select the specific **metric** (and optional **dimension**) to display — for example, Sessions, Impressions, or Cost.
+  </Step>
+  <Step title="Set the date range">
+    Choose the date range for the widget. You can use a fixed range or a relative range (such as "Last 30 days" or "This month") that updates automatically each time the report is viewed.
+  </Step>
+  <Step title="Add the widget to the page">
+    Click **Add** or **Insert**. The widget appears on the page canvas.
+  </Step>
+</Steps>
+
+## Configure widget settings
+
+After adding a widget, you can edit its settings at any time:
+
+<Steps>
+  <Step title="Select the widget">
+    Click the widget on the page canvas to select it. A settings panel opens on the right.
+  </Step>
+  <Step title="Change the data source or metric">
+    Update the **Integration**, **Metric**, or **Dimension** fields in the settings panel to change what data the widget displays.
+  </Step>
+  <Step title="Adjust the date range">
+    Change the **Date range** setting to a different fixed or relative period.
+  </Step>
+  <Step title="Switch the visualization type">
+    Use the **Chart type** or **Visualization** selector to switch between a line chart, bar chart, KPI tile, and so on, without losing your data configuration.
+  </Step>
+  <Step title="Customize appearance">
+    Set a widget title, adjust colors, and configure any type-specific display options (such as showing a comparison period on a KPI tile).
+  </Step>
+</Steps>
+
+## Rearrange and resize widgets
+
+Widgets on a page use a drag-and-drop grid layout. You can freely move and resize any widget:
+
+- **Move a widget** — click and drag it by its header to a new position on the grid.
+- **Resize a widget** — drag the resize handle in the bottom-right corner of the widget to make it larger or smaller. Widgets snap to the grid for alignment.
+
+<Tip>
+  Larger widgets work well for primary KPIs and charts. Use smaller tiles for supporting metrics so the most important data draws the eye first.
+</Tip>
+
+## Bulk delete widgets
+
+To remove multiple widgets at once:
+
+<Steps>
+  <Step title="Enter selection mode">
+    Hold **Shift** and click each widget you want to delete, or look for a **Select widgets** option in the page toolbar.
+  </Step>
+  <Step title="Delete the selection">
+    Click **Delete selected** in the toolbar that appears above the canvas. The selected widgets are removed from the page immediately.
+  </Step>
+</Steps>
+
+## Save your changes
+
+Oviond uses an atomic save model — when you save, **all pages and all widgets across the entire project are saved at once**. Changes you make on any page are not committed until you explicitly save.
+
+<Steps>
+  <Step title="Make your changes">
+    Add, edit, move, or delete pages and widgets as needed across any pages in the project.
+  </Step>
+  <Step title="Save the project">
+    Click the **Save** button in the top-right corner of the project editor. Oviond saves every page and widget in the project in a single operation.
+  </Step>
+</Steps>
+
+<Warning>
+  If you navigate away from the project editor without saving, any unsaved changes to pages and widgets will be lost. Always click **Save** before leaving the editor.
+</Warning>

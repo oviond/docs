@@ -1,0 +1,38 @@
+---
+title: "GET /v1/automations/{id}/history — Execution History"
+description: "GET /v1/automations/{id}/history — Returns the execution history for a scheduled automation, including timestamps and delivery status."
+---
+
+Returns the execution history for a given automation — each past run with its timestamp and outcome.
+
+## Request
+
+```bash
+GET https://backend.oviond.com/v1/automations/{id}/history
+Authorization: Bearer YOUR_API_KEY
+```
+
+<ParamField path="id" type="string" required>
+  The automation ID.
+</ParamField>
+
+## Response
+
+```json
+{
+  "data": [
+    {
+      "runId": "run_001",
+      "executedAt": "2024-03-04T08:00:00Z",
+      "status": "success",
+      "recipients": ["client@example.com"]
+    },
+    {
+      "runId": "run_002",
+      "executedAt": "2024-02-26T08:00:00Z",
+      "status": "failed",
+      "error": "SMTP authentication failed"
+    }
+  ]
+}
+```

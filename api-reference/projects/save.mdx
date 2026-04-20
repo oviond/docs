@@ -1,0 +1,45 @@
+---
+title: "PUT /v1/projects/{id}/save — Save Project"
+description: "PUT /v1/projects/{id}/save — Atomically saves all pages and widgets for an Oviond project in one request. Primary endpoint for persisting report edits."
+---
+
+Atomically saves the complete state of a project — all pages and their widgets — in a single request. This is the primary way to persist changes to a report layout.
+
+## Request
+
+```bash
+PUT https://backend.oviond.com/v1/projects/{id}/save
+Authorization: Bearer YOUR_API_KEY
+Content-Type: application/json
+
+{
+  "pages": [
+    {
+      "id": "page_abc",
+      "name": "Overview",
+      "order": 0,
+      "widgets": [
+        {
+          "id": "widget_xyz",
+          "type": "kpi",
+          "metricId": "metric_clicks",
+          "integrationId": "int_google_ads",
+          "position": { "x": 0, "y": 0, "w": 4, "h": 2 }
+        }
+      ]
+    }
+  ]
+}
+```
+
+<ParamField path="id" type="string" required>
+  The project ID to save.
+</ParamField>
+
+<ParamField body="pages" type="array" required>
+  Array of page objects, each containing their widgets.
+</ParamField>
+
+## Response
+
+Returns `200 OK` on success.

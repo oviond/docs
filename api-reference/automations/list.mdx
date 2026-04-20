@@ -1,0 +1,32 @@
+---
+title: "GET /v1/automations — List Automations"
+description: "GET /v1/automations — Returns all scheduled report automations in your Oviond account, including status, schedule (cron), delivery method, and recipients."
+---
+
+Returns all automations in your account.
+
+## Request
+
+```bash
+GET https://backend.oviond.com/v1/automations
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Response
+
+```json
+{
+  "data": [
+    {
+      "id": "auto_abc123",
+      "name": "Monthly Client Report",
+      "projectId": "proj_xyz",
+      "schedule": "0 8 1 * *",
+      "status": "active",
+      "deliveryMethod": "email",
+      "recipients": ["client@example.com"],
+      "createdAt": "2024-01-05T00:00:00Z"
+    }
+  ]
+}
+```

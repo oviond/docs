@@ -1,0 +1,40 @@
+---
+title: "POST /v1/data/test — Test Integration Connection"
+description: "POST /v1/data/test — Verifies a connected integration's credentials are valid and the data source is reachable. Returns a success flag and diagnostic message."
+---
+
+Tests an integration connection to verify the credentials are still valid and the data source is reachable.
+
+## Request
+
+```bash
+POST https://backend.oviond.com/v1/data/test
+Authorization: Bearer YOUR_API_KEY
+Content-Type: application/json
+
+{
+  "integrationId": "auth_abc123"
+}
+```
+
+<ParamField body="integrationId" type="string" required>
+  The auth profile ID to test.
+</ParamField>
+
+## Response
+
+```json
+{
+  "success": true,
+  "message": "Connection is healthy."
+}
+```
+
+If the connection has expired or has insufficient permissions:
+
+```json
+{
+  "success": false,
+  "message": "Token expired. Please reconnect this integration."
+}
+```

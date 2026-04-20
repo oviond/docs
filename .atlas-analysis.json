@@ -1,0 +1,187 @@
+{
+  "projectType": "saas",
+  "projectName": "Oviond",
+  "projectDescription": "Oviond is a white-label digital marketing reporting platform that lets agencies build, customize, and automatically deliver client reports and dashboards connected to popular marketing data sources.",
+  "theme": "luma",
+  "primaryColor": "#5B5BD6",
+  "lightColor": "#7B7FE8",
+  "darkColor": "#4747B8",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "authentication"
+            ]
+          },
+          {
+            "group": "Account & Team",
+            "pages": [
+              "account/overview",
+              "account/team-members",
+              "account/clients-folders"
+            ]
+          },
+          {
+            "group": "Reports",
+            "pages": [
+              "reports/overview",
+              "reports/pages-widgets",
+              "reports/templates",
+              "reports/themes"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/overview",
+              "integrations/connecting-data-sources",
+              "integrations/metrics"
+            ]
+          },
+          {
+            "group": "White Label",
+            "pages": [
+              "white-label/overview",
+              "white-label/custom-domains",
+              "white-label/branding"
+            ]
+          },
+          {
+            "group": "Automation & Delivery",
+            "pages": [
+              "automation/scheduled-reports",
+              "automation/email-delivery",
+              "automation/pdf-export"
+            ]
+          },
+          {
+            "group": "Billing & Plans",
+            "pages": [
+              "billing/plans",
+              "billing/manage-subscription"
+            ]
+          },
+          {
+            "group": "API Keys",
+            "pages": [
+              "api-keys/overview"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Authentication",
+            "pages": [
+              "api-reference/auth/signup",
+              "api-reference/auth/verify"
+            ]
+          },
+          {
+            "group": "Reports",
+            "pages": [
+              "api-reference/projects/list",
+              "api-reference/projects/create",
+              "api-reference/projects/update",
+              "api-reference/projects/delete",
+              "api-reference/projects/duplicate",
+              "api-reference/projects/save",
+              "api-reference/widgets/create",
+              "api-reference/widgets/delete"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "api-reference/integrations/auth-url",
+              "api-reference/integrations/auth",
+              "api-reference/integrations/list",
+              "api-reference/integrations/delete",
+              "api-reference/data/query",
+              "api-reference/data/test"
+            ]
+          },
+          {
+            "group": "Automations",
+            "pages": [
+              "api-reference/automations/list",
+              "api-reference/automations/create",
+              "api-reference/automations/update",
+              "api-reference/automations/delete",
+              "api-reference/automations/pause",
+              "api-reference/automations/history"
+            ]
+          },
+          {
+            "group": "Public API",
+            "pages": [
+              "api-reference/public/report",
+              "api-reference/public/resolve",
+              "api-reference/public/branding"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "White-label reporting for agencies",
+    "Connect to 30+ marketing data integrations (Google Ads, Facebook, etc.)",
+    "Drag-and-drop report and dashboard builder",
+    "Scheduled automated report delivery via email or PDF",
+    "Custom domain and branding for client-facing reports",
+    "Team collaboration with role-based access",
+    "Reusable templates and themes for report design",
+    "Custom metrics and calculated formulas",
+    "Media and asset library for report design",
+    "Public shareable report links for clients"
+  ],
+  "publicApiSurface": [
+    "POST /v1/auth/signup",
+    "GET /v1/auth/verify/{token}",
+    "POST /v1/auth/verify",
+    "GET /v1/users/me",
+    "PUT /v1/users/me/profile",
+    "POST /v1/users/invite",
+    "GET /v1/projects",
+    "POST /v1/projects",
+    "PUT /v1/projects/{id}",
+    "DELETE /v1/projects/{id}",
+    "POST /v1/projects/{id}/duplicate",
+    "PUT /v1/projects/{id}/save",
+    "POST /v1/pages",
+    "POST /v1/widgets",
+    "GET /v1/integrations/auth-url",
+    "POST /v1/integrations/auth",
+    "POST /v1/data/query",
+    "POST /v1/data/test",
+    "PUT /v1/white-label",
+    "POST /v1/white-label/domains",
+    "POST /v1/automations",
+    "PUT /v1/automations/{id}/pause",
+    "POST /v1/email/queue",
+    "POST /v1/pdf/generate",
+    "GET /v1/pdf/status/{job_id}",
+    "GET /v1/billing/plans",
+    "POST /v1/billing/subscribe",
+    "GET /v1/api-keys",
+    "POST /v1/api-keys",
+    "DELETE /v1/api-keys/{id}",
+    "GET /v1/public/report/{account_id}/{client_id}/{project_id}",
+    "GET /v1/public/resolve/{nano_id}"
+  ]
+}

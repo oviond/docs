@@ -1,0 +1,35 @@
+---
+title: "PUT /v1/projects/{id} — Update Project"
+description: "PUT /v1/projects/{id} — Updates an existing Oviond project. Change the name, reassign to a different client, or update PDF export layout settings."
+---
+
+Updates a project's metadata such as name, client assignment, or PDF export settings.
+
+## Request
+
+```bash
+PUT https://backend.oviond.com/v1/projects/{id}
+Authorization: Bearer YOUR_API_KEY
+Content-Type: application/json
+
+{
+  "name": "Updated Report Name",
+  "clientId": "client_xyz789"
+}
+```
+
+<ParamField path="id" type="string" required>
+  The project ID to update.
+</ParamField>
+
+<ParamField body="name" type="string">
+  New display name for the project.
+</ParamField>
+
+<ParamField body="clientId" type="string">
+  Reassign the project to a different client.
+</ParamField>
+
+## Response
+
+Returns `200 OK` with the updated project object.

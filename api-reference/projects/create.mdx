@@ -1,0 +1,45 @@
+---
+title: "POST /v1/projects — Create Project"
+description: "POST /v1/projects — Creates a new report or dashboard project in Oviond. Assign it to a client and optionally base it on a template."
+---
+
+Creates a new project (report or dashboard) in your Oviond account.
+
+## Request
+
+```bash
+POST https://backend.oviond.com/v1/projects
+Authorization: Bearer YOUR_API_KEY
+Content-Type: application/json
+
+{
+  "name": "Q1 Performance Report",
+  "clientId": "client_xyz789",
+  "templateId": "tmpl_optional"
+}
+```
+
+<ParamField body="name" type="string" required>
+  Display name for the project.
+</ParamField>
+
+<ParamField body="clientId" type="string" required>
+  The ID of the client this project belongs to.
+</ParamField>
+
+<ParamField body="templateId" type="string">
+  Optional. ID of a template to base the project on.
+</ParamField>
+
+## Response
+
+Returns `201 Created` with the new project object.
+
+```json
+{
+  "id": "proj_newid",
+  "name": "Q1 Performance Report",
+  "clientId": "client_xyz789",
+  "createdAt": "2024-03-01T09:00:00Z"
+}
+```

@@ -1,0 +1,25 @@
+---
+title: "DELETE /v1/projects/{id} — Delete Project"
+description: "DELETE /v1/projects/{id} — Permanently removes a project and all its pages and widgets from Oviond. This action cannot be undone. Returns 204 on success."
+---
+
+Permanently deletes a project and all associated pages and widgets.
+
+## Request
+
+```bash
+DELETE https://backend.oviond.com/v1/projects/{id}
+Authorization: Bearer YOUR_API_KEY
+```
+
+<ParamField path="id" type="string" required>
+  The ID of the project to delete.
+</ParamField>
+
+## Response
+
+Returns `204 No Content` on success.
+
+<Warning>
+  This action is irreversible. All pages and widgets within the project are permanently deleted.
+</Warning>

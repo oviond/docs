@@ -1,0 +1,27 @@
+---
+title: "GET /v1/integrations/auth-url — Get OAuth URL"
+description: "GET /v1/integrations/auth-url — Returns the OAuth authorization URL to begin connecting a marketing platform integration in Oviond."
+---
+
+Returns the OAuth authorization URL for a given integration platform. Redirect the user to this URL to begin the OAuth consent flow.
+
+## Request
+
+```bash
+GET https://backend.oviond.com/v1/integrations/auth-url?platform=google_ads
+Authorization: Bearer YOUR_API_KEY
+```
+
+<ParamField query="platform" type="string" required>
+  The integration platform identifier (e.g., `google_ads`, `facebook_ads`, `google_analytics`).
+</ParamField>
+
+## Response
+
+```json
+{
+  "url": "https://accounts.google.com/o/oauth2/v2/auth?..."
+}
+```
+
+Redirect the user to the returned `url`. After granting access, they will be redirected back to Oviond to complete the authorization.

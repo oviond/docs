@@ -1,0 +1,21 @@
+---
+title: "DELETE /v1/automations/{id} — Delete Automation"
+description: "DELETE /v1/automations/{id} — Permanently removes a scheduled automation from Oviond. All future sends are cancelled. Returns 204 No Content."
+---
+
+Permanently deletes an automation. Future scheduled sends will not occur.
+
+## Request
+
+```bash
+DELETE https://backend.oviond.com/v1/automations/{id}
+Authorization: Bearer YOUR_API_KEY
+```
+
+<ParamField path="id" type="string" required>
+  The automation ID to delete.
+</ParamField>
+
+## Response
+
+Returns `204 No Content` on success.

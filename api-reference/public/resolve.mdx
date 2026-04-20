@@ -1,0 +1,29 @@
+---
+title: "GET /v1/public/resolve/{nano_id} — Resolve Short Link"
+description: "GET /v1/public/resolve/{nano_id} — Resolves an Oviond short link to the full report path. Unauthenticated. Returns 404 if the nano ID does not exist."
+---
+
+Resolves a short share link (nano ID) to the full report path. Used to redirect users from short URLs like `oviond.com/s/abc123` to the full report URL.
+
+## Request
+
+```bash
+GET https://backend.oviond.com/v1/public/resolve/{nano_id}
+```
+
+<ParamField path="nano_id" type="string" required>
+  The short link identifier.
+</ParamField>
+
+## Response
+
+```json
+{
+  "url": "/v1/public/report/acc_xyz/client_abc/proj_def",
+  "accountId": "acc_xyz",
+  "clientId": "client_abc",
+  "projectId": "proj_def"
+}
+```
+
+Returns `404 Not Found` if the nano ID does not exist or has been deleted.

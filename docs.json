@@ -1,0 +1,165 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "luma",
+  "name": "Oviond",
+  "colors": {
+    "primary": "#5B5BD6",
+    "light": "#7B7FE8",
+    "dark": "#4747B8"
+  },
+  "logo": {
+    "light": "https://v2.oviond.com/img/oviond-logo.svg",
+    "dark": "https://v2.oviond.com/img/oviond-logo.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@oviond.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Sign In",
+      "href": "https://app.oviond.com"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "authentication"
+            ]
+          },
+          {
+            "group": "Account & Team",
+            "pages": [
+              "account/overview",
+              "account/team-members",
+              "account/clients-folders"
+            ]
+          },
+          {
+            "group": "Reports",
+            "pages": [
+              "reports/overview",
+              "reports/pages-widgets",
+              "reports/templates",
+              "reports/themes"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/overview",
+              "integrations/connecting-data-sources",
+              "integrations/metrics"
+            ]
+          },
+          {
+            "group": "White Label",
+            "pages": [
+              "white-label/overview",
+              "white-label/custom-domains",
+              "white-label/branding"
+            ]
+          },
+          {
+            "group": "Automation & Delivery",
+            "pages": [
+              "automation/scheduled-reports",
+              "automation/email-delivery",
+              "automation/pdf-export"
+            ]
+          },
+          {
+            "group": "Billing & Plans",
+            "pages": [
+              "billing/plans",
+              "billing/manage-subscription"
+            ]
+          },
+          {
+            "group": "API Keys",
+            "pages": [
+              "api-keys/overview"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Authentication",
+            "pages": [
+              "api-reference/auth/signup",
+              "api-reference/auth/verify"
+            ]
+          },
+          {
+            "group": "Reports",
+            "pages": [
+              "api-reference/projects/list",
+              "api-reference/projects/create",
+              "api-reference/projects/update",
+              "api-reference/projects/delete",
+              "api-reference/projects/duplicate",
+              "api-reference/projects/save",
+              "api-reference/widgets/create",
+              "api-reference/widgets/delete"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "api-reference/integrations/auth-url",
+              "api-reference/integrations/auth",
+              "api-reference/integrations/list",
+              "api-reference/integrations/delete",
+              "api-reference/data/query",
+              "api-reference/data/test"
+            ]
+          },
+          {
+            "group": "Automations",
+            "pages": [
+              "api-reference/automations/list",
+              "api-reference/automations/create",
+              "api-reference/automations/update",
+              "api-reference/automations/delete",
+              "api-reference/automations/pause",
+              "api-reference/automations/history"
+            ]
+          },
+          {
+            "group": "Public API",
+            "pages": [
+              "api-reference/public/report",
+              "api-reference/public/resolve",
+              "api-reference/public/branding"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/oviond",
+      "linkedin": "https://linkedin.com/company/oviond"
+    }
+  }
+}

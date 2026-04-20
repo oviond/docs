@@ -1,0 +1,143 @@
+---
+title: "Design Report Themes"
+description: "Create visual themes in Oviond to apply consistent colors, fonts, and design tokens across all your client reports and dashboards."
+---
+
+Themes in Oviond let you define a reusable set of visual design tokens — color palettes, font choices, and related styling — that you can apply across your reports and dashboards. Instead of styling each project individually, you create a theme once and apply it wherever you need consistent branding.
+
+## What is a theme?
+
+A theme is a named collection of design settings:
+
+- **Color palette** — primary, secondary, and accent colors used in charts, KPI tiles, and backgrounds.
+- **Font choices** — the typefaces used for headings and body text within your reports.
+
+When you apply a theme to a project, all widgets and pages in that project inherit the theme's design settings. Updating the theme later does not automatically propagate to projects that have already been assigned it — you need to reapply the theme to see changes in existing projects.
+
+<Note>
+  Themes control the visual style of your report content. For branding that appears in the report frame itself — such as your agency logo, custom domain, or client portal colors — see your [white-label branding settings](/white-label/overview).
+</Note>
+
+## Create a new theme
+
+<Steps>
+  <Step title="Open the Themes library">
+    Click **Themes** in the left sidebar (or find it under **Brand** or **Design** depending on your sidebar layout).
+  </Step>
+  <Step title="Click New Theme">
+    Click the **+ New Theme** button.
+  </Step>
+  <Step title="Name the theme">
+    Enter a name that reflects the theme's purpose or the client it's designed for — for example, "Client A Brand Colors" or "Agency Dark Theme".
+  </Step>
+  <Step title="Configure colors and fonts">
+    Set your color palette and font choices (see the sections below). You can also do this after the theme is created by editing it.
+  </Step>
+  <Step title="Save the theme">
+    Click **Save**. The theme appears in your Themes library and is available to apply to any project.
+  </Step>
+</Steps>
+
+## Edit theme colors and fonts
+
+<Steps>
+  <Step title="Open the Themes library">
+    Click **Themes** in the left sidebar.
+  </Step>
+  <Step title="Open the theme">
+    Click the theme you want to edit, or select **Edit** from its three-dot menu.
+  </Step>
+  <Step title="Edit the color palette">
+    In the **Colors** section, update each color swatch by entering a hex color value or using the color picker. Common palette slots include:
+
+    - **Primary color** — the dominant accent used in charts and KPI tiles.
+    - **Secondary color** — a supporting accent for multi-series charts.
+    - **Background color** — the page background for the report canvas.
+    - **Text color** — the default color for labels and widget text.
+
+    Add additional colors to the palette if your charts display multiple data series.
+  </Step>
+  <Step title="Choose fonts">
+    In the **Fonts** section, select the typeface for **Headings** and **Body text** from the available font options. Font choices affect all text rendered within the report pages.
+  </Step>
+  <Step title="Save your changes">
+    Click **Save** to update the theme.
+  </Step>
+</Steps>
+
+<Tip>
+  Use your client's brand hex codes and typefaces to create a per-client theme. This keeps every report you produce for that client visually on-brand without manual styling each time.
+</Tip>
+
+## Apply a theme to a project
+
+<Steps>
+  <Step title="Open the project">
+    From the **Reports** screen, click the project you want to style.
+  </Step>
+  <Step title="Open project settings">
+    Click **Project Settings** from the project menu or the settings icon in the editor toolbar.
+  </Step>
+  <Step title="Select a theme">
+    In the **Theme** dropdown, choose the theme you want to apply to this project.
+  </Step>
+  <Step title="Save your changes">
+    Click **Save**. All pages and widgets in the project now use the selected theme's colors and fonts.
+  </Step>
+</Steps>
+
+<Note>
+  Applying a theme overrides any widget-level color customizations that were set individually. If you need one widget to use a different color, adjust it manually after applying the theme.
+</Note>
+
+## Duplicate a theme
+
+Duplicating a theme is the fastest way to create a variation — for example, a light and dark version of the same brand palette, or a starting point for a similar client.
+
+<Steps>
+  <Step title="Open the Themes library">
+    Click **Themes** in the left sidebar.
+  </Step>
+  <Step title="Open the theme menu">
+    Hover over the theme card and click the three-dot menu.
+  </Step>
+  <Step title="Select Duplicate">
+    Click **Duplicate**. Oviond creates a copy with "Copy of" prepended to the theme name.
+  </Step>
+  <Step title="Rename and edit the duplicate">
+    Open the duplicate theme and update its name and color or font settings as needed.
+  </Step>
+</Steps>
+
+## Delete a theme
+
+<Warning>
+  Deleting a theme does not remove the styling from projects that currently use it — those projects retain the last-applied colors and fonts. However, the deleted theme will no longer be available to apply to future projects, and you won't be able to make centralized updates to it.
+</Warning>
+
+<Steps>
+  <Step title="Open the Themes library">
+    Click **Themes** in the left sidebar.
+  </Step>
+  <Step title="Open the theme menu">
+    Hover over the theme card and click the three-dot menu.
+  </Step>
+  <Step title="Select Delete">
+    Click **Delete**, then confirm when prompted.
+  </Step>
+</Steps>
+
+## How themes interact with white-label branding
+
+Themes and white-label branding settings serve different purposes in Oviond:
+
+| Setting | Controls |
+|---|---|
+| **Theme** | Colors and fonts used inside report pages — chart colors, KPI tile styling, background and text colors. |
+| **White-label branding** | The report frame visible to clients — your agency logo, custom domain, client portal header and footer colors. |
+
+Use themes to match the visual style of each report's content to your client's brand. Use white-label settings to ensure the report delivery experience reflects your agency's brand.
+
+<Tip>
+  For a fully branded client experience, set up your white-label settings once at the account level, then create per-client themes to style each report's content independently.
+</Tip>

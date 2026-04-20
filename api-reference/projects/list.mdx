@@ -1,0 +1,35 @@
+---
+title: "GET /v1/projects — List Projects"
+description: "GET /v1/projects — Returns all report and dashboard projects in your Oviond account. Optionally filter by clientId to scope results to one client."
+---
+
+Returns all projects (reports/dashboards) in your Oviond account.
+
+## Request
+
+```bash
+GET https://backend.oviond.com/v1/projects
+Authorization: Bearer YOUR_API_KEY
+```
+
+### Query parameters
+
+<ParamField query="clientId" type="string">
+  Filter projects by client ID.
+</ParamField>
+
+## Response
+
+```json
+{
+  "data": [
+    {
+      "id": "proj_abc123",
+      "name": "Monthly Performance Report",
+      "clientId": "client_xyz789",
+      "createdAt": "2024-01-15T10:00:00Z",
+      "updatedAt": "2024-02-01T14:30:00Z"
+    }
+  ]
+}
+```

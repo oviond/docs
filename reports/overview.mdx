@@ -1,0 +1,164 @@
+---
+title: "Build Marketing Reports and Dashboards"
+description: "Learn how to create, manage, and share marketing reports and dashboards in Oviond. Covers project creation, settings, duplication, and sharing."
+---
+
+In Oviond, every report or dashboard you build lives inside a **project**. A project is the top-level container that holds your pages and widgets, is assigned to a client, and can be shared with stakeholders via a public link. Whether you're producing a monthly PDF report or a live performance dashboard, you start by creating a project.
+
+## What is a project?
+
+A project is a named report or dashboard in Oviond. It belongs to a specific client, can contain multiple pages, and is the unit you share, duplicate, or export. Projects appear on your main **Reports** screen, organized by client.
+
+Each project contains:
+
+- **Pages** — individual tabs within the report, each with its own layout.
+- **Widgets** — data visualizations (charts, KPI tiles, tables) placed on each page and connected to your integrations.
+
+See [Add Pages and Widgets](/reports/pages-widgets) for details on building out the content inside a project.
+
+## Create a new project
+
+<Steps>
+  <Step title="Open the Reports screen">
+    Click **Reports** in the left sidebar. This lists all projects across your clients.
+  </Step>
+  <Step title="Click New Project">
+    Click the **+ New Project** button in the top-right corner.
+  </Step>
+  <Step title="Name your project">
+    Enter a name in the **Project name** field. Choose something descriptive — the name appears in the client-facing shared link and in any exported PDFs.
+  </Step>
+  <Step title="Assign a client">
+    Use the **Client** dropdown to assign the project to one of your existing clients. Every project must belong to a client.
+
+    <Note>
+      If the client doesn't exist yet, create them first in [Clients & Folders](/account/clients-folders), then return here.
+    </Note>
+  </Step>
+  <Step title="Choose a starting point">
+    Select whether to start from a **blank project** or from a **template**. Starting from a template pre-populates your project with pages and widgets you can customize. See [Use and Create Report Templates](/reports/templates) for more on templates.
+  </Step>
+  <Step title="Create the project">
+    Click **Create**. Oviond opens the project editor immediately.
+  </Step>
+</Steps>
+
+## Find and search your projects
+
+All your projects appear on the **Reports** screen. Use the search bar at the top of the list to filter projects by name. You can also filter the list by client using the **Client** dropdown filter to narrow down projects to a specific account.
+
+<Tip>
+  Use consistent naming conventions (for example, including the month and year in the project name) to make searching and identifying projects easier as your list grows.
+</Tip>
+
+## Edit project settings
+
+Project settings let you rename a project, reassign it to a different client, and configure PDF export options.
+
+<Steps>
+  <Step title="Open the project">
+    From the **Reports** screen, click the project you want to edit to open it.
+  </Step>
+  <Step title="Open project settings">
+    Click the **Settings** icon or select **Project Settings** from the project menu (the three-dot menu next to the project name).
+  </Step>
+  <Step title="Update the project name">
+    Edit the **Project name** field to rename the report. The new name will be reflected in the shared link and in any future PDF exports.
+  </Step>
+  <Step title="Reassign the client">
+    Use the **Client** dropdown to move the project to a different client if needed.
+  </Step>
+  <Step title="Configure PDF settings">
+    Under the **PDF** section, set the paper size, orientation, and any header or footer content that should appear on exported PDFs.
+  </Step>
+  <Step title="Save your changes">
+    Click **Save** to apply the updated settings.
+  </Step>
+</Steps>
+
+## Duplicate a project
+
+Duplicating a project creates an exact copy — including all pages and widgets — under a new name. This is useful when you want to reuse a report structure for a different client or time period without modifying the original.
+
+<Steps>
+  <Step title="Find the project">
+    On the **Reports** screen, locate the project you want to duplicate.
+  </Step>
+  <Step title="Open the project menu">
+    Click the three-dot menu next to the project name.
+  </Step>
+  <Step title="Select Duplicate">
+    Click **Duplicate**. Oviond creates a copy of the project with "Copy of" prepended to the name.
+  </Step>
+  <Step title="Rename and reassign if needed">
+    Open the duplicated project's settings to give it a new name and assign it to the correct client.
+  </Step>
+</Steps>
+
+<Tip>
+  If you want to save the project as a reusable starting point for future reports, consider [creating a template](/reports/templates) instead of duplicating.
+</Tip>
+
+## Delete a project
+
+<Warning>
+  Deleting a project permanently removes all of its pages, widgets, and data. This action cannot be undone. If you might need the report again, duplicate it or export it as a PDF before deleting.
+</Warning>
+
+<Steps>
+  <Step title="Find the project">
+    On the **Reports** screen, locate the project you want to delete.
+  </Step>
+  <Step title="Open the project menu">
+    Click the three-dot menu next to the project name.
+  </Step>
+  <Step title="Select Delete">
+    Click **Delete**, then confirm when prompted.
+  </Step>
+</Steps>
+
+### Bulk delete projects
+
+To delete multiple projects at once:
+
+<Steps>
+  <Step title="Enter selection mode">
+    On the **Reports** screen, click the checkbox that appears when you hover over a project card, or look for a **Select** option in the toolbar.
+  </Step>
+  <Step title="Select the projects to delete">
+    Check each project you want to remove.
+  </Step>
+  <Step title="Delete the selection">
+    Click **Delete selected** in the toolbar that appears, then confirm when prompted.
+  </Step>
+</Steps>
+
+## Share a report
+
+Oviond lets you share any project via a public link. Clients can view the report in a browser without needing an Oviond account or login.
+
+<Steps>
+  <Step title="Open the project">
+    Open the project you want to share.
+  </Step>
+  <Step title="Click Share">
+    Click the **Share** button in the top-right corner of the project editor, or find the **Share** option in the project menu from the Reports screen.
+  </Step>
+  <Step title="Enable the public link">
+    Toggle **Public link** on. Oviond generates a unique URL for the report.
+  </Step>
+  <Step title="Copy the link">
+    Copy the full URL, or click **Copy short URL** to get a shortened version that's easier to share.
+  </Step>
+  <Step title="Send the link to your client">
+    Paste the link into an email or message. Anyone with the link can view the live report without logging in.
+  </Step>
+</Steps>
+
+<Note>
+  The public link reflects your report's current live data each time it's opened — clients always see up-to-date figures. If you want to share a static snapshot, export the report as a PDF instead.
+</Note>
+
+<Warning>
+  Anyone who has the public link can view the report. Do not share it in public channels if your report contains sensitive client data.
+</Warning>

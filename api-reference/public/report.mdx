@@ -1,0 +1,52 @@
+---
+title: "GET /v1/public/report — Fetch Shared Report Data"
+description: "GET /v1/public/report/{account_id}/{client_id}/{project_id} — Retrieves the full data for a publicly shared Oviond report. No authentication required."
+---
+
+Returns the full report data for a publicly shared Oviond project. This endpoint is unauthenticated and used to power client-facing shared report links.
+
+## Request
+
+```bash
+GET https://backend.oviond.com/v1/public/report/{account_id}/{client_id}/{project_id}
+```
+
+<ParamField path="account_id" type="string" required>
+  The Oviond account ID.
+</ParamField>
+
+<ParamField path="client_id" type="string" required>
+  The client ID.
+</ParamField>
+
+<ParamField path="project_id" type="string" required>
+  The project ID.
+</ParamField>
+
+## Response
+
+Returns the project structure including pages, widgets, and rendered data.
+
+```json
+{
+  "project": {
+    "id": "proj_abc",
+    "name": "Q1 Performance",
+    "pages": [
+      {
+        "id": "page_1",
+        "name": "Overview",
+        "widgets": []
+      }
+    ]
+  },
+  "branding": {
+    "logo": "https://youragency.com/logo.png",
+    "primaryColor": "#3B82F6"
+  }
+}
+```
+
+<Note>
+  The response includes white-label branding so the report renders with your agency's visual identity.
+</Note>
