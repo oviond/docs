@@ -43,6 +43,7 @@
             "pages": [
               "introduction",
               "quickstart",
+              "onboarding/overview",
               "authentication"
             ]
           },
@@ -74,7 +75,14 @@
             "group": "Agency",
             "pages": [
               "agency/add",
-              "agency/list"
+              "agency/list",
+              "agency/update",
+              "agency/duplicate",
+              "agency/bulk-delete",
+              "agency/archive",
+              "agency/share",
+              "agency/pages",
+              "agency/widgets"
             ]
           },
           {
@@ -196,6 +204,17 @@
               "custom-data/update",
               "custom-data/duplicate",
               "custom-data/delete"
+            ]
+          },
+          {
+            "group": "Media",
+            "pages": [
+              "media/upload",
+              "media/list",
+              "media/folders",
+              "media/update",
+              "media/bulk-delete",
+              "media/delete"
             ]
           },
           {
