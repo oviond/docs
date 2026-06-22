@@ -1,13 +1,22 @@
 ---
-title: "View Notifications"
-description: "In-app alerts and email digests from your Oviond account."
+title: "View notifications"
+description: "In-app alerts from your Oviond account."
 ---
 
-Oviond surfaces events as **Notifications** (the bell icon in the top bar) for things you need to react to:
+Oviond surfaces events as **Notifications** in the bell icon, with an unread badge showing your count. Notifications cover things you may need to react to, such as:
 
-- An integration disconnected and needs re-authentication
-- An automation run failed
-- A team member was invited or removed
-- A PDF export finished
+- A data source failed to load widget data
+- An automation finished or failed
+- A PDF export is ready or failed
+- An email bounced
+- An account change — your role changed, an invite was accepted, or you were removed from an account
 
-Each user can configure per-event email delivery under **Notifications → Preferences**. In-app notifications are shared account-wide; email delivery is per-user.
+Notifications are **per-user** — each person sees their own. Each one carries a severity (`info`, `warning`, `error`, or `success`) and belongs to a category. Open the inbox at `/notifications`; the bell and unread badge live in the sidebar user menu.
+
+## In the inbox
+
+- **Filter by category** — All, Data Sources, Automations, PDF Export, Email, or Account.
+- **Mark as read** — click a notification to mark it read, or select several and **Mark as read** in bulk.
+- **Delete** — select the notifications you want to remove and delete them in bulk.
+
+Choose which events reach you, and through which channels, under **Settings → Notifications**. See [Preferences](/notifications/preferences).

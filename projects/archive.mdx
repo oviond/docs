@@ -1,18 +1,18 @@
 ---
 title: "Archive Project"
-description: "Soft-delete a project with full restore within the retention window."
+description: "Soft-delete a project and restore it from the Archive."
 ---
 
-Archiving a project removes it from your active Reports list without permanently destroying the project's pages, widgets, or date-range settings. You can restore the project from the [Archive](/archive/view) any time before the retention window expires.
+Archiving a project removes it from your active **Projects** list without destroying the project's pages, widgets, or settings. When you archive a project, Oviond also archives everything under it — pages, widgets, and automations. You can restore the project from the [Archive](/archive/view) at any time.
 
 ## Archive a project
 
 <Steps>
   <Step title="Open the project menu">
-    From the Reports screen, click the three-dot menu on the project card, or open the project and use its header menu.
+    From the client's **Projects** tab, open the three-dot menu on the project card, or open the project and use its header menu.
   </Step>
-  <Step title="Choose Archive">
-    The project disappears from the active Reports list and moves to the [Archive](/archive/view).
+  <Step title="Choose Delete">
+    The project disappears from the active list and moves to the [Archive](/archive/view), along with its pages, widgets, and automations.
   </Step>
 </Steps>
 
@@ -20,6 +20,10 @@ Archiving a project removes it from your active Reports list without permanently
 
 From the Archive, find the project, click **Restore**, and it reappears under its original client with all pages and widgets intact.
 
-## Retention
+<Note>
+Archiving a client also archives every project under it. Restoring the client restores those projects too.
+</Note>
 
-Archived projects older than the retention window (90 days by default) are **permanently purged** by a background job. For long-term storage of reference reports, [duplicate](/projects/duplicate) into a dedicated "Archive" client instead.
+## Permanent delete
+
+Archived projects stay in the Archive until you permanently delete them — there's no automatic time-based purge. Permanent deletion is **admin-only** and is irreversible. Export anything you need first.

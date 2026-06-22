@@ -1,29 +1,30 @@
 ---
-title: "Duplicate Custom Data"
+title: "Duplicate custom data"
 description: "Copy a dataset under a new name."
 ---
 
-Duplicating clones a Custom Data dataset — rows, columns, and metadata — under a new name. Useful for:
+Duplicating clones a dataset — its rows, columns, and metadata — under a new name. It's useful for:
 
-- Creating a variant with different filtering or data transformations applied downstream
-- Forking a dataset before a risky update, so you can compare side-by-side
-- Spinning up test data from a verified production dataset
+- Creating a variant before applying different transformations downstream
+- Forking a dataset before a risky edit, so you can compare side by side
+- Spinning up test data from a verified dataset
 
 <Steps>
-  <Step title="Open Custom Data">
-    From the sidebar.
-  </Step>
-  <Step title="Open the dataset's menu">
-    Click the three-dot menu on the row.
+  <Step title="Open Manage Custom Data">
+    From the **Data Query** widget's **Custom Data** source, click **Manage** next to the **Dataset** label.
   </Step>
   <Step title="Choose Duplicate">
-    The copy appears in the list as `Copy of [original]`.
+    Select the dataset and choose **Duplicate**.
   </Step>
-  <Step title="Rename">
-    Open the copy and give it a meaningful name.
+  <Step title="Name the copy">
+    Enter a name for the new dataset. The copy is created with that name.
   </Step>
 </Steps>
 
 <Note>
-Widgets continue pointing at the original dataset — duplicating doesn't re-wire anything. If you want widgets to use the new dataset, open each widget and update its data source.
+Widgets continue pointing at the original dataset — duplicating doesn't re-wire anything. To point a widget at the copy, open the widget and select the new dataset.
 </Note>
+
+## API
+
+`POST /v1/custom-data/{id}/duplicate` clones the source dataset. Send `new_name` for the copy. The response returns the new dataset `id`.

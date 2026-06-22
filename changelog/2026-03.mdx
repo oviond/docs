@@ -1,0 +1,55 @@
+---
+title: "March 2026"
+description: "Release notes for the Oviond REST API."
+---
+
+<Update label="2026-03-26" description="Email delivery">
+
+### Sending infrastructure
+
+Send reports from your own addresses over a verified domain or your own SMTP server, with reusable email templates.
+
+- `GET|PUT /v1/email/provider` — select the active transport (Oviond, SMTP, or domain)
+- `POST /v1/email/senders` and `POST /v1/email/senders/{id}/default`
+- `POST /v1/email/smtp` and `POST /v1/email/smtp/test`
+- `POST /v1/email/domain` and `POST /v1/email/domain/{id}/verify`
+- `POST /v1/email/templates`
+
+</Update>
+
+<Update label="2026-03-19" description="Automations">
+
+### Scheduled report delivery
+
+Schedule reports to be emailed to clients on a recurring cadence, with pause/resume, run history, and test sends.
+
+- `POST /v1/automations` — create an automation
+- `POST /v1/automations/{id}/pause` and `/v1/automations/{id}/unpause`
+- `POST /v1/automations/{id}/test` — send a test without advancing the schedule
+- `GET /v1/automations/{project_id}/history` — inspect past deliveries
+
+</Update>
+
+<Update label="2026-03-12" description="PDF export">
+
+### PDF generation
+
+Render any report to PDF asynchronously — enqueue a job, then poll for status until the download is ready.
+
+- `POST /v1/pdf/generate` — enqueue a job
+- `GET /v1/pdf/status/{job_id}` — poll until complete
+- `GET /v1/exports` and `GET /v1/exports/{id}` — export history
+
+</Update>
+
+<Update label="2026-03-05" description="Public sharing">
+
+### Shareable report links
+
+Every project gets a short `nano_id` share URL. Public endpoints return the full rendered payload — widgets, branding, and theme — with no authentication required.
+
+- `GET /v1/public/resolve/{nano_id}` — resolve a short link
+- `GET /v1/public/project/{account_id}/{project_id}` — full render payload
+- `GET /v1/public/branding/{account_id}` and `GET /v1/public/theme/{theme_id}`
+
+</Update>

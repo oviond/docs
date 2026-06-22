@@ -1,26 +1,23 @@
 ---
-title: "Delete Custom Data"
-description: "Permanently remove an uploaded CSV dataset."
+title: "Delete custom data"
+description: "Permanently remove an uploaded dataset."
 ---
 
-Deleting a dataset removes its rows and the dataset metadata. Widgets that referenced the dataset show *Data source unavailable* until re-wired to a different source.
+Deleting a dataset removes its rows and metadata. Widgets that referenced the dataset no longer resolve their data until you re-wire them to a different source.
 
 <Warning>
-Deletion is permanent — there's no Archive recovery for Custom Data. Download the CSV back from the dataset preview first if you want a backup.
+Deletion is permanent — custom data is hard-deleted, with no Archive recovery. Keep a copy of the original file if you might need it later.
 </Warning>
 
 <Steps>
-  <Step title="Open Custom Data">
-    From the sidebar.
-  </Step>
-  <Step title="Open the dataset's menu">
-    Click the three-dot menu.
+  <Step title="Open Manage Custom Data">
+    From the **Data Query** widget's **Custom Data** source, click **Manage** next to the **Dataset** label.
   </Step>
   <Step title="Choose Delete">
-    Confirm when prompted.
+    Select the dataset and choose **Delete**. Confirm when prompted.
   </Step>
 </Steps>
 
-## If the dataset is in use
+## API
 
-Oviond warns you if the dataset is referenced by any active widget before deletion. Review the list of dependent widgets — you may want to swap their data source first rather than leaving broken widgets.
+`DELETE /v1/custom-data/{id}` permanently removes the dataset. It returns `404` if the dataset doesn't exist in your account.

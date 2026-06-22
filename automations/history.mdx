@@ -1,25 +1,30 @@
 ---
-title: "Run History"
-description: "See every past run of an automation and its status."
+title: "Run history"
+description: "See every past run of a project's automations and its status."
 ---
 
-The **Run History** page lists every scheduled delivery an automation has made — successful or not — along with the exact time, recipient list, and any error if it failed.
+The **Automation History** page lists every run recorded for a project — across all of its automations, and including both scheduled deliveries and test sends. Open it from an automation's **Executions** action, or from the row menu. The page lives at `/automations/:project_id`.
 
-## Status codes
+Each row shows the run's name, **Source** (**Scheduled** or **Test**), the time it sent, its status, the report **Type**, and the **Date range** it covered. Test runs are also tagged with a **Test** badge. You can search by name and filter by report type, and the list is paginated.
+
+## Status values
 
 | Status | Meaning |
 |---|---|
-| **Delivered** | Email was successfully queued to every recipient's provider. |
-| **Partial** | Some recipients received it, others bounced or errored. |
-| **Failed** | The automation errored before sending — typically a rendering or template issue. |
-| **Skipped** | Automation was paused when the scheduled run fired. |
+| **Success** | The run rendered and sent. |
+| **Failed** | The run errored — typically a rendering or delivery problem. The error detail is stored with the run. |
+| **Skipped** | The run was skipped (for example, the automation was paused when it was due). |
 
-## When to check History
+## When to check history
 
-- **Debugging a missed delivery** — a client says they didn't receive the report; check History to confirm it fired and to see the recipient-level delivery status.
-- **Auditing** — prove that an end-of-month report was delivered on time.
-- **Error triage** — a row showing **Failed** includes the specific error (e.g. *Integration error — Google Ads token expired*).
+- **Debugging a missed delivery** — confirm a scheduled run actually fired and whether it succeeded or failed.
+- **Verifying a test** — a test send shows up here as a **Test** row right after you trigger it.
+- **Auditing** — confirm an end-of-month report went out on time.
 
-## Retention
+## Endpoint
 
-Run history is retained for 12 months. Older entries are purged automatically.
+The history is served by `GET /v1/automations/:project_id/history` — note that it's scoped by **project**, not by a single automation id. It aggregates the runs of every automation attached to that project into one timeline and is paginated via `page` and `limit`.
+
+<Note>
+Archiving a run from the history list removes the underlying report snapshot for that run, not the automation itself. The automation keeps running on its schedule.
+</Note>

@@ -3,34 +3,48 @@ title: "Authentication"
 description: "How the Oviond MCP server authenticates AI agents — OAuth 2.1 under the hood."
 ---
 
-The Oviond MCP server uses **OAuth 2.1 authorization-code flow with PKCE** — the same pattern Anthropic's MCP spec mandates for remote servers. This section walks through what the agent and Oviond do during the handshake.
+The Oviond MCP server uses **OAuth 2.1 authorization-code flow with PKCE** — the same pattern the MCP spec mandates for remote servers. Clients are public clients: they use PKCE (`S256`) instead of a client secret. This section walks through what the agent and Oviond do during the handshake.
 
 ## Flow at a glance
 
-1. **Discovery** — the agent fetches `https://api.oviond.com/.well-known/oauth-authorization-server` to learn the auth endpoints.
-2. **Client registration** — the agent dynamically registers with Oviond (no manual client-secret setup required).
-3. **Authorization request** — the agent opens a browser to Oviond's `/oauth/authorize` with a PKCE challenge.
-4. **User consent** — you sign in to Oviond and approve the connection scope.
-5. **Token exchange** — the agent exchanges the authorization code for an access token via `/oauth/token`.
+1. **Discovery** — when the agent hits `https://api.oviond.com/mcp` without a valid token, the `WWW-Authenticate` header points it at `https://api.oviond.com/.well-known/oauth-protected-resource`. That metadata names the authorization server, which the agent then reads from `https://api.oviond.com/.well-known/oauth-authorization-server`.
+2. **Client registration** — the agent dynamically registers at `/oauth/register` (RFC 7591). No manual client-secret setup is required; registered clients use `token_endpoint_auth_method: none`.
+3. **Authorization request** — the agent opens a browser to `/oauth/authorize` with a PKCE `code_challenge` (`code_challenge_method=S256`).
+4. **User consent** — you sign in to Oviond and approve the connection on the consent screen.
+5. **Token exchange** — the agent exchanges the authorization code at `/oauth/token`, sending its `code_verifier` to satisfy PKCE.
 6. **Tool calls** — every subsequent MCP request carries `Authorization: Bearer <access_token>`.
+
+## Endpoints
+
+| Endpoint | Purpose |
+|---|---|
+| `/.well-known/oauth-protected-resource` | Resource metadata (RFC 9728) — names the authorization server. |
+| `/.well-known/oauth-authorization-server` | Authorization server metadata (RFC 8414). |
+| `/oauth/register` | Dynamic client registration (RFC 7591). |
+| `/oauth/authorize` | Start the authorization-code flow. |
+| `/oauth/token` | Exchange a code or refresh token for an access token. |
+| `/oauth/revoke` | Revoke a refresh token (RFC 7009). |
+| `/oauth/jwks` | Public signing keys (ES256). |
+
+The only supported scope is `mcp`, and the only supported PKCE method is `S256`.
 
 ## Token scope
 
-Access tokens are scoped to **the signed-in user's role and allowed projects**. The MCP server:
+Access tokens are scoped to **the signed-in user's role and account**. The MCP server:
 
 - Sees only clients, projects, and data the authenticated user can see in the web app.
-- Inherits role restrictions (read-only users can only read via MCP).
-- Can't delete or modify data the user isn't authorized for.
+- Inherits the user's role (carried as a claim in the access token).
+- Is scoped to a single account — you don't pass an `account_id`.
 
 ## Token lifetime
 
 - **Access tokens** last 1 hour.
 - **Refresh tokens** are issued alongside the access token and last 30 days.
-- The MCP client auto-refreshes — you won't be prompted to sign in again during normal usage.
+- Refresh tokens rotate: each refresh returns a new refresh token and invalidates the old one. The MCP client refreshes automatically, so you won't be prompted to sign in again during normal usage.
 
 ## Revoking access
 
-Revoke an MCP client's access at any time from **Account → Connected Apps** in Oviond. Revoked tokens stop working immediately — the agent will need to re-authorize on its next tool call.
+The MCP client can revoke its refresh token at `/oauth/revoke`. Once revoked, that refresh token stops working immediately; the agent re-authorizes on its next attempt. Access tokens are stateless and expire on their own within an hour.
 
 <Note>
 The MCP server does **not** use the Bearer API keys you create under **API Keys**. Those are for direct REST API calls. MCP has its own OAuth flow with per-client tokens.

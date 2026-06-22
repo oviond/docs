@@ -66,23 +66,55 @@
               "projects/duplicate",
               "projects/bulk-delete",
               "projects/archive",
-              "projects/share",
-              "projects/pages",
-              "projects/widgets"
+              "projects/share"
             ]
           },
           {
-            "group": "Agency",
+            "group": "Pages",
             "pages": [
-              "agency/add",
-              "agency/list",
-              "agency/update",
-              "agency/duplicate",
-              "agency/bulk-delete",
-              "agency/archive",
-              "agency/share",
-              "agency/pages",
-              "agency/widgets"
+              "pages/add",
+              "pages/rename",
+              "pages/duplicate",
+              "pages/delete"
+            ]
+          },
+          {
+            "group": "Widgets",
+            "pages": [
+              "widgets/add",
+              "widgets/types",
+              "widgets/configure",
+              "widgets/layout",
+              "widgets/duplicate",
+              "widgets/delete"
+            ]
+          },
+          {
+            "group": "Calculated Metrics",
+            "pages": [
+              "calculated-metrics/overview",
+              "calculated-metrics/add",
+              "calculated-metrics/duplicate",
+              "calculated-metrics/delete"
+            ]
+          },
+          {
+            "group": "Goals",
+            "pages": [
+              "goals/overview",
+              "goals/add",
+              "goals/duplicate",
+              "goals/delete"
+            ]
+          },
+          {
+            "group": "Custom Data",
+            "pages": [
+              "custom-data/upload",
+              "custom-data/list",
+              "custom-data/update",
+              "custom-data/duplicate",
+              "custom-data/delete"
             ]
           },
           {
@@ -121,6 +153,8 @@
             "group": "Account",
             "pages": [
               "account/overview",
+              "account/profile",
+              "account/password",
               "account/usage",
               "account/delete"
             ]
@@ -131,8 +165,7 @@
               "users/invite",
               "users/list",
               "users/update",
-              "users/remove",
-              "users/profile"
+              "users/remove"
             ]
           },
           {
@@ -192,18 +225,7 @@
               "data-sources/profiles",
               "data-sources/test",
               "data-sources/link",
-              "data-sources/delete",
-              "data-sources/metrics"
-            ]
-          },
-          {
-            "group": "Custom Data",
-            "pages": [
-              "custom-data/upload",
-              "custom-data/list",
-              "custom-data/update",
-              "custom-data/duplicate",
-              "custom-data/delete"
+              "data-sources/delete"
             ]
           },
           {
@@ -283,7 +305,12 @@
           {
             "group": "Releases",
             "pages": [
-              "changelog/2026-04"
+              "changelog/2026-06",
+              "changelog/2026-05",
+              "changelog/2026-04",
+              "changelog/2026-03",
+              "changelog/2026-02",
+              "changelog/2026-01"
             ]
           }
         ]

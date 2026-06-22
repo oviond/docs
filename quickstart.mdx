@@ -1,48 +1,54 @@
 ---
 title: "Get Started"
-description: "Create your Oviond account, connect a marketing data source, and publish your first client report in five steps. Everything you need to get started."
+description: "Create your Oviond account, add a client, connect a marketing data source, and build your first client report. Everything you need to get started."
 ---
 
-Oviond is a white-label marketing reporting platform for agencies. This quickstart walks you through signing up, connecting a marketing data source, and building your first report so you can see live client data in minutes.
+Oviond is a white-label marketing reporting platform. This quickstart walks you through signing up, creating a client, connecting a data source, and building your first report so you can see live client data in minutes.
 
 <Steps>
   <Step title="Create your account">
-    Go to [app.oviond.com](https://app.oviond.com) and click **Sign Up**. Enter your name, email, and password, then verify your email address from the confirmation message Oviond sends you.
+    Go to [app.oviond.com](https://app.oviond.com) and click **Sign up**. Enter your email address — there's no password to set at signup. Oviond emails you a confirmation link. Click it to finish creating your account, then sign in.
 
     <Note>
-      If you're joining an existing agency account, ask your admin to send you an invitation instead of signing up directly.
+      If you're joining an existing account, ask your admin to send you an invitation instead of signing up directly.
     </Note>
   </Step>
 
   <Step title="Complete onboarding">
-    On your first sign-in, Oviond opens a 4-step setup modal: your full name, company name, company website, and how many clients you report for. The whole flow takes under a minute and unlocks the main app. See [Onboarding](/onboarding/overview) for what each step does.
+    On your first sign-in, Oviond opens a six-step setup flow: your full name, company name, company website, how many clients you report for, and your first client. The final step finalizes your workspace automatically. See [Onboarding](/onboarding/overview) for what each step does.
+
+    <Note>
+      Onboarding creates your first client for you, so if you complete it you can skip the next step.
+    </Note>
   </Step>
 
-  <Step title="Add your first client">
-    Go to **Clients** in the left sidebar and click **Add Client**. Enter the client name and any optional details. Clients are the top-level container that groups all their reports and connected data sources together.
+  <Step title="Add a client">
+    Go to **Clients** in the left sidebar and click **Add Client**. Enter the required **Client Name** and **Client Website**, and optionally set currency, timezone, and manager. A client is the top-level container that groups all of its data sources, dashboards, and reports together. Every project belongs to a client.
   </Step>
 
   <Step title="Connect a data source">
-    Inside your new client, click **Connect Integration**. Choose a platform (for example, Google Ads or Facebook Ads) and follow the OAuth authorization flow. Oviond will request read-only access to the account's data.
+    Open a project, then go to the **Data sources** tab in the project editor sidebar. Search for a platform (for example, Google Ads or Facebook Ads) and select it to start the connection wizard. Connect with OAuth or an API key, depending on the platform.
 
-    See [Connecting Data Sources](/data-sources/connect) for a full list of supported integrations and connection steps.
+    You can review and manage connected data sources later under **Settings → Data sources**. See [Connecting Data Sources](/data-sources/connect) for the full list of supported platforms and connection steps.
   </Step>
 
-  <Step title="Create a report">
-    Go to **Projects** and click **New Project**. Give it a name, select the client you just created, and choose a template or start from a blank canvas.
+  <Step title="Create a project">
+    Inside a client, go to **Projects** and click **Add Project**. Choose to start from scratch or from a template. If you start from scratch, pick a project type: a **Dashboard** (a live view that always shows the latest data) or a **Report** (a point-in-time report for a specific date range). Then name your project and pick a theme.
 
-    Drag widgets onto your report page from the right-hand panel. Each widget is tied to a metric and data source — select the integration you connected in the previous step.
+    In the editor, drag widgets onto the page from the **Add Content** panel. Each widget is tied to a metric and the data source you connected.
   </Step>
 
   <Step title="Share with your client">
-    Click **Share** in the top toolbar. You can copy a public link your client can view without logging in, or schedule automated email delivery. To apply your agency's branding, see [White Label Overview](/custom-domains/list).
+    Click **Share** in the top toolbar to open the share dialog. Use the **Link** tab to copy a public link your client can view without logging in — you can toggle the link active, require a password, or allow PDF download. Use the **Email** tab to send the report by email, or the **Download** tab to export a PDF.
+
+    To send reports on a recurring schedule, set up an [automation](/automations/scheduled) instead. To apply your branding, see [White Label Overview](/custom-domains/list).
   </Step>
 </Steps>
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Connect more integrations" icon="plug" href="/data-sources/list">
+  <Card title="Connect more data sources" icon="plug" href="/data-sources/list">
     Add Google Analytics, Facebook, LinkedIn, and 30+ other platforms.
   </Card>
   <Card title="Set up white labeling" icon="palette" href="/custom-domains/list">

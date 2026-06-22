@@ -1,25 +1,22 @@
 ---
-title: "Delete Domain"
+title: "Delete domain"
 description: "Remove a custom domain from your account."
 ---
 
-Deleting a domain stops it from serving reports and removes it from Vercel on Oviond's side. Shared links that used the custom domain will fall back to `app.oviond.com`.
+Deleting a domain stops it from serving reports and removes it from Vercel on Oviond's side. Shared links that used the custom domain fall back to the default `oviond.com` domain.
 
 <Steps>
-  <Step title="Open Custom Domains">
-    From **Account → Custom Domains**.
+  <Step title="Open Custom domains">
+    Go to **Settings → Custom domains** (`/settings/custom-domains`).
   </Step>
-  <Step title="Open the domain's menu">
-    Click the three-dot menu.
+  <Step title="Remove the domain">
+    Click **Remove domain** on the domain, then confirm with **Remove domain** in the dialog (or **Keep domain** to cancel).
   </Step>
-  <Step title="Choose Delete">
-    Confirm when prompted.
-  </Step>
-  <Step title="Remove DNS records">
-    Optionally clean up the CNAME/TXT records in your DNS provider — Oviond doesn't touch your DNS admin.
+  <Step title="Clean up your DNS records">
+    Optionally remove the `CNAME` (and any `TXT`) records in your DNS provider — Oviond doesn't touch your DNS admin.
   </Step>
 </Steps>
 
 <Note>
-Existing shared links keep working — they transparently redirect from `yourdomain.com` to `app.oviond.com`. If you want a hard cut-off, also remove the DNS records so the domain no longer resolves.
+  Oviond removes the domain from Vercel and deletes its stored DNS records. If the deleted domain was the account default, set another active domain as the default so shared URLs continue to resolve under a custom domain.
 </Note>

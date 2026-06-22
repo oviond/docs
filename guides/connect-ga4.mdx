@@ -3,90 +3,109 @@ title: "Connect Google Analytics 4"
 description: "End-to-end GA4 setup for a client — from OAuth to your first widget."
 ---
 
-Google Analytics 4 is one of the most common data sources in Oviond reports. This guide walks through connecting GA4 to a client and dropping a first widget on a report.
+Google Analytics 4 is one of the most common data sources in Oviond reports. This guide walks through connecting GA4 to a client inside a project and adding a first widget. GA4 uses a two-step account selection: you pick the analytics **account**, then the **property** inside it.
 
 ## Before you start
 
-- You have admin access (or higher) to the GA4 property you want to report on.
-- You've already created an Oviond [client](/clients/add) for this customer.
+- You have at least **Viewer** access to the GA4 property you want to report on.
+- You've already created an Oviond [client](/clients/add) and a [project](/projects/add) for this customer. You connect data sources from inside the project editor.
 
-## 1. Start the OAuth flow
+## 1. Start the connection
 
 <Steps>
-  <Step title="Open the client">
-    Click the client in your sidebar.
+  <Step title="Open the project">
+    From the client's **Projects** tab, open the project you want to report in.
   </Step>
-  <Step title="Open Data Sources">
-    Inside the client workspace, click **Data Sources**.
+  <Step title="Open the Data sources tab">
+    In the editor sidebar, click **Data sources**.
   </Step>
-  <Step title="Click Google Analytics 4">
-    Oviond opens a Google sign-in popup.
+  <Step title="Find Google Analytics 4">
+    Use the **Search data sources...** box, then click **Connect** next to Google Analytics 4.
   </Step>
-  <Step title="Authorize">
-    Pick the Google account that has access to the GA4 property. Approve the scopes Oviond requests — these are read-only.
+  <Step title="Name the profile">
+    Oviond shows a **Profile Name** field, prefilled with *Default Google Analytics 4 Connection*. Keep it or rename it (for example, *Acme — Google*), then click **Connect**. A profile name can't contain `.` or `$`.
   </Step>
 </Steps>
 
-## 2. Pick the profile
-
-GA4 connections can see every property the authorizing Google account has access to. You need to tell Oviond which property belongs to *this* client:
+## 2. Authorize with Google
 
 <Steps>
-  <Step title="Open the data source">
-    Back in Data Sources, click the newly connected GA4 tile.
+  <Step title="Sign in">
+    Oviond opens a Google sign-in popup. Pick the Google account that has access to the GA4 property.
+  </Step>
+  <Step title="Approve the scopes">
+    Approve the access Oviond requests. Oviond requests read-only access — it cannot change anything in your GA4 account.
+  </Step>
+</Steps>
+
+<Note>
+A profile is reusable. If you already authorized Google Analytics for another client, you don't need to authorize again — pick the existing profile under **Select Profile** in the next step.
+</Note>
+
+## 3. Link the account and property
+
+After authorizing, you tell Oviond which analytics account and property belong to *this* client.
+
+<Steps>
+  <Step title="Select the profile">
+    Under **Select Profile**, choose the connection you just authorized, then click **Link**.
+  </Step>
+  <Step title="Select the account">
+    Under **Select Account**, pick the GA4 analytics account. Use **Search...** to narrow the list, then click **Next**.
   </Step>
   <Step title="Select the property">
-    From the dropdown, pick the GA4 property for this client. See [Profiles](/data-sources/profiles).
-  </Step>
-  <Step title="Rename the connection">
-    Optionally rename the connection to something client-friendly (e.g. *Acme — Main Site*) so your team picks the right one when building widgets.
+    The next screen (still headed **Select Account**) lists the properties inside that account. Pick the GA4 **property**, then click **Save**.
   </Step>
 </Steps>
 
-## 3. Test the connection
+Oviond links the property to the client and shows a *Google Analytics 4 linked* confirmation. The linked profile sorts to the top of the list with a **Linked** tag and shows the selected **Account** and **Property**.
 
-Before building widgets, confirm the connection works:
+## 4. Check the connection status
+
+Each profile shows a status badge so you can tell its token is healthy:
+
+- **Token Valid** — the connection is authorized and data should flow.
+- **Token Expired** — the token expired or was revoked; refresh it.
+
+Status is set automatically by a daily auth-test check and the OAuth token refresher.
+
+## 5. Refresh an expired connection
+
+If the profile shows **Token Expired**, click **Refresh** on the profile to reopen the Google sign-in popup and re-authorize with the same account. The badge returns to **Token Valid**. There is no separate "test" or "reconnect" action — **Refresh** handles re-authorization.
+
+## 6. Build your first GA4 widget
 
 <Steps>
-  <Step title="Click Test Connection">
-    From the data source's three-dot menu. See [Test Connection](/data-sources/test).
+  <Step title="Open the Add Content tab">
+    In the editor sidebar, open the **Add Content** tab.
   </Step>
-  <Step title="Look for Success">
-    A green tick means the OAuth token is live and GA4 is returning data.
-  </Step>
-</Steps>
-
-## 4. Build your first GA4 widget
-
-<Steps>
-  <Step title="Open a project">
-    Create a new [project](/projects/add) or open an existing one.
-  </Step>
-  <Step title="Add a KPI widget">
-    Click **+ Add Widget** → **KPI**.
+  <Step title="Drag in a Data Query">
+    Drag a **Data Query** widget onto the canvas. See [Add a widget](/widgets/add).
   </Step>
   <Step title="Pick Google Analytics 4">
-    In the Data Source dropdown, select the GA4 connection you just wired up.
+    In the data source picker, select the GA4 source you just linked. Only sources connected to this client are available.
   </Step>
   <Step title="Pick a metric">
-    Start with **Sessions** — a universal GA4 KPI that exists for every property.
+    Start with **Sessions** — a universal GA4 metric that exists for every property. Add an optional dimension for a breakdown.
   </Step>
-  <Step title="Set the date range">
-    **Last 30 Days (relative)** — this way the widget auto-updates every time the report is opened.
-  </Step>
-  <Step title="Save">
-    Click **Save** in the top-right. The widget renders live data.
+  <Step title="Choose the chart type">
+    Pick a single-value KPI for a quick win, or a line chart to trend the metric over time.
   </Step>
 </Steps>
+
+<Note>
+Set the project's date range to a relative period (for example, last 30 days) so the widget auto-updates each time the report is opened. Oviond auto-saves the editor as you work.
+</Note>
 
 ## Common follow-ups
 
-- Add a **Sessions by Source / Medium** table for traffic breakdown.
-- Add a **Conversions** KPI if you've set up GA4 conversion events.
-- Use **Calculated Metrics** to compute engagement rate or conversion rate.
+- Add a **Sessions by Source / Medium** table for a traffic breakdown.
+- Add a **Conversions** widget if you've set up GA4 conversion events.
+- Use [Calculated metrics](/calculated-metrics/overview) to compute engagement rate or conversion rate.
 
 ## Troubleshooting
 
-- **"No data returned"** — the property is connected but empty. Double-check the profile selection and the date range.
-- **"Integration error"** — the OAuth token expired. Run [Test Connection](/data-sources/test), and if it fails, click **Reconnect**.
-- **"Property not found"** — the authorizing Google account lost access to the property in GA4. Re-authorize with a Google account that still has access.
+- **No data returned** — the property is connected but empty for the selected period. Check the widget's date range and that you linked the right property.
+- **Token Expired** — the OAuth token expired or access was revoked. Click **Refresh** on the profile and re-authorize.
+- **Property missing from the list** — the authorizing Google account doesn't have access to that property in GA4. Re-authorize with an account that does, or click **Refresh**.
+- **Accounts won't load** — Oviond shows *Unable to load accounts for Google Analytics 4.* Click **Refresh** and try again.

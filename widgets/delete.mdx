@@ -1,0 +1,27 @@
+---
+title: "Delete widgets"
+description: "Remove one or more widgets from a page."
+---
+
+## Delete a single widget
+
+Click the widget, open its menu, and choose **Delete**.
+
+## Delete several at once
+
+<Steps>
+  <Step title="Enable Multi Select">
+    Turn on **Multi Select** in the floating toolbar.
+  </Step>
+  <Step title="Select widgets">
+    Click each widget you want to remove.
+  </Step>
+  <Step title="Delete">
+    Choose **Delete** to remove the selected widgets in one action.
+  </Step>
+</Steps>
+
+## API
+
+- `DELETE /v1/widgets/{id}` — remove a single widget.
+- `POST /v1/widgets/bulk` — remove several widgets in one request.

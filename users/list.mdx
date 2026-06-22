@@ -1,109 +1,42 @@
 ---
-title: "List Users"
+title: "List users"
 description: "Every team member with access to this Oviond account."
 ---
 
-Oviond lets you invite colleagues to your account so you can build and manage reports together. Each team member gets their own login and is assigned a role that controls what they can see and do inside your workspace.
+Oviond lets you invite colleagues to your account so you can build and manage reports together. Each team member gets their own login and an access level that controls what they can see and do.
 
-To manage team members, go to **Account Settings** and select the **Team Members** tab.
-
-<Note>
-  The number of team members you can invite depends on your plan. If you've reached your seat limit, you'll need to upgrade before you can add more. See [Plans and billing](/billing/plans) for details.
-</Note>
-
-## Invite a team member
-
-<Steps>
-  <Step title="Open the Team Members tab">
-    Go to **Account Settings** and click **Team Members**.
-  </Step>
-  <Step title="Click Invite team member">
-    Click the **Invite team member** button (or **Add member**) in the top-right corner.
-  </Step>
-  <Step title="Enter their email address">
-    Type the email address of the person you want to invite.
-  </Step>
-  <Step title="Assign a role">
-    Select the role that best fits their responsibilities. See [Team member roles](#team-member-roles) below for a breakdown of each role.
-  </Step>
-  <Step title="Send the invitation">
-    Click **Send invitation**. The invitee receives an email with a link to accept the invitation and set up their login. The invitation link expires after a set period — if they don't accept in time, you can resend it from the team member list.
-  </Step>
-</Steps>
+To manage team members, go to **Settings → Users**.
 
 <Note>
-  Invited members appear in your team list with a **Pending** status until they accept the invitation and complete their account setup.
+  The number of team members you can invite depends on your plan. If you've reached your limit, upgrade from **Settings → Billing** before adding more. See [Plans and billing](/billing/plans) for details.
 </Note>
 
-## Team member roles
+## Access levels
 
-Oviond provides distinct roles to give you control over what each person can access and modify.
+Oviond has three access levels. You assign one when you invite a user, and you can change it later.
 
-| Role | Description |
+| Access level | What it grants |
 |---|---|
-| **Admin** | Full access to the account. Can manage team members, billing, account settings, white-label configuration, and all clients and reports. |
-| **Manager** | Can create and manage clients, reports, and integrations. Cannot access billing or account-level settings. |
-| **Editor** | Can edit reports and dashboards for clients they're assigned to. Cannot create or delete clients or manage integrations. |
-| **Viewer** | Read-only access. Can view reports and dashboards but cannot make any changes. |
+| **Admin access** | Full access to all features, including billing and team management. Admins see every client. |
+| **Client access** | Can view the projects assigned to them. Limited to their assigned clients. |
+| **Read-only access** | Can view their assigned clients but cannot make changes. |
+
+**Client access** and **Read-only access** are client-scoped — when you assign either, you choose exactly which clients the user can access.
 
 <Note>
-  The account owner always retains full admin access and cannot be removed by other team members.
+  The account owner always retains admin access and cannot be removed or have their access level changed by other team members.
 </Note>
 
-## Edit a team member's role
+## View the user list
 
-You can change a team member's role at any time. Changes take effect immediately.
+Go to **Settings → Users** to see everyone with access to the account. Each row shows the user's name, email, and current access level. Internal Oviond staff accounts are hidden from this list.
 
-<Steps>
-  <Step title="Open the Team Members tab">
-    Go to **Account Settings** and click **Team Members**.
-  </Step>
-  <Step title="Locate the team member">
-    Find the team member in the list.
-  </Step>
-  <Step title="Edit their role">
-    Click the **Edit** icon (or the three-dot menu) next to their name and select **Edit role**.
-  </Step>
-  <Step title="Select a new role">
-    Choose the updated role from the dropdown.
-  </Step>
-  <Step title="Save the change">
-    Click **Save**. The team member's permissions update immediately — they will see the new access level the next time they perform an action or refresh their session.
-  </Step>
-</Steps>
+## Manage users
 
-## Resend an invitation
+From the **Users** list you can:
 
-If a pending team member hasn't accepted their invitation, you can resend it.
+- [Invite a user](/users/invite) — add a new team member.
+- [Update a user](/users/update) — change a user's name, access level, or assigned clients.
+- [Remove a user](/users/remove) — revoke a team member's access.
 
-<Steps>
-  <Step title="Find the pending team member">
-    In the **Team Members** tab, look for members with a **Pending** status.
-  </Step>
-  <Step title="Resend the invitation">
-    Click the three-dot menu next to their name and select **Resend invitation**. A new invitation email is sent to their address.
-  </Step>
-</Steps>
-
-## Remove a team member
-
-Removing a team member revokes their access to your Oviond workspace immediately. Their login is deactivated and they will not be able to access any reports, clients, or settings.
-
-<Steps>
-  <Step title="Open the Team Members tab">
-    Go to **Account Settings** and click **Team Members**.
-  </Step>
-  <Step title="Locate the team member">
-    Find the person you want to remove.
-  </Step>
-  <Step title="Select Remove">
-    Click the three-dot menu next to their name and select **Remove member**.
-  </Step>
-  <Step title="Confirm removal">
-    Confirm the action in the dialog that appears. The team member is removed immediately and their seat becomes available for a new invite.
-  </Step>
-</Steps>
-
-<Note>
-  Removing a team member does not delete any reports or clients they created. All content they built remains in your workspace.
-</Note>
+All three actions require **Admin access**.

@@ -1,0 +1,34 @@
+---
+title: "Add a calculated metric"
+description: "Build a custom KPI from a formula and set how it displays."
+---
+
+<Steps>
+  <Step title="Open the project">
+    From the client's **Projects** tab, open the report or dashboard.
+  </Step>
+  <Step title="Open the Calculated Metrics tab">
+    In the editor sidebar, open the **Calculated Metrics** tab and click **Add Calculated Metric**.
+  </Step>
+  <Step title="Build the formula">
+    Add tokens to the formula canvas:
+
+    - **Metric** — a query against a connected data source (pick the source, metric, and optional dimension).
+    - **Operator** — `+`, `-`, `×`, `÷`, and parentheses to control order.
+    - **Number** — a constant value.
+  </Step>
+  <Step title="Set the format">
+    Choose how the result displays: **Numeric**, **Decimal**, **Percentage**, or **Currency**.
+  </Step>
+  <Step title="Name and save">
+    Give the metric a clear name and save it. It's now available to widgets in this project.
+  </Step>
+</Steps>
+
+<Tip>
+Each metric token is a normal data-source query, so a single formula can combine metrics from different platforms — for example ad spend from one source divided by conversions from another.
+</Tip>
+
+## API
+
+`POST /v1/calculated-metrics` creates a calculated metric.

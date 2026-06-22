@@ -1,19 +1,30 @@
 ---
 title: "Defaults"
-description: "Set the default subject, sender, and message for every automation email."
+description: "How Oviond picks the default sender and email template."
 ---
 
-Defaults live at **Account → Email Settings → Defaults**. Anything you set here becomes the starting value every time you create a new [automation](/automations/add) — automations can override per-delivery.
+Oviond doesn't have a separate **Defaults** page. Instead, "default" is a per-row setting you mark with a **star** in **Settings → Email settings** (`/settings/email-settings`): a default **sender** and a default **template**. Oviond uses these whenever a send doesn't specify a sender or template of its own.
 
-## Fields
+## Default sender
 
-| Field | Default | Notes |
-|---|---|---|
-| **Default subject** | `{project_name} — {date}` | Supports template variables like `{project_name}`, `{client_name}`, `{date}`. |
-| **Default from name** | Your agency company name | Shown as the sender name in the recipient's inbox. |
-| **Default from email** | `hello@oviond.com` | Override by adding a [sender](/email-settings/senders) on a verified domain. |
-| **Default message body** | Short Oviond-branded copy | Use the rich text editor to set your own intro copy. |
+In the **Sender addresses** section, one sender is the default, shown with a star. Click **Set default sender** on any saved sender to make it the default. Your first saved sender becomes the default automatically, and if you delete the default Oviond promotes the next-oldest saved sender. The built-in Oviond sender can't be your default.
 
-<Tip>
-Keeping the defaults client-agnostic (no hardcoded client names) means every automation inherits sensible defaults and you only customize the bits that differ per client.
-</Tip>
+See [Senders](/email-settings/senders) for the full sender setup.
+
+## Default template
+
+In the **Email templates** section, one template is the default, shown with a star and a **Default** badge. Click **Set template as default** on any template to change it. Each account is seeded with a built-in default template.
+
+A template defines:
+
+| Field | Notes |
+|---|---|
+| `name` | Internal template name. |
+| `subject` | Subject line. Supports inserted variables (type `/` to insert one). |
+| `message` | Body copy, also variable-aware. |
+| `button_text` | Optional CTA button label. |
+| `button_top` | Whether the button appears above the message. |
+
+<Note>
+  There are no standalone "default subject", "default from name", or "default from email" fields — those values come from the default **template** and default **sender** described above.
+</Note>

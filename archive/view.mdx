@@ -1,12 +1,26 @@
 ---
-title: "View Archive"
-description: "Browse every soft-deleted client, project, and media item."
+title: "View archive"
+description: "Browse every soft-deleted item across your account."
 ---
 
-Everything you delete in Oviond is **soft-deleted first** — moved to the Archive rather than permanently removed. The Archive view shows:
+Most things you delete in Oviond are **soft-deleted first** — moved to the Archive rather than removed straight away. Open it from **Settings → Archive** (`/settings/archive`).
 
-- Archived **projects** (reports and dashboards)
-- Archived **clients** (with their projects nested)
-- Archived **media** (images and files)
+The Archive lists archived items across five types:
 
-From here you can **restore** an item back to its original location, or **permanently delete** it to free up quota. Items older than the retention window (90 days by default) are purged automatically.
+- **Clients**
+- **Projects** (reports and dashboards)
+- **Media** (images and files)
+- **Automations**
+- **Templates**
+
+Each row shows the **Name**, **Type**, and the **Archived** date (`deleted_at`). From here you can **restore** an item back to its original location or **permanently delete** it.
+
+## Find what you're looking for
+
+- **Search** by name.
+- **Filter by type** with the type popover — each type shows a live count of how many archived items it holds.
+- Sort by name or archived date (newest archived first by default).
+
+<Note>
+The Archive is admin-only. Members without the **manage archive** permission don't see it in the sidebar or have access to the page.
+</Note>

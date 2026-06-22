@@ -1,43 +1,48 @@
 ---
 title: "Subscription"
-description: "Change plan, update payment method, or cancel your Oviond subscription."
+description: "Manage your plan, payment method, and subscription through Stripe."
 ---
 
-Oviond uses Stripe to handle all subscription billing. You can manage your plan, payment method, and invoices directly from your account settings or through the Stripe customer portal.
+Oviond uses Stripe for subscription billing. You change your client count and billing cycle directly on the billing page, and manage payment details and cancellation through the Stripe customer portal.
 
-## Access the billing portal
+<Note>
+  Managing billing requires admin or owner permissions.
+</Note>
 
-Go to **Settings → Billing** and click **Manage Billing**. This opens the Stripe customer portal in a new tab, where you can:
+## Open the billing portal
 
-- Update your credit card or payment method
+Go to **Settings → Billing** and click **Open billing portal**. This opens the Stripe customer portal in a new tab, where you can:
+
+- Update your card or payment method
 - View and download past invoices
-- Cancel or change your subscription
+- Cancel your subscription
+
+## Change your plan
+
+You change your client count and billing cycle on the billing page itself, not in the Stripe portal. Adjust the client count, choose **Monthly** or **Annual**, then click **Update Plan**. Oviond previews the prorated amount or credit, and you confirm the change in-app. See [Plans](/billing/plans) for the full flow.
 
 ## Update your payment method
 
 <Steps>
   <Step title="Open the billing portal">
-    Go to **Settings → Billing → Manage Billing**.
+    Go to **Settings → Billing** and click **Open billing portal**.
   </Step>
-  <Step title="Click Payment Methods">
-    In the Stripe portal, select **Payment Methods** and click **Add payment method**.
-  </Step>
-  <Step title="Enter card details">
-    Enter your new card number, expiry, and CVC, then click **Add**.
+  <Step title="Add a payment method">
+    In the Stripe portal, add or update your card details.
   </Step>
   <Step title="Set as default">
-    Click **Set as default** next to your new card to use it for future charges.
+    Set your preferred card as the default so it's used for future charges.
   </Step>
 </Steps>
 
-## View and download invoices
+## Past or missing payments
 
-In the Stripe billing portal, click **Invoice history** to see all past payments. Click any invoice to view or download a PDF receipt.
+If a payment fails, the billing page shows a banner. Use **Open billing portal** to update your payment method, or, if your subscription is unpaid, the banner lets you reactivate the subscription and settle outstanding invoices.
 
 ## Cancel your subscription
 
-In the Stripe billing portal, click **Cancel plan**. Your subscription remains active until the end of the current billing period. After that, your account switches to a limited free tier.
+In the Stripe customer portal, cancel your plan. Your subscription stays active until the end of the current billing period — the billing page shows a `pending_cancellation` status until then.
 
 <Warning>
-  Canceling your subscription does not delete your data immediately. However, if your usage exceeds free-tier limits, some features will become inaccessible until you resubscribe.
+  Canceling doesn't delete your data. However, once your subscription ends, access to billed features is limited until you resubscribe.
 </Warning>

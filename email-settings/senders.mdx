@@ -1,32 +1,42 @@
 ---
 title: "Senders"
-description: "Add verified from-addresses for automation emails."
+description: "Add the from-addresses Oviond uses for outgoing email."
 ---
 
-A **sender** is a specific from-address (e.g. `reports@youragency.com`) that Oviond can send automation emails from. Before a sender is usable, the domain it belongs to must be verified under [Email Domains](/email-settings/domains).
+A **sender** is a from-address (for example, `reports@youragency.com`) that Oviond sends email from. Each sender is tied to a transport — your verified **sending domain** or your own **SMTP server**. Manage senders in the **Sender addresses** section of **Settings → Email settings** (`/settings/email-settings`).
+
+The built-in Oviond sender (`noreply@oviond.com`) is always available and is shown read-only. It isn't available on lifetime plans, which must send from their own SMTP server.
 
 ## Add a sender
 
 <Steps>
-  <Step title="Open Email Settings → Senders">
-    Under **Account**.
+  <Step title="Open Email settings">
+    Go to **Settings → Email settings** and find the **Sender addresses** section.
   </Step>
-  <Step title="Click + Add Sender">
-    Opens the create dialog.
+  <Step title="Add an email address">
+    Click **Add Email Address**, then choose the source — **Sending domain** (an address on your verified domain) or **SMTP server** (your own server).
   </Step>
-  <Step title="Enter the address">
-    Must belong to a verified domain. Unverified domains are blocked.
-  </Step>
-  <Step title="Enter a display name">
-    The name recipients see as the sender (e.g. *Acme Reports Team*).
+  <Step title="Enter the from details">
+    Set the **from name** and **from email**. For a sending-domain sender, the `from_email` must be on your verified domain. You can also set an optional **nickname**, **reply-to**, and a physical **address**, **city**, and **country**.
   </Step>
   <Step title="Save">
-    The sender is now selectable on any automation or email default.
+    The sender becomes selectable when sending email. Your first saved sender is set as the default automatically.
   </Step>
 </Steps>
 
-## Who sees what
+## Fields
 
-Emails from a verified sender display with your agency name in the recipient's inbox — no "sent via Oviond" footer, no mismatched from-address warnings, and SPF/DKIM pass cleanly because the domain is set up correctly.
+| Field | Notes |
+|---|---|
+| `source` | `resend` (sending domain) or `smtp` — the transport the sender uses. |
+| `from_name` | The display name recipients see. |
+| `from_email` | The from-address. For a sending-domain sender, must be on your verified domain. |
+| `nickname` | Optional internal label. |
+| `reply_to` | Optional reply-to address. |
+| `address`, `city`, `country` | Optional physical address. |
 
-See [Email Domains](/email-settings/domains) for the domain verification flow.
+## Default sender
+
+One sender per account is the default, marked with a **star**. Click **Set default sender** on any saved sender to make it the default — Oviond uses the default when no specific sender is chosen. The Oviond built-in sender can't be set as your default. If you delete the default sender, Oviond promotes the next-oldest saved sender automatically.
+
+Before you can add a sending-domain sender, configure and verify a sending domain — see [Email domains](/email-settings/domains). Before you can add an SMTP sender, configure your server — see [SMTP](/email-settings/smtp).

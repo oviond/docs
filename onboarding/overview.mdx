@@ -1,41 +1,57 @@
 ---
 title: "Onboarding"
-description: "The 4-step account setup shown after your first sign-in."
+description: "The 6-step setup flow shown after your first sign-in."
 ---
 
-After your first sign-in, Oviond opens an **Account Setup** modal that asks for four things. The modal is blocking — you can't click outside or press Escape to dismiss — but each step is one field, and the whole flow takes under a minute.
+After your first sign-in, Oviond opens a full-page setup flow at `/onboarding`. It walks you through six steps: your details, your company, and your first client. The flow is blocking — until you finish it, every other page redirects you back here, and there is no skip or dismiss control. Most steps are a single field, so the whole thing takes about a minute.
 
-Once you complete it, the `account.onboarding` flag flips off and the modal never appears again. You can always update the values later under [Account](/account/overview) and [Company](/company/overview).
+Once you finish, Oviond creates your account, company, theme, first client, and a starter project, then drops you on that client's **Projects** page. The flow is gated by the `account.onboarding` flag, which the backend sets when your account is created, so the flow never appears again.
 
-## The 4 steps
+## The 6 steps
 
 <Steps>
-  <Step title="Full Name">
-    *"What should we call you?"* — your name as it should appear throughout the app and in activity-log entries. Also shown on team member listings.
+  <Step title="What should we call you?">
+    Enter your **Full Name**. This is your name as it appears throughout the app and in activity-log entries.
   </Step>
-  <Step title="Company Name">
-    *"What is the name of your company?"* — the agency name used on report headers, email footers, and shared links (unless overridden by [white-label branding](/company/branding)).
+  <Step title="What is the name of your company?">
+    Enter your **Company name**. This is the company name used on report headers, email footers, and shared links unless you override it with [white-label branding](/company/branding).
   </Step>
-  <Step title="Website">
-    *"What is your company's website?"* — your agency's URL. If you don't include `http://` or `https://`, Oviond adds `https://` automatically. Shown on the accounts row and used for the default screenshot on your own company card.
+  <Step title="What is your company's website?">
+    Enter your **Website** (for example, `yourcompany.com`). If you leave off `http://` or `https://`, Oviond adds `https://` automatically.
   </Step>
-  <Step title="Client Count">
-    *"How many clients do you report for?"* — pick one: **1–5**, **6–20**, **21–100**, or **100+**. This isn't a hard limit — it's used for plan recommendations and to tailor onboarding emails.
+  <Step title="How many clients do you report for?">
+    Pick one option: **1 - 5**, **6 - 20**, **21 - 100**, or **100+**. This isn't a hard limit — it's used to tailor your setup.
+  </Step>
+  <Step title="Add your first client">
+    Enter your first client's details. **Client Name** and **Client Website** are required. You can also set **Select Currency** and **Client Timezone**. This step only collects the details — Oviond creates the client in the final step.
+  </Step>
+  <Step title="Almost done">
+    Oviond finalizes your setup automatically. You'll see **Setting up your workspace** while it detects your branding, applies your theme, and prepares your first project. No action is needed.
   </Step>
 </Steps>
 
+## Buttons
+
+- Steps 1 to 4 show a **Continue** button. It stays disabled until the field is filled in and valid. Pressing Enter also advances these steps.
+- Step 5 shows a **Finish** button. It stays disabled until the client form is valid.
+- Step 6 has no buttons. If finalizing fails, it shows a **Retry** button.
+
 ## What happens next
 
-When you click **Get Started** on step 4, Oviond:
+When you finish, Oviond makes a single `POST /v1/onboarding` call that:
 
-- Saves your name to [Profile Settings](/users/profile).
-- Saves company name and website to [Company](/company/overview).
-- Records the client-count bucket on your account.
-- Sets `account.onboarding = false` so the modal doesn't show again.
-- Drops you on your Clients dashboard, ready to [add your first client](/clients/add).
+- Creates your account and saves your name, company name, and website.
+- Records your client-count bucket on the account.
+- Applies a default theme.
+- Creates your first client and a starter project.
+- Sets the account's `onboarding` flag to done so the flow doesn't show again.
+- Sends you to the new client's **Projects** page.
+
+You can update your name later under [My account](/account/overview) and your company details under [Company](/company/overview).
 
 ## Troubleshooting
 
-- **The modal won't dismiss** — each step validates the field before you can advance. Fix any red inline error, then **Continue** becomes active.
-- **Website rejected** — it expects a simple domain (e.g. `yourcompany.com`). Leave off paths and trailing slashes.
-- **The modal reappears on a different device** — it follows the account, not the device. If you only partially completed it elsewhere, finish it on this device and it syncs.
+- **You can't advance** — each step validates its field before you can continue. Fix any inline error, then the button becomes active.
+- **Website rejected** — enter a simple domain (for example, `yourcompany.com`). Leave off paths and trailing slashes.
+- **The flow reappears on a different device** — it follows your account, not the device. Finish it on this device and it syncs.
+- **Setup failed** — if the final step shows an error, click **Retry**. If your email is already registered, sign in instead of going through onboarding again.

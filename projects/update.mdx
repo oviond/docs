@@ -1,30 +1,34 @@
 ---
 title: "Update Project"
-description: "Rename, reassign, and configure project settings."
+description: "Rename a project and configure its settings."
 ---
 
-Project settings cover everything outside the report canvas — name, client assignment, date range defaults, and PDF export options.
+Project **Settings** cover everything outside the report canvas — name, default date range, theme, cover page, header, sharing, and PDF export options.
 
 <Steps>
   <Step title="Open the project">
-    From the Reports screen, click the project you want to edit.
+    From the client's **Projects** tab, click the project you want to edit.
   </Step>
-  <Step title="Open project settings">
-    Click the **Settings** icon in the editor or choose **Project Settings** from the project's three-dot menu.
+  <Step title="Open the Settings tab">
+    In the project editor, open the **Settings** tab.
   </Step>
   <Step title="Rename">
-    Edit the **Project name** field. The new name immediately appears on the shared link and PDF exports.
-  </Step>
-  <Step title="Reassign the client">
-    Use the **Client** dropdown to move the project to a different client.
+    Edit the **Project name** field. The new name appears on the shared link, in PDF exports, and in the email subject when the project is automated.
   </Step>
   <Step title="Set the default date range">
-    Pick a fixed range or a relative range (like *Last 30 Days*) — every widget that uses the project-level date inherits this.
+    Pick a fixed range or a relative range (like *Last 30 Days*) — every widget that uses the project-level date inherits it. Changing the range refetches every connected data widget.
+  </Step>
+  <Step title="Configure cover page and header">
+    Toggle the cover page, header, page numbers, table of contents, and thank-you page (reports only), and choose what each shows.
   </Step>
   <Step title="Configure PDF export">
-    Under **PDF**, set paper size, orientation, and any header / footer content for exports. See [PDF Export](/automations/pdf).
+    Enable PDF export, and for reports set the paper size (A4 or Letter) and orientation (portrait or landscape). See [PDF Export](/automations/pdf).
   </Step>
   <Step title="Save">
     Click **Save** to apply.
   </Step>
 </Steps>
+
+<Note>
+A project belongs to the client you create it under, and it can't be reassigned to a different client. To report on the same structure for another client, recreate the project under that client — or save it as a [template](/templates/add) first and apply it there.
+</Note>

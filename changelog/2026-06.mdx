@@ -1,0 +1,40 @@
+---
+title: "June 2026"
+description: "Release notes for the Oviond REST API."
+---
+
+<Update label="2026-06-18" description="Public API reference">
+
+### REST API reference launched
+
+The Oviond REST API reference is now live on Mintlify — the full endpoint catalog across clients, projects, widgets, data sources, automations, and public share links, auto-generated from the backend's OpenAPI spec and kept in sync on every release.
+
+- Interactive **Try it** console against `https://api.oviond.com`
+- Bearer-token authentication via API keys from **Settings → API keys**
+- Grouped by domain: Account, Clients, Projects, Data sources, Automations, Public, and more
+
+</Update>
+
+<Update label="2026-06-11" description="MCP server">
+
+### Model Context Protocol support
+
+Connect AI agents to your Oviond workspace over a streamable HTTP MCP endpoint, secured with OAuth 2.1 (PKCE, dynamic client registration).
+
+- `POST /mcp` — MCP endpoint
+- `GET /.well-known/oauth-authorization-server` — discovery
+- `POST /oauth/register`, `GET /oauth/authorize`, `POST /oauth/token`, `POST /oauth/revoke`
+
+</Update>
+
+<Update label="2026-06-04" description="Billing & subscriptions">
+
+### Self-serve billing
+
+Manage your plan, payment, and invoices through Stripe. The plan scales by active client count, billed monthly or annually.
+
+- `GET /v1/billing` and `GET /v1/billing/plans`
+- `POST /v1/billing/subscribe` and `GET /v1/billing/portal`
+- `GET /v1/billing/invoices` — invoice history
+
+</Update>

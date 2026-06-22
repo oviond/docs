@@ -1,33 +1,52 @@
 ---
-title: "Upload Custom Data"
-description: "Upload a CSV dataset to report on data that doesn't live in a connected integration."
+title: "Upload custom data"
+description: "Upload a CSV or JSON dataset to report on data that doesn't live in a connected data source."
 ---
 
-**Custom Data** lets you upload your own CSV files and use them alongside data from connected integrations. Useful for:
+**Custom data** lets you upload your own CSV or JSON files and use them alongside data from connected data sources. It's useful for:
 
 - Offline sales, lead lists, or CRM exports
 - Revenue forecasts and targets
-- Any KPI that lives outside the integrations we support natively
+- Any KPI that lives outside the data sources we support natively
 
-## How it works
+## Where it lives
+
+Custom data isn't a standalone page in the sidebar. You reach it from the **Data Query** widget while editing a project:
 
 <Steps>
-  <Step title="Upload a CSV">
-    From **Data → Custom Data**, click **Upload** and pick a CSV. Oviond parses the headers into columns and stores the rows.
+  <Step title="Add a Data Query widget">
+    In the project editor, add (or select) a **Data Query** widget to open the query builder in the left panel.
   </Step>
-  <Step title="Reference it in a widget">
-    In any widget, pick **Custom Data** as the datasource, then select your uploaded dataset and the column you want to visualize.
+  <Step title="Pick Custom Data as the source">
+    In the widget's data-source dropdown, choose **Custom Data**. The picker also lists your connected data sources, **Static Value**, **Calculated Metrics**, and **Goals**.
   </Step>
-  <Step title="Update the data">
-    Re-upload a CSV with the same structure to refresh the underlying rows — all widgets that reference the dataset update automatically.
+  <Step title="Choose or upload a dataset">
+    Pick an existing dataset from the **Dataset** dropdown, or use the **Upload New File** drop-zone below the **OR** divider. You can drag a file in or click to open the file picker.
+  </Step>
+  <Step title="Name and save">
+    After Oviond parses the file, enter a **Dataset Name** and click **Save Dataset**. Oviond parses the headers into columns and stores the rows.
   </Step>
 </Steps>
 
+You can also start from a blank grid with **Start from Blank**, or use the **Manage** button next to the **Dataset** label to open the **Manage Custom Data** slide-over, where you can edit, rename, duplicate, and delete datasets across your account.
+
+## Supported files
+
+Uploads accept `.csv` and `.json` files, up to **5 MB** each.
+
+## How a dataset is used
+
+Once you select a dataset, its `custom_data_id` is stored on the widget query, and you map the dataset's columns to the widget's metrics and dimensions. The widget then queries the dataset alongside your connected data sources.
+
 <Note>
-Custom Data is account-level — any client's project can reference any custom dataset you've uploaded. Combine it with integration data in the same widget using **Calculated Metrics**.
+Custom data is account-level — any client's project can reference any dataset you've uploaded. A dataset can hold at most **10,000 rows**.
 </Note>
 
-## When to use Custom Data vs a Data Source
+## Custom data vs a data source
 
-- **Data Sources** (Google Ads, Facebook, etc.) — live data pulled from a connected marketing platform.
-- **Custom Data** — static or periodically-refreshed data you upload yourself.
+- **Data sources** (Google Ads, Facebook, etc.) — live data pulled from a connected marketing platform.
+- **Custom data** — static or periodically refreshed data you upload yourself.
+
+## API
+
+`POST /v1/custom-data` creates a dataset. Send `name`, `file_name`, `raw_data` (an array of row objects, max 10,000), `columns`, and `file_size`. The response returns the new dataset `id`.

@@ -1,34 +1,33 @@
 ---
-title: "Add Automation"
+title: "Add an automation"
 description: "Schedule a report or dashboard for recurring email delivery."
 ---
 
-An **automation** sends a report to a list of recipients on a recurring schedule — daily, weekly, or monthly. Once configured, Oviond renders the report, attaches it (if you chose PDF), and emails it from the sender you specify.
+An **automation** emails a project's report to a list of recipients on a recurring schedule — daily, weekly, or monthly. On each run, Oviond renders the report for the configured date range and emails it from the sender you choose, using the email template you select.
+
+You can create an automation two ways:
+
+- From the top-level **Automations** screen in the sidebar.
+- From the **Automations** tab inside the project editor, which pre-selects the current project.
 
 <Steps>
   <Step title="Open Automations">
-    From the left sidebar.
+    Click **Automations** in the left sidebar, then click **New automation**. Inside the project editor, open the **Automations** tab and click **Add automation** instead.
   </Step>
-  <Step title="Click + New Automation">
-    Opens the create dialog.
+  <Step title="Name and schedule">
+    Enter a **Name**, then set the **Frequency** (**daily**, **weekly**, or **monthly**), the day, and the send time. See [Scheduled delivery](/automations/scheduled).
   </Step>
-  <Step title="Pick a project">
-    Choose the report or dashboard to deliver.
-  </Step>
-  <Step title="Set the schedule">
-    Frequency (daily / weekly / monthly), day, time, and timezone. See [Scheduled Delivery](/automations/scheduled).
+  <Step title="Choose the project and date range">
+    Pick the **Client** and **Project** to deliver (the project is fixed when you start from the editor tab), then choose a **Date range** such as `Last Month`. The report is rendered fresh for that range on every run.
   </Step>
   <Step title="Configure the email">
-    Recipients, subject, sender, and message body. See [Email Delivery](/automations/email).
-  </Step>
-  <Step title="Choose attachment">
-    Inline HTML only, or attach a [PDF export](/automations/pdf).
+    Add **Recipients**, choose the **From** sender, and pick an **Email template** — or select **Custom message** to compose a new template inline. See [Email delivery](/automations/email).
   </Step>
   <Step title="Create">
-    The automation is saved and starts firing on the next scheduled run.
+    Click **Create**. The automation is saved and the next run is scheduled automatically.
   </Step>
 </Steps>
 
 <Tip>
-Always [Test](/automations/test) a new automation before going live — the test send bypasses the schedule and emails you immediately, so you can verify the content looks right.
+Always [test](/automations/test) a new automation before relying on it — the test send bypasses the schedule and emails the report immediately so you can verify it looks right.
 </Tip>

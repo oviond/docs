@@ -1,28 +1,32 @@
 ---
-title: "Archive Client"
-description: "Soft-delete a client with full recovery within the retention window."
+title: "Archive client"
+description: "Soft-delete a client and restore it later from the Archive."
 ---
 
-Archiving a client removes it from your active dashboard without permanently destroying anything. The client's projects, pages, widgets, and data connections are preserved and can be restored at any time before the retention window expires.
+Archiving a client removes it from your active dashboard without permanently destroying anything. The client's projects, pages, widgets, and data connections are preserved and can be restored at any time.
 
 ## Archive a client
 
+You can archive a single client from its settings, or several at once from the Clients list.
+
 <Steps>
-  <Step title="Open the client's menu">
-    From the client card or inside the client's workspace, click the three-dot menu.
+  <Step title="Open the client's settings">
+    Open the client and go to its **Settings**, then scroll to the **Danger zone**.
   </Step>
-  <Step title="Choose Archive">
-    Click **Archive client**.
+  <Step title="Archive the client">
+    Click **Archive client**. Oviond explains that the client moves to the archive and projects stay attached.
   </Step>
   <Step title="Confirm">
-    The client disappears from the active list and moves to the [Archive](/archive/view).
+    Confirm with **Archive client**. The client moves to the [Archive](/archive/view) and disappears from the active list.
   </Step>
 </Steps>
 
+To archive multiple clients at once, select them on the Clients list and click **Archive** in the action bar. See [Bulk archive](/clients/bulk-delete).
+
 ## Restore an archived client
 
-From the [Archive](/archive/view) view, find the client, click **Restore**, and the client reappears in your active list with all its projects intact.
+Go to **Settings → [Archive](/archive/view)**, find the client, and click **Restore**. The client returns to your active list with all its projects intact.
 
-## Retention
+## Permanent deletion
 
-Archived clients older than the retention window (90 days by default) are **permanently deleted** by a background job. If you need to keep a client indefinitely without it cluttering the active dashboard, keep it in a dedicated [folder](/clients/folders) instead.
+Archived clients stay in the Archive until you permanently delete them. From the Archive, select a client and click **Delete** to remove it permanently. Permanent deletion is unrecoverable, so export anything you need to keep first.

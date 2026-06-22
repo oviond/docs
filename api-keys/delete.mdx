@@ -1,22 +1,22 @@
 ---
-title: "Delete API Key"
-description: "Permanently remove an API key from the list."
+title: "Delete API key"
+description: "Permanently remove a revoked API key from your list."
 ---
 
-Deleting a key removes it entirely from your API Keys list — the audit entry is gone. If you just want to stop the key from working while keeping the audit trail, [Revoke](/api-keys/revoke) instead.
+Deleting a key removes it entirely from your **API keys** list. You can only delete a key after it has been [revoked](/api-keys/revoke) — this prevents you from deleting a key that's still authenticating live requests.
 
 <Steps>
-  <Step title="Open API Keys">
-    From **Account → API Keys**.
+  <Step title="Open API keys">
+    Go to **Settings → API keys**.
   </Step>
-  <Step title="Open the key's menu">
-    Click the three-dot menu.
+  <Step title="Revoke the key first">
+    If the key is still active, click **Revoke** and confirm. The **Delete** action only appears on revoked keys.
   </Step>
-  <Step title="Choose Delete">
-    Confirm when prompted.
+  <Step title="Delete the key">
+    On the revoked key's row, click **Delete** and confirm.
   </Step>
 </Steps>
 
 <Warning>
-Deletion is irreversible and the key's metadata (name, created-at, created-by) is lost. Revoke first and delete later if you want to preserve the audit record.
+  Deletion is permanent. Once a key is deleted it's removed from your account and can't be recovered. If you only want to stop a key from working while keeping a record of it, [revoke](/api-keys/revoke) it instead.
 </Warning>

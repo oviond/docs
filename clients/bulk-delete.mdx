@@ -1,29 +1,29 @@
 ---
-title: "Bulk Delete"
-description: "Remove multiple clients at once from your workspace."
+title: "Bulk archive"
+description: "Archive multiple clients at once from your workspace."
 ---
 
-Bulk delete is the fastest way to clean up after offboarding several clients at the same time — or to clear out test clients you no longer need.
+Archiving several clients at once is the fastest way to clean up after offboarding — or to clear out test clients you no longer need. Archiving is a soft-delete: clients aren't permanently removed.
 
 <Warning>
-Bulk-deleted clients move to the [Archive](/archive/view) along with all their projects, dashboards, and data-source connections. The clients can be restored from the Archive within the retention window, but anything permanently deleted from the Archive is unrecoverable. Export what you need to keep first.
+Archived clients move to **Settings → Archive** along with their projects, pages, widgets, and data-source connections. You can restore them from the Archive at any time. Permanent deletion only happens when you explicitly delete an item from the Archive — and that is unrecoverable.
 </Warning>
 
 <Steps>
   <Step title="Open the client list">
     Go to your home dashboard.
   </Step>
-  <Step title="Enable multi-select">
-    Hover a client card and click the checkbox that appears, or toggle **Select** mode from the dashboard toolbar. Check every client you want to remove.
+  <Step title="Select clients">
+    Click the checkbox that appears when you hover a client card, or **Ctrl/Cmd**-click cards to toggle them. Select every client you want to archive.
   </Step>
-  <Step title="Click Delete">
-    With clients selected, click **Delete** in the action bar at the top of the list.
+  <Step title="Click Archive">
+    With clients selected, click **Archive** in the action bar.
   </Step>
   <Step title="Confirm">
-    Review the list in the confirmation dialog, then click **Confirm delete**. Selected clients move to the Archive.
+    In the **Archive Clients** dialog, review the count and click **Archive**. The selected clients move to the Archive.
   </Step>
 </Steps>
 
-## Undo a bulk delete
+## Restore archived clients
 
-Go to [Archive](/archive/view), select the clients you just removed, and click **Restore**. Their projects and data connections come back intact.
+Go to **Settings → [Archive](/archive/view)**, select the clients you just archived, and click **Restore**. Their projects and data connections come back intact.

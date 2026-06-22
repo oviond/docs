@@ -1,0 +1,28 @@
+---
+title: "Calculated metrics"
+description: "Build custom KPIs from formulas that combine metrics across your data sources."
+---
+
+A **calculated metric** is a custom KPI defined by a formula — for example `Revenue / Sessions` or `(Clicks / Impressions) * 100`. You combine metrics from your connected data sources with operators and number constants, then use the result in widgets like any other metric.
+
+Calculated metrics are managed inside the project editor, on the **Calculated Metrics** tab.
+
+## Use a calculated metric
+
+Once saved, a calculated metric appears alongside your data-source metrics in the **Data Query** widget's metric picker. Select it like any other metric to chart it, show it as a KPI, or add it to a table.
+
+## In this section
+
+- [Add a calculated metric](/calculated-metrics/add) — build a formula and set its format.
+- [Duplicate a calculated metric](/calculated-metrics/duplicate) — start a variant from an existing metric.
+- [Delete a calculated metric](/calculated-metrics/delete) — remove a metric you no longer need.
+
+## API
+
+| Action | Endpoint |
+|---|---|
+| List | `GET /v1/calculated-metrics` |
+| Create | `POST /v1/calculated-metrics` |
+| Update | `PUT /v1/calculated-metrics/{id}` |
+| Duplicate | `POST /v1/calculated-metrics/{id}/duplicate` |
+| Delete | `DELETE /v1/calculated-metrics/{id}` |

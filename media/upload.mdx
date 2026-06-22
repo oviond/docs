@@ -1,36 +1,40 @@
 ---
-title: "Upload Media"
-description: "Upload images and files into the Oviond Media library."
+title: "Upload media"
+description: "Upload images into the Oviond Media Library."
 ---
 
-The **Media library** is where every image, logo, icon, and file referenced from widgets, reports, and share pages lives. Uploads go straight to S3-backed storage — Oviond generates a pre-signed URL, the file uploads directly from your browser, and the metadata row is committed once upload finishes.
+The **Media Library** is where the images you reference from widgets, report covers, and branding live. It isn't a standalone page — it opens as a modal wherever you choose an image, such as an **Image** widget's source, report cover and theme backgrounds, and the company, account, and client branding settings.
+
+Uploads go to S3-backed storage. Oviond generates a pre-signed URL, the file uploads directly from your browser, and the metadata row is committed once the upload finishes.
 
 <Steps>
-  <Step title="Open the Media library">
-    Click **Media** in the left sidebar.
+  <Step title="Open the Media Library">
+    Trigger it from any image picker — for example, an **Image** widget's source or a branding logo control.
   </Step>
-  <Step title="Click Upload">
-    Opens a file picker — or drag files straight onto the Media grid.
+  <Step title="Switch to the Upload tab">
+    The modal has a **Library** tab and an **Upload** tab. Open **Upload**.
   </Step>
-  <Step title="Pick files">
-    Images (PNG, JPG, SVG, WebP) and common file types are all supported. Multi-select works — every file uploads in parallel.
+  <Step title="Add files">
+    Drag images onto the drop-zone or click to open the file picker. You can select multiple files at once.
   </Step>
-  <Step title="Optional: drop into a folder">
-    If you opened Media from inside a folder, uploads land in that folder. Otherwise they go to the unorganized pool.
+  <Step title="Upload">
+    Click **Upload files**. Each file uploads in parallel, then appears in the **Library** tab.
   </Step>
 </Steps>
 
-## Supported formats
+## Supported files
 
-| Type | Formats |
-|---|---|
-| Image | PNG, JPG, SVG, WebP, GIF |
-| Document | PDF |
+The Upload tab accepts images only: **JPEG, PNG, GIF, SVG, and WebP**.
 
-## Size limits
+## Limits
 
-Individual files up to **25 MB**. For larger uploads, chunk them or host externally and reference the URL directly from the widget.
+- Up to **25 MB** per file.
+- Up to **10 files** per upload batch.
 
 <Tip>
-For logos and branding, prefer **SVG** — they stay crisp at every report resolution and render cleanly in PDF export.
+For logos and branding, prefer **SVG** — it stays crisp at every report resolution and renders cleanly in PDF export.
 </Tip>
+
+## API
+
+The upload flow is two steps. `POST /v1/media/presigned-url` (send `file_name`, `content_type`, and `size`) creates the media row and returns an `upload_url`, the S3 `key`, and the new `media_id`. Upload the file with an HTTP `PUT` to `upload_url`, then confirm the display name with `PUT /v1/media/{id}`.

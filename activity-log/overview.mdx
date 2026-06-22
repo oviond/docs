@@ -1,12 +1,34 @@
 ---
-title: "Activity Log"
-description: "Audit every meaningful action taken in your account."
+title: "Activity log"
+description: "Audit meaningful actions taken in your account."
 ---
 
-The **Activity Log** records who did what and when, across projects, clients, integrations, users, and billing events. Use it to:
+The **Activity log** records who did what and when across your account. Open it from **Settings → Activity log** (`/settings/activity-log`). Use it to:
 
-- Trace when a report was created, updated, or deleted
-- See which team member invited a user or changed a role
-- Correlate a data anomaly with a recent integration reconnect
+- Trace when a client, project, or report was created, updated, or deleted
+- See which team member changed a role or removed a user
+- Correlate a change with a recent data source action
 
-Entries retain the actor (`user_id`), target (`resource_type`, `resource_id`), and timestamp. Filter by user or resource type from the Activity Log view.
+## What each entry shows
+
+The table has a row per action with these columns:
+
+| Column | Field | Description |
+|---|---|---|
+| **User** | `user_id` | The team member who performed the action, with their name and email. |
+| **Action** | `action` | What happened (for example `created`, `updated`, `deleted`, `restored`). |
+| **Type** | `resource_type` | The kind of resource affected. |
+| **Source** | `source` | Where the action came from — `app`, `api`, `mcp`, or `system`. |
+| **Resource** | `resource_name` | The name of the affected item (falls back to `—`). |
+| **Date** | `created_at` | When it happened, in your account timezone. |
+
+Each record also stores `resource_id` and an optional `details` object internally.
+
+## Filter and search
+
+- **Search** by resource name or action.
+- **Filter by type** — one resource type at a time: `client`, `project`, `media`, `automation`, `user`, `auth`, or `email`.
+
+## Who can see what
+
+Admins see the whole account's activity. Other members see only their own actions.

@@ -1,31 +1,32 @@
 ---
-title: "Update User"
-description: "Change a team member's role, name, or allowed projects."
+title: "Update a user"
+description: "Change a team member's name, access level, or assigned clients."
 ---
 
-Only the account **Owner** or **Admin** role can update another user's settings.
+Only users with **Admin access** can update another team member's settings.
 
 <Steps>
   <Step title="Open Users">
-    Under **Account → Users**.
+    Go to **Settings → Users**.
   </Step>
-  <Step title="Open the user's menu">
-    Click the three-dot menu next to the user's row.
+  <Step title="Open the user you want to edit">
+    Find the user in the list and open their edit panel.
   </Step>
-  <Step title="Choose Edit">
-    Opens the user editor.
+  <Step title="Update their details">
+    You can change the user's **Full name** and their **Permission level**:
+
+    - **Admin access** — full access to all features, including billing and team management.
+    - **Client access** — can view projects assigned to them.
+    - **Read-only access** — can view their assigned clients but cannot make changes.
   </Step>
-  <Step title="Update the role">
-    Change between Owner, Admin, Projects, or Read-only. See [Invite User](/users/invite) for role definitions.
-  </Step>
-  <Step title="Update allowed projects (Projects role only)">
-    For users with the **Projects** role, pick exactly which projects they can see.
+  <Step title="Update assigned clients (Client and Read-only access only)">
+    For **Client access** and **Read-only access**, use the **Assign clients** field to choose which clients this user can access.
   </Step>
   <Step title="Save">
-    Changes take effect on the user's next page load.
+    Save your changes. The user's access updates the next time they refresh or perform an action.
   </Step>
 </Steps>
 
 <Warning>
-Demoting the **Owner** moves ownership to whoever you promote — you can't leave an account ownerless. To transfer ownership, first make the target user an Admin, then re-invite yourself as Admin and ask the new Owner to demote you.
+  You can't change your own access level, and you can't change the account owner's access level. These actions are blocked to keep at least one admin on the account.
 </Warning>

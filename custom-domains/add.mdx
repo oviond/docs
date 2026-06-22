@@ -1,30 +1,47 @@
 ---
-title: "Add Domain"
-description: "Register a custom domain so shared reports load under your agency's URL."
+title: "Add domain"
+description: "Register a custom domain so shared reports load under your own URL."
 ---
 
-Custom domains replace `app.oviond.com` with your own URL on shared report links — e.g. `reports.youragency.com`. Oviond detects the DNS provider and tells you exactly which records to add.
+A custom domain replaces `app.oviond.com` with a URL you own on shared report links — for example, `reports.youragency.com`. When you add a domain, Oviond detects its DNS host and shows you the exact records to add.
 
 <Steps>
-  <Step title="Open Custom Domains">
-    From **Account → Custom Domains**.
+  <Step title="Open Custom domains">
+    Go to **Settings → Custom domains** (`/settings/custom-domains`).
   </Step>
-  <Step title="Click + Add Domain">
-    Enter the subdomain you want to use — e.g. `reports.youragency.com`.
+  <Step title="Add a domain">
+    Click **Add domain**, then enter the subdomain you want to use — for example, `reports.youragency.com`. Don't include `https://`.
   </Step>
-  <Step title="Detect DNS provider">
-    Oviond auto-detects the domain's DNS host (Cloudflare, GoDaddy, Route 53, etc).
+  <Step title="Review the detected DNS provider">
+    Oviond looks up the domain's nameservers and identifies the DNS host (Cloudflare, GoDaddy, Namecheap, AWS Route 53, Google Domains, or Squarespace; **Other** if it can't be matched). This is read-only — it just tells you where to add the records.
   </Step>
-  <Step title="Copy the DNS records">
-    Oviond shows a CNAME (and verification TXT) record. Add them exactly as shown in your DNS provider's admin.
+  <Step title="Add the DNS records">
+    Oviond shows a `CNAME` record and, in some cases, a `TXT` ownership record. Add them exactly as shown in your DNS provider's admin panel, then click **I added the records**.
   </Step>
-  <Step title="Start verification">
-    Click **Verify**. Oviond polls DNS until the records propagate.
+  <Step title="Verify">
+    Click **Verify domain** to check the records. See [Verify domain](/custom-domains/verify) for the status flow.
   </Step>
 </Steps>
 
-## Supported providers with auto-setup
+## DNS records
 
-If your domain is on **Cloudflare** or **GoDaddy**, Oviond can configure the DNS records for you via OAuth — you grant permission once and Oviond writes the records automatically. For other providers, add the records manually as shown in the UI.
+Oviond registers the domain with Vercel and returns the records you need to add:
 
-See [Verify Domain](/custom-domains/verify) for the verification flow.
+| Record | Purpose |
+|---|---|
+| `CNAME` | Points your subdomain at Vercel (`cname.vercel-dns.com`) so it can serve your reports and provision SSL. |
+| `TXT` | An ownership challenge (`_vercel`), returned only when the domain is already attached to another Vercel account. It can be removed once the domain is verified. |
+
+<Note>
+  You always add DNS records yourself in your provider's admin. Oviond detects which provider you use but never writes records on your behalf.
+</Note>
+
+<Note>
+  On **Cloudflare**, set the record's proxy status to **DNS only** (grey cloud). With the proxy enabled, Vercel can't issue the SSL certificate.
+</Note>
+
+<Note>
+  SSL is provisioned automatically by Vercel once the domain verifies. You don't need to set up a certificate manually.
+</Note>
+
+Your account's first custom domain is set as the default automatically, so shared URLs have a domain to resolve against. The number of custom domains you can add depends on your plan.

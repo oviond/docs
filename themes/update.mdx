@@ -1,28 +1,32 @@
 ---
-title: "Update Theme"
-description: "Edit an existing theme's colors, fonts, or styling tokens."
+title: "Update theme"
+description: "Edit an existing theme's colours, fonts, or styling tokens."
 ---
 
-Updating a theme changes **every project** that uses it. Project-level data isn't affected — just the visual tokens.
+Editing a theme changes its visual tokens. Project data isn't affected — only the look and feel of projects that use the theme.
 
 <Steps>
-  <Step title="Open the Themes screen">
-    From the left sidebar.
+  <Step title="Open the project's Themes panel">
+    In the project editor sidebar, open the **Themes** panel.
   </Step>
   <Step title="Open the theme editor">
-    Click the theme, or choose **Edit** from its three-dot menu.
+    Hover the theme row and click **Edit**.
   </Step>
-  <Step title="Change tokens">
-    Update any of: name, primary color, chart colors, font, border radius, shadow.
+  <Step title="Change the tokens">
+    Update any of: name, **Primary colour**, **Palette mode** and individual chart colours, canvas colours, **Header background**, **Radius**, **Shadow**, and **Font**. You can also edit the cover-page and thank-you-page designs.
   </Step>
   <Step title="Preview">
-    The preview panel shows a sample chart and KPI tile using the current settings.
+    The project canvas previews your changes live as you edit.
   </Step>
-  <Step title="Save">
-    The theme is re-applied to every project that uses it on next render.
+  <Step title="Choose where it applies and save">
+    Set **Apply to** (Current project, This client's projects, or All projects), then click **Save and apply**.
   </Step>
 </Steps>
 
 <Tip>
-If you change the **primary color** without manually overriding the chart palette, Oviond re-derives the chart colors from the new primary. Override individual chart colors before saving if you need them pinned.
+If you change the **Primary colour** without overriding the chart palette, Oviond re-derives the ten chart colours from the new primary. Open **Edit chart colours** and set them by hand if you need specific colours pinned.
 </Tip>
+
+<Note>
+To make a copy instead of changing the original, hover the theme row and choose **Duplicate**. Editing themes requires permission to manage shared assets.
+</Note>

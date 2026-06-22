@@ -7,30 +7,39 @@ Share a project with a client, stakeholder, or prospect via a public URL. The re
 
 <Steps>
   <Step title="Open the project">
-    From the Reports screen, click the project.
+    From the client's **Projects** tab, click the project.
   </Step>
   <Step title="Click Share">
-    The Share button sits in the top-right of the editor. The full link and a short link both get generated.
-  </Step>
-  <Step title="Enable the public link">
-    Toggle **Public link** on.
+    The **Share** button sits in the top-right of the editor and opens the Share panel.
   </Step>
   <Step title="Copy the link">
-    Copy the full URL or the short URL. Short URLs are easier to share in chat and email.
+    On the **Link** tab, click **Copy** to copy the share URL. The link points to `/shared/{short-id}` on your share host.
   </Step>
-  <Step title="Optional: password-protect">
-    Enable **Password** under the share settings and set a passphrase. Recipients are prompted for it before the report loads.
+  <Step title="Make sure the link is active">
+    Under **Sharing Options**, keep **Link is Active** on so anyone with the link can view the report. Turn it off to disable the link.
+  </Step>
+  <Step title="Optional: protect or extend it">
+    Toggle **Enable Password** and set a passphrase, **Allow PDF Download** to let viewers export a PDF, and **Show Date Selector** to let viewers change the date range.
   </Step>
 </Steps>
 
+## Share tabs
+
+The Share panel has four tabs:
+
+- **Link** — copy the public link and configure sharing options.
+- **Email** — send the report to recipients by email.
+- **Download** — generate a PDF (available when **Allow PDF Download** is on).
+- **Embed** — copy an `<iframe>` snippet to embed the report in another site.
+
 ## Custom domain
 
-If you've set up a [Custom Domain](/custom-domains/list), shared links use your white-label domain instead of `app.oviond.com`. Your logo, favicon, and brand colors render on the share page out of the box.
+Share links never expose the Oviond app domain. The link host resolves in order: the client's custom domain, then your account's default custom domain, then an unbranded platform fallback. Set up a [Custom Domain](/custom-domains/list) to serve links from your own white-label host. Your logo, favicon, and brand colors render on the share page out of the box.
 
 ## Live vs snapshot
 
-Public links render live data every time they're opened. To send a static snapshot (e.g. end-of-month), use [PDF Export](/automations/pdf) instead.
+Public links render live data every time they're opened. To send a static snapshot (e.g. end-of-month), use the **Download** tab or [PDF Export](/automations/pdf) instead.
 
 <Warning>
-Anyone with the link can view the report. Use password protection if the report contains sensitive client data.
+Anyone with the link can view the report while **Link is Active** is on. Enable a password if the report contains sensitive client data.
 </Warning>

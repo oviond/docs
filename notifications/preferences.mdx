@@ -1,35 +1,53 @@
 ---
 title: "Preferences"
-description: "Choose which notifications trigger email delivery."
+description: "Choose which events notify you and through which channels."
 ---
 
-**Preferences** are per-user — each team member controls which Oviond events reach their inbox. In-app notifications are always on account-wide; email delivery is the toggle you manage here.
+**Preferences** are per-user — each team member controls which events notify them and over which channels. Manage them under **Settings → Notifications** (`/settings/notifications`).
 
-## Event types
+## Channels
 
-| Event | Default email | Notes |
+- **In-app** — the bell icon. Always on for every event, so there's no toggle for it.
+- **Email** — to your account email. Personal, toggled per event.
+- **Slack** — posts to your account's Slack webhook.
+- **Discord** — posts to your account's Discord webhook.
+
+The settings matrix shows a toggle column for **Email**, **Slack**, and **Discord**. Slack and Discord are **team channels** — their toggles stay disabled until an admin connects the webhook for the account (see below).
+
+## Events
+
+Events are grouped by category. Toggle Email, Slack, and Discord per event.
+
+| Category | Event | Event key |
 |---|---|---|
-| **Automation failed** | On | Email when an automation errors during a scheduled run. |
-| **Integration disconnected** | On | Email when a data source's OAuth token is revoked or expires. |
-| **Team invite** | On | Email when a user is invited to your account. |
-| **Team member removed** | On | Email when a team member is removed. |
-| **PDF export ready** | Off | Email when an on-demand PDF is generated. |
-| **Weekly digest** | Off | Summary of activity each Monday. |
+| Data Sources | Data source issue | `datasource_error` |
+| Automations | Automation sent | `automation_success` |
+| Automations | Automation failed | `automation_failed` |
+| PDF Export | Export ready | `pdf_completed` |
+| PDF Export | Export failed | `pdf_failed` |
+| Email Delivery | Email bounced | `email_bounced` |
+| Account | Email changed | `email_changed` |
+| Account | Role changed | `role_changed` |
+| Account | Removed from account | `removed_from_account` |
+| Account | Invite accepted | `invite_accepted` |
+| Account | Domain verified | `custom_domain_verified` |
 
-## How to change preferences
+## Configure Slack and Discord
+
+Slack and Discord are **account-wide** delivery channels backed by an incoming webhook. Configuring them requires the **manage account** permission (admin).
 
 <Steps>
-  <Step title="Open Notifications → Preferences">
-    From the sidebar (or click your avatar → Preferences).
+  <Step title="Open the channel setup">
+    From **Settings → Notifications**, open the Slack or Discord channel.
   </Step>
-  <Step title="Toggle each event">
-    Turn email delivery on or off per event type.
+  <Step title="Paste the webhook URL">
+    Enter the incoming webhook URL for your Slack or Discord workspace.
   </Step>
-  <Step title="Save">
-    Changes take effect immediately.
+  <Step title="Enable and save">
+    Once enabled, any user can route events to that channel from their own preferences.
   </Step>
 </Steps>
 
 <Note>
-Preferences are per-user — switching them doesn't affect your teammates. In-app notifications (the bell icon) show every event for every user in the account regardless of email preferences.
+Preferences are per-user — your toggles don't affect teammates. Slack and Discord webhooks, however, are account-wide: one webhook per channel for the whole account, managed by an admin.
 </Note>

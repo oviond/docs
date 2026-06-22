@@ -1,33 +1,33 @@
 ---
-title: "Revoke API Key"
-description: "Immediately disable an API key without deleting its audit record."
+title: "Revoke API key"
+description: "Immediately disable an API key while keeping it in your list."
 ---
 
-Revoking a key stops it from authenticating new requests — every future call returns `401 Unauthorized`. The key's metadata (name, created-at, created-by) stays in the list for audit.
+Revoking a key stops it from authenticating requests — every future call returns `401 Unauthorized`. The key stays in your **API keys** list with a `Revoked` status, so you keep a record of it and can permanently delete it later.
 
-Use revoke when:
+Revoke a key when:
 
-- The key was accidentally shared or committed to a public repo
-- A team member leaves the agency
+- The key was accidentally shared or committed to a public repository
+- A team member leaves and their key should stop working
 - An integration is being decommissioned
 
 <Steps>
-  <Step title="Open API Keys">
-    From **Account → API Keys**.
+  <Step title="Open API keys">
+    Go to **Settings → API keys**.
   </Step>
-  <Step title="Open the key's menu">
-    Click the three-dot menu on the key row.
+  <Step title="Revoke the key">
+    On the key's row, click **Revoke**.
   </Step>
-  <Step title="Choose Revoke">
-    Confirm when prompted.
+  <Step title="Confirm">
+    Confirm in the dialog. The key's status changes to `Revoked` immediately.
   </Step>
 </Steps>
 
 ## Revoked vs deleted
 
-| State | Still in list? | Can still authenticate? | Can be restored? |
+| State | Still in list? | Can authenticate? | Reversible? |
 |---|---|---|---|
 | **Revoked** | Yes | No | No — create a new key |
 | **Deleted** | No | No | No |
 
-Revoke first — deleting is irreversible and drops the audit record. See [Delete API Key](/api-keys/delete).
+Revoking is the first step. To remove a revoked key from the list entirely, see [Delete API key](/api-keys/delete) — a key must be revoked before it can be deleted.

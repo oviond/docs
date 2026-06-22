@@ -1,26 +1,26 @@
 ---
-title: "Delete Theme"
-description: "Remove a theme from your library."
+title: "Delete theme"
+description: "Remove a theme from your account."
 ---
 
-Deleting a theme removes it from your Themes library. Projects that used the theme fall back to Oviond's default theme — the projects themselves are untouched.
+Deleting a theme removes it from your account's Themes panel. The projects themselves aren't touched — a project that referenced the deleted theme falls back to a default theme on its next render.
 
 <Steps>
-  <Step title="Open the Themes screen">
-    From the left sidebar.
+  <Step title="Open the project's Themes panel">
+    In the project editor sidebar, open the **Themes** panel.
   </Step>
-  <Step title="Open the theme menu">
-    Click the three-dot menu on the theme card.
+  <Step title="Delete the theme">
+    Hover the theme row and click the **Delete** (trash) action.
   </Step>
-  <Step title="Choose Delete">
-    Confirm when prompted.
+  <Step title="Confirm">
+    In the **Delete theme** dialog, confirm. Deleting a theme can't be undone.
   </Step>
 </Steps>
 
-<Note>
-Themes from the **Oviond Library** aren't deletable from your account — they're shared and maintained by Oviond.
-</Note>
-
 <Warning>
-If the theme is set as a client's **default**, the client's default falls back to Oviond's standard theme. Already-created projects keep their own theme settings.
+If the deleted theme was your account **default**, or was set as a **Client theme**, those references fall back to a default theme. Already-styled projects keep their own theme until you re-apply another one.
 </Warning>
+
+<Note>
+Deleting themes requires permission to manage shared assets.
+</Note>

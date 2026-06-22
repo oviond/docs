@@ -1,50 +1,38 @@
 ---
-title: "Scheduled Delivery"
-description: "Set the cadence, day, and time an automation fires."
+title: "Scheduled delivery"
+description: "Set the frequency, day, and time an automation sends."
 ---
 
-Oviond automations let you schedule reports to be delivered automatically to your clients — no manual sending required. You can send reports as live links or PDF attachments on any recurring schedule you define.
+Each automation sends its report on a recurring schedule you define. Oviond renders the report for the configured date range and emails it to your recipients — no manual sending required.
 
-## Create an automation
+## Set the schedule
 
-<Steps>
-  <Step title="Open Automations">
-    In the left sidebar, click **Automations**, then click **New Automation**.
-  </Step>
-  <Step title="Select a report">
-    Choose the project (report) you want to send. You can only select one project per automation.
-  </Step>
-  <Step title="Set the schedule">
-    Choose a frequency: **Daily**, **Weekly**, or **Monthly**. Then set the specific day (for weekly/monthly), time, and timezone for delivery.
-  </Step>
-  <Step title="Configure delivery">
-    Select the delivery method:
-    - **Email link** — sends a live link to the report
-    - **PDF attachment** — attaches a rendered PDF to the email
+When you create or edit an automation, the **Schedule** step controls when it sends:
 
-    Add recipient email addresses, customize the email subject line, and optionally write a message body.
-  </Step>
-  <Step title="Save the automation">
-    Click **Save**. The automation is active immediately and will run on the next scheduled time.
-  </Step>
-</Steps>
+- **Frequency** — **Daily**, **Weekly**, or **Monthly**.
+- **Day of week** — shown for **weekly** automations (Monday–Sunday).
+- **Day of month** — shown for **monthly** automations (day `1`–`31`).
+- **Send at** — the hour, minute (`00` or `30`), and `AM`/`PM`.
 
-## Manage automations
+The schedule is stored as `frequency`, `day`, `hours`, `minutes`, and `time_format`, and is evaluated against the account's `timezone`. The send time is shown in that timezone in the automation's details.
 
-From the **Automations** list you can:
+<Note>
+Oviond checks for due automations every minute, so a run starts shortly after its scheduled time rather than exactly on the second.
+</Note>
 
-- **Pause / unpause** — Click the toggle next to any automation to suspend it without deleting it.
-- **Edit** — Update the schedule, recipients, or delivery settings at any time.
-- **Delete** — Remove automations individually or in bulk using the checkboxes.
+## Date range
+
+The **Date range** (for example `Last Month`) is stored as `date_text` and decides which period the report covers. It's resolved fresh on every run, so a monthly automation set to `Last Month` always sends the most recent complete month.
+
+## After it's scheduled
+
+Once saved, the automation runs on its next scheduled time. From the **Automations** screen you can:
+
+- **Edit** the schedule, recipients, template, or sender at any time. Changing the schedule recomputes the next run.
+- **Pause / Resume** to suspend sending without losing the configuration.
+- **Test** to send immediately — see [Test an automation](/automations/test).
+- **Archive** to stop and remove it — see [Archive an automation](/automations/delete).
 
 ## View execution history
 
-Click on any automation to open its detail view and see a log of every past send — including the timestamp and delivery status (success or failure). This is useful for confirming reports were delivered or diagnosing missed sends.
-
-## Test an automation
-
-To send an immediate test delivery without waiting for the next scheduled time, open the automation detail and click **Send Now**. The report is sent to all configured recipients right away.
-
-<Note>
-  Test sends count toward your monthly email quota.
-</Note>
+Open an automation and click **Executions** (or open the project's run history) to see every past run — scheduled and test — with its timestamp and status. See [Run history](/automations/history).

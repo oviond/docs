@@ -1,0 +1,63 @@
+---
+title: "May 2026"
+description: "Release notes for the Oviond REST API."
+---
+
+<Update label="2026-05-29" description="Archive & search">
+
+### Recover anything, find anything
+
+Soft-deleted clients, projects, media, automations, and templates land in the archive, where you can restore or permanently delete them. A unified search spans your workspace.
+
+- `GET /v1/archive` and `GET /v1/archive/counts`
+- `PUT /v1/archive/restore` and `DELETE /v1/archive/permanent`
+- `GET /v1/search` — search across the workspace
+
+</Update>
+
+<Update label="2026-05-22" description="Goals & version history">
+
+### Targets and a project timeline
+
+Set targets for any metric and track progress in reports. Every project keeps a change history you can inspect and roll back to.
+
+- `POST /v1/goals` — define a target (`POST /v1/goals/{id}/duplicate` to clone)
+- `GET /v1/projects/{project_id}/changes` — version history
+- `GET /v1/projects/{project_id}/at/{seq}` — load a past version
+
+</Update>
+
+<Update label="2026-05-15" description="Notifications & activity log">
+
+### Stay informed
+
+In-app notifications for automation failures, data-source disconnects, and team events, plus a full audit log of account activity.
+
+- `GET /v1/notifications` and `DELETE /v1/notifications/bulk`
+- `PUT /v1/notifications/preferences` — email, Slack, and Discord delivery
+- `GET /v1/activity` — audit log
+
+</Update>
+
+<Update label="2026-05-08" description="API keys">
+
+### Programmatic access
+
+Issue API keys to call the REST API outside the app. Keys carry an access level and can be revoked instantly.
+
+- `POST /v1/api-keys` — create a key (secret shown once)
+- `DELETE /v1/api-keys/{id}` — revoke a key
+
+</Update>
+
+<Update label="2026-05-01" description="Team & roles">
+
+### Multi-user accounts
+
+Invite team members, assign access levels, and restrict users to a subset of clients.
+
+- `POST /v1/users/invite` — invite a team member
+- `POST /v1/users/accept-invite` — accept and set a password
+- `GET|PUT /v1/users/{id}` — manage a member's access
+
+</Update>

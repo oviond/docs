@@ -3,28 +3,29 @@ title: "Restore"
 description: "Bring a soft-deleted item back to your active workspace."
 ---
 
-Restoring moves an item out of the Archive and back to its original location. Clients, projects, and media items can all be restored — and their dependent children (a client's projects, a project's widgets) come back intact.
+Restoring moves an item out of the Archive and back to its original location. Clients, projects, media, automations, and templates can all be restored — and their dependent children come back intact.
+
+When you restore a **client**, its projects are restored too, along with everything under them (widgets, pages, exports, automations, and run history). When you restore a **project**, its widgets, pages, exports, and automations come back with it. Restored automations are **rescheduled** so they resume on their normal cadence rather than firing a backlog of missed runs.
 
 <Steps>
   <Step title="Open Archive">
-    From **Account → Archive**.
+    Go to **Settings → Archive** (`/settings/archive`).
   </Step>
   <Step title="Filter by type">
-    Narrow to **Clients**, **Projects**, or **Media** if you know what you're looking for.
+    Narrow to **Clients**, **Projects**, **Media**, **Automations**, or **Templates** if you know what you're looking for.
   </Step>
   <Step title="Select items">
-    Check the items you want to restore. Multi-select works.
+    Check the items you want to restore. Multi-select works for bulk restore.
   </Step>
   <Step title="Click Restore">
-    Items reappear in their original location — clients back to the Clients list, projects back under their client, media back to the Media library.
+    Confirm in the dialog. Items reappear in their original location.
   </Step>
 </Steps>
 
-## What if the parent was deleted too?
+## Plan limits
 
-- Restoring a **project** whose parent **client** is also archived — the client is restored first automatically. You end up with both the client and its project active again.
-- Restoring a **project** whose parent client was **permanently deleted** — the project returns to the Archive with a new error state. You'll need to reassign it to a different active client.
+Restoring a **client** counts against your plan's client limit. If your account is already at the cap, the restore is blocked — upgrade your plan or remove an active client first.
 
-## Retention
-
-You can only restore items within the retention window (90 days by default). Past that, the item is permanently purged.
+<Note>
+The Archive is admin-only. Members without the **manage archive** permission can't restore items.
+</Note>

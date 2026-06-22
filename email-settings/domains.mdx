@@ -1,35 +1,46 @@
 ---
-title: "Email Domains"
-description: "Verify domains so Oviond can send mail on their behalf."
+title: "Email domains"
+description: "Verify a sending domain so Oviond can send mail from your own addresses."
 ---
 
-An **email domain** is a domain authorized to send mail through Oviond. Verification involves adding DNS records (SPF, DKIM, DMARC) so recipient providers trust messages coming from your domain.
+A **sending domain** is a domain authorized to send mail through Oviond's managed provider. Verifying it means adding DNS records so recipient providers trust messages from your domain. You can register one sending domain per account from **Settings → Email settings** (`/settings/email-settings`).
 
-## Add a domain
+<Note>
+  Lifetime plans are SMTP-only and can't register a sending domain — they send from their own [SMTP server](/email-settings/smtp) instead.
+</Note>
+
+## Add a sending domain
 
 <Steps>
-  <Step title="Open Email Settings → Domains">
-    Under **Account**.
+  <Step title="Open Email settings">
+    Go to **Settings → Email settings** and start adding a sender, then choose **Sending domain**.
   </Step>
-  <Step title="Click + Add Domain">
-    Enter the domain — e.g. `youragency.com`.
+  <Step title="Add the domain">
+    In **Add sending domain**, enter the domain — for example, `mail.youragency.com` — and click **Add domain**.
   </Step>
-  <Step title="Copy the DNS records">
-    Oviond shows SPF, DKIM, and (optionally) DMARC records. Add them exactly as shown in your DNS provider.
+  <Step title="Add the DNS records">
+    Oviond shows **DKIM and SPF records** to add to your DNS provider, plus a recommended **DMARC** record. Add them exactly as shown.
   </Step>
-  <Step title="Click Verify">
-    Oviond queries DNS and marks the domain **Active** once records resolve.
+  <Step title="Verify the domain">
+    Click **Verify domain**. Oviond checks the live status: if the records resolve, the domain is marked verified; otherwise verification is started and the status updates on the next check or in the background.
   </Step>
 </Steps>
+
+## DNS records
+
+The records table shows **Type**, **Host/Name**, **Value**, **TTL**, **Priority**, and **Status** for each record. A separate **DMARC** card provides a recommended `TXT` record at `_dmarc`. Each value can be copied directly from the table.
 
 ## Status
 
 | Status | Meaning |
 |---|---|
-| **Pending** | DNS records not visible yet. |
-| **Active** | All required records verified — senders under this domain can send. |
-| **Failed** | Verification timed out. Re-check records and click Verify again. |
+| **Not started** | Domain added but verification hasn't run. |
+| **Pending** | Records aren't fully visible yet. |
+| **Verified** | All required records resolve — senders on this domain can send. |
+| **Failed** | Verification didn't complete. Re-check the records and click **Verify domain** again. |
+
+When the domain verifies, Oviond switches the account's active provider to the sending domain so your verified senders are used.
 
 ## Remove a domain
 
-Deleting a domain immediately invalidates every [sender](/email-settings/senders) under it. Automations configured with those senders will fail on next fire — switch them to a different verified sender first.
+Removing the sending domain deletes it from Oviond and the provider. If it was the active provider, Oviond falls back to the Oviond default. Removing it also invalidates any [senders](/email-settings/senders) on that domain — switch automations to a different sender first.

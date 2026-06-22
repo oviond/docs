@@ -1,28 +1,51 @@
 ---
-title: "Add API Key"
-description: "Generate a new API key to authenticate REST API calls."
+title: "Add API key"
+description: "Create an API key to authenticate REST API and MCP calls."
 ---
 
-API keys let external scripts and integrations call the Oviond REST API on behalf of your account. A key inherits the permissions of the user who created it — invite a dedicated read-only user for key-issuing if you want to scope-limit.
+API keys let external scripts, integrations, and AI connectors call the Oviond API on behalf of your account. You choose a permission level for each key when you create it, so a key can be scoped more tightly than your own account.
+
+<Note>
+  API and MCP access is included with the agency plan. If your plan doesn't include API access, the create panel prompts you to upgrade in **Settings → Billing**.
+</Note>
+
+## Create a key
 
 <Steps>
-  <Step title="Open API Keys">
-    From **Account → API Keys**.
+  <Step title="Open API keys">
+    Go to **Settings → API keys**.
   </Step>
-  <Step title="Click + New Key">
-    Opens the create dialog.
+  <Step title="Click Create key">
+    Click **Create key** to open the create panel.
   </Step>
   <Step title="Name the key">
-    Use a descriptive name — e.g. *Zapier — Marketing Workflows* — so you know what depends on it.
+    Enter a descriptive name — for example, `Reporting automation` — so you can identify what depends on it later.
   </Step>
-  <Step title="Create">
-    Oviond shows the key **once** — copy it immediately. We hash the key after this screen; there's no way to retrieve it later.
+  <Step title="Choose a permission">
+    Pick the access level for the key:
+
+    | Permission | What the key can do |
+    |---|---|
+    | **View** | Read-only access. View clients, projects, and data, but can't make changes. |
+    | **Edit** | Read and write content. Create and edit clients, projects, and data — but not account settings, billing, or team. |
+    | **Full** | Full account access. Everything your own account can do, including account settings. |
   </Step>
-  <Step title="Paste into your tool">
-    Use the key as a Bearer token: `Authorization: Bearer <key>`.
+  <Step title="Create and copy the key">
+    Oviond shows the key **once**. Copy it immediately and store it somewhere safe — the key is hashed after this panel and can't be retrieved again. The panel also offers ready-made snippets for AI connectors that include the key.
   </Step>
 </Steps>
 
+## Use your key
+
+Send the key as a Bearer token on every request:
+
+```bash
+curl https://api.oviond.com/v1/users/me \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+Every key starts with the `oviond_` prefix. See [Authentication](/authentication) for more on authenticating API requests.
+
 <Warning>
-The full key is only visible at creation. If you lose it, you'll need to [revoke](/api-keys/revoke) the key and generate a new one.
+  The full key is only visible at creation. If you lose it, [revoke](/api-keys/revoke) the key and create a new one.
 </Warning>

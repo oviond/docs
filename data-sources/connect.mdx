@@ -1,128 +1,127 @@
 ---
 title: "Connect"
-description: "Authorize Oviond to pull data from Google Ads, Facebook, and 30+ other platforms."
+description: "Authorize Oviond to pull data from Google Ads, Facebook, and 60+ other platforms."
 ---
 
-Connecting a marketing platform to a client is a two-step process. First, you authorize the platform through OAuth — this creates an **auth profile** in your Oviond workspace. Second, you link a specific account or data source from that platform to the client. Once linked, that data source is available in widgets when you build reports for that client.
+Connecting a marketing platform to a client is a two-step process that happens inside a client's project editor. First, you authorize the platform — through OAuth or an API key — which creates a reusable **connection** (an auth profile) in your workspace. Second, you link a specific account, property, or page from that connection to the client. Once linked, that data source is available when you build widgets for that client.
 
 <Note>
-  Oviond requests read-only access to all connected platforms. Oviond cannot make changes to your campaigns, budgets, or account settings.
+  Oviond requests read-only access to the platforms you connect. Oviond cannot make changes to your campaigns, budgets, or account settings.
 </Note>
 
-## Step 1: Authorize the platform
+## Where data sources live
+
+You manage data sources in two places:
+
+- **A project's Data Sources tab** — open a client's project, then click **Data Sources** in the editor sidebar. This is where you connect platforms and link them to the client. It's the primary place to wire up data.
+- **Settings → Data sources** (`/settings/data-sources`) — a workspace-wide table of every connection. Use it to rename, refresh, or delete connections and to see which clients use each one. You cannot create new connections here; the empty state points you back to a project editor: *Connect data sources from a client project editor.*
+
+## Step 1: Connect the platform
 
 <Steps>
-  <Step title="Open Integrations">
-    Click **Integrations** in the left sidebar. This shows all platforms available to connect.
+  <Step title="Open the Data Sources tab">
+    Open a client's project and click **Data Sources** in the editor sidebar.
   </Step>
   <Step title="Find the platform">
-    Browse the list or use the search bar to find the platform you want to connect (for example, Google Ads or Facebook Ads).
+    Use the **Search data sources...** box to find the platform you want (for example, Google Ads or Facebook Ads).
   </Step>
   <Step title="Click Connect">
-    Click **Connect** next to the platform name. Oviond opens an OAuth authorization window.
+    Click **Connect** next to the platform. Oviond shows a **Profile Name** field so you can label this connection (for example, *Acme — Main Account*). A default name like *Default Google Analytics Connection* is prefilled.
   </Step>
-  <Step title="Log in and grant permissions">
-    Log in to the platform using the account credentials for the client (or your agency's manager account). Review the permissions and click **Allow** or **Authorize** to grant Oviond read access.
+  <Step title="Authorize">
+    For an OAuth platform, click **Connect** to open the authorization popup. Log in with the account that has access to this client's data, review the read-only permissions, and authorize. For an API-key platform, enter the credentials in the fields shown and click **Next** or **Save**.
   </Step>
   <Step title="Return to Oviond">
-    After authorization, the platform redirects you back to Oviond. The new auth profile now appears under that platform in your integrations list.
-  </Step>
-</Steps>
-
-If you already have an auth profile for this platform (for example, you previously connected Google Ads for another client), you can skip Step 1 and proceed directly to linking the data source in Step 2.
-
-## Step 2: Link a data source to a client
-
-After authorization, you link the specific account or property to a client.
-
-<Steps>
-  <Step title="Navigate to the client">
-    Go to **Clients** in the left sidebar and open the client you want to connect data to.
-  </Step>
-  <Step title="Open the Integrations tab">
-    Click the **Integrations** tab on the client's profile page.
-  </Step>
-  <Step title="Add a data source">
-    Click **+ Add Data Source**. A panel opens listing the platforms you have authorized.
-  </Step>
-  <Step title="Select the platform and auth profile">
-    Choose the platform (for example, Google Ads) and select the auth profile to use. If you have multiple auth profiles for the same platform, select the one that has access to this client's account.
-  </Step>
-  <Step title="Select the specific account">
-    From the account dropdown, select the specific account, property, or sub-account to link to this client (for example, the Google Ads account for this particular client). Only accounts accessible under the selected auth profile appear in this list.
-  </Step>
-  <Step title="Save the data source">
-    Click **Save**. The data source is now linked to the client and available in report widgets.
-  </Step>
-</Steps>
-
-## Test the connection
-
-After linking a data source, verify it is returning data correctly before building widgets.
-
-1. On the client's **Integrations** tab, find the data source you just linked.
-2. Click the three-dot menu next to it and select **Test Connection**.
-3. Oviond attempts to fetch data from the platform. A success message confirms the connection is active.
-
-If the test fails, see [Common connection issues](#common-connection-issues) below.
-
-## Reconnect an expired or revoked integration
-
-OAuth tokens expire or are revoked when you change your password, revoke app access from within the marketing platform, or the platform's token policy expires the session. When this happens, widgets connected to that integration stop displaying data and the integration shows a warning status.
-
-<Steps>
-  <Step title="Identify the expired integration">
-    Go to **Integrations** in the left sidebar. Expired or revoked auth profiles display a warning icon or a **Reconnect** prompt.
-  </Step>
-  <Step title="Click Reconnect">
-    Click **Reconnect** next to the affected auth profile.
-  </Step>
-  <Step title="Re-authorize through OAuth">
-    Complete the OAuth flow again using the same account credentials. Once you authorize, Oviond updates the auth profile with a fresh token.
-  </Step>
-  <Step title="Verify the connection">
-    After reconnecting, use **Test Connection** on the affected data sources to confirm data is flowing again.
+    After authorization, Oviond stores the connection. If the platform exposes multiple accounts, Oviond advances to account selection (Step 2). Otherwise the connection is saved and a *{name} connected* confirmation appears.
   </Step>
 </Steps>
 
 <Note>
-  Reconnecting an auth profile restores all clients and widgets that used it — you do not need to re-link each client individually.
+  A connection is reusable. If you already have a connection for this platform (for example, you authorized Google Ads for another client), you don't need to authorize again — select the existing profile and skip to linking in Step 2.
+</Note>
+
+## Step 2: Link an account to the client
+
+After connecting, you pick which specific account, property, or page maps to this client.
+
+<Steps>
+  <Step title="Select the connection">
+    Under **Select Profile**, choose the connection to use. If you have several connections for the same platform, pick the one with access to this client's account. The connection already linked to this client sorts to the top.
+  </Step>
+  <Step title="Click Link">
+    Click **Link** on the connection. Oviond loads the accounts available under that connection.
+  </Step>
+  <Step title="Select the account">
+    Under **Select Account**, choose the specific account, property, or page for this client. Some platforms use a two-step pick — for example, Google Analytics 4 (analytics account, then property), Google Business Profile (account, then one or more locations), and Meta/Instagram Ads (Business Manager, then ad account). Use **Search...** to narrow the list.
+  </Step>
+  <Step title="Save">
+    Click **Save**. Oviond links the account to the client and shows a *{name} linked* confirmation. The data source is now available in this client's widgets.
+  </Step>
+</Steps>
+
+## Check the connection status
+
+Each connection shows a status badge so you can tell at a glance whether its token is healthy:
+
+- **Token Valid** — the connection is authorized and data should flow.
+- **Token Expired** — the token has expired or been revoked; refresh it.
+
+Status is set automatically by a daily auth-test check and by the OAuth token refresher. When a token expires, widgets that depend on the connection stop returning data.
+
+## Refresh an expired connection
+
+OAuth tokens expire or are revoked when you change a password, revoke app access inside the platform, or the platform's token policy ends the session. When that happens, the connection shows **Token Expired**.
+
+<Steps>
+  <Step title="Find the connection">
+    Open the project's **Data Sources** tab (or **Settings → Data sources**) and look for a connection showing **Token Expired**.
+  </Step>
+  <Step title="Refresh">
+    Click **Refresh** (in the project tab) or **Refresh token** (in Settings). Oviond reopens the OAuth popup.
+  </Step>
+  <Step title="Re-authorize">
+    Complete the OAuth flow again with the same account. Oviond updates the connection with a fresh token, and the badge returns to **Token Valid**.
+  </Step>
+</Steps>
+
+<Note>
+  Refresh is shown only for OAuth platforms. API-key connections are updated by clicking **Edit** and re-entering credentials. Refreshing a connection restores every client and widget that uses it — you don't re-link each client.
 </Note>
 
 ## Common connection issues
 
 <AccordionGroup>
   <Accordion title="Wrong account selected during OAuth">
-    If you have multiple accounts on a platform (for example, both a personal Google account and an agency Google account), the OAuth window may default to the wrong one. To fix this:
+    If you have multiple accounts on a platform (for example, both a personal and a work Google account), the OAuth popup may default to the wrong one. To fix this:
 
-    1. Go to **Integrations** and delete the incorrectly authorized auth profile.
-    2. Click **Connect** again.
-    3. In the OAuth window, click the account switcher or **Use a different account** and log in with the correct credentials.
+    1. Delete the incorrect connection from **Settings → Data sources** (**Delete profile**).
+    2. Start **Connect** again in the project's **Data Sources** tab.
+    3. In the OAuth window, use the account switcher or **Use a different account** and log in with the correct credentials.
   </Accordion>
 
   <Accordion title="Insufficient permissions">
-    Oviond requires read access to the account you are connecting. If authorization succeeds but the connection test fails with a permissions error, verify that the account you used has at least read-level access in the marketing platform. For Google Ads, the account needs **Read only** access or higher. For Facebook Ads, the user must have the **Analyst** role or higher on the ad account.
+    Oviond requires read access to the account you connect. If authorization succeeds but no data loads, confirm the account you used has at least read-level access in the platform. For Google Ads the account needs **Read only** access or higher; for Facebook Ads the user needs the **Analyst** role or higher on the ad account.
   </Accordion>
 
-  <Accordion title="Account not appearing in the data source list">
-    If the account you expect does not appear after authorization:
+  <Accordion title="Account not appearing in the account list">
+    If the account you expect doesn't appear after connecting:
 
-    - Confirm the account is accessible under the login you used (for manager accounts, check that the sub-account is linked to your manager account).
-    - Try disconnecting and re-authorizing the auth profile.
-    - If using a Google Ads manager account, allow up to a few minutes for the full account hierarchy to load.
+    - Confirm the account is accessible under the login you used (for manager accounts, check the sub-account is linked to your manager account).
+    - Use **Refresh** to re-authorize the connection.
+    - For a Google Ads manager account, allow a few minutes for the full account hierarchy to load. If accounts fail to load, Oviond shows *Unable to load accounts for {platform}.*
   </Accordion>
 
-  <Accordion title="Connection test passes but widgets show no data">
-    A successful connection test confirms the authorization is valid, but data in widgets may still be empty if:
+  <Accordion title="Token Valid but widgets show no data">
+    A **Token Valid** badge confirms the authorization works, but a widget can still be empty if:
 
-    - The date range on the widget is set to a period with no activity.
-    - The specific campaign, property, or segment selected in the widget has no data for that period.
-    - The account was created recently and has not yet accumulated data.
+    - The widget's date range covers a period with no activity.
+    - The selected campaign, property, or segment has no data for that period.
+    - The account was created recently and hasn't accumulated data yet.
 
-    Check the widget's date range and data source settings before troubleshooting the integration further.
+    Check the widget's date range and data source settings before troubleshooting the connection.
   </Accordion>
 
   <Accordion title="OAuth popup is blocked">
-    Some browsers block OAuth popups by default. If clicking **Connect** does nothing, check your browser's popup blocker and allow popups for your Oviond domain, then try again.
+    Some browsers block popups by default. If clicking **Connect** does nothing, allow popups for your Oviond domain and try again.
   </Accordion>
 </AccordionGroup>

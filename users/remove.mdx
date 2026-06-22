@@ -1,29 +1,28 @@
 ---
-title: "Remove User"
+title: "Remove a user"
 description: "Revoke a team member's access to your Oviond account."
 ---
 
-Removing a user immediately revokes their access. They can no longer sign in, and any API keys they issued stop working.
+Removing a user immediately revokes their access. Their login is deleted and they can no longer sign in to the account.
+
+Only users with **Admin access** can remove team members.
 
 <Steps>
   <Step title="Open Users">
-    Under **Account → Users**.
+    Go to **Settings → Users**.
   </Step>
-  <Step title="Open the user's menu">
-    Click the three-dot menu.
+  <Step title="Open the user you want to remove">
+    Find the user in the list and open their options.
   </Step>
-  <Step title="Choose Remove">
-    Confirm when prompted.
+  <Step title="Remove the user">
+    Choose to remove them, then confirm when prompted. The user is notified that they've been removed, and their access ends immediately.
   </Step>
 </Steps>
 
 ## What happens to their work
 
-- **Reports and dashboards they created** stay in the account — they belong to the client, not the user.
-- **Integrations they connected** keep working — the OAuth tokens are stored on the account, not the user.
-- **API keys they issued** are revoked immediately. If any automations depend on them, regenerate the keys under a different user or the owner.
-- **Activity log entries** remain intact with their name attached for audit purposes.
+Removing a user doesn't delete the clients, projects, or reports in your account — that content belongs to the account, not the individual user, so it stays in place and remains accessible to your other team members.
 
 <Warning>
-Removing the only account **Owner** requires transferring ownership first. See [Update User](/users/update).
+  You can't remove yourself, and you can't remove the account owner. Transfer ownership before attempting to remove an owner.
 </Warning>

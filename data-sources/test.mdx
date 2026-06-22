@@ -1,30 +1,29 @@
 ---
 title: "Test Connection"
-description: "Verify a data-source authorization is still valid."
+description: "Check whether a connection's authorization is still valid."
 ---
 
-Test Connection pings the data source's API with the stored OAuth token and reports back success or failure. Use it when:
+Oviond checks the health of each connection's token automatically. A daily auth-test pings each platform with the stored credentials, and the OAuth refresher updates the status when a token refresh fails. You don't run a manual test in the app — instead, each connection shows a status badge:
 
-- A widget shows *Integration error* and you want to check if re-auth is needed
-- You just reconnected a data source and want to confirm it's working
-- You're debugging a failed automation that depends on this data source
+- **Token Valid** — the token is authorized and data should flow.
+- **Token Expired** — the token has expired or been revoked; refresh it.
 
-<Steps>
-  <Step title="Open Data Sources">
-    From the sidebar.
-  </Step>
-  <Step title="Open the data source">
-    Click the integration you want to test.
-  </Step>
-  <Step title="Click Test Connection">
-    Oviond hits the provider's API using the stored token.
-  </Step>
-  <Step title="Read the result">
-    **Success** — token is valid, data should flow. **Failed** — token expired or was revoked; reconnect.
-  </Step>
-</Steps>
+You'll see this badge on the **Data Sources** tab in a client's project and in **Settings → Data sources** (where it appears as **Token valid** / **Token expired**, and you can filter the table by status).
 
-## If the test fails
+## Where to look
 
-- Click **Reconnect** to kick off a fresh OAuth flow. The existing profile selections are preserved.
-- If reconnect doesn't resolve it, the authorizing user's access in the source platform may have been revoked — check the source platform's admin for the token's status.
+- A widget shows a data error and you want to know whether re-authorization is needed.
+- You just refreshed a connection and want to confirm it's working.
+- You're debugging a report that depends on a specific connection.
+
+In each case, open the connection in the **Data Sources** tab or in **Settings → Data sources** and read its status badge.
+
+## If a connection shows Token Expired
+
+1. Click **Refresh** (project tab) or **Refresh token** (Settings) to start a fresh OAuth flow. Your account selection is preserved.
+2. Complete the OAuth flow with the same login. The badge returns to **Token Valid**.
+3. If refresh doesn't resolve it, the authorizing user's access in the source platform may have been revoked — check the platform's admin for the token's status.
+
+<Note>
+  The API exposes a `POST /v1/datasources/test` endpoint that takes an `auth_id` and returns `{ connected, message }`, plus `POST /v1/data/test` to test a connection against the data service. See the API reference for details.
+</Note>

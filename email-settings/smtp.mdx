@@ -1,44 +1,44 @@
 ---
 title: "SMTP"
-description: "Route Oviond emails through your own SMTP server."
+description: "Route Oviond email through your own SMTP server."
 ---
 
-By default Oviond sends automation emails via our managed provider (Resend). If your agency needs every email to pass through its own SMTP server — for audit, deliverability isolation, or IP warming — configure SMTP under **Account → Email Settings → SMTP**.
+By default Oviond sends email through its managed provider. If you need every email to pass through your own SMTP server — for deliverability isolation, audit, or IP warming — configure SMTP under **Settings → Email settings** (`/settings/email-settings`). Saving an SMTP config makes SMTP your active email provider.
 
 ## Configure
 
 <Steps>
-  <Step title="Enable Use SMTP">
-    Toggles Oviond from the managed provider to your SMTP server.
+  <Step title="Open Email settings">
+    Go to **Settings → Email settings** and set up SMTP (via **Set up SMTP**, or **Add Sender → SMTP server**).
   </Step>
-  <Step title="Enter SMTP details">
-    Host, port, username, password, and TLS/SSL setting. Most agencies use port 587 with STARTTLS.
+  <Step title="Enter your server details">
+    Provide the **SMTP host**, **port** (default `587`), **username**, and **password**, plus the **from email** and an optional **from name**. Leave **Use TLS/SSL** checked unless your server requires otherwise.
   </Step>
   <Step title="Save">
-    Oviond stores the credentials encrypted and starts using them for every automation delivery.
+    Oviond tests the connection, then — if it succeeds — stores the password encrypted at rest and switches the account's active provider to SMTP.
   </Step>
 </Steps>
 
-## Test
+## Fields
 
-Always test before going live:
+| Field | Notes |
+|---|---|
+| `host` | SMTP server hostname. |
+| `port` | Server port. Most servers use `587` (STARTTLS); `465` uses implicit TLS. |
+| `username` | SMTP auth username. |
+| `password` | SMTP auth password. Stored encrypted and never returned by the API. |
+| `secure` | Whether to connect over TLS. The server derives this from the port — `465` uses implicit TLS; `587`/`25` upgrade via STARTTLS — regardless of the **Use TLS/SSL** checkbox. |
+| `from_email` | The default from-address for SMTP sends. |
+| `from_name` | Optional display name. |
 
-<Steps>
-  <Step title="Click Send Test Email">
-    Under the SMTP config section.
-  </Step>
-  <Step title="Check delivery">
-    Oviond sends a test email to your logged-in address via your configured SMTP. If it arrives, you're good.
-  </Step>
-  <Step title="Check the error if it fails">
-    The error is shown inline — usually auth, TLS, or firewall-related.
-  </Step>
-</Steps>
+## Connection test
 
-## Fall back
+Oviond tests the connection as part of saving — there's no separate test button. When you save, it connects to the server and verifies your credentials without sending an email; if the test fails, the save is aborted and the error (usually auth, TLS, or firewall related) is shown inline.
 
-Toggle **Use SMTP** off to revert to Oviond's managed provider. No changes to existing automations are needed — they pick up the new route on the next fire.
+## Remove SMTP
+
+Deleting the SMTP config removes its credentials and cascade-deletes any senders tied to SMTP. If SMTP was the active provider, Oviond falls back to the Oviond provider.
 
 <Warning>
-A misconfigured SMTP server stops every automation from delivering. Keep **Use SMTP** off until the test passes.
+  A misconfigured SMTP server stops email from delivering. Because the save aborts on a failed connection test, a stored config has already passed the test — but verify deliverability with a real send before relying on it for client email.
 </Warning>

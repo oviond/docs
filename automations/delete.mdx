@@ -1,26 +1,30 @@
 ---
-title: "Delete Automation"
-description: "Permanently remove a scheduled delivery."
+title: "Archive an automation"
+description: "Stop and remove a scheduled delivery, with the option to restore it."
 ---
 
-Deleting an automation removes the schedule and every run-history entry associated with it. The underlying **project** is not affected — only the scheduled delivery.
+Archiving an automation stops it from running and removes it from the active **Automations** list. It's a soft delete — the configuration is retained, so you can restore the automation from the archive later. The underlying **project** is not affected; only the scheduled delivery stops.
 
 <Steps>
-  <Step title="Open the Automations screen">
-    From the left sidebar.
+  <Step title="Open the automation">
+    From the **Automations** screen, use the row menu or open the details slide-over. You can also archive from the **Automations** tab inside the project editor.
   </Step>
-  <Step title="Open the automation menu">
-    Click the three-dot menu on the row.
-  </Step>
-  <Step title="Choose Delete">
-    Confirm when prompted.
+  <Step title="Choose Archive">
+    The automation stops running. Confirm when prompted.
   </Step>
 </Steps>
 
+Archiving clears the automation's next run so it won't send again. Its email template stays in your templates list and isn't deleted.
+
 <Tip>
-If you're temporarily pausing a client's deliveries, toggle **Pause** on the automation instead of deleting. Paused automations keep their history and can be resumed any time. See [List Automations](/automations/list).
+If you only need to suspend deliveries temporarily, **Pause** the automation instead of archiving it — paused automations stay in the active list and resume with a single click. See [List automations](/automations/list).
 </Tip>
 
-## Bulk delete
+## Bulk archive
 
-To remove multiple automations at once, enter **Select mode** on the Automations list, check each automation you want to remove, and click **Delete selected** from the action bar.
+To archive several automations at once, select them with the checkboxes and use the bulk **Archive** action. This soft-deletes each selected automation the same way and removes them from the active list.
+
+## API
+
+- `DELETE /v1/automations/:id` — archive a single automation.
+- `DELETE /v1/automations/bulk` — archive several at once, with a body of `{ "ids": [...] }`.

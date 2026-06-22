@@ -1,0 +1,32 @@
+---
+title: "Add a widget"
+description: "Drop charts, data tiles, text, and media onto a page."
+---
+
+A **widget** is an individual block on a page. A data widget connects to a data source and displays a metric or breakdown; other widgets add headings, text, images, buttons, or embeds.
+
+<Steps>
+  <Step title="Open the report or dashboard">
+    From the client's **Projects** tab, open the project.
+  </Step>
+  <Step title="Select the page">
+    For a report, click the page you want to add the widget to. (A dashboard is a single view.)
+  </Step>
+  <Step title="Open the Add Content tab">
+    In the editor sidebar, open the **Add Content** tab.
+  </Step>
+  <Step title="Drag a content type onto the canvas">
+    Drag **Data Query**, **Heading**, **Textbox**, **Image**, **Button**, or **Embed** onto the grid where you want it. See [Content types](/widgets/types).
+  </Step>
+  <Step title="Configure it">
+    For a Data Query, pick the data source, metric, and optional dimension, then set the data. See [Configure a widget](/widgets/configure).
+  </Step>
+</Steps>
+
+<Note>
+A dashboard is capped at 50 widgets. Reports paginate instead, so they have no widget cap.
+</Note>
+
+## API
+
+`POST /v1/widgets` batch-upserts widgets. Oviond saves the whole project atomically and also auto-saves as you work.

@@ -1,31 +1,37 @@
 ---
-title: "Add Theme"
-description: "Create a reusable color + font palette for reports and dashboards."
+title: "Add theme"
+description: "Create a reusable colour and font palette for reports and dashboards."
 ---
 
-A **theme** is a reusable bundle of visual tokens — primary color, ten chart colors, font, border radius, and shadow style — that can be applied to any project or client.
+A **theme** is a reusable bundle of visual tokens — primary colour, ten chart colours, canvas and header colours, font, border radius, and shadow — plus cover-page and thank-you-page designs. You apply themes to projects to keep reports and dashboards on-brand.
+
+Themes live in the **Themes** panel inside the **project editor** — there's no standalone Themes page. Open any project, then open the **Themes** panel from the editor sidebar.
 
 <Steps>
-  <Step title="Open the Themes screen">
-    From the left sidebar.
+  <Step title="Open a project's Themes panel">
+    In the project editor sidebar, open the **Themes** panel. It lists every theme on your account.
   </Step>
-  <Step title="Click + New Theme">
-    Opens the theme editor.
+  <Step title="Click New Theme">
+    At the bottom of the panel, click **New Theme** to open the theme editor.
   </Step>
   <Step title="Name the theme">
-    Use a clear name like *Acme Brand* or *Dark Pitch Deck*.
+    Click the theme name in the editor header and type a clear name like *Acme Brand*.
   </Step>
-  <Step title="Pick a primary color">
-    Oviond auto-derives a ten-chart color palette from this. You can override any chart color individually.
+  <Step title="Pick a primary colour">
+    Set the **Primary colour**. Oviond auto-derives the ten chart colours (`chart1`–`chart10`) from it. Under **Charts**, switch the **Palette mode** between **Tonal** and **Contrast**, or open **Edit chart colours** to override any individual colour.
   </Step>
-  <Step title="Choose typography">
-    Pick a font, border radius, and shadow style.
+  <Step title="Set canvas, typography, and styling">
+    Under **Canvas**, choose the **Header background**, canvas colours, **Radius**, **Shadow**, and **Font**.
   </Step>
-  <Step title="Save">
-    The theme appears in your Themes library and becomes available in every project's theme picker.
+  <Step title="Choose where it applies and save">
+    Set **Apply to** (Current project, This client's projects, or All projects), optionally toggle **Set as default theme**, then click **Save and apply**.
   </Step>
 </Steps>
 
 <Tip>
-The auto-derived chart palette works for most brands, but if your brand has a mandated full color spec, override each of the ten chart colors manually before saving.
+The auto-derived chart palette works for most brands. If your brand mandates a full colour spec, open **Edit chart colours** and set each of the ten chart colours before saving.
 </Tip>
+
+<Note>
+Creating or editing themes requires permission to manage shared assets.
+</Note>

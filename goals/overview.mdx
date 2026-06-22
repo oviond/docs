@@ -1,0 +1,36 @@
+---
+title: "Goals"
+description: "Set targets for your metrics and track progress toward them in reports."
+---
+
+A **goal** is a target you set for a metric — for example *Q4 revenue ≥ $250,000* or *cost per lead ≤ $40*. A goal ties a target value to a metric query, so you can show clients how actual performance compares to the target.
+
+Goals are managed inside the project editor, on the **Goals** tab.
+
+## How a goal is defined
+
+- **Metric** — a query against a connected data source (the same builder used for widgets and calculated metrics).
+- **Target value** — the number to measure against.
+- **Operator** — whether hitting the goal means the metric should be at or above (`>=`), equal to (`=`), or at or below (`<=`) the target.
+- **Type** — **Static** measures the metric against a fixed target; **Change** measures the change in the metric over the period.
+- **Symbol** — an optional unit shown with the value, such as `$` or `%`.
+
+## Use a goal
+
+Once saved, a goal can be displayed in a report to track progress toward its target alongside your other widgets.
+
+## In this section
+
+- [Add a goal](/goals/add) — define a target for a metric.
+- [Duplicate a goal](/goals/duplicate) — start a new goal from an existing one.
+- [Delete a goal](/goals/delete) — remove a goal you no longer need.
+
+## API
+
+| Action | Endpoint |
+|---|---|
+| List | `GET /v1/goals` |
+| Create | `POST /v1/goals` |
+| Update | `PUT /v1/goals/{id}` |
+| Duplicate | `POST /v1/goals/{id}/duplicate` |
+| Delete | `DELETE /v1/goals/{id}` |

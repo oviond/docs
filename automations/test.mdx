@@ -1,25 +1,31 @@
 ---
-title: "Test Automation"
+title: "Test an automation"
 description: "Send an automation immediately to verify its content."
 ---
 
-A **test send** bypasses the schedule and emails the automation to you (or a test recipient) right now. Use it after creating or editing an automation — it's the fastest way to catch a broken widget, wrong logo, or mangled subject line before the real delivery.
+A **test send** bypasses the schedule and emails the report right now. Use it after creating or editing an automation — it's the fastest way to catch a broken widget, wrong logo, or mangled subject line before a real delivery.
 
 <Steps>
   <Step title="Open the automation">
-    From the Automations list, click the automation's row or the three-dot menu.
+    From the **Automations** list, use the row menu or open the details slide-over. You can also test from the **Automations** tab inside the project editor.
   </Step>
-  <Step title="Click Test Send">
-    Oviond renders the report with the current settings and sends it exactly as the scheduled delivery would.
+  <Step title="Click Test">
+    Oviond renders the report with the automation's current settings and sends it exactly as a scheduled run would.
   </Step>
-  <Step title="Optionally override recipient">
-    By default the test goes to your logged-in email. Use the **Send to** field to target a different address.
+  <Step title="Confirm the recipients">
+    The recipient dialog is pre-filled with the automation's saved recipients. Edit them to send the test to a different address instead.
   </Step>
   <Step title="Check the inbox">
-    Verify the subject, sender name, body copy, and — if attached — the PDF looks correct.
+    Verify the subject, sender, message body, and rendered report look correct.
   </Step>
 </Steps>
 
+A test runs immediately rather than going through the queue, so you get fast feedback. Oviond also posts a success or failure notification when it finishes.
+
 <Note>
-Test sends don't count against your monthly email quota and don't appear in [Run History](/automations/history) — they're out-of-band.
+A test send does **not** advance the automation's schedule — it leaves the last-run and next-run times untouched. It **does** record an entry in [run history](/automations/history), flagged as a **Test** run so you can tell it apart from scheduled deliveries.
 </Note>
+
+<Warning>
+You can't test a **paused** automation — the **Test** action is disabled until you resume it.
+</Warning>

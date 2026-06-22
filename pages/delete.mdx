@@ -1,0 +1,26 @@
+---
+title: "Delete a page"
+description: "Remove a page from a report."
+---
+
+Deleting a page removes the page and **every widget on it**.
+
+<Steps>
+  <Step title="Open the Pages tab">
+    In the report editor, open the **Pages** tab.
+  </Step>
+  <Step title="Open the page menu">
+    Click the menu on the page you want to remove.
+  </Step>
+  <Step title="Delete">
+    Choose **Delete page**. The page and its widgets are removed.
+  </Step>
+</Steps>
+
+<Warning>
+A report must keep at least one page. Deleting a page can't be undone — duplicate it first if you might need the layout again.
+</Warning>
+
+## API
+
+`DELETE /v1/pages/{page_id}` removes a page and its widgets.

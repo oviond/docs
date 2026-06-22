@@ -1,0 +1,20 @@
+---
+title: "Rename & reorder pages"
+description: "Rename a page and change the order pages appear in a report."
+---
+
+## Rename a page
+
+Choose **Rename page** from the page's menu and edit the name inline, or rename a page right after you create it. The name shows in the report's page navigation and in the table of contents on the shared report.
+
+## Reorder pages
+
+Drag pages in the **Pages** tab to change their order. Each page keeps a `position` value that sets where it appears in the report.
+
+<Tip>
+Order pages the way you'd walk a client through the report — a summary page first, then a page per channel.
+</Tip>
+
+## API
+
+`PUT /v1/pages/{page_id}` updates a page, including its name and `position`.

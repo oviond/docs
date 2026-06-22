@@ -1,25 +1,43 @@
 ---
-title: "List Automations"
-description: "View, pause, or edit every scheduled delivery."
+title: "List automations"
+description: "View, test, pause, or archive every scheduled delivery."
 ---
 
-The **Automations** screen lists every scheduled delivery in your account, grouped by project. Each row shows the automation's name, schedule, next run time, last-run status, and a pause toggle.
+The top-level **Automations** screen lists every automation in your account. Each row shows the automation's name, project, schedule, next send, and a status badge. Use the search box to filter by name, project, recipient, template, or sender, and the filter tiles to narrow the list.
+
+## Filter tiles
+
+| Tile | Shows |
+|---|---|
+| **Needs attention** | Failed last run, no next send scheduled, paused with nothing upcoming, or no sender configured. |
+| **Due next** | Automations scheduled to send within the next 24 hours. |
+| **Delivered** | Automations that delivered successfully in the last week. |
+| **Paused** | Automations currently paused. |
 
 ## Row actions
 
+Click a row to open the details slide-over, or use the row menu:
+
 | Action | Result |
 |---|---|
-| **Pause / Unpause** | Toggles whether the automation fires on its next scheduled run. See below. |
-| **Edit** | Opens the automation for editing (schedule, recipients, subject, body). |
-| **Test** | Sends the automation immediately — see [Test Automation](/automations/test). |
-| **History** | Opens the run log — see [Run History](/automations/history). |
-| **Delete** | Permanently removes the automation. See [Delete Automation](/automations/delete). |
+| **Edit** | Opens the automation for editing (schedule, recipients, template, sender). |
+| **Executions** | Opens the run history for the project — see [Run history](/automations/history). |
+| **Test** | Sends the automation immediately — see [Test an automation](/automations/test). Disabled while paused. |
+| **Pause / Resume** | Stops the automation from running, or resumes it. See below. |
+| **Archive** | Soft-deletes the automation — see [Archive an automation](/automations/delete). |
 
-## Pause / Unpause
+## Pause and resume
 
-Paused automations stay in the list but skip their scheduled runs. Paused is a soft state — toggle it back on any time to resume. Useful when a client is on hold, or you're switching report templates mid-month.
+Pausing clears the automation's next run so it stops sending, but keeps all of its configuration. Resume it any time to schedule the next run again. Useful when a client is on hold or you're switching templates mid-month.
 
-## Filters
+## Status badges
 
-- **Project** — show only automations for a single project.
-- **Status** — filter to active, paused, or last-run-failed.
+| Badge | Meaning |
+|---|---|
+| **Active** | Scheduled and ready to send. |
+| **Delivered** | Last run succeeded. |
+| **Queued** / **Running** | A run is in progress. |
+| **Failed** | The last run failed. |
+| **Paused** | Paused — won't send until resumed. |
+| **No next send** | No upcoming run is scheduled. |
+| **No sender** | No sender is configured, so it can't send. |

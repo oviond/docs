@@ -1,47 +1,41 @@
 ---
-title: "PDF Export"
-description: "Generate a PDF from a report — on demand or attached to an automation."
+title: "PDF export"
+description: "Generate a downloadable PDF of a report on demand."
 ---
 
-Oviond can render any report as a PDF — either exported on demand from the report view, or delivered automatically as an email attachment via an automation. PDF generation runs asynchronously in the background, so large reports don't block your browser.
+Oviond renders any report as a PDF on demand. Generation runs asynchronously in the background, so large reports don't block your browser — Oviond queues a job, renders the report headlessly, and stores the finished file for download.
 
-## On-demand PDF export
+## Generate a PDF
 
 <Steps>
-  <Step title="Open the report">
-    Navigate to the project you want to export.
+  <Step title="Open the share dialog">
+    From the project, open **Share** and switch to the **Download** tab.
   </Step>
-  <Step title="Click Export">
-    In the top toolbar, click **Export → PDF**. Oviond queues the PDF generation job.
+  <Step title="Click Generate New PDF">
+    Oviond queues a generation job. The button shows **Generating** (or a queued count) while it works, and a new entry appears in the **Download History** list in a processing state.
   </Step>
   <Step title="Download">
-    When the PDF is ready, Oviond notifies you with a download link. Generation typically takes 15–60 seconds depending on report size.
+    When the job completes, the history row flips to a success state and a **Download** link appears. Use the trash icon to remove an export and its stored file.
   </Step>
 </Steps>
 
-## PDF settings
+The list reflects each generation attempt's state — **processing**, **completed**, or **failed**.
 
-Configure PDF layout per project in **Project Settings → PDF**:
+## How it works
 
-| Setting | Options |
-|---|---|
-| Page size | A4, Letter, Legal |
-| Orientation | Portrait, Landscape |
-| Cover page | On / Off |
-| Include page numbers | On / Off |
+Generation is a two-step asynchronous flow:
 
-<Tip>
-  Landscape orientation works best for wide tables and multi-column chart layouts.
-</Tip>
+1. `POST /v1/pdf/generate` validates the request and enqueues the job, returning a `job_id`. The request specifies the `project_id`, `client_id`, a page `format` (**A4** or **Letter**), and `orientation` (**portrait** or **landscape**). The defaults are `A4` and `portrait`.
+2. `GET /v1/pdf/status/:job_id` is polled until `status` is `complete` (which returns the file `url`) or `failed`.
 
-## Automated PDF delivery
+Each attempt is recorded in the project's export history, which the **Download History** list reads from.
 
-To send PDFs on a recurring schedule, create an automation and select **PDF attachment** as the delivery method. See [Scheduled Reports](/automations/scheduled) for the full setup steps.
+<Note>
+PDF generation requires Oviond's file storage (S3) to be configured. If it isn't, the generate request is rejected.
+</Note>
 
 ## Troubleshooting
 
-**Widgets appear cut off** — Switch to landscape orientation or reduce the number of columns in your layout.
+**Generation fails or times out** — Very large reports with many widgets can occasionally fail to render. Try again, or split the report across more pages. Failed attempts show a **failed** state in the history list.
 
-**Images or logos missing** — Ensure all image URLs in your report are publicly accessible. Private or expired URLs won't render in PDF.
-
-**PDF generation times out** — Very large reports with many widgets can occasionally time out. Try splitting the report across multiple pages.
+**Images or logos missing** — Make sure all image URLs in your report are publicly accessible. Private or expired URLs won't render in the headless browser.

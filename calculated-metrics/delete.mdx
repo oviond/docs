@@ -1,0 +1,23 @@
+---
+title: "Delete a calculated metric"
+description: "Remove a calculated metric you no longer need."
+---
+
+Deleting removes the calculated metric from the project.
+
+<Steps>
+  <Step title="Open the Calculated Metrics tab">
+    In the project editor, open the **Calculated Metrics** tab.
+  </Step>
+  <Step title="Delete the metric">
+    Open the metric's menu and choose **Delete**.
+  </Step>
+</Steps>
+
+<Warning>
+Widgets that referenced the deleted metric stop resolving until you point them at another metric.
+</Warning>
+
+## API
+
+`DELETE /v1/calculated-metrics/{id}` removes a calculated metric.

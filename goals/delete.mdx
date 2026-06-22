@@ -1,0 +1,23 @@
+---
+title: "Delete a goal"
+description: "Remove a goal you no longer need."
+---
+
+Deleting removes the goal from the project.
+
+<Steps>
+  <Step title="Open the Goals tab">
+    In the project editor, open the **Goals** tab.
+  </Step>
+  <Step title="Delete the goal">
+    Open the goal's menu and choose **Delete**.
+  </Step>
+</Steps>
+
+<Warning>
+Widgets that displayed the deleted goal stop showing its progress until you point them at another goal.
+</Warning>
+
+## API
+
+`DELETE /v1/goals/{id}` removes a goal.

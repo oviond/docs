@@ -1,25 +1,29 @@
 ---
-title: "Delete Data Source"
-description: "Remove an OAuth connection from your account."
+title: "Delete Connection"
+description: "Remove a data source connection from your workspace."
 ---
 
-Deleting a data source revokes its OAuth token and removes it from the account — every client that had it linked loses access, and every widget referencing it shows *Data source unavailable* until re-wired.
+Deleting a connection removes it from your workspace and unlinks it from every client that used it. Widgets that referenced it stop displaying data until they're re-wired.
 
 <Warning>
-If the data source is currently feeding automations or active reports, deleting it will break them on the next render. Unlink it from clients first if you want a softer path — see [Link to Client](/data-sources/link).
+  Deleting a connection may affect widgets that use it. If the connection feeds active reports, those widgets break on the next render. To remove it from one client only, **Unlink** it from that client's **Data Sources** tab instead — see [Link to Client](/data-sources/link).
 </Warning>
 
 <Steps>
-  <Step title="Open Data Sources">
-    From the sidebar.
+  <Step title="Open Settings → Data sources">
+    Go to **Settings → Data sources** (`/settings/data-sources`).
   </Step>
-  <Step title="Open the source's menu">
-    Click the three-dot menu on the integration card.
+  <Step title="Click Delete profile">
+    Find the connection in the table and click **Delete profile** on its row.
   </Step>
-  <Step title="Choose Delete">
-    Confirm when prompted.
+  <Step title="Confirm">
+    Type `DELETE` in the confirmation field, then click **Delete profile**.
   </Step>
   <Step title="Optional: revoke in the source platform">
-    Oviond revokes its own access token, but if you want to be extra-thorough, remove Oviond from the authorized-apps list in the source platform too (e.g. Google Account → Third-party apps).
+    To be thorough, also remove Oviond from the authorized-apps list in the source platform (for example, Google Account → Third-party apps).
   </Step>
 </Steps>
+
+<Note>
+  Deleting and renaming connections requires account-management permissions. Connecting and unlinking data sources happens in a client's project editor.
+</Note>

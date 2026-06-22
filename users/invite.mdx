@@ -1,34 +1,37 @@
 ---
-title: "Invite User"
+title: "Invite a user"
 description: "Add a new team member to your Oviond account."
 ---
 
-Invite a colleague to collaborate on reports, connect integrations, or manage clients. The invitee receives an email with a link to set their password and sign in.
+Invite a colleague to collaborate on reports, connect data sources, or manage clients. The invitee receives an email with a link to accept the invitation, set a password, and sign in.
+
+Inviting users requires admin access — only users with **Admin access** can invite, edit, or remove team members.
 
 <Steps>
   <Step title="Open Users">
-    From the sidebar under **Account → Users**.
+    From the sidebar, go to **Settings → Users**.
   </Step>
-  <Step title="Click + Invite User">
-    Opens the invite dialog.
+  <Step title="Click Invite user">
+    This opens the invite panel.
   </Step>
-  <Step title="Enter the email">
-    Must be a real email address — the invite link goes there.
+  <Step title="Enter their full name and email">
+    Type the person's full name and email address. The invite link goes to this address, so it must be a real inbox.
   </Step>
-  <Step title="Pick a role">
-    - **Owner** — full access to every feature, including account deletion. One per account.
-    - **Admin** — manage users, billing, all clients, all projects.
-    - **Projects** — limited to projects you explicitly allow via the **Allowed Projects** selector.
-    - **Read-only** — view-only across the account.
+  <Step title="Choose a permission level">
+    Under **Permission level**, pick the access level that fits their role:
+
+    - **Admin access** — full access to all features, including billing and team management.
+    - **Client access** — can view projects assigned to them.
+    - **Read-only access** — can view their assigned clients but cannot make changes.
   </Step>
-  <Step title="Optional: restrict to specific projects">
-    If the role is **Projects**, use the **Allowed Projects** picker to list which projects this user can see and edit.
+  <Step title="Assign clients (Client and Read-only access only)">
+    For **Client access** and **Read-only access**, an **Assign clients** field appears. Select which clients this user can access. **Admin access** users see every client and don't need an assignment.
   </Step>
-  <Step title="Send invite">
-    The user receives an email with a link to set their password.
+  <Step title="Send the invite">
+    Send the invitation. The invitee receives an email with a link to accept it and set their password.
   </Step>
 </Steps>
 
 <Note>
-Invites don't expire, but the user must click the link to activate their account before they can sign in.
+  Invited users have no password until they accept the invitation. They set one when they complete sign-up from the invite link. Until then, they appear in your **Users** list as not yet verified.
 </Note>

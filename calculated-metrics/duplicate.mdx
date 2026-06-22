@@ -1,0 +1,23 @@
+---
+title: "Duplicate a calculated metric"
+description: "Start a new metric from an existing formula."
+---
+
+Duplicating copies an existing calculated metric's formula and format, so you can create a variant without rebuilding it.
+
+<Steps>
+  <Step title="Open the Calculated Metrics tab">
+    In the project editor, open the **Calculated Metrics** tab.
+  </Step>
+  <Step title="Duplicate the metric">
+    Open the metric's menu and choose **Duplicate**. A copy is added that you can rename and edit.
+  </Step>
+</Steps>
+
+<Tip>
+Use duplicate to build a family of related KPIs — for example a cost-per-conversion metric per channel — from one formula.
+</Tip>
+
+## API
+
+`POST /v1/calculated-metrics/{id}/duplicate` copies a calculated metric.

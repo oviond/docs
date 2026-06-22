@@ -1,29 +1,26 @@
 ---
-title: "Update Custom Data"
-description: "Refresh a dataset by re-uploading its CSV."
+title: "Update custom data"
+description: "Edit a dataset's rows, columns, or name."
 ---
 
-Updating replaces the dataset's rows with a new CSV. The dataset's ID and widget bindings stay intact — every widget that references the dataset re-renders with the new data.
+Updating changes a dataset in place. The dataset's `id` and widget bindings stay intact — every widget that references the dataset re-renders with the new data.
 
 <Steps>
-  <Step title="Open the dataset">
-    Click the dataset name in the Custom Data list.
+  <Step title="Open Manage Custom Data">
+    From the **Data Query** widget's **Custom Data** source, click **Manage** next to the **Dataset** label.
   </Step>
-  <Step title="Click Re-upload CSV">
-    Opens the file picker.
-  </Step>
-  <Step title="Select the new CSV">
-    Oviond parses it and replaces the existing rows.
+  <Step title="Edit the dataset">
+    Select the dataset and edit its rows in the grid, re-upload a file, or change its name.
   </Step>
   <Step title="Save">
-    Widgets using this dataset pick up the new data on next render.
+    Widgets using this dataset pick up the changes on the next render.
   </Step>
 </Steps>
 
 <Note>
-The new CSV should use the **same column structure** as the original. If you add or rename columns, widgets configured against the old column names will need to be re-wired.
+If you change the columns, widgets configured against the old column names will need to be re-mapped.
 </Note>
 
-## Rename without re-uploading
+## API
 
-To just change the dataset's display name (leaving the rows intact), use **Rename** from the row's menu in the [List Custom Data](/custom-data/list) view.
+`PUT /v1/custom-data/{id}` applies a partial update — send only the fields you want to change. Accepted fields are `name`, `file_name`, `raw_data`, `columns`, and `file_size`. When you send `raw_data`, Oviond recalculates `row_count` (and rejects payloads over 10,000 rows). To rename a dataset, send just `name`.

@@ -8,7 +8,7 @@ This guide sets up a monthly automated report that delivers to your client's inb
 ## Before you start
 
 - You have a [project](/projects/add) — report or dashboard — ready to send.
-- You've [configured email sending](/email-settings/defaults) from your agency's domain (optional but recommended).
+- You've configured a [sender](/email-settings/senders) so the email comes from your own domain (optional — Oviond falls back to a default address).
 - You've tested the project's widgets with live data.
 
 ## 1. Verify the report is ready to send
@@ -18,78 +18,75 @@ This guide sets up a monthly automated report that delivers to your client's inb
     Make sure every widget is configured against the right data source and date range.
   </Step>
   <Step title="Use a relative date range">
-    Configure the project's default date range to something like **Last Month** or **Previous Calendar Month**. See [Update Project](/projects/update). Relative dates are essential for automations — each monthly fire should pull its own month's data.
+    Plan to set the automation's date range to a relative period such as **Last Month**. Relative dates are essential for automations — each monthly run pulls its own month's data.
   </Step>
-  <Step title="Export a test PDF">
-    See [PDF Export](/automations/pdf). Check that the rendered PDF looks clean before automating.
+  <Step title="Preview a PDF">
+    Open the project's **Share** dialog, switch to the **Download** tab, and click **Generate New PDF**. Generation runs in the background; check that the rendered report looks clean. See [PDF export](/automations/pdf).
   </Step>
 </Steps>
 
 ## 2. Create the automation
 
+You can create an automation from the top-level **Automations** screen or from the project editor's **Automations** tab. See [Add an automation](/automations/add).
+
 <Steps>
   <Step title="Open Automations">
-    From the left sidebar.
+    Click **Automations** in the left sidebar, then click **New automation**. (From the project editor's **Automations** tab, click **Add automation** instead, and the project is pre-selected.)
   </Step>
-  <Step title="Click + New Automation">
-    See [Add Automation](/automations/add).
+  <Step title="Name and set the schedule">
+    Enter a **Name**. Set **Frequency** to **Monthly**, **Day of month** to `1`, and **Send at** to a morning hour. The schedule is evaluated against your account timezone. See [Scheduled delivery](/automations/scheduled).
   </Step>
-  <Step title="Pick the project">
-    The report you just validated.
-  </Step>
-  <Step title="Set the schedule">
-    Frequency: **Monthly**. Day: **1st**. Time: a morning hour in the client's timezone.
-  </Step>
-  <Step title="Set recipients">
-    Add the client contact's email. You can include multiple recipients — they all receive the same message.
+  <Step title="Pick the project and date range">
+    Choose the **Client** and **Project** you validated, then set **Date range** to **Last Month**. The report is rendered fresh for that range on every run.
   </Step>
   <Step title="Configure the email">
-    Subject: *{client_name} — {date}*. Use the default sender from [Email Settings](/email-settings/defaults) or pick a specific one. Write a short intro paragraph for the body.
-  </Step>
-  <Step title="Choose PDF attachment">
-    Attach the report as a PDF so the client has a durable copy.
+    Add the client contact under **Recipients** (you can add several). Choose the **From** sender, and pick an **Email template** — or choose **Custom message** to compose a **Subject** and **Message** inline. Placeholders like the client name and date range fill in from the project. See [Email delivery](/automations/email).
   </Step>
   <Step title="Create">
-    The automation is saved — it fires on the next scheduled run.
+    Click **Create**. The automation is saved and the next run is scheduled automatically.
   </Step>
 </Steps>
 
 ## 3. Test before going live
 
-Always test:
+Always test before relying on an automation:
 
 <Steps>
   <Step title="Open the automation">
-    From the Automations list.
+    From the **Automations** list, use the row menu or open the details slide-over.
   </Step>
-  <Step title="Click Test Send">
-    See [Test Automation](/automations/test). Override the recipient to send to yourself.
+  <Step title="Click Test">
+    A test send bypasses the schedule and emails the report immediately. The recipient dialog is pre-filled with the saved recipients — edit it to send the test to yourself. See [Test an automation](/automations/test).
   </Step>
   <Step title="Check the email">
-    Subject, sender, body copy, and PDF attachment — all should look exactly how the client will see it.
+    Subject, sender, body copy, and the rendered report should all look exactly how the client will see it.
   </Step>
 </Steps>
+
+<Note>
+A test send doesn't advance the schedule, but it does appear in run history flagged as a **Test** run.
+</Note>
 
 ## 4. Monitor the first real run
 
 After the first scheduled delivery (on the 1st of next month):
 
 <Steps>
-  <Step title="Open the automation's Run History">
-    See [Run History](/automations/history).
+  <Step title="Open run history">
+    From an automation, click **Executions**, or open the project's run history. See [Run history](/automations/history).
   </Step>
   <Step title="Check the status">
-    **Delivered** — you're good. **Partial** — some recipients bounced; check their email addresses. **Failed** — the render errored; read the message.
+    **Success** — the run rendered and sent. **Failed** — a rendering or delivery problem; the error detail is stored with the run. **Skipped** — the run was skipped, e.g. the automation was paused when it was due.
   </Step>
-  <Step title="Check Email Logs">
-    See [Email Logs](/email-settings/logs) for per-recipient delivery events (opened, clicked, bounced).
+  <Step title="Check email delivery">
+    See [Email logs](/email-settings/logs) for per-recipient delivery events.
   </Step>
 </Steps>
 
 ## If the client changes their address
 
-Edit the automation, update the recipients list, and save. No need to re-test unless you also changed the sender or subject.
+Edit the automation, update the **Recipients** list, and save. No need to re-test unless you also changed the sender or subject.
 
 ## If you need to pause
 
-Toggle **Pause** on the automation row. The schedule stops firing until you unpause — no need to delete the automation. See [List Automations](/automations/list).
+Use **Pause / Resume** on the automation to suspend sending without losing the configuration. The schedule stops firing until you resume. See [Scheduled delivery](/automations/scheduled).

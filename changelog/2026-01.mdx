@@ -1,0 +1,53 @@
+---
+title: "January 2026"
+description: "Release notes for the Oviond REST API."
+---
+
+<Update label="2026-01-28" description="Pages & widgets">
+
+### The report canvas
+
+Build reports and dashboards from pages and widgets. Pages organize a report into sections; widgets are the charts, KPIs, text, images, buttons, and embeds on each page. The atomic save persists pages and bulk widget upserts in a single call.
+
+- `POST /v1/pages` and `PUT /v1/pages/{page_id}` — add and update report pages
+- `POST /v1/widgets` and `POST /v1/widgets/bulk` — batch upsert and bulk-delete widgets
+- `POST /v1/widgets/duplicate` — copy widgets across a page
+
+</Update>
+
+<Update label="2026-01-21" description="Reports & dashboards">
+
+### Projects
+
+Every report and dashboard is a project that lives inside a client. Create projects from scratch or duplicate an existing one.
+
+- `POST /v1/projects` — create a report or dashboard
+- `GET /v1/projects` and `GET /v1/projects/all` — list and dropdown views
+- `POST /v1/projects/{id}/duplicate` — clone a project
+
+</Update>
+
+<Update label="2026-01-14" description="Clients & folders">
+
+### Client workspaces
+
+Every project ties to a client. Organize clients into folders and manage them in bulk.
+
+- `POST /v1/clients` — create a client
+- `POST /v1/folders/clients` — create a client folder
+- `PUT /v1/clients/{id}/folder` — move a client between folders
+- `POST /v1/clients/bulk` — bulk operations
+
+</Update>
+
+<Update label="2026-01-07" description="Accounts & authentication">
+
+### Accounts, users, and onboarding
+
+Sign up, provision an account, and complete the guided onboarding flow. Authenticated requests use a Supabase-issued Bearer JWT.
+
+- `GET /v1/account` and `GET /v1/account/usage` — account and plan snapshot
+- `GET /v1/users/me`, `PUT /v1/users/me/profile`, `PUT /v1/users/me/email`, `PUT /v1/users/me/avatar`
+- `POST /v1/onboarding` — finalize the onboarding flow
+
+</Update>

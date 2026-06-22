@@ -1,30 +1,47 @@
 ---
-title: "List Templates"
-description: "Browse your account's templates and the shared Oviond library."
+title: "List templates"
+description: "Browse your account's templates and the shared Oviond standard library."
 ---
 
-The **Templates** screen shows every template available to you — those you've created yourself, and the shared library of templates Oviond provides out of the box.
+The **Templates** screen shows every template available to you — those your team saved from its own projects, and the shared **Oviond standard** library that ships with every account.
 
-## Sources
+## Libraries
 
-| Source | What it contains |
+You filter between libraries from the **Library** filter:
+
+| Filter | What it contains |
 |---|---|
-| **My Templates** | Templates you or your team created from your own projects. |
-| **Oviond Library** | Shared templates maintained by Oviond — usable by every account without copying. |
+| **All** | Both libraries, merged. |
+| **Saved by me** | Templates you or your team saved from your own projects. |
+| **Oviond standard** | Shared templates maintained by Oviond, usable by every account. |
 
-## Filters
+## Filters and sort
 
-- **Search** — match by template name.
-- **Data sources** — filter to templates that use specific integrations (e.g. templates that include Google Ads widgets).
-- **Type** — Reports only or Dashboards only.
-- **Sort** — by ranking, name, or creation date.
+Open the **Filters** popover to narrow the list:
+
+- **Library** — All, Saved by me, or Oviond standard.
+- **Type** — All types, Dashboards, or Reports.
+- **Data sources** — show only templates whose widgets use specific data sources (e.g. Google Ads).
+
+Use the **search** box (matches template names and data sources) and the **Sort** popover:
+
+- **Recommended** — Oviond's default ranking (shown as **Best match** while you're searching).
+- **Newest** — most recently created first.
+- **Name A-Z** / **Name Z-A**.
+
+Active filters appear as removable chips above the grid.
 
 ## What's on a template card
 
 | Element | Description |
 |---|---|
-| **Thumbnail** | Preview image uploaded with the template. |
+| **Thumbnail** | Auto-generated preview of the template. |
 | **Name & description** | Short summary of what the template is for. |
-| **Data-source badges** | Which integrations the widgets inside expect. |
+| **Type badge** | **Dashboard** or **Report**. |
+| **Data-source icons** | Which data sources the widgets inside expect (up to four, then `+N`). |
 
-Click a template to preview it before applying to a project — see [Apply Template](/templates/apply).
+Open a template to preview its pages and widgets before using it — see [Apply Template](/templates/apply).
+
+<Note>
+Only **Saved by me** templates are selectable and manageable. **Oviond standard** templates can be previewed and used, but not edited or archived.
+</Note>

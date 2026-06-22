@@ -1,35 +1,36 @@
 ---
-title: "List Clients"
-description: "View and filter every client in your workspace."
+title: "List clients"
+description: "View, search, and filter every client in your workspace."
 ---
 
-The **Clients** list is your home dashboard — every client you've created appears here, most-recently-active first. Each client card shows the client's name, website screenshot, project count, and folder (if assigned).
+The **Clients** page is your home dashboard — every client you've created appears here. The page heading shows your slot usage, for example **You're using 8 of 25 client slots.**
+
+Each client card shows the website **screenshot**, a **logo** chip (favicon, logo, or initials), the client **name**, and the client's **domain**. While a screenshot is still generating, the list polls and the image appears automatically once it's ready.
 
 ## Views
 
-- **All Clients** — the unfiltered list.
-- **By Folder** — narrow the list to a single folder from the sidebar.
-- **Search** — type in the search bar to match by client name.
-- **Sort** — switch between recent activity, name (A–Z), and date created.
+- **Search** — type in the **Search clients** box to match by name.
+- **Folders** — open the **Folders** popover to filter the list to a single folder, or choose **All Clients** to clear the filter. See [Group clients](/clients/folders).
+- **Sort** — open the **Sort** popover. Options are **Last Updated**, **Name (A-Z)**, **Name (Z-A)**, **Created (Newest)**, and **Created (Oldest)**.
 
-## What's on a client card
+## Client card actions
 
-| Element | Description |
-|---|---|
-| **Name** | Shown in the card header and the sidebar. |
-| **Screenshot** | Auto-generated from the client's website. Click **Refresh Screenshot** from the client's menu to regenerate. |
-| **Project count** | Number of active reports and dashboards in the client's workspace. |
-| **Folder badge** | The folder the client is assigned to, if any. |
+- **Open** — click the card to enter the client's workspace (its Projects). Hold **Ctrl/Cmd** and click to toggle selection instead.
+- **Refresh screenshot** — hover the card and click the refresh icon in the top-right to regenerate the website screenshot.
 
 <Note>
-The Clients list respects your **allowed projects** if your role is limited. Team members with restricted access only see clients whose projects they're authorized to view.
+Cards don't show a project count or a folder badge, and there is no per-card three-dot menu. Rename, move to folder, and archive are available from the action bar after you select one or more clients (see below).
 </Note>
 
-## Quick actions
+## Bulk actions
 
-From any client card's three-dot menu:
+Select one or more clients (click the checkbox that appears on hover, or **Ctrl/Cmd**-click a card) to reveal the action bar. It shows the selected count and these actions:
 
-- **Open** — enter the client's workspace.
-- **Rename** — edit the client's display name inline.
-- **Move to folder** — see [Group Clients](/clients/folders).
-- **Archive** — soft-delete the client; see [Archive Client](/clients/archive).
+- **Add to folder** — move the selected clients to a folder. See [Group clients](/clients/folders).
+- **Edit** — rename the client (available when exactly one is selected).
+- **Open** — go to the client (available when exactly one is selected).
+- **Archive** — archive the selected clients; see [Archive client](/clients/archive).
+
+<Note>
+The Clients list respects your access scope. Team members with restricted access only see the clients they're authorized to view.
+</Note>

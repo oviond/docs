@@ -1,0 +1,23 @@
+---
+title: "Duplicate a goal"
+description: "Start a new goal from an existing one."
+---
+
+Duplicating copies an existing goal's metric, target, and settings, so you can create a variant without rebuilding it.
+
+<Steps>
+  <Step title="Open the Goals tab">
+    In the project editor, open the **Goals** tab.
+  </Step>
+  <Step title="Duplicate the goal">
+    Open the goal's menu and choose **Duplicate**. A copy is added that you can rename and edit.
+  </Step>
+</Steps>
+
+<Tip>
+Use duplicate to set the same target across several clients or to build month-over-month variants of one goal.
+</Tip>
+
+## API
+
+`POST /v1/goals/{id}/duplicate` copies a goal.

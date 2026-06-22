@@ -1,28 +1,35 @@
 ---
-title: "Apply Template"
-description: "Use a template as the starting point for a new project."
+title: "Apply template"
+description: "Use a template to spin up a new project."
 ---
 
-Applying a template copies its pages, widgets, and settings into a brand-new project. You then wire the widgets to the client's specific data sources.
+Using a template creates a **brand-new project** from its pages, widgets, and settings, then wires the widgets to the client you choose.
 
 <Steps>
-  <Step title="Start a new project">
-    From the Reports screen, click **+ New Project**. See [Add Project](/projects/add).
+  <Step title="Open the template">
+    From the [Templates](/templates/list) screen, open the template you want. This shows a preview of its pages and widgets.
   </Step>
-  <Step title="Choose Use a Template">
-    In the create dialog, pick **Start from template** instead of **Blank**.
+  <Step title="Click Use template">
+    In the preview, click **Use template** to open the slide-over.
   </Step>
-  <Step title="Pick a template">
-    Browse **My Templates** or the **Oviond Library**. Preview any template to see the page and widget layout before applying.
+  <Step title="Choose a client">
+    Pick the **Client** the new project belongs to. You can only create a project for a client you have permission to edit.
   </Step>
-  <Step title="Assign a client & create">
-    Assign the project to a client and click **Create**. Oviond copies every page and widget into the new project.
+  <Step title="Name the project">
+    Enter a **Name** for the new project. It's pre-filled with the template's name.
   </Step>
-  <Step title="Wire data sources">
-    Open each widget and pick the matching data source for your client — the template ships with the widget structure but no live connection.
+  <Step title="Create project">
+    Click **Create project**. Oviond copies every page and widget into a new project, applies the client's theme, and opens the project so you can finish wiring its data.
   </Step>
 </Steps>
 
+## What happens on create
+
+- A new project is created and assigned to the chosen client.
+- Pages and widgets are copied from the template.
+- The new project inherits the **client's theme** (`theme_id`) when the client has one set.
+- Widgets that need a data connection use the new project's client.
+
 <Tip>
-If a template expects a data source you haven't connected for this client, Oviond flags the widget with a **Connect required** badge. See [Connect Data Source](/data-sources/connect).
+Set a **Client theme** in the client's settings before you create projects from templates, and every new project starts on-brand automatically. See [Apply Theme](/themes/apply).
 </Tip>

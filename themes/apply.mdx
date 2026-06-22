@@ -1,46 +1,51 @@
 ---
-title: "Apply Theme"
-description: "Use a theme on a project or set it as a client's default."
+title: "Apply theme"
+description: "Apply a theme to a project, a client's projects, or every project."
 ---
 
-Themes apply at two levels:
+You apply a theme from the **Themes** panel in the project editor, or set a per-client theme from client settings.
 
-| Level | What it affects |
-|---|---|
-| **Per-project** | Applies the theme only to the selected project. |
-| **Per-client** | Sets the theme as the default for every new project under that client. |
+## Apply from the editor
 
-## Apply to a project
+Selecting a theme row in the project editor's **Themes** panel applies it to the open project right away. To apply a theme more widely, save it with a scope.
 
 <Steps>
-  <Step title="Open the project">
-    From the Reports screen.
+  <Step title="Open the project's Themes panel">
+    In the project editor sidebar, open the **Themes** panel.
   </Step>
-  <Step title="Open Project Settings">
-    From the project's three-dot menu or the settings icon.
+  <Step title="Open the theme">
+    Click a theme to apply it to the current project, or hover and choose **Edit** to open the editor.
   </Step>
-  <Step title="Pick a theme">
-    Under **Theme**, select from My Themes or the Oviond Library.
+  <Step title="Choose where it applies">
+    Under **Apply to**, pick a scope:
+
+    | Scope | What it affects |
+    |---|---|
+    | **Current project** | Only this project. |
+    | **This client's projects** | Every project for this client. |
+    | **All projects** | Every project in every client. |
   </Step>
-  <Step title="Save">
-    Every chart, KPI tile, and background re-renders using the theme's tokens.
+  <Step title="Save and apply">
+    Click **Save and apply**. Oviond stamps the theme onto every project in the chosen scope, and charts, KPI tiles, and backgrounds re-render with the theme's tokens.
   </Step>
 </Steps>
 
-## Set a client default
+## Set a client theme
+
+A client theme is applied to new projects created for that client (including projects [created from a template](/templates/apply)).
 
 <Steps>
-  <Step title="Open the client's workspace">
-    From the Clients list.
+  <Step title="Open the client's settings">
+    Go to the client and open **Settings**.
   </Step>
-  <Step title="Open Client Settings">
-    Click the three-dot menu on the client header.
+  <Step title="Pick a Client theme">
+    In the **Client theme** section, select a theme. The account default is marked with a star and **(Default)**. A swatch strip previews its chart colours.
   </Step>
-  <Step title="Pick a default theme">
-    Under **Default Theme**, select one. New projects under this client start with this theme.
+  <Step title="Save changes">
+    Click **Save changes**. New projects for this client start with this theme.
   </Step>
 </Steps>
 
 <Note>
-Changing a client's default theme does **not** change existing projects — only new ones. Update existing projects individually if you want them retroactively rethemed.
+Setting a **Client theme** doesn't restyle the client's existing projects — it sets the theme new projects start with. To restyle existing projects, apply a theme with the **This client's projects** scope from the editor.
 </Note>

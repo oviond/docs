@@ -1,30 +1,30 @@
 ---
-title: "List Custom Data"
-description: "Every CSV dataset uploaded to your account."
+title: "List custom data"
+description: "Every CSV or JSON dataset uploaded to your account."
 ---
 
-The **Custom Data** list shows every dataset you've uploaded — name, row count, column count, file size, and upload date.
-
-## Filters
-
-- **Search** — match by dataset name.
-- **Sort** — by name, upload date, or row count.
+The **Manage Custom Data** slide-over lists every dataset you've uploaded — its name, row count, column count, file size, and upload date. Open it from the **Manage** button next to the **Dataset** label in the **Data Query** widget's **Custom Data** source.
 
 ## What's on a row
 
-| Column | Description |
+| Field | Description |
 |---|---|
-| **Name** | The label you gave the dataset on upload. |
-| **Columns** | Number of columns parsed from the CSV header. |
-| **Rows** | Number of data rows (excluding the header). |
-| **Size** | Raw file size of the CSV. |
-| **Uploaded** | Timestamp of the most recent upload. |
+| `name` | The label you gave the dataset when you saved it. |
+| `columns` | The columns parsed from the file header. |
+| `row_count` | Number of data rows. |
+| `file_size` | Size of the uploaded file. |
+| `file_name` | The original file name, if one was provided. |
+| `created_at` | When the dataset was first saved. |
+| `updated_at` | When the dataset was last changed. |
 
 ## Quick actions
 
-From any row's three-dot menu:
+From the **Manage Custom Data** slide-over you can:
 
-- **Preview** — see the first 50 rows.
-- **Update** — see [Update Custom Data](/custom-data/update).
-- **Duplicate** — see [Duplicate Custom Data](/custom-data/duplicate).
-- **Delete** — see [Delete Custom Data](/custom-data/delete).
+- **Edit** — change the data or rename the dataset. See [Update custom data](/custom-data/update).
+- **Duplicate** — copy the dataset under a new name. See [Duplicate custom data](/custom-data/duplicate).
+- **Delete** — remove the dataset. See [Delete custom data](/custom-data/delete).
+
+## API
+
+`GET /v1/custom-data` returns a lightweight list of your datasets, newest first. The list response omits `raw_data` because it can be large — fetch a single dataset with `GET /v1/custom-data/{id}` to include `raw_data`.

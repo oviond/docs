@@ -1,0 +1,50 @@
+---
+title: "February 2026"
+description: "Release notes for the Oviond REST API."
+---
+
+<Update label="2026-02-25" description="Calculated & saved metrics">
+
+### Custom KPIs and reusable queries
+
+Define formulas that combine metrics across data sources, and save query configurations you reuse across reports.
+
+- `POST /v1/calculated-metrics` — define a formula (`POST /v1/calculated-metrics/{id}/duplicate` to clone)
+- `POST /v1/saved-metrics` — save a query config (`POST /v1/saved-metrics/{id}/duplicate`)
+
+</Update>
+
+<Update label="2026-02-18" description="Custom data">
+
+### Bring your own datasets
+
+Upload CSV or JSON datasets and query them alongside connected data sources.
+
+- `POST /v1/custom-data` — upload and parse a dataset
+- `PUT /v1/custom-data/{id}` and `POST /v1/custom-data/{id}/duplicate`
+
+</Update>
+
+<Update label="2026-02-11" description="Data query engine">
+
+### Pull metrics from any source
+
+A single query API resolves metrics and breakdowns across every connected platform, with a dry-run test path.
+
+- `POST /v1/data/query` — pull metrics
+- `POST /v1/data/test` and `GET /v1/data/accounts`, `GET /v1/data/resource`
+- `POST /v1/datasources/test` — verify a connection
+
+</Update>
+
+<Update label="2026-02-04" description="Data sources">
+
+### Connect marketing platforms via OAuth
+
+OAuth 2.1 connection flow for Google Analytics, Meta Ads, LinkedIn, and the rest of the data-source catalog. Auth profiles link to clients; an account or property is chosen per connection.
+
+- `POST /v1/datasources/auths` — create an auth profile from an OAuth grant
+- `POST /v1/datasources/{client_id}/link` and `POST /v1/datasources/{client_id}/unlink`
+- `GET /v1/datasources/{datasource_id}/profiles` — manage connection profiles
+
+</Update>

@@ -1,91 +1,78 @@
 ---
 title: "List Data Sources"
-description: "Every marketing platform connected to your Oviond account."
+description: "Every marketing platform connected to your Oviond workspace."
 ---
 
-Integrations are OAuth connections between Oviond and your clients' marketing platforms. Once connected, Oviond pulls live data from those platforms into your reports and dashboards — no manual exports or copy-pasting required. Each integration is connected on a per-client basis, so the data you see in a report always belongs to the client that report is built for.
+Data sources are connections between Oviond and your clients' marketing platforms. Once connected, Oviond pulls live data from those platforms into your reports and dashboards — no manual exports or copy-pasting required. Each data source is linked on a per-client basis, so the data in a report always belongs to the client that report is built for.
 
-## Supported integrations
+## Supported data sources
 
-Oviond supports 30+ marketing platforms across six categories.
+Oviond supports 60+ marketing platforms across categories such as paid search, paid social, analytics, SEO, email marketing, and e-commerce/CRM.
 
-| Category | Platforms |
+| Category | Examples |
 |---|---|
-| **Paid Search** | Google Ads, Microsoft Ads (Bing Ads) |
+| **Paid Search** | Google Ads, Microsoft Ads |
 | **Paid Social** | Facebook Ads, Instagram Ads, LinkedIn Ads, TikTok Ads, Pinterest Ads, Snapchat Ads, Twitter/X Ads |
-| **Analytics** | Google Analytics 4, Google Analytics (Universal), Adobe Analytics |
-| **SEO** | Google Search Console, Semrush, Moz, Ahrefs |
+| **Analytics** | Google Analytics 4, Matomo, Piwik PRO, Plausible |
+| **SEO** | Google Search Console, Semrush, Ahrefs, SE Ranking, Serpstat |
 | **Email Marketing** | Mailchimp, Klaviyo, Campaign Monitor, ActiveCampaign |
-| **E-commerce & CRM** | Shopify, HubSpot, Salesforce |
+| **E-commerce & CRM** | Shopify, WooCommerce, HubSpot, Salesforce, Pipedrive, Stripe |
 
 <Note>
-  The full list of available integrations is visible inside Oviond under **Integrations** in the left sidebar. New platforms are added regularly.
+  The full list of available data sources appears when you open the **Data Sources** tab in a client's project editor and search. New platforms are added regularly.
 </Note>
 
-## How integrations work
+## How data sources work
 
-When you connect an integration, Oviond guides you through an OAuth flow — you log in to the marketing platform and grant Oviond permission to read your data. Oviond stores the resulting authorization as an **auth profile**.
+When you connect a data source, Oviond guides you through an OAuth flow — or, for some platforms, an API-key form — where you authorize Oviond to read your data. Oviond stores the result as a reusable **connection** (an auth profile).
 
-After authorization, you link a specific account or data source (for example, a particular Google Ads account or Facebook Ads campaign) to a client. That linked data source then becomes available in widgets when you build reports for that client.
+After connecting, you link a specific account, property, or page (for example, a particular Google Ads account or GA4 property) to a client. That linked data source then becomes available when you build widgets for that client.
 
-### Auth profiles
+### Connections (auth profiles)
 
-An auth profile represents one authorized connection to a platform — typically tied to one login. If you manage multiple clients' accounts through a single agency login (such as a Google Ads manager account), one auth profile can cover all of those sub-accounts.
+A connection represents one authorized credential for a platform — typically tied to one login. If you manage multiple clients' accounts through a single login (such as a Google Ads manager account), one connection can cover all of those sub-accounts.
 
-You can reuse the same auth profile across multiple clients. For example, if your agency has a single Google Ads manager account that contains sub-accounts for 10 clients, you authorize Google Ads once and then link each client to their respective sub-account — all without re-authenticating.
+You can reuse the same connection across multiple clients. For example, if your workspace has a single Google Ads manager account containing sub-accounts for 10 clients, you authorize Google Ads once and then link each client to their respective sub-account — without re-authenticating.
 
-## Listing your connected integrations
+## Listing your connections
 
-To see all integrations connected across your workspace:
+To see every connection across your workspace, go to **Settings → Data sources** (`/settings/data-sources`). The table lists each connected profile with its platform, profile name, token **Status** (**Token valid** or **Token expired**), the number of clients using it, and the date it was connected. Use the toolbar to search by name or filter by status and platform.
 
-1. Click **Integrations** in the left sidebar.
-2. The integrations list shows every platform you have authorized, along with the auth profiles and their connection status.
+To see the data sources linked to one client, open that client's project and click the **Data Sources** tab in the editor sidebar. This shows only the connections relevant to that client, with the linked profile sorted first.
 
-To see integrations for a specific client:
+## Checking connection status
 
-1. Navigate to the client from the **Clients** screen.
-2. Open the client's **Integrations** tab. This lists only the data sources linked to that client.
+Oviond checks token health automatically with a daily auth-test. You don't run a manual test — each connection displays a **Token valid** or **Token expired** badge. When a token expires, click **Refresh** (project tab) or **Refresh token** (Settings) to re-authorize. See [Test Connection](/data-sources/test) for details.
 
-## Testing an integration connection
+## Unlinking and deleting
 
-If you want to verify that a connected integration is returning data correctly:
-
-1. Go to **Integrations** and locate the integration you want to test.
-2. Click the three-dot menu next to the integration.
-3. Select **Test Connection**.
-
-Oviond will attempt to fetch data from the platform and confirm whether the connection is active. If the test fails, see [Connect a Data Source to a Client](/data-sources/connect) for troubleshooting steps.
-
-## Unlinking and deleting integrations
-
-**Unlinking** removes the data source from a specific client but keeps the auth profile available for reuse. **Deleting** an auth profile removes it from your workspace entirely and disconnects all clients that relied on it.
+**Unlinking** removes a data source from a specific client but keeps the connection available for reuse. **Deleting** a connection removes it from your workspace entirely and disconnects every client that used it.
 
 ### Unlink a data source from a client
 
-1. Open the client and go to the **Integrations** tab.
-2. Find the data source you want to remove.
-3. Click the three-dot menu and select **Unlink**.
+1. Open the client's project and go to the **Data Sources** tab.
+2. Find the linked data source.
+3. Click **Unlink**.
 
-The auth profile remains available and can be relinked to the same or a different client at any time.
+The connection remains available and can be linked to the same or a different client at any time.
 
-### Delete an auth profile
+### Delete a connection
 
 <Warning>
-  Deleting an auth profile removes it permanently and disconnects every client and widget that used it. Any widgets in reports that relied on that connection will stop displaying data. This cannot be undone.
+  Deleting a connection removes it permanently and may affect widgets that use it. Widgets that relied on it stop displaying data. This cannot be undone.
 </Warning>
 
-1. Click **Integrations** in the left sidebar.
-2. Find the auth profile you want to delete.
-3. Click the three-dot menu and select **Delete**.
-4. Confirm the deletion in the dialog.
+1. Go to **Settings → Data sources**.
+2. Find the connection and click **Delete profile**.
+3. Type `DELETE` to confirm, then click **Delete profile**.
 
 ## Next steps
 
 <CardGroup cols={2}>
   <Card title="Connect a data source" icon="plug" href="/data-sources/connect">
-    Step-by-step guide to authorizing a platform and linking it to a client.
+    Step-by-step guide to connecting a platform and linking it to a client.
   </Card>
-  <Card title="Custom metrics and data" icon="sliders" href="/data-sources/metrics">
-    Create calculated metrics, save metric presets, and upload custom CSV data.
+  <Card title="Calculated metrics" icon="sliders" href="/calculated-metrics/overview">
+    Combine metrics across data sources into custom KPIs.
   </Card>
 </CardGroup>

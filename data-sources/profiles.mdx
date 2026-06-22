@@ -3,32 +3,40 @@ title: "Profiles"
 description: "Pick which ad account, property, or page to report on for each connected data source."
 ---
 
-A **profile** is the specific account, property, page, or view inside a data source. When you connect Google Ads you get access to every ad account the authorizing user can see — a profile is how you tell Oviond *which* ad account to report on per client.
+A **profile** is one connection to a platform, named and reusable. When you link a data source to a client, you pick the specific account, property, or page that profile reports on — that's how you tell Oviond *which* numbers to pull for that client.
 
-## Why profiles matter
+## Why the account selection matters
 
-Without a profile selection, Oviond doesn't know which numbers to pull:
+A single connection can see every account the authorizing login has access to. Linking resolves that ambiguity by anchoring each client to one account, property, or page:
 
-- **Google Ads** has a Customer ID per ad account
-- **Google Analytics 4** has a Property per site
-- **Facebook Ads** has an Ad Account per business
-- **LinkedIn** has a Page per brand
+- **Google Ads** — a Customer ID per ad account
+- **Google Analytics 4** — a Property per site
+- **Facebook Ads** — an Ad Account per business
+- **Google Business Profile** — one or more Locations per account
 
-Profiles resolve that ambiguity — each client's data source is anchored to one profile.
-
-## Manage profiles
+## Link a profile to a client
 
 <Steps>
-  <Step title="Open Data Sources">
-    From the sidebar.
+  <Step title="Open the Data Sources tab">
+    Open the client's project and click **Data Sources** in the editor sidebar.
   </Step>
-  <Step title="Pick the data source">
-    Click a connected integration to see its available profiles.
+  <Step title="Select the profile">
+    Under **Select Profile**, pick the connection to use, then click **Link**.
   </Step>
-  <Step title="Select a profile">
-    Click the profile the client uses. Widgets configured with this data source now pull from the selected profile.
-  </Step>
-  <Step title="Rename if needed">
-    Give each profile a friendly label (e.g. *Acme — Main Site*) so your team picks the right one when building widgets.
+  <Step title="Select the account">
+    Under **Select Account**, choose the account, property, or page for this client. Some platforms (GA4, Google Business Profile, Meta/Instagram Ads) use a two-step pick. Click **Save**.
   </Step>
 </Steps>
+
+Widgets configured with this data source now pull from the account you selected. To change the account later, click **Edit** on the profile and re-select.
+
+## Rename a profile
+
+Give each connection a clear label (for example, *Acme — Main Site*) so your team picks the right one when linking.
+
+- You set the name when you first connect, in the **Profile Name** field.
+- To rename an existing connection, go to **Settings → Data sources**, click **Rename profile** on the row, enter a **New name**, and click **Save changes**. The rename applies everywhere the connection is used.
+
+<Note>
+  A profile name can't contain `.` or `$` characters.
+</Note>

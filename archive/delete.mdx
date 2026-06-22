@@ -1,12 +1,14 @@
 ---
-title: "Permanently Delete"
+title: "Permanently delete"
 description: "Remove archived items from your account forever."
 ---
 
-Permanently deleting an archived item is **irreversible** — the row is removed from the database along with all its children (a client's projects, a project's widgets, etc). Use it to:
+Permanently deleting an archived item is **irreversible** — the row is removed from the database along with all its children (a client's projects and widgets, a project's widgets and pages, a template's pages and widgets, and so on). For media, the underlying file is also removed from storage.
 
-- Free up plan quota immediately rather than waiting for the retention window
-- Remove sensitive data after a client requests GDPR/CCPA erasure
+Use it to:
+
+- Free up plan quota immediately
+- Remove sensitive data after a client requests erasure
 - Clean up test data with certainty
 
 <Warning>
@@ -15,16 +17,16 @@ There is no undo. Once an item is permanently deleted, it cannot be recovered �
 
 <Steps>
   <Step title="Open Archive">
-    From **Account → Archive**.
+    Go to **Settings → Archive** (`/settings/archive`).
   </Step>
   <Step title="Filter and select">
-    Narrow to the type you want to purge, then check each item.
+    Narrow to the type you want to remove, then check each item. Multi-select works for bulk delete.
   </Step>
-  <Step title="Click Permanently Delete">
-    Confirm by typing a verification word when prompted.
+  <Step title="Click Delete">
+    A confirmation dialog warns that the items will be permanently deleted. Confirm to proceed, or choose **Keep archived** to cancel.
   </Step>
 </Steps>
 
-## Automatic purge
-
-Archived items older than the retention window (90 days by default) are **automatically purged** by a background job. You don't need to manually delete them — they're cleaned up periodically on Oviond's end.
+<Note>
+The Archive is admin-only. Members without the **manage archive** permission can't permanently delete items.
+</Note>

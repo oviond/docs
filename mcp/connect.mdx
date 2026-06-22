@@ -50,10 +50,14 @@ https://api.oviond.com/mcp
 
 ## Other MCP clients
 
-Any client that speaks the MCP HTTP transport with OAuth 2.1 support works. Point it at `https://api.oviond.com/mcp` and complete the OAuth flow.
+Any client that speaks the MCP streamable HTTP transport with OAuth 2.1 support works. Point it at `https://api.oviond.com/mcp` and complete the OAuth flow.
 
 <Note>
 Only **streamable HTTP** transport is supported. Stdio servers don't apply here — Oviond's MCP server is hosted by us, not run locally.
+</Note>
+
+<Note>
+MCP access requires an eligible plan. Subscription plans include API/MCP access; lifetime plans need the API add-on. If your plan isn't entitled, the connection is rejected during sign-in.
 </Note>
 
 ## First prompts to try
