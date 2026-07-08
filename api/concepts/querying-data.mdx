@@ -27,12 +27,12 @@ curl -X POST https://api.oviond.com/v1/data/query \
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `datasource_id` | ✓ | The datasource alias, e.g. `ga4` (Google Analytics 4), `gadw` (Google Ads), `fb-ads` (Facebook Ads), `inst-ads` (Instagram Ads). |
-| `client_id` | ✓ | The client whose connected data source you're querying. |
+| `datasource_id` | ✓ | The datasource alias, e.g. `ga4`, `gadw`, `fb-ads`. **List all with [`GET /v1/data/datasources`](#finding-valid-identifiers).** |
+| `client_id` | ✓ | The client whose connected data source you're querying. List with `GET /v1/clients`. |
 | `date_range` | ✓ | `{ current_start, current_end }` as `YYYY-MM-DD`. Add `previous_start` / `previous_end` to get period-over-period comparison values. |
-| `metrics` | ✓ | Array of metric identifiers, e.g. `["sessions", "conversions"]`. Identifiers are **datasource-specific** (see [Finding valid identifiers](#finding-valid-identifiers)). |
-| `dimensions` | ✓ | Array of dimension identifiers, e.g. `["DATE"]` for a time series, or `[]` / a summary `data_view` for a single total. |
-| `data_view` | ✓ | The datasource view to query, e.g. `OVERVIEW`. Datasource-specific. |
+| `metrics` | ✓ | Array of metric `id`s, e.g. `["clicks", "impressions"]`. **Get valid ids from [`GET /v1/data/{datasource_id}/metrics`](#finding-valid-identifiers).** |
+| `dimensions` | ✓ | Array of dimension `id`s, e.g. `["DATE"]` for a time series, or `[]` for a single total. **Get valid ids from [`GET /v1/data/{datasource_id}/dimensions`](#finding-valid-identifiers).** |
+| `data_view` | ✓ | The datasource view, e.g. `ACCOUNT`. Returned alongside each field by the `/metrics` and `/dimensions` endpoints above. |
 | `filters` | | Array of `{ field, operator, value }` to filter rows. |
 | `timezone` | | IANA timezone for date bucketing. Defaults to `UTC`. |
 
