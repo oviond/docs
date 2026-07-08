@@ -64,27 +64,51 @@ Read fields by the identifiers you requested rather than by position; the exact 
 
 ## Finding valid identifiers
 
-The valid `metrics`, `dimensions`, and `data_view` values differ per datasource. Discover them from the datasource's **field catalog**:
+The valid `datasource_id`, `metrics`, `dimensions`, and `data_view` values are all discoverable — you never have to guess. Walk the **field catalog**:
+
+**1. Find the `datasource_id`** — list every datasource Oviond supports:
 
 ```bash
-# Metrics — use the returned `id`s as the `metrics` array
+curl "https://api.oviond.com/v1/data/datasources" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+# → [{ "id": "gadw", "name": "Google Ads", "category": "...", "data_views": [...] }, ...]
+```
+
+**2. List its metrics and dimensions** — the `id`s you pass to the query:
+
+```bash
 curl "https://api.oviond.com/v1/data/gadw/metrics" \
   -H "Authorization: Bearer YOUR_API_KEY"
 
-# Dimensions — use the returned `id`s as the `dimensions` array
 curl "https://api.oviond.com/v1/data/gadw/dimensions" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-Both group results by data view; add `?data_view=ACCOUNT` to filter to one view. Each entry has an `id` (what you pass to the query) and a human-readable `name`.
+Each returns a **flat, scannable list** — every field carries its `id`, `name`, `data_view`, and `group`:
+
+```json
+{
+  "success": true,
+  "data": {
+    "datasource": "gadw",
+    "data_views": ["ACCOUNT", "CAMPAIGNS", "..."],
+    "fields": [
+      { "id": "impressions", "name": "Impressions", "data_view": "ACCOUNT", "group": "Basic" },
+      { "id": "clicks", "name": "Clicks", "data_view": "ACCOUNT", "group": "Basic" }
+    ]
+  }
+}
+```
+
+Add `?data_view=ACCOUNT` to filter to one view. Use each `id` as an entry in `metrics` / `dimensions`, and its `data_view` as `data_view`.
 
 Other helpful endpoints:
 
-- **`GET /v1/clients/{id}/datasources`** — which sources a client has connected (and their `datasource_id`s).
+- **`GET /v1/clients/{id}/datasources`** — which sources a specific client has connected.
 - **`POST /v1/data/resource`** — selectable sub-resource values (campaigns, ad sets, videos) for filters.
 
 <Tip>
-  Over MCP, the `data_list_metrics` and `data_list_dimensions` tools return the same catalog — an agent calls those first, then `data_query`.
+  Over MCP the same catalog is available as tools — `data_list_datasources` → `data_list_metrics` / `data_list_dimensions` → `data_query`. Agents call them in that order, no guessing.
 </Tip>
 
 ## Common errors

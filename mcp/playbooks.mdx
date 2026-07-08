@@ -16,12 +16,19 @@ These playbooks are prompts you can give an MCP client (Claude, Cursor, etc.) co
 **Tools:** `clients_list`, `folders_list`, `projects_list`, `search`
 **What happens:** the agent pages through your clients, groups them by folder, and cross-references each client's projects. Read-only — nothing changes.
 
-## 2. Create a client and starter report
+## 2. Create a client with a report (from a template)
 
-> "Create a client called Acme Demo, then create a report called 'Monthly Marketing Overview' with sections for Traffic, Paid Media, and Conversions."
+> "Create a client called Acme Demo with a Google Ads dashboard."
 
-**Tools:** `clients_create` → `projects_create` → `pages_create` → `widgets_add_title` / `widgets_add_text`
-**What happens:** the agent creates the client, creates the report, then lays out the sections as pages and heading widgets. It should summarize exactly what it created and the new IDs.
+**Tools:** `templates_list` (find the template) → `clients_create_with_project`
+**What happens:** the agent finds the matching template with `templates_list` (filter `datasources=gadw`, `type=DASHBOARD` → "Google Ads Dashboard"), then `clients_create_with_project` creates the client and clones that template into the first project — pages and widgets included.
+
+The create step is smart about the project:
+- **"…with a Google dashboard"** → the agent passes the matched `template_id`.
+- **"…with a blank report"** → pass `blank: true` for an empty project.
+- **"…with a report"** (unspecified) → a matching **Starter** template is cloned automatically.
+
+To add a template-based report to an **existing** client, use `projects_create_from_template`.
 
 <Warning>
   This creates real records in your account. Confirm the client and report names before the agent runs it.
@@ -34,32 +41,39 @@ These playbooks are prompts you can give an MCP client (Claude, Cursor, etc.) co
 **Tools:** `search` / `projects_list` → `projects_duplicate` → `projects_update`
 **What happens:** the agent finds the source report, duplicates it, and re-points the copy at the new client. Layout and widgets carry over.
 
-## 4. Apply branding
+## 4. Add a saved section to a report or dashboard
+
+> "Add my 'Executive Summary' section to the Acme dashboard."
+
+**Tools:** `assets_list` (find the section) → `projects_add_section`
+**What happens:** the agent finds the saved section with `assets_list` (search by name), then `projects_add_section` places its widgets on the project. A single-page project (typical dashboard) uses its one page automatically; a multi-page report returns its pages so the agent can pick the right `page_id`.
+
+## 5. Apply branding
 
 > "Set Acme Demo's brand color to #1E88E5 and generate a matching palette."
 
 **Tools:** `branding_get`, `branding_update`, `company_generate_palette`
 **What happens:** the agent reads current branding, generates a palette, and updates the logo/colors. Review the palette before applying.
 
-## 5. Query live data
+## 6. Query live data
 
 > "For Acme, pull sessions and conversions from GA4 for the last 30 days, broken down by day."
 
-**Tools:** `data_list_metrics` / `data_list_dimensions` (discover identifiers), then `data_query` (or `reports_get_metric_values` for headline totals), `datasources_list`
-**What happens:** the agent discovers the datasource's valid metric/dimension `id`s via `data_list_metrics` / `data_list_dimensions`, then queries live values with `data_query`. Read-only.
+**Tools:** `data_list_datasources` → `data_list_metrics` / `data_list_dimensions` (discover ids), then `data_query` (or `reports_get_metric_values` for headline totals)
+**What happens:** the agent finds the `datasource_id`, discovers the valid metric/dimension `id`s, then queries live values — no guessing at any step. Read-only.
 
 <Note>
   Metric and dimension identifiers are datasource-specific. If a query returns nothing, run `data_test_connection` — the client's OAuth token may have expired and need reconnecting in the app.
 </Note>
 
-## 6. Audit a report's health
+## 7. Audit a report's health
 
 > "Audit the 'Monthly Marketing Overview' report — what data sources are connected and are any automations paused?"
 
-**Tools:** `reports_audit_project_health` (one call), or `projects_get` + `datasources_list` + `automations_list`
-**What happens:** the `reports_audit_project_health` workflow tool gathers the connected data sources and automation state in one step and flags likely issues (nothing connected, paused automations). Read-only.
+**Tools:** `projects_audit_health` (one call), or `projects_get` + `datasources_list` + `automations_list`
+**What happens:** the `projects_audit_health` workflow tool gathers the connected data sources and automation state in one step and flags likely issues (nothing connected, paused automations). Read-only.
 
-## 7. Schedule a monthly report (with confirmation)
+## 8. Schedule a monthly report (with confirmation)
 
 > "Schedule the Acme monthly report to email on the 1st of each month to me@acme.com — but show me the settings and ask before you activate it."
 
