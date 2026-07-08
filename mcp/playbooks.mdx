@@ -45,8 +45,8 @@ These playbooks are prompts you can give an MCP client (Claude, Cursor, etc.) co
 
 > "For Acme, pull sessions and conversions from GA4 for the last 30 days, broken down by day."
 
-**Tools:** `data_query` (or `reports_get_metric_values` for headline totals), `datasources_list`, `widgets_get`
-**What happens:** the agent queries live metric values from the client's connected data source. If it doesn't know the exact metric/dimension identifiers, it reads them from an existing data widget first (`widgets_get`). Read-only.
+**Tools:** `data_list_metrics` / `data_list_dimensions` (discover identifiers), then `data_query` (or `reports_get_metric_values` for headline totals), `datasources_list`
+**What happens:** the agent discovers the datasource's valid metric/dimension `id`s via `data_list_metrics` / `data_list_dimensions`, then queries live values with `data_query`. Read-only.
 
 <Note>
   Metric and dimension identifiers are datasource-specific. If a query returns nothing, run `data_test_connection` — the client's OAuth token may have expired and need reconnecting in the app.
@@ -73,4 +73,3 @@ These playbooks are prompts you can give an MCP client (Claude, Cursor, etc.) co
 ## What MCP can't do yet
 
 - **Connect a data source.** Connecting a source needs interactive OAuth, done once in the app. MCP can list, rename, and delete existing connections — and query the data from them — but it can't create the connection itself.
-- **Discover metric names automatically.** There's no metrics-catalog tool yet, so the agent needs the metric/dimension identifiers (it can read them from an existing data widget via `widgets_get`). See [Querying data](/api/concepts/querying-data).

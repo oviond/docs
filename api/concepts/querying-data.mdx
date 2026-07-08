@@ -64,11 +64,28 @@ Read fields by the identifiers you requested rather than by position; the exact 
 
 ## Finding valid identifiers
 
-There is no public metrics catalog endpoint yet, and the valid `metrics`, `dimensions`, and `data_view` values differ per datasource. The reliable ways to discover them today:
+The valid `metrics`, `dimensions`, and `data_view` values differ per datasource. Discover them from the datasource's **field catalog**:
 
-1. **Confirm what's connected** — `GET /v1/clients/{id}/datasources` lists the client's connected sources and their `datasource_id`s.
-2. **Copy from a working widget** — build the equivalent widget once in the app, then `GET /v1/widgets/{id}` (or list a project's widgets) and read the exact `metrics`, `dimensions`, and `data_view` it uses.
-3. **List sub-resources** — for things like campaigns, ad sets, or videos, use [`POST /v1/data/resource`](/api/introduction) with a `resource` name (e.g. `"campaigns"`) to fetch selectable values.
+```bash
+# Metrics — use the returned `id`s as the `metrics` array
+curl "https://api.oviond.com/v1/data/gadw/metrics" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# Dimensions — use the returned `id`s as the `dimensions` array
+curl "https://api.oviond.com/v1/data/gadw/dimensions" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+Both group results by data view; add `?data_view=ACCOUNT` to filter to one view. Each entry has an `id` (what you pass to the query) and a human-readable `name`.
+
+Other helpful endpoints:
+
+- **`GET /v1/clients/{id}/datasources`** — which sources a client has connected (and their `datasource_id`s).
+- **`POST /v1/data/resource`** — selectable sub-resource values (campaigns, ad sets, videos) for filters.
+
+<Tip>
+  Over MCP, the `data_list_metrics` and `data_list_dimensions` tools return the same catalog — an agent calls those first, then `data_query`.
+</Tip>
 
 ## Common errors
 
@@ -76,7 +93,7 @@ There is no public metrics catalog endpoint yet, and the valid `metrics`, `dimen
 |--------|-------|------------|
 | `422` | Missing/invalid field (e.g. no `metrics`). | Check the request against the table above; details are in `error.details`. |
 | `404` | `client_id` doesn't exist in your account. | Verify the ID via `GET /v1/clients`. |
-| `502` | Upstream datasource error — not connected, expired OAuth token, or an unsupported metric/dimension. | Run [`POST /v1/data/test`](/api/introduction) to check the connection; if the token expired, reconnect the source in the app. Verify metric/dimension identifiers against a working widget. |
+| `502` | Upstream datasource error — not connected, expired OAuth token, or an unsupported metric/dimension. | Run [`POST /v1/data/test`](/api/introduction) to check the connection; if the token expired, reconnect the source in the app. Verify metric/dimension identifiers against `GET /v1/data/{datasource_id}/metrics`. |
 
 <Tip>
   A `502` most often means the client's OAuth token for that datasource has expired and needs reconnecting in the app — it's not a bug in your request.
