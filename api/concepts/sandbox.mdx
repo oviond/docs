@@ -1,0 +1,55 @@
+---
+title: "Sandbox"
+description: "Try the Oviond API against a shared, read-only demo account — no signup — before wiring in your own key."
+---
+
+The sandbox lets you make real API calls against a demo account with live data connected, so you can see actual responses before building against your own account. It's **read-only**: you can list and query, but not create or change anything.
+
+<Info>
+  The key below is a shared **read-only** sandbox key — safe to use publicly. Write calls (`POST`/`PUT`/`DELETE`) return `403`. For write access, use a key from your own account (see [Authentication](/authentication)).
+</Info>
+
+## Set up
+
+```bash
+export OVIOND_SANDBOX_KEY="oviond_276f473c1ea416ec1d6ab186f628e04748195705c77492d798b7b0c10736610f"
+export OVIOND_BASE="https://api.oviond.com"
+```
+
+The sandbox account has one demo client with Google Ads, Google Analytics 4, and Facebook Ads connected:
+
+| Value | |
+|-------|--|
+| `client_id` | `OGlOKfzHdJTpJouhD` |
+| Connected `datasource_id`s | `gadw`, `ga4`, `fb-ads` |
+
+## List the demo client
+
+```bash
+curl "$OVIOND_BASE/v1/clients" \
+  -H "Authorization: Bearer $OVIOND_SANDBOX_KEY"
+```
+
+## Query live data
+
+Pull real Google Ads numbers for the demo client:
+
+```bash
+curl -X POST "$OVIOND_BASE/v1/data/query" \
+  -H "Authorization: Bearer $OVIOND_SANDBOX_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "datasource_id": "gadw",
+    "client_id": "OGlOKfzHdJTpJouhD",
+    "date_range": { "current_start": "2026-06-07", "current_end": "2026-07-06" },
+    "metrics": ["impressions", "clicks", "ctr"],
+    "dimensions": ["DATE"],
+    "data_view": "ACCOUNT"
+  }'
+```
+
+You'll get back the [data-query response shape](/api/concepts/querying-data) — `data.current` rows plus `data.currentSummary` totals — with real values.
+
+## What you can't do here
+
+The sandbox key is read-only, so `POST`/`PUT`/`DELETE` calls return `403`. To try the full create → connect → build flow, use your own account and follow the [Quickstart](/api/quickstart).

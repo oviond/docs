@@ -1,9 +1,13 @@
 ---
 title: "Add API key"
-description: "Create an API key to authenticate REST API and MCP calls."
+description: "Create an API key to authenticate REST API calls."
 ---
 
-API keys let external scripts, integrations, and AI connectors call the Oviond API on behalf of your account. You choose a permission level for each key when you create it, so a key can be scoped more tightly than your own account.
+API keys let external scripts and integrations call the Oviond REST API on behalf of your account. You choose a permission level for each key when you create it, so a key can be scoped more tightly than your own account.
+
+<Note>
+  API keys authenticate the **REST API only**. The [MCP server](/mcp/overview) uses its own OAuth 2.1 flow with per-client tokens — it does **not** accept these API keys. See [MCP authentication](/mcp/auth).
+</Note>
 
 <Note>
   API and MCP access is included with the agency plan. If your plan doesn't include API access, the create panel prompts you to upgrade in **Settings → Billing**.

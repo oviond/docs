@@ -1,0 +1,59 @@
+---
+title: "OpenAPI, Postman & environment"
+description: "Download the Oviond OpenAPI spec, import it into Postman, Bruno, or Insomnia, and set up your environment variables."
+---
+
+The Oviond API publishes a machine-readable OpenAPI 3.1 spec you can import into any API client or code generator.
+
+## Download the spec
+
+```
+https://api.oviond.com/openapi.json
+```
+
+It's always current — the spec is generated from the live API on every release, so it never drifts from the running service.
+
+## Import into an API client
+
+Every operation in the spec has a stable `operationId`, so imports produce clean, named requests.
+
+<Tabs>
+  <Tab title="Postman">
+    **Import → Link**, paste `https://api.oviond.com/openapi.json`, and Postman generates a collection with a folder per tag. Then create an environment (below) so `{{base_url}}` and `{{api_key}}` resolve.
+  </Tab>
+  <Tab title="Bruno">
+    **Import Collection → OpenAPI V3**, point it at the downloaded `openapi.json`. Bruno creates a `.bru` request per operation.
+  </Tab>
+  <Tab title="Insomnia">
+    **Import → From URL**, paste the spec URL. Insomnia builds a request collection you can run immediately.
+  </Tab>
+</Tabs>
+
+## Environment variables
+
+Set these once in your client's environment (or your shell) and reuse them everywhere:
+
+| Variable | Value | Notes |
+|----------|-------|-------|
+| `base_url` | `https://api.oviond.com` | Always pin the `/v1` version in the path. |
+| `api_key` | `oviond_...` | Your [API key](/authentication). Store it as a **secret** — never commit it. |
+
+Then send the key as a Bearer token on every request:
+
+```
+Authorization: Bearer {{api_key}}
+```
+
+<Warning>
+  Treat your API key like a password. Use your client's secret/vault storage, and never paste it into a shared collection or version control.
+</Warning>
+
+## SDKs
+
+There is no official published SDK yet. Because the spec carries stable `operationId`s and typed schemas, you can generate a client in the meantime with a tool like [openapi-generator](https://openapi-generator.tech/) or [openapi-typescript](https://github.com/openapi-ts/openapi-typescript):
+
+```bash
+npx openapi-typescript https://api.oviond.com/openapi.json -o oviond.d.ts
+```
+
+Generated clients are community-supported until official SDKs ship.

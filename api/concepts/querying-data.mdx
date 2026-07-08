@@ -1,0 +1,83 @@
+---
+title: "Querying data"
+description: "Use POST /v1/data/query to pull live metric values from a client's connected data sources — the endpoint behind Oviond's charts and KPIs."
+---
+
+`POST /v1/data/query` returns live metric values from one of a client's **connected** data sources. It's the same call that powers every chart and KPI widget in the app, exposed for your own automations.
+
+<Note>
+  This endpoint proxies to Oviond's datasource service. It reads a data source the client has already connected in the app — it does not create or authorize connections. Connect a source in the [project editor](/data-sources/connect) first.
+</Note>
+
+## Request
+
+```bash
+curl -X POST https://api.oviond.com/v1/data/query \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "datasource_id": "ga4",
+    "client_id": "cliAbc123",
+    "date_range": { "current_start": "2026-03-01", "current_end": "2026-03-31" },
+    "metrics": ["sessions", "conversions"],
+    "dimensions": ["DATE"],
+    "data_view": "OVERVIEW"
+  }'
+```
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `datasource_id` | ✓ | The datasource alias, e.g. `ga4` (Google Analytics 4), `gadw` (Google Ads), `fb-ads` (Facebook Ads), `inst-ads` (Instagram Ads). |
+| `client_id` | ✓ | The client whose connected data source you're querying. |
+| `date_range` | ✓ | `{ current_start, current_end }` as `YYYY-MM-DD`. Add `previous_start` / `previous_end` to get period-over-period comparison values. |
+| `metrics` | ✓ | Array of metric identifiers, e.g. `["sessions", "conversions"]`. Identifiers are **datasource-specific** (see [Finding valid identifiers](#finding-valid-identifiers)). |
+| `dimensions` | ✓ | Array of dimension identifiers, e.g. `["DATE"]` for a time series, or `[]` / a summary `data_view` for a single total. |
+| `data_view` | ✓ | The datasource view to query, e.g. `OVERVIEW`. Datasource-specific. |
+| `filters` | | Array of `{ field, operator, value }` to filter rows. |
+| `timezone` | | IANA timezone for date bucketing. Defaults to `UTC`. |
+
+## Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "current": [
+      { "DATE": "2026-03-01", "sessions": 1240, "conversions": 18 },
+      { "DATE": "2026-03-02", "sessions": 1310, "conversions": 22 }
+    ],
+    "currentSummary": { "sessions": 39120, "conversions": 604 },
+    "previous": [],
+    "previousSummary": {},
+    "state": "ACTIVE"
+  },
+  "meta": { "request_id": "req_a1b2c3" }
+}
+```
+
+- `data.current` — the rows for the current range (one per `dimensions` bucket, keyed by your metric and dimension identifiers).
+- `data.currentSummary` — the totals across the current range.
+- `data.previous` / `data.previousSummary` — the same for the comparison period, when you pass `previous_start` / `previous_end` (empty otherwise).
+- `data.state` — `ACTIVE` when the connection returned data.
+
+Read fields by the identifiers you requested rather than by position; the exact keys vary by datasource and `data_view`.
+
+## Finding valid identifiers
+
+There is no public metrics catalog endpoint yet, and the valid `metrics`, `dimensions`, and `data_view` values differ per datasource. The reliable ways to discover them today:
+
+1. **Confirm what's connected** — `GET /v1/clients/{id}/datasources` lists the client's connected sources and their `datasource_id`s.
+2. **Copy from a working widget** — build the equivalent widget once in the app, then `GET /v1/widgets/{id}` (or list a project's widgets) and read the exact `metrics`, `dimensions`, and `data_view` it uses.
+3. **List sub-resources** — for things like campaigns, ad sets, or videos, use [`POST /v1/data/resource`](/api/introduction) with a `resource` name (e.g. `"campaigns"`) to fetch selectable values.
+
+## Common errors
+
+| Status | Cause | What to do |
+|--------|-------|------------|
+| `422` | Missing/invalid field (e.g. no `metrics`). | Check the request against the table above; details are in `error.details`. |
+| `404` | `client_id` doesn't exist in your account. | Verify the ID via `GET /v1/clients`. |
+| `502` | Upstream datasource error — not connected, expired OAuth token, or an unsupported metric/dimension. | Run [`POST /v1/data/test`](/api/introduction) to check the connection; if the token expired, reconnect the source in the app. Verify metric/dimension identifiers against a working widget. |
+
+<Tip>
+  A `502` most often means the client's OAuth token for that datasource has expired and needs reconnecting in the app — it's not a bug in your request.
+</Tip>

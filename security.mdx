@@ -1,0 +1,61 @@
+---
+title: "Security & data access"
+description: "How Oviond authenticates access, isolates each account's data, handles API keys and OAuth tokens, and records activity."
+---
+
+Oviond stores marketing data on behalf of agencies and their clients, so access control and tenant isolation are built into every request. This page describes how the platform protects your data.
+
+## How access is authenticated
+
+There are three separate ways to reach Oviond, each with its own credential:
+
+| Surface | Credential | Used by |
+|---------|-----------|---------|
+| Web app | Supabase-issued session JWT (ES256) | The Oviond product UI. |
+| REST API | An Oviond API key (`oviond_…`) as a Bearer token | Your scripts and integrations. See [Authentication](/authentication). |
+| MCP | OAuth 2.1 + PKCE access token | AI agents. See [MCP authentication](/mcp/auth). |
+
+API keys never work against MCP, and MCP tokens never work against the REST API — the surfaces are isolated by design.
+
+## Tenant isolation
+
+Every request is scoped to the account of the authenticated credential. The account is derived from the token — **never** from anything in the request body or query — so one account can't read or write another's data by passing a different ID. Requesting a resource that belongs to another account returns `404`, so IDs outside your tenant aren't even confirmed to exist.
+
+## API key handling
+
+- Keys are generated with 32 bytes of cryptographic randomness and prefixed `oviond_`.
+- Only a **SHA-256 hash** of the key is stored — Oviond can't recover the raw key, and it's shown to you exactly once at creation.
+- Each key carries an **access level** — *View* (read-only), *Edit* (content writes), or *Full* — and inherits the role and client scope of the person who created it, capped at that level.
+- Keys can be **revoked** at any time from **Settings → API Keys** or via the [API Keys API](/api-keys/list); `last_used_at` is tracked so you can spot stale keys.
+
+<Warning>
+  Treat API keys like passwords: store them in a secret manager, never commit them, and never expose them in client-side code.
+</Warning>
+
+## MCP OAuth
+
+The MCP server implements OAuth 2.1 for confidential and public clients:
+
+- **Grants:** `authorization_code` and `refresh_token`.
+- **PKCE:** required, `S256`.
+- **Scope:** `mcp`.
+- **Dynamic client registration**, token **revocation**, and a **JWKS** endpoint are all published at [`/.well-known/oauth-authorization-server`](https://api.oviond.com/.well-known/oauth-authorization-server).
+
+Agents only ever act within the authenticated account, and destructive tools are flagged so clients can prompt before running them. See [MCP playbooks](/mcp/playbooks).
+
+## Activity & request tracing
+
+- Every response carries an `X-Request-Id` header (see [Errors & request IDs](/api/concepts/errors)); include it when you contact support so we can find the exact request.
+- Account activity is recorded in the in-app **[Activity Log](/activity-log/overview)**.
+
+## Rate limiting & abuse protection
+
+Programmatic API and MCP traffic is rate-limited per account to protect the platform. The web app is never limited. See [Rate limits & retries](/api/concepts/rate-limits).
+
+## Data retention
+
+Oviond retains your account's data — clients, projects, connected data sources, and media — for as long as your account exists. There is no automatic expiry; your data stays until you delete it. Deleting an individual resource removes it immediately, and [deleting your account](/account/delete) permanently and irreversibly purges everything associated with it: all data across every table, all team members, media files, and connected-source credentials.
+
+## Questions & disclosure
+
+For security questions, data-processing agreements, or to report a vulnerability, email [lesedi@oviond.com](mailto:lesedi@oviond.com). Please don't disclose a suspected vulnerability publicly before we've had a chance to respond.

@@ -1,35 +1,37 @@
 ---
 title: "Introduction"
-description: "White-label marketing reporting. Build branded dashboards, connect 30+ data sources, and automate client report delivery."
+description: "White-label marketing reporting. Build branded dashboards, connect 60+ data sources, and automate client report delivery."
 ---
 
 Oviond is a white-label digital marketing reporting platform. Connect your clients' marketing accounts — Google Ads, Facebook, and 60\+ other platforms — and build professional dashboards and reports that you deliver under your own brand. This documentation covers everything you need to get up and running, from creating your first client report to automating scheduled delivery for your entire client base.
 
-In Oviond, every project belongs to a **client**. You create a client, connect their data sources, then build dashboards and reports inside that client. The main sidebar gives you **Clients**, **Templates**, **Automations**, and **Settings**.
+In Oviond, every project belongs to a **client**. You create a client, build a dashboard or report inside that client, and connect the client's data sources from within the project editor as you go. The main sidebar gives you **Clients**, **Templates**, **Automations**, and **Settings**.
+
+## Start with your goal
 
 <CardGroup cols={2}>
-  <Card title="Quick Start" icon="rocket" href="/quickstart">
-    Create your account and build your first report in minutes.
+  <Card title="Start reporting for a client" icon="user-plus" href="/quickstart">
+    Create a client, connect data, and build your first report.
   </Card>
 
-  <Card title="Authentication" icon="key" href="/authentication">
-    Learn how to authenticate API requests with your API key.
+  <Card title="Build a monthly client report" icon="calendar" href="/guides/monthly-report">
+    Assemble a report and schedule recurring delivery.
   </Card>
 
-  <Card title="Data Sources" icon="plug" href="/data-sources/list">
-    Connect Google Ads, Facebook, and 30\+ marketing platforms.
+  <Card title="Build a live dashboard" icon="chart-line" href="/projects/list">
+    Create a dashboard that always shows the latest data.
   </Card>
 
-  <Card title="Custom Domains" icon="palette" href="/custom-domains/list">
-    Set up your custom domain and brand for client-facing reports.
+  <Card title="White-label your reports" icon="palette" href="/custom-domains/list">
+    Set up your own domain and branding for client-facing reports.
   </Card>
 
-  <Card title="Projects" icon="chart-bar" href="/projects/list">
-    Build dashboard and report projects with drag-and-drop widgets.
+  <Card title="Use the REST API" icon="code" href="/api/introduction">
+    Automate Oviond from your own scripts and integrations.
   </Card>
 
-  <Card title="API Reference" icon="code" href="/api/introduction">
-    Explore the full Oviond REST API.
+  <Card title="Use Oviond with AI (MCP)" icon="robot" href="/mcp/overview">
+    Let Claude, ChatGPT, and other agents manage your account.
   </Card>
 </CardGroup>
 
@@ -39,11 +41,14 @@ In Oviond, every project belongs to a **client**. You create a client, connect t
   <Step title="Add a client">
     Create a client to hold all of one customer's data sources, dashboards, and reports.
   </Step>
-  <Step title="Connect your data sources">
-    Link the client's marketing accounts — Google Ads, Facebook Ads, Google Analytics, and more — through OAuth or an API key in a few clicks.
+  <Step title="Create a report or dashboard">
+    Add a project inside the client — a **Dashboard** for a live view or a **Report** for a point-in-time snapshot. Start from scratch or from a template.
   </Step>
-  <Step title="Build reports and dashboards">
-    Create a project inside the client, then use the drag-and-drop builder to add charts, tables, and KPI widgets that pull live data from your connected data sources.
+  <Step title="Connect your data sources">
+    Inside the project editor, open the **Data sources** tab and link the client's marketing accounts — Google Ads, Facebook Ads, Google Analytics, and more — through OAuth or an API key in a few clicks.
+  </Step>
+  <Step title="Build with widgets">
+    Use the drag-and-drop builder to add charts, tables, and KPI widgets that pull live data from your connected data sources.
   </Step>
   <Step title="Apply your brand">
     Customize the logo, colors, and fonts on every project. Set up a custom domain so clients experience your brand, not Oviond's.

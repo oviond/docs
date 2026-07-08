@@ -1,0 +1,115 @@
+---
+title: "Quickstart: your first report via the API"
+description: "Go from an API key to a client report with live data — authenticate, create a client, create a report, and query live metric values."
+---
+
+This quickstart chains the core REST endpoints to take you from zero to a client report with live data. Every field is `snake_case`, and every call uses your [API key](/authentication) as a Bearer token.
+
+<Note>
+  One step — connecting a data source — happens once in the Oviond app, because it needs an interactive OAuth consent. Everything else is pure API.
+</Note>
+
+## Before you start
+
+- An Oviond API key (**Settings → API Keys**), on a plan that includes API access.
+- Base URL: `https://api.oviond.com`. Set a couple of shell variables to follow along:
+
+```bash
+export OVIOND_API_KEY="oviond_..."
+export OVIOND_BASE="https://api.oviond.com"
+```
+
+## 1. Verify your key
+
+```bash
+curl "$OVIOND_BASE/v1/users/me" -H "Authorization: Bearer $OVIOND_API_KEY"
+```
+
+A `200` with your profile confirms the key works. A `401` means the header is missing or the key is invalid; see [Errors](/api/concepts/errors).
+
+## 2. Create a client
+
+Every project belongs to a client.
+
+```bash
+curl -X POST "$OVIOND_BASE/v1/clients" \
+  -H "Authorization: Bearer $OVIOND_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Acme Demo",
+    "website": "acme.com",
+    "timezone": "UTC",
+    "currency": { "iso": "US", "code": "USD", "symbol": "$" }
+  }'
+```
+
+The response's `data.id` (for example `cliAbc123`) is your `client_id` for the next steps.
+
+## 3. Connect a data source (in the app)
+
+Data-source connections require interactive OAuth, so connect them once in the app — open a project for the client and use the **Data sources** tab (see [Connecting Data Sources](/data-sources/connect)). Once connected, confirm it over the API:
+
+```bash
+curl "$OVIOND_BASE/v1/clients/cliAbc123/datasources" \
+  -H "Authorization: Bearer $OVIOND_API_KEY"
+```
+
+Note the `datasource_id` (e.g. `ga4`, `gadw`, `fb-ads`) — you'll need it to query.
+
+## 4. Create a report
+
+```bash
+curl -X POST "$OVIOND_BASE/v1/projects" \
+  -H "Authorization: Bearer $OVIOND_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Q1 Report",
+    "type": "REPORT",
+    "template": "BLANK",
+    "client_id": "cliAbc123"
+  }'
+```
+
+Use `"type": "DASHBOARD"` for a live dashboard instead of a point-in-time report. The response returns the new project's `id` and `nano_id`. See the [Create Project reference](/api/introduction) for the full set of layout and branding fields.
+
+## 5. Pull live data
+
+Now query real metric values from the connected source:
+
+```bash
+curl -X POST "$OVIOND_BASE/v1/data/query" \
+  -H "Authorization: Bearer $OVIOND_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "datasource_id": "ga4",
+    "client_id": "cliAbc123",
+    "date_range": { "current_start": "2026-03-01", "current_end": "2026-03-31" },
+    "metrics": ["sessions", "conversions"],
+    "dimensions": ["DATE"],
+    "data_view": "OVERVIEW"
+  }'
+```
+
+See [Querying data](/api/concepts/querying-data) for the full field reference, how to discover valid metrics and dimensions, and error handling.
+
+## 6. Share or schedule
+
+- **Share a link:** open the project in the app and use the **Share** dialog to publish a link (backed by the project's `nano_id`).
+- **Schedule delivery:** create an [automation](/automations/scheduled) to email the report on a recurring schedule.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Querying data" icon="chart-line" href="/api/concepts/querying-data">
+    Metrics, dimensions, date ranges, and comparisons.
+  </Card>
+  <Card title="Errors & request IDs" icon="triangle-exclamation" href="/api/concepts/errors">
+    The response envelope and status codes.
+  </Card>
+  <Card title="Rate limits & retries" icon="gauge-high" href="/api/concepts/rate-limits">
+    Stay within budget and retry safely.
+  </Card>
+  <Card title="Full API reference" icon="code" href="/api/introduction">
+    Every endpoint, request, and response.
+  </Card>
+</CardGroup>

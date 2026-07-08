@@ -23,7 +23,7 @@
   "navbar": {
     "links": [
       {
-        "label": "Talk to US",
+        "label": "Talk to Us",
         "href": "https://www.oviond.com/contact/"
       }
     ],
@@ -36,7 +36,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
+        "tab": "Product",
         "groups": [
           {
             "group": "Get Started",
@@ -45,6 +45,12 @@
               "quickstart",
               "onboarding/overview",
               "authentication"
+            ]
+          },
+          {
+            "group": "Trust & security",
+            "pages": [
+              "security"
             ]
           },
           {
@@ -280,7 +286,20 @@
           {
             "group": "Overview",
             "pages": [
-              "api/introduction"
+              "api/introduction",
+              "api/quickstart"
+            ]
+          },
+          {
+            "group": "Concepts",
+            "pages": [
+              "api/concepts/sandbox",
+              "api/concepts/querying-data",
+              "api/concepts/errors",
+              "api/concepts/pagination",
+              "api/concepts/rate-limits",
+              "api/concepts/versioning",
+              "api/concepts/tools"
             ]
           }
         ]
@@ -294,7 +313,8 @@
               "mcp/overview",
               "mcp/connect",
               "mcp/auth",
-              "mcp/tools"
+              "mcp/tools",
+              "mcp/playbooks"
             ]
           }
         ]

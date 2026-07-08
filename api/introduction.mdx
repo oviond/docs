@@ -39,8 +39,37 @@ Generate an API key from **Settings → API Keys** in the Oviond app. See [Authe
 | `403` | Forbidden — insufficient permissions |
 | `404` | Not found |
 | `422` | Validation error |
+| `429` | Too many requests — you've hit the rate limit |
 | `500` | Server error |
+
+Every response uses one consistent JSON envelope. See [Errors & request IDs](/api/concepts/errors) for the full shape.
 
 ## Rate limiting
 
-API requests are rate-limited per account. If you exceed the limit, you'll receive a `429 Too Many Requests` response. Wait before retrying.
+Programmatic API and MCP traffic is rate-limited **per account** — the web app is never limited. By default that's 300 requests per minute per surface; a `429 Too Many Requests` response includes a `Retry-After` header. See [Rate limits & retries](/api/concepts/rate-limits) for the headers and safe-retry guidance.
+
+## Concepts
+
+<CardGroup cols={2}>
+  <Card title="Querying data" icon="chart-line" href="/api/concepts/querying-data">
+    Pull live metric values from connected data sources.
+  </Card>
+  <Card title="Authentication" icon="key" href="/authentication">
+    Bearer tokens, API keys, and auth errors.
+  </Card>
+  <Card title="Errors & request IDs" icon="triangle-exclamation" href="/api/concepts/errors">
+    The response envelope, status codes, and request IDs.
+  </Card>
+  <Card title="Pagination, filtering & sorting" icon="list" href="/api/concepts/pagination">
+    Page through, search, filter, and sort list results.
+  </Card>
+  <Card title="Rate limits & retries" icon="gauge-high" href="/api/concepts/rate-limits">
+    Limits, headers, and how to retry safely.
+  </Card>
+  <Card title="Versioning & stability" icon="code-branch" href="/api/concepts/versioning">
+    What changes are additive vs breaking.
+  </Card>
+  <Card title="Security & data access" icon="shield-halved" href="/security">
+    Auth model, tenant isolation, and key handling.
+  </Card>
+</CardGroup>

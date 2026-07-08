@@ -1,28 +1,61 @@
 ---
 title: "Connect"
-description: "Wire Claude, Cursor, or another MCP client to your Oviond account."
+description: "Connect Claude, ChatGPT, Cursor, VS Code, and other AI clients to your Oviond account over MCP."
 ---
 
-Every MCP client supports remote HTTP servers with OAuth. The specifics differ, but the server URL is always the same:
+Every supported AI connector reaches Oviond at the same hosted server URL over OAuth:
 
 ```
 https://api.oviond.com/mcp
 ```
 
-## Claude Desktop
+## Supported connectors
+
+All use the standard **streamable HTTP** transport with **OAuth 2.1 + PKCE** — setup differs only in where you paste the URL.
+
+| Connector | What it is |
+|-----------|-----------|
+| **Claude** | Claude.ai web & desktop |
+| **Claude Code** | Anthropic's terminal CLI |
+| **ChatGPT** | OpenAI custom connectors |
+| **Codex** | OpenAI's coding CLI |
+| **Cursor** | AI-first code editor |
+| **VS Code** | GitHub Copilot agent mode |
+| **Windsurf** | Codeium's AI editor |
+| **Openclaw** | Local AI agent with custom skills |
+| **Other MCP clients** | Any client that speaks MCP |
+| **REST API** | Call Oviond's HTTP API directly — see [Authentication](/authentication) |
+
+## Claude (web & desktop)
 
 <Steps>
-  <Step title="Open Claude Desktop settings">
-    From the menu bar, open **Settings → Connectors**.
+  <Step title="Open Claude settings">
+    On the web or in the desktop app, open **Settings → Connectors**.
   </Step>
   <Step title="Add Oviond">
     Click **+ Add custom connector** and enter the URL `https://api.oviond.com/mcp`.
   </Step>
   <Step title="Sign in">
-    Claude Desktop opens a browser window to Oviond's sign-in page. Sign in and authorize the connection.
+    Claude opens a browser window to Oviond's sign-in page. Sign in and authorize the connection.
   </Step>
   <Step title="Verify">
-    Back in Claude Desktop, you should see Oviond in your connector list. Start a chat and ask Claude to *"list my Oviond clients"* to confirm.
+    You should see Oviond in your connector list. Start a chat and ask Claude to *"list my Oviond clients"* to confirm.
+  </Step>
+</Steps>
+
+## Claude Code
+
+<Steps>
+  <Step title="Add the server">
+    ```bash
+    claude mcp add --transport http oviond https://api.oviond.com/mcp
+    ```
+  </Step>
+  <Step title="Authorize">
+    Run `/mcp` inside Claude Code and choose to authenticate — it opens a browser to complete the Oviond OAuth flow.
+  </Step>
+  <Step title="Verify">
+    Ask Claude Code to *"list my Oviond clients"* to confirm.
   </Step>
 </Steps>
 
@@ -48,9 +81,15 @@ https://api.oviond.com/mcp
   </Step>
 </Steps>
 
-## Other MCP clients
+## ChatGPT, Codex, VS Code, Windsurf, Openclaw & other clients
 
-Any client that speaks the MCP streamable HTTP transport with OAuth 2.1 support works. Point it at `https://api.oviond.com/mcp` and complete the OAuth flow.
+The flow is the same everywhere: add a **custom / remote MCP connector** pointing at `https://api.oviond.com/mcp`, then complete the OAuth sign-in when the client prompts you.
+
+- **ChatGPT** — add Oviond as a custom connector in settings.
+- **VS Code** — add it as an MCP server for Copilot agent mode.
+- **Codex**, **Windsurf**, **Openclaw**, and any other MCP client — register a remote streamable-HTTP MCP server at the URL above.
+
+Then verify by asking the agent to *"list my Oviond clients."*
 
 <Note>
 Only **streamable HTTP** transport is supported. Stdio servers don't apply here — Oviond's MCP server is hosted by us, not run locally.

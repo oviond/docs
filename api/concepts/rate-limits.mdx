@@ -1,0 +1,50 @@
+---
+title: "Rate limits & retries"
+description: "Oviond rate-limits programmatic API and MCP traffic per account. Learn the limits, the X-RateLimit headers, the 429 response, and how to retry safely."
+---
+
+Oviond rate-limits **programmatic** traffic to protect the platform. This applies to:
+
+- **REST API** calls authenticated with an [API key](/authentication), and
+- **[MCP](/mcp/overview)** agent calls.
+
+The Oviond web app (which signs in with a session token) is **never** rate-limited — so your own dashboards and the product UI are unaffected.
+
+## The limits
+
+- **Per account, per surface.** Your REST API budget and your MCP budget are counted **separately** — heavy agent traffic can't starve your direct API usage, and vice-versa.
+- **Per minute.** Limits are enforced in a fixed 60-second window.
+- **Default: 300 requests per minute** per account for each surface. Your account's actual ceiling is always returned in the `X-RateLimit-Limit` header — read it rather than hard-coding a number.
+
+## Rate-limit headers
+
+Every programmatic response carries your current budget:
+
+| Header | Meaning |
+|--------|---------|
+| `X-RateLimit-Limit` | Requests allowed in the window. |
+| `X-RateLimit-Remaining` | Requests left in the current window. |
+| `X-RateLimit-Reset` | Unix time (seconds) when the window resets. |
+
+## When you're limited
+
+Exceeding the budget returns `429 Too Many Requests` in the standard [error envelope](/api/concepts/errors), with a `Retry-After` header (seconds to wait):
+
+```json
+{
+  "success": false,
+  "error": {
+    "message": "Rate limit exceeded. Please retry after some time.",
+    "status_code": 429
+  },
+  "meta": { "request_id": "req_a1b2c3" }
+}
+```
+
+## Retrying safely
+
+- **Honor `Retry-After`.** On a `429`, wait the number of seconds it specifies before retrying.
+- **Back off exponentially** on repeated `429` or `5xx` responses (for example 1s, 2s, 4s, with jitter).
+- **`GET` requests are always safe to retry** — they don't change state.
+- **Writes are not idempotent.** Oviond does not support idempotency keys, so a `POST`/`PUT`/`DELETE` that timed out may or may not have applied. Before blindly retrying a write, re-fetch the resource (or list) to check whether the first attempt succeeded, to avoid creating duplicates.
+- **Stay under the limit proactively** by watching `X-RateLimit-Remaining` and pacing bulk jobs, rather than sprinting into a `429`.

@@ -1,0 +1,38 @@
+---
+title: "Versioning & stability"
+description: "How Oviond versions its REST API, what counts as a breaking change, and how to build integrations that keep working."
+---
+
+The Oviond REST API is versioned in the URL path. Every endpoint today lives under `/v1`:
+
+```
+https://api.oviond.com/v1/...
+```
+
+## What we may change without a new version
+
+These are **additive** and can ship at any time — build your integration to tolerate them:
+
+- New endpoints.
+- New **optional** request fields.
+- New fields in a response object.
+- New values in an enum where the field is already documented as extensible.
+
+<Warning>
+  Parse responses **tolerantly** — ignore fields you don't recognize, and don't fail on new properties. A strict client that rejects unknown fields will break on additive changes.
+</Warning>
+
+## What counts as a breaking change
+
+Breaking changes ship under a **new version prefix** (for example a future `/v2`), and `/v1` continues to work during any migration window:
+
+- Removing or renaming an endpoint, field, or enum value.
+- Making a previously optional request field required.
+- Changing a field's type or the shape of the response envelope.
+- Changing authentication or default behavior in a way that rejects previously valid requests.
+
+## Staying current
+
+- Follow the [Changelog](/changelog/2026-06) for additive changes and deprecations.
+- Field names are always `snake_case`; timestamps are ISO 8601.
+- Pin your integration to `/v1` explicitly — never depend on an unversioned base URL.

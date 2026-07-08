@@ -1,0 +1,76 @@
+---
+title: "Playbooks"
+description: "Copy-paste prompts for common Oviond jobs an AI agent can do over MCP — with the tools each one uses and safety notes."
+---
+
+These playbooks are prompts you can give an MCP client (Claude, Cursor, etc.) connected to Oviond. Each lists the tools the agent will reach for and any safety note. Tool names and the full catalog are on [Available tools](/mcp/tools).
+
+<Note>
+  Every call is automatically scoped to your authenticated account — you never pass an account ID, and the agent can only see your own clients and projects.
+</Note>
+
+## 1. List and inspect clients
+
+> "List my Oviond clients grouped by folder, and tell me which ones have no active projects."
+
+**Tools:** `clients_list`, `folders_list`, `projects_list`, `search`
+**What happens:** the agent pages through your clients, groups them by folder, and cross-references each client's projects. Read-only — nothing changes.
+
+## 2. Create a client and starter report
+
+> "Create a client called Acme Demo, then create a report called 'Monthly Marketing Overview' with sections for Traffic, Paid Media, and Conversions."
+
+**Tools:** `clients_create` → `projects_create` → `pages_create` → `widgets_add_title` / `widgets_add_text`
+**What happens:** the agent creates the client, creates the report, then lays out the sections as pages and heading widgets. It should summarize exactly what it created and the new IDs.
+
+<Warning>
+  This creates real records in your account. Confirm the client and report names before the agent runs it.
+</Warning>
+
+## 3. Duplicate a report for another client
+
+> "Duplicate the 'Monthly Marketing Overview' report for the client Beta Corp."
+
+**Tools:** `search` / `projects_list` → `projects_duplicate` → `projects_update`
+**What happens:** the agent finds the source report, duplicates it, and re-points the copy at the new client. Layout and widgets carry over.
+
+## 4. Apply branding
+
+> "Set Acme Demo's brand color to #1E88E5 and generate a matching palette."
+
+**Tools:** `branding_get`, `branding_update`, `company_generate_palette`
+**What happens:** the agent reads current branding, generates a palette, and updates the logo/colors. Review the palette before applying.
+
+## 5. Query live data
+
+> "For Acme, pull sessions and conversions from GA4 for the last 30 days, broken down by day."
+
+**Tools:** `data_query` (or `reports_get_metric_values` for headline totals), `datasources_list`, `widgets_get`
+**What happens:** the agent queries live metric values from the client's connected data source. If it doesn't know the exact metric/dimension identifiers, it reads them from an existing data widget first (`widgets_get`). Read-only.
+
+<Note>
+  Metric and dimension identifiers are datasource-specific. If a query returns nothing, run `data_test_connection` — the client's OAuth token may have expired and need reconnecting in the app.
+</Note>
+
+## 6. Audit a report's health
+
+> "Audit the 'Monthly Marketing Overview' report — what data sources are connected and are any automations paused?"
+
+**Tools:** `reports_audit_project_health` (one call), or `projects_get` + `datasources_list` + `automations_list`
+**What happens:** the `reports_audit_project_health` workflow tool gathers the connected data sources and automation state in one step and flags likely issues (nothing connected, paused automations). Read-only.
+
+## 7. Schedule a monthly report (with confirmation)
+
+> "Schedule the Acme monthly report to email on the 1st of each month to me@acme.com — but show me the settings and ask before you activate it."
+
+**Tools:** `automations_create`, `automations_test`, `automations_pause` / `automations_unpause`, `automations_history`
+**What happens:** the agent drafts the automation (recipient, cadence, timezone), can send a test, and should leave it **paused** until you confirm activation.
+
+<Warning>
+  This changes delivery state and sends real email. Ask the agent to create it paused and send a test to yourself first.
+</Warning>
+
+## What MCP can't do yet
+
+- **Connect a data source.** Connecting a source needs interactive OAuth, done once in the app. MCP can list, rename, and delete existing connections — and query the data from them — but it can't create the connection itself.
+- **Discover metric names automatically.** There's no metrics-catalog tool yet, so the agent needs the metric/dimension identifiers (it can read them from an existing data widget via `widgets_get`). See [Querying data](/api/concepts/querying-data).

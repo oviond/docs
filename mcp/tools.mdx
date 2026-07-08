@@ -3,7 +3,7 @@ title: "Available tools"
 description: "The full catalog of tools the Oviond MCP server exposes."
 ---
 
-The Oviond MCP server exposes 100+ tools across 18 categories. Each tool maps to a REST API operation — the MCP server is a thin wrapper that lets your AI agent call the Oviond API with natural language.
+The Oviond MCP server exposes 100+ tools across 20 categories. Most map to a single REST API operation; a few **Workflow** tools chain several. Together they let your AI agent manage your account — and pull live data — with natural language.
 
 ## Categories
 
@@ -15,6 +15,8 @@ The Oviond MCP server exposes 100+ tools across 18 categories. Each tool maps to
 | **Automations** | Create, pause, unpause, test, delete, and inspect the history of scheduled deliveries. |
 | **Branding** | Read and update logo, favicon, and brand colors. |
 | **Clients** | Create, get, update, delete, bulk-delete, count, and move clients between folders. |
+| **Data** | Query live metric values, fetch sub-resources, test connections, list datasource accounts, and refresh widgets. |
+| **Workflows** | Multi-step actions — create a client with a starter project, audit a report's health. |
 | **Company** | Read and update agency-level company info and generate a color palette. |
 | **Domain** | List, add, and remove custom white-label domains. |
 | **Folders** | List, create, update, and delete client folders. |
@@ -41,6 +43,8 @@ Tool names are `snake_case` and prefixed by category.
 | Branding | `branding_get`, `branding_update` |
 | Clients | `clients_list`, `clients_count`, `clients_get`, `clients_create`, `clients_update`, `clients_delete`, `clients_bulk_delete`, `clients_move_to_folder` |
 | Company | `company_get`, `company_update`, `company_generate_palette` |
+| Data | `data_query`, `reports_get_metric_values`, `data_fetch_resource`, `data_test_connection`, `data_list_accounts`, `projects_refresh_widgets`, `widgets_refresh` |
+| Workflows | `clients_create_with_project`, `reports_audit_project_health` |
 | Domain | `domain_list`, `domain_add`, `domain_remove` |
 | Folders | `folders_list`, `folders_create`, `folders_update`, `folders_delete` |
 | Data sources | `datasources_list`, `datasources_rename`, `datasources_delete` |
