@@ -33,7 +33,7 @@ curl -X POST https://api.oviond.com/v1/data/query \
 | `metrics` | ✓ | Array of metric `id`s, e.g. `["clicks", "impressions"]`. **Get valid ids from [`GET /v1/data/{datasource_id}/metrics`](#finding-valid-identifiers).** |
 | `dimensions` | ✓ | Array of dimension `id`s, e.g. `["DATE"]` for a time series, or `[]` for a single total. **Get valid ids from [`GET /v1/data/{datasource_id}/dimensions`](#finding-valid-identifiers).** |
 | `data_view` | ✓ | The datasource view, e.g. `ACCOUNT`. Returned alongside each field by the `/metrics` and `/dimensions` endpoints above. |
-| `filters` | | Array of `{ field, operator, value }` to filter rows. |
+| `filters` | | Array of `{ field, operator, value }` filter objects. `operator` is one of `equals`, `not_equals`, `contains`, `not_contains`, `starts_with`, `ends_with`, `greater_than`, `less_than`, `greater_than_or_equal`, `less_than_or_equal`. Add `"logicalOperator": "and"` (or `"or"`) to combine multiple filters. |
 | `timezone` | | IANA timezone for date bucketing. Defaults to `UTC`. |
 
 ## Response
@@ -115,9 +115,9 @@ Other helpful endpoints:
 
 | Status | Cause | What to do |
 |--------|-------|------------|
-| `422` | Missing/invalid field (e.g. no `metrics`). | Check the request against the table above; details are in `error.details`. |
+| `422` | Missing/invalid field — no `metrics`, or an unknown `datasource_id`, `metric`, or `dimension` for that datasource. Identifiers are validated against the field catalog before the query runs, so a typo is rejected here rather than failing upstream. | Check the request against the table above and the [field catalog](#finding-valid-identifiers); details are in `error.details`. |
 | `404` | `client_id` doesn't exist in your account. | Verify the ID via `GET /v1/clients`. |
-| `502` | Upstream datasource error — not connected, expired OAuth token, or an unsupported metric/dimension. | Run [`POST /v1/data/test`](/api/introduction) to check the connection; if the token expired, reconnect the source in the app. Verify metric/dimension identifiers against `GET /v1/data/{datasource_id}/metrics`. |
+| `502` | Upstream datasource error — not connected or an expired OAuth token. | Run [`POST /v1/data/test`](/api/introduction) to check the connection; if the token expired, reconnect the source in the app. |
 
 <Tip>
   A `502` most often means the client's OAuth token for that datasource has expired and needs reconnecting in the app — it's not a bug in your request.

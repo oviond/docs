@@ -30,3 +30,29 @@ A dashboard is capped at 50 widgets. Reports paginate instead, so they have no w
 ## API
 
 `POST /v1/widgets` batch-upserts widgets. Oviond saves the whole project atomically and also auto-saves as you work.
+
+For a **data widget**, configure it with plain identifiers — pass metric and dimension **`id`s** (from [`GET /v1/data/{datasource_id}/metrics`](/api/concepts/querying-data#finding-valid-identifiers)):
+
+```json
+{
+  "widgets": [{
+    "id": "wgt_abc123",
+    "datasource_type": "DATASOURCE",
+    "datasource_id": "gadw",
+    "data_view": "ACCOUNT",
+    "metrics": ["clicks", "impressions"],
+    "dimensions": ["DATE"],
+    "chart": "line"
+  }],
+  "source_type": "project",
+  "source_id": "prj_...",
+  "client_id": "cli_...",
+  "page_id": "pg_..."
+}
+```
+
+- **`metrics` / `dimensions`** are arrays of metric/dimension `id`s.
+- **`chart`** is one of `table`, `score`, `area`, `line`, `bar`, `column`, `pie`, `donut`, `funnel`, `map`.
+- **`filters`** (optional) is an array of `{ field, operator, value }`; see [Querying data](/api/concepts/querying-data) for operators.
+
+Over MCP, the equivalent is `widgets_add_data` with the same `datasource_id`, `metrics`, `dimensions`, and `chart`.
