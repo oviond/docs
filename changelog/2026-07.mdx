@@ -1,0 +1,49 @@
+---
+title: "July 2026"
+description: "Release notes for the Oviond REST API."
+---
+
+<Update label="2026-07-10" description="More MCP tools">
+
+### New MCP tools
+
+The MCP server now exposes the rest of the workspace to AI agents. New tool groups:
+
+- **Goals** — `goals_list`, `goals_create`, `goals_update`, `goals_delete`, `goals_duplicate`
+- **Calculated metrics** — `calculated_metrics_list`, `_create`, `_update`, `_delete`, `_duplicate`
+- **Custom data** — `custom_data_list`, `_get`, `_create`, `_update`, `_delete`, `_duplicate`
+- **PDF** — `pdf_generate`, `pdf_status`; **Exports** — `exports_list`, `exports_delete`
+- **Email** — `email_send`, senders / templates / sending-domains CRUD, and `email_provider_get`/`_set`
+- **API keys** — `api_keys_list`, `api_keys_create`, `api_keys_revoke`
+- **Notifications** — `notifications_list`, `notifications_unread_count`, `notifications_mark_read`, and more
+- **Archive** — `archive_list`, `archive_counts`, `archive_restore`
+- **Activity** — `activity_list`
+- **Billing** — `billing_get`, `billing_invoices` (read-only; plan changes stay in-app)
+
+</Update>
+
+<Update label="2026-07-10" description="Stricter input validation">
+
+### Enumerated fields are now validated
+
+Request fields with a fixed set of options now reject anything outside that set (a clear `400` instead of silently storing a bad value), and every enumerated field shares one definition across the REST API and the MCP tools so they can't drift. Highlights:
+
+- **Sort & filter params** — `sort_by` / `order` on list endpoints, `source` (`all` / `standard` / `mine`) on templates and assets, and the `datasources` filter (each id must be a real data source).
+- **Automations** — `frequency`, `time_format`, and the report `date_text` preset.
+- **Projects** — `type`, `orientation`, `paper_size`, `branding_source`, and `auto_refresh_interval_hours` (hourly or daily).
+- **Goals & calculated metrics** — `operator`, `goal_type`, and the display `format` (Numeric / Decimal / Percentage / Currency).
+- **Media** — upload `content_type` is restricted to image types.
+- **Onboarding & company** — client-count band and `country` (from the country list).
+- **Timezones** — every `timezone` field is validated as a real IANA zone.
+
+No changes are needed for existing integrations that already send valid values.
+
+</Update>
+
+<Update label="2026-07-10" description="Saved Metrics hidden">
+
+### Saved Metrics excluded from the public reference
+
+The internal **Saved Metrics** endpoints are no longer published in the OpenAPI spec (`/openapi.json`) or the API reference. The endpoints continue to work for existing callers; they're simply not part of the documented public surface.
+
+</Update>
