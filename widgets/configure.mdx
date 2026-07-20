@@ -13,6 +13,10 @@ For a **Data Query** widget:
 - **Metric** — what the widget measures.
 - **Dimension** — an optional breakdown (for example, by campaign or by day).
 
+<Note>
+Metrics and dimensions shown in **red** have been retired by the provider. They stay selectable so existing widgets keep working, but the provider may return no data for them. Prefer a current equivalent when you're building something new.
+</Note>
+
 ## Date range
 
 Each widget inherits the project-level date range by default. Override it per widget when you need a different period — for example a year-over-year comparison tile.
@@ -24,6 +28,34 @@ Switch the visualization (KPI, line, bar, table, and so on) without losing your 
 ## Appearance
 
 Set the title and per-type display options such as colors and formatting.
+
+## Metric settings
+
+Under **Display**, each metric on the widget gets its own row in **Metric Settings**. Expand a metric to override:
+
+- **Name** — a custom label that replaces the metric's default name.
+- **Format** — how the value renders: numeric, decimal, percentage, currency, or time.
+- **Comparison Indicator** — whether a rise in this metric is good or bad.
+
+**Higher is better** is the default: a rise shows green, a fall red. Switch to **Lower is better** for cost-style metrics — cost, CPC, bounce rate — so a falling figure reads as a win. Only the colour changes; the arrow and the sign always follow the actual movement.
+
+<Tip>
+The comparison indicator applies to scorecards and to the KPI figures shown on chart widgets, so a dashboard of cost tiles reads correctly at a glance.
+</Tip>
+
+## Comparison display
+
+When a comparison period is active, choose what each row or data point shows:
+
+- **Previous Value** — the raw figure from the previous period. This is the default.
+- **Percentage Change** — the change against the previous period.
+- **Both** — the previous value and the percentage change side by side.
+
+Available on tables and on line, area, and bar charts. Pie, funnel, map, and scorecard widgets don't render side-by-side comparisons, so the setting is hidden for them.
+
+## Table options
+
+- **Show Search** — a search box above the table, letting viewers filter rows. Enabled by default.
 
 <Note>
 Connected data widgets refetch in the background after a save, so the latest data appears without a manual refresh.

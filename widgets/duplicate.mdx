@@ -21,6 +21,10 @@ Duplicating copies a widget along with its data configuration and appearance.
 Duplicate a configured Data Query widget, then change only its metric or data source to build a row of related tiles quickly.
 </Tip>
 
+<Note>
+Duplicating counts against a dashboard's 50-widget cap. If a copy would push the dashboard past it, nothing is duplicated. Reports paginate instead and have no cap.
+</Note>
+
 ## API
 
 `POST /v1/widgets/duplicate` copies widgets.
