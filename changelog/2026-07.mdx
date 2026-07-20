@@ -3,6 +3,116 @@ title: "July 2026"
 description: "Release notes for the Oviond REST API."
 ---
 
+<Update label="2026-07-20" description="Widget data source types">
+
+### Widget data source types
+
+The `datasource_type` field on a widget accepts:
+
+`DATASOURCE` · `CALCULATION` · `CUSTOM_DATA` · `CUSTOM_IMPORT` · `GOALS`
+
+</Update>
+
+<Update label="2026-07-17" description="Deprecated metrics flagged">
+
+### Deprecated metrics are flagged, not renamed
+
+When a vendor retires a metric, it is now marked with a `deprecated` flag in the metric catalog rather than having `(Deprecated)` appended to its name. In the report builder these metrics render in red with an explanatory tooltip, and they remain selectable so existing widgets continue to resolve.
+
+The change removes a long-standing annoyance: the old suffix was copied into a widget's saved metric label at the moment it was picked, so every deprecation round left stale labels behind in saved reports. The flag lives only in the catalog, so it can never go out of date.
+
+Applied across Ahrefs, Facebook Pages, Google Analytics 4, Google Ads, Google Business Profile, Google Local Services Ads, Instagram, Instagram Ads, Keywords, Salesforce, Shopify, Twitter Ads, WooCommerce, and YouTube. No metrics were added or removed.
+
+</Update>
+
+<Update label="2026-07-17" description="Facebook post reach fixed">
+
+### Facebook post reach returns data again
+
+Post-level reach was still requesting a field Meta has retired, which returned `0` for every post. It now uses Meta's current unique-viewers field. Affected widgets recover on their next refresh — no reconfiguration needed.
+
+</Update>
+
+<Update label="2026-07-17" description="Preview column sorting & search">
+
+### Sorting and search fixed for preview columns
+
+Table columns that render a rich preview — ad creatives, social posts — carry a structured value rather than plain text. Sorting and searching those columns compared the underlying object instead of its text, so every row looked identical: sorting did nothing and search matched everything or nothing.
+
+These columns now sort and search on the text shown in the cell. Period comparison on the same columns matches rows by the entity's identifier, so each row is compared against its own previous-period value instead of all rows collapsing onto the first.
+
+</Update>
+
+<Update label="2026-07-14" description="Comparison display modes">
+
+### Choose how comparison data appears
+
+When a comparison period is active, you can now choose what each row or data point shows. A **Comparison Display** setting under **Display** offers:
+
+- **Previous Value** — the raw figure from the previous period (the default)
+- **Percentage Change** — the change against the previous period
+- **Both** — the previous value and the percentage change side by side
+
+Available on tables, line, area, and bar charts. Pie, funnel, map, and scorecard widgets don't render side-by-side comparisons, so the setting is hidden for them.
+
+Over the API, this is the `comparison_display` field on a widget, accepting `previous`, `change`, or `both`. Widgets without it continue to show the previous value.
+
+</Update>
+
+<Update label="2026-07-14" description="Period comparison alignment">
+
+### Period comparison matches the correct category
+
+Comparison figures now line up with the category they belong to for dimensions such as channel, country, page, and campaign — including on widgets that are sorted or limited to a set number of rows. Date-based comparisons are unaffected.
+
+</Update>
+
+<Update label="2026-07-13" description="Per-metric display settings">
+
+### Metric Settings — rename, format, and set comparison direction
+
+A new **Metric Settings** panel under **Display** gives each metric in a widget its own overrides, in a collapsible row per metric:
+
+- **Name** — a custom label that replaces the metric's default name
+- **Format** — how the value renders (numeric, decimal, percentage, currency, time)
+- **Comparison Indicator** — whether a rise is good or bad for that metric
+
+The comparison indicator matters for cost-style metrics. On **Higher is better** (the default) a rise shows green and a fall red. On **Lower is better** — cost, CPC, bounce rate — the colours swap, so a falling cost reads as a win. Only the colour changes; the arrow and the sign always follow the actual movement.
+
+Applies to scorecards and the KPI figures on chart widgets.
+
+</Update>
+
+<Update label="2026-07-13" description="Dashboard widget limit enforced on duplicate">
+
+### Dashboard widget limit applies to duplication
+
+Dashboards are capped at 50 widgets. The cap was enforced when saving widgets but not when duplicating them, so a direct API or MCP call could push a dashboard past the limit. Duplicating beyond the cap now returns:
+
+```json
+{ "success": false, "error": { "message": "Dashboards are limited to 50 widgets.", "status_code": 400 } }
+```
+
+Reports paginate across pages and remain exempt. In the editor, a slot counter on the dashboard canvas now shows how much room is left, shifting from neutral to amber as the limit approaches and to red once it is reached.
+
+</Update>
+
+<Update label="2026-07-13" description="Table search toggle">
+
+### Show or hide the table search box
+
+Table widgets accept a new `show_search` boolean on create and update, exposed in the builder under **Display**. It defaults to enabled, so existing widgets are unchanged.
+
+</Update>
+
+<Update label="2026-07-13" description="Heading colour in themes">
+
+### Headings can be coloured independently
+
+Themes gain an optional `heading_text` token, edited as **Headings** in the theme editor's colour section. It controls the colour of title widgets. When unset, headings continue to follow the general `text` colour, so existing themes render exactly as before.
+
+</Update>
+
 <Update label="2026-07-10" description="More MCP tools">
 
 ### New MCP tools
