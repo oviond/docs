@@ -17,3 +17,19 @@ From the **Add Content** tab you can drag in any of these content types:
 <Tip>
 **Data Query** is the only type that connects to a data source. The rest are presentation widgets you can use to frame and annotate your data.
 </Tip>
+
+## Variables in text
+
+**Textbox** widgets can include variables that resolve to live client and report details when the report is viewed, shared, or exported to PDF. Insert them from the text toolbar — each shows as a chip while editing and renders as real text everywhere the report appears.
+
+| Variable | Resolves to |
+|---|---|
+| **Client Name** / **Client First Name** | The client's name |
+| **Client Website** | The client's website |
+| **Client Manager** | The team member assigned as manager |
+| **Project Type** / **Project Name** | The report or dashboard's type and name |
+| **Date Range** | The report's active date range |
+| **Account Name** | Your workspace name |
+| **Report URL** | The shareable link to the report |
+
+For example, *"Here's the {{Project Name}} update for {{Client Name}} covering {{Date Range}}"* fills itself in for every client and every reporting period.

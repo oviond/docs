@@ -3,6 +3,135 @@ title: "July 2026"
 description: "Release notes for the Oviond REST API."
 ---
 
+<Update label="2026-07-25" description="Per-client number format">
+
+### Number format per client
+
+Each client can now choose how numbers read in its reports. A **Number format** setting under **Settings → General** sets the thousands and decimal separators — for example `1,234.56` (US) versus `1.234,56` (German) — independently of the client's currency.
+
+The value is a BCP 47 locale, so it works for any region without a fixed list of "US vs Europe" options. New clients default to `en-US`, and every existing client keeps rendering exactly as before until you change it.
+
+Over the API this is the `number_format` field on a client, accepting a locale string such as `en-US` or `de-DE`. Null or absent defaults to `en-US`.
+
+</Update>
+
+<Update label="2026-07-24" description="Variables in text widgets">
+
+### Insert dynamic variables into text
+
+Textbox widgets can now include variables that resolve to live client and report details when the report is viewed, shared, or exported to PDF. Insert them from the text toolbar; each renders as a chip in the editor and as real text everywhere the report is shown.
+
+Available variables:
+
+- **Client Name**, **Client First Name**, **Client Website**, **Client Manager**
+- **Project Type**, **Project Name**, **Date Range**
+- **Account Name**, **Report URL**
+
+Write one intro paragraph — *"Here's the {{Project Name}} update for {{Client Name}} covering {{Date Range}}"* — and it fills itself in for every client and every period.
+
+</Update>
+
+<Update label="2026-07-24" description="New Ahrefs dataviews">
+
+### Ahrefs — Organic Traffic and Rank Tracker
+
+Two new Ahrefs dataviews are available in the report builder:
+
+- **Organic Traffic** — organic keywords, traffic, and traffic value over time
+- **Rank Tracker** — tracked keyword positions and movement
+
+Existing Ahrefs widgets are unaffected.
+
+</Update>
+
+<Update label="2026-07-24" description="New data sources: Moz and Vbout">
+
+### Two new data sources
+
+- **Moz** — domain SEO authority: Domain Authority, Links to Root Domain, Linking Root Domains, Links to Subdomain, Links to Page, and Outbound Links.
+- **Vbout** — email marketing: **Email Campaigns** and **Campaigns** dataviews.
+
+Connect either from the **Data Sources** tab in a client's project, the same way as any other platform.
+
+</Update>
+
+<Update label="2026-07-24" description="Faster PDF and screenshot rendering">
+
+### More reliable PDF exports
+
+PDF generation and report screenshots now run on a dedicated rendering service with its own browser pool and memory watchdog, separated from the API. Large reports render more consistently and are less likely to time out under load. No change to how you generate a PDF — `pdf_generate` and automation attachments work exactly as before.
+
+</Update>
+
+<Update label="2026-07-24" description="Connection profile manager">
+
+### Manage a connection in one place
+
+The data-source connection panel gained a profile manager slide-over. From **Settings → Data sources**, opening a connection now shows its status, the clients linked to it, and an inline credentials editor — so you can re-authorize or repoint a connection without leaving the page.
+
+</Update>
+
+<Update label="2026-07-22" description="Logo restored to emails">
+
+### Your logo is back on emails
+
+The agency (or client) logo again appears in the header of report and authentication emails, following the same branding source as the rest of the workspace. Emails sent without a configured logo fall back cleanly to the workspace name.
+
+</Update>
+
+<Update label="2026-07-21" description="Go High Level — five new dataviews">
+
+### Go High Level expands beyond Opportunities and Contacts
+
+The Go High Level data source gains five new dataviews, so you can report on far more of a sub-account than deals and contacts:
+
+- **Appointments** and **Appointments Performance** — appointment title, status, start/end time, address, contact, and created/updated dates, plus performance counts for **Total Booked**, **Showed**, **No-Show**, and **Cancelled**.
+- **Forms Performance** — form **Submissions** over time, broken down by form.
+- **Email Campaigns** and **Email Campaigns Performance** — per-campaign **Opens**, **Clicks**, **Delivered**, **Open Rate**, and **Click-Through Rate**, plus workspace-wide totals for the same.
+- **Pipeline Summary** — **Contacts** and **Total Value** by pipeline and stage.
+- **Social Planner** — scheduled and published posts with **Platform**, **Status**, **Type**, and publish/display dates.
+
+The existing **Contacts** dataview also picks up **Tags** and **Last Updated** as new fields. Existing Go High Level widgets are unaffected.
+
+</Update>
+
+<Update label="2026-07-21" description="Instagram — new metrics">
+
+### New Instagram metrics
+
+The Instagram data source adds several metrics that Meta has surfaced for Reels and cross-posted content:
+
+- **Account performance** — **Reposts**.
+- **Media** — **Reels Skip Rate**, **Reposts**, **Crossposted Views**, **Facebook Views**, and **Link Clicks**.
+
+These appear alongside the existing Instagram metrics in the report builder; existing widgets are unchanged.
+
+</Update>
+
+<Update label="2026-07-21" description="WhatConverts — Lead Source dimension">
+
+### Break WhatConverts leads down by source
+
+WhatConverts gains a **Lead Source** dimension, so you can group and chart leads by where they originated — for example splitting a lead-count table or bar chart across Google Ads, organic, direct, and referral traffic. It sits under the **Leads** dimension group and works with any existing WhatConverts lead metric.
+
+</Update>
+
+<Update label="2026-07-21" description="Date selector on mobile in shared reports">
+
+### Date selector on mobile
+
+Shared reports now show the date-range selector on mobile as an icon button that expands to the full picker — it was previously hidden below the small-screen breakpoint. The picker popover is capped to the viewport and scrolls, so presets and the calendar stay reachable on a phone.
+
+</Update>
+
+<Update label="2026-07-20" description="Archive UI fixes">
+
+### Archive placeholder fixes
+
+Fixed placeholder and empty-state glitches in the Archive view so restoring and deleting archived items reads correctly.
+
+</Update>
+
 <Update label="2026-07-20" description="Widget data source types">
 
 ### Widget data source types
