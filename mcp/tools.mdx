@@ -3,66 +3,350 @@ title: "Available tools"
 description: "The full catalog of tools the Oviond MCP server exposes."
 ---
 
-The Oviond MCP server exposes 100+ tools across 20 categories. Most map to a single REST API operation; a few **Workflow** tools chain several. Together they let your AI agent manage your account — and pull live data — with natural language.
-
-## Categories
-
-| Category | What the agent can do |
-|---|---|
-| **Account** | Read account info and usage. |
-| **Agency** | List and manage account-level reports not tied to a client. |
-| **Assets** | Manage saved widget sections and add them to pages. |
-| **Automations** | Create, pause, unpause, test, delete, and inspect the history of scheduled deliveries. |
-| **Branding** | Read and update logo, favicon, and brand colors. |
-| **Clients** | Create, get, update, delete, bulk-delete, count, and move clients between folders. |
-| **Data** | List supported datasources, discover a datasource's metrics & dimensions, query live metric values, fetch sub-resources, test connections, list datasource accounts, and refresh widgets. |
-| **Workflows** | Multi-step actions — create a client with a template/blank/starter project, create a report **or dashboard** from a template, add a saved section to a report or dashboard (smart about which page), audit a report or dashboard's health. |
-| **Company** | Read and update agency-level company info and generate a color palette. |
-| **Domain** | List, add, and remove custom white-label domains. |
-| **Folders** | List, create, update, and delete client folders. |
-| **Data sources** | List, rename, and delete connected data sources. |
-| **Media** | List, rename, and delete media files. |
-| **Pages** | List, create, update, and delete pages inside projects. |
-| **Projects** | List, get, create, update, duplicate, delete, and bulk-delete reports and dashboards. |
-| **Search** | Search clients and projects by name. |
-| **Templates** | List, get, create, update, delete, and inspect the widgets of templates. |
-| **Themes** | List, get, create, update, and delete themes. |
-| **Users** | List, invite, edit, remove team members, and manage your own profile. |
-| **Widgets** | List, get, add, update, move, delete, and bulk-delete widgets. |
+The Oviond MCP server exposes **179 tools** across 29 groups. Most map to a single REST
+operation; a few chain several. Tool names are verb-first — `create_client`, `list_projects`,
+`add_data_widget` — so an agent can guess the right one from the action.
 
 ## Tool catalog
 
-Tool names are `snake_case` and prefixed by category.
+### Account
 
-| Category | Tools |
+| Tool | What it does |
 |---|---|
-| Account | `account_get`, `account_usage` |
-| Agency | `agency_list`, `agency_get`, `agency_create`, `agency_update`, `agency_duplicate`, `agency_delete`, `agency_bulk_delete` |
-| Assets | `assets_list`, `assets_get`, `assets_create`, `assets_update`, `assets_duplicate`, `assets_delete`, `assets_add_to_page`, `assets_list_widgets` |
-| Automations | `automations_list`, `automations_create`, `automations_update`, `automations_pause`, `automations_unpause`, `automations_test`, `automations_history`, `automations_delete` |
-| Branding | `branding_get`, `branding_update` |
-| Clients | `clients_list`, `clients_count`, `clients_get`, `clients_create`, `clients_update`, `clients_delete`, `clients_bulk_delete`, `clients_move_to_folder` |
-| Company | `company_get`, `company_update`, `company_generate_palette` |
-| Data | `data_list_datasources`, `data_list_metrics`, `data_list_dimensions`, `data_query`, `reports_get_metric_values`, `data_fetch_resource`, `data_test_connection`, `data_list_accounts`, `projects_refresh_widgets`, `widgets_refresh` |
-| Workflows | `clients_create_with_project`, `projects_create_from_template`, `projects_add_section`, `projects_audit_health` |
-| Domain | `domain_list`, `domain_add`, `domain_remove` |
-| Folders | `folders_list`, `folders_create`, `folders_update`, `folders_delete` |
-| Data sources | `datasources_list`, `datasources_rename`, `datasources_delete` |
-| Media | `media_list`, `media_rename`, `media_delete` |
-| Pages | `pages_list`, `pages_create`, `pages_update`, `pages_delete` |
-| Projects | `projects_list`, `projects_get`, `projects_create`, `projects_update`, `projects_duplicate`, `projects_delete`, `projects_bulk_delete` |
-| Search | `search` |
-| Templates | `templates_list`, `templates_get`, `templates_create`, `templates_update`, `templates_delete`, `templates_list_widgets` |
-| Themes | `themes_list`, `themes_get`, `themes_create`, `themes_update`, `themes_delete` |
-| Users | `users_list`, `users_me`, `users_invite`, `users_edit`, `users_remove`, `users_update_profile`, `users_update_avatar`, `users_change_email` |
-| Widgets | `widgets_list`, `widgets_get`, `widgets_move`, `widgets_delete`, `widgets_bulk_delete`, `widgets_add_text`, `widgets_add_title`, `widgets_add_image`, `widgets_add_embed`, `widgets_add_goal`, `widgets_add_button`, `widgets_add_data`, `widgets_update_text`, `widgets_update_title`, `widgets_update_image`, `widgets_update_embed`, `widgets_update_goal`, `widgets_update_button`, `widgets_update_data` |
+| `get_account` | Get account details for the authenticated user |
+| `get_account_usage` | Get current account usage stats (clients, projects, users, storage) |
+
+### Activity
+
+| Tool | What it does |
+|---|---|
+| `list_activity` | List the account activity / audit log (who changed what), paginated and filterable. |
+
+### API keys
+
+| Tool | What it does |
+|---|---|
+| `list_api_keys` | List the account's API keys (prefixes + status only — the full key is never returned after creation). |
+| `revoke_api_key` 🔒 | Revoke an API key (soft — it stops working but stays listed as revoked). |
+| `delete_api_key` 🔒 | Permanently delete an API key record. |
+
+### Archive
+
+| Tool | What it does |
+|---|---|
+| `list_archive` | List soft-deleted (archived) items across clients, projects, media, automations and templates. |
+| `get_archive_counts` | Get the count of archived items per type. |
+| `restore_from_archive` | Restore archived items of one type back to active. |
+
+### Assets
+
+| Tool | What it does |
+|---|---|
+| `list_assets` | List saved widget-section assets for the account (with optional filters). |
+| `get_asset` | Get a single asset by ID. |
+| `create_asset` | Save widgets as a reusable section, the same way the editor does when you select widgets and save them: each widget is copied onto the section with a fresh id, and its type and datasources are… |
+| `update_asset` | Update asset metadata. Only include fields you want to change. |
+| `delete_asset` 🔒 | Delete an asset and its associated widget rows. |
+| `duplicate_asset` | Duplicate an asset (and its widgets) under a new name. |
+| `list_asset_widgets` | List the widgets that belong to an asset (useful for previewing what add_asset_to_page will instantiate). |
+| `add_asset_to_page` | Instantiate an asset's widgets onto a project page. |
+| `list_asset_tags` | List every tag used across the account's saved sections (useful for filtering list_assets by tag). |
+
+### Automations
+
+| Tool | What it does |
+|---|---|
+| `list_automations` | List automations with optional filtering by project or client |
+| `get_automation_history` | Get send history for an automation |
+| `create_automation` | Create a new automation. Pick an existing email template + sender by id (from email_templates / email_senders), or pass template_id:"custom" together with a `custom` payload to save a new named… |
+| `update_automation` | Update an existing automation — only include the fields you want to change |
+| `delete_automation` 🔒 | Delete an automation |
+| `pause_automation` | Pause an automation |
+| `unpause_automation` | Unpause an automation |
+| `test_automation` | Send a test email for an automation |
+
+### Billing
+
+| Tool | What it does |
+|---|---|
+| `get_billing` | Get the current billing summary for the account (plan, status, limits, trial). |
+| `list_invoices` | List the account's invoices. |
+
+### Branding
+
+| Tool | What it does |
+|---|---|
+| `get_branding` | Get the account's white-label branding (logo, favicon) |
+| `update_branding` | Update branding settings — only include the fields you want to change. |
+| `refresh_account_favicon` | Re-derive the account's favicon from its website, cache-bust it, save it and return the new URL. |
+| `remove_account_logo` 🔒 | Remove the account's full logo. It falls back to the default Oviond branding. |
+| `remove_account_favicon` 🔒 | Remove the account's square logo (favicon). |
+
+### Calculated metrics
+
+| Tool | What it does |
+|---|---|
+| `list_calculated_metrics` | List calculated metrics for the account (custom KPI formulas). |
+| `create_calculated_metric` | Create a calculated metric — a custom KPI from a formula over other metrics. |
+| `update_calculated_metric` | Update a calculated metric. Full replacement — you must send name, formula AND symbol. |
+| `delete_calculated_metric` 🔒 | Delete a calculated metric by ID. |
+| `duplicate_calculated_metric` | Duplicate a calculated metric, optionally with a new name. |
+
+### Clients
+
+| Tool | What it does |
+|---|---|
+| `list_clients` | List all clients with optional filtering and pagination |
+| `count_clients` | Get total count of clients for the account |
+| `get_client` | Get a single client by ID |
+| `create_client` | Create a new client |
+| `update_client` | Update an existing client — only include the fields you want to change |
+| `delete_client` 🔒 | Delete a client by ID |
+| `delete_clients` 🔒 | Delete multiple clients by ID |
+| `remove_client_logo` 🔒 | Remove a client's full logo (logo_url). It falls back to the agency branding. |
+| `remove_client_favicon` 🔒 | Remove a client's square logo/favicon (favicon_url). |
+| `refresh_client_favicon` | Re-derive a client's square favicon from its stored website (Google favicon service), cache-bust it, save it, and return the new favicon URL. |
+| `refresh_client_screenshot` | Re-take the screenshot of a client's website and save it, returning the new URL. |
+| `move_client_to_folder` | Move a client to one or more folders |
+
+### Company
+
+| Tool | What it does |
+|---|---|
+| `get_company` | Get company settings |
+| `update_company` | Update company settings |
+| `generate_company_palette` | Generate a color palette from a hex color (read-only — computes shades, changes nothing). |
+
+### Custom data
+
+| Tool | What it does |
+|---|---|
+| `list_custom_data` | List uploaded custom-data (CSV) datasets for the account — summaries without the row data. |
+| `get_custom_data` | Get a single custom-data dataset by ID, including its parsed rows. |
+| `create_custom_data` | Create a custom-data dataset from parsed CSV rows (max 10,000 rows). |
+| `update_custom_data` | Update a custom-data dataset — send only the fields you want to change (e.g. &#123; raw_data, columns &#125;). |
+| `delete_custom_data` 🔒 | Delete a custom-data dataset by ID. |
+| `duplicate_custom_data` | Duplicate a custom-data dataset with a new name. |
+
+### Datasources
+
+| Tool | What it does |
+|---|---|
+| `datasources` | List every datasource Oviond supports, with the `id` (the datasource_id used everywhere else — e.g. ga4, gadw, fb-ads), name, category, and data views. |
+| `describe_datasource` | Describe a datasource the way the report builder sees it, in one call: its data views, the `advanced` settings each view requires, its default view and defaults, and its metric and dimension catalogs… |
+| `connected_datasources` | List the datasource connections this account has made. |
+| `create_connection` | Create a datasource connection from credentials — the connect panel's credential form, as a tool. |
+| `link_datasource` | Point a client at one of the account's datasource connections — the connect panel's account picker, as a tool. |
+| `test_connection` | Test whether a client's connected datasource is still working (e.g. the OAuth token is valid). |
+| `rename_connection` | Rename a datasource connection |
+| `unlink_datasource` 🔒 | Detach a connected datasource from a client so its widgets no longer pull from that connection. |
+| `delete_connection` 🔒 | Delete a datasource connection — every widget pulling data from it will break |
+
+### Domains
+
+| Tool | What it does |
+|---|---|
+| `list_domains` | List custom domains registered on the account, including DNS verification records |
+| `add_domain` | Add a custom domain. The backend detects the DNS provider and returns the DNS records the user needs to configure. |
+| `remove_domain` 🔒 | Remove a custom domain by its ID |
+
+### Email
+
+| Tool | What it does |
+|---|---|
+| `send_email` | Send an email. Either pass template_id (a saved template) OR subject+html (free-form). Sends are queued and paced; poll email logs for delivery. |
+| `list_email_logs` | List sent-email history / delivery logs. |
+| `list_email_senders` | List configured "From" senders and the active provider. |
+| `create_email_sender` | Create a "From" sender. |
+| `update_email_sender` | Update a sender — only the fields you want to change. |
+| `delete_email_sender` 🔒 | Delete a sender by ID. |
+| `set_default_email_sender` | Make a sender the account default. |
+| `list_email_templates` | List reusable email templates. |
+| `get_email_template` | Get a single email template by ID. |
+| `create_email_template` | Create an email template. |
+| `update_email_template` | Update an email template — only the fields you want to change. |
+| `delete_email_template` 🔒 | Delete an email template by ID (refused if it is the default). |
+| `set_default_email_template` | Make an email template the account default. |
+| `list_email_domains` | List verified sending domains. |
+| `add_email_domain` | Add a sending domain (returns DNS records to configure). |
+| `verify_email_domain` | Re-check DNS and verify a sending domain. |
+| `remove_email_domain` 🔒 | Remove a sending domain by ID. |
+| `get_email_provider` | Get the account's active email provider. |
+| `set_email_provider` | Set the account's email provider. |
+
+### Exports
+
+| Tool | What it does |
+|---|---|
+| `list_exports` | List PDF export history for a project (one row per generation attempt). |
+| `delete_export` 🔒 | Delete a PDF export record by ID. |
+
+### Folders
+
+| Tool | What it does |
+|---|---|
+| `list_folders` | List all client folders for the account |
+| `create_folder` | Create a new client folder |
+| `update_folder` | Rename a client folder |
+| `delete_folder` 🔒 | Delete a client folder |
+
+### Goals
+
+| Tool | What it does |
+|---|---|
+| `list_goals` | List goals for the account (targets tracked against a metric query). |
+| `create_goal` | Create a goal — a target value + comparison for a saved metric query. |
+| `update_goal` | Update a goal — only include the fields you want to change. |
+| `delete_goal` 🔒 | Delete a goal by ID. |
+| `duplicate_goal` | Duplicate a goal, optionally with a new name. |
+
+### Media
+
+| Tool | What it does |
+|---|---|
+| `list_media` | List media files |
+| `rename_media_file` | Rename a media file |
+| `delete_media_file` 🔒 | Delete a media file |
+| `delete_media_files` 🔒 | Delete multiple media files by ID in one call. |
+| `move_media_to_folder` | Move one or more media files into a media folder. |
+| `list_media_folders` | List the account's media folders. |
+| `create_media_folder` | Create a new media folder. |
+| `update_media_folder` | Rename a media folder. |
+| `delete_media_folder` 🔒 | Delete a media folder (its media are not deleted, just un-foldered). |
+
+### Notifications
+
+| Tool | What it does |
+|---|---|
+| `list_notifications` | List in-app notifications for the account (paginated). |
+| `count_unread_notifications` | Get the number of unread notifications. |
+| `mark_notifications_read` | Mark notifications as read — specific ids, or all of them. |
+| `delete_notification` 🔒 | Delete a single notification by ID. |
+| `delete_notifications` 🔒 | Delete several notifications by ID in one call. |
+| `clear_read_notifications` 🔒 | Delete all notifications that have already been read. |
+| `get_notification_preferences` | Get the per-event notification delivery preferences (which channels fire for each event type). |
+| `update_notification_preferences` | Change how you are notified for specific events. |
+| `list_notification_channels` | List the account's configured Slack/Discord notification channels (webhook + enabled state). |
+| `set_notification_channel` | Configure a Slack or Discord notification channel with an incoming-webhook URL. |
+| `delete_notification_channel` 🔒 | Remove a configured Slack or Discord notification channel. |
+
+### Pages
+
+| Tool | What it does |
+|---|---|
+| `list_pages` | List pages for a project or template, ordered by position |
+| `create_page` | Add a page to a project or template. Appended at the end by default. |
+| `update_page` | Update a page — only include the fields you want to change |
+| `delete_page` 🔒 | Delete a page by ID |
+
+### PDF
+
+| Tool | What it does |
+|---|---|
+| `generate_pdf` | Queue a PDF render of a project. Returns a job_id — poll get_pdf_status until it completes, then download the URL. |
+| `get_pdf_status` | Poll a PDF job. status is pending → processing → complete (with a url) or failed. |
+
+### Projects
+
+| Tool | What it does |
+|---|---|
+| `list_projects` | List report/dashboard projects for the account, optionally filtered by client. |
+| `get_project` | Get a single project by ID |
+| `create_project` | Create a new report/dashboard project for a client. |
+| `update_project` | Update a project — only include the fields you want to change |
+| `delete_project` 🔒 | Delete a project by ID |
+| `delete_projects` 🔒 | Delete multiple projects by ID |
+| `duplicate_project` | Duplicate a project with a new name |
+| `change_project_date_range` | Set the period a project reports on. Every data widget on it is re-fetched for the new range and the results are saved — widgets on their own custom range keep it. A rolling preset ("Last 30 Days")… |
+| `refresh_project` | Re-fetch every data widget on a project with its current config and the project date range, saving the results. |
+
+### Search
+
+| Tool | What it does |
+|---|---|
+| `search` | Search clients and projects by name (minimum 2 characters) |
+
+### Templates
+
+| Tool | What it does |
+|---|---|
+| `list_templates` | List project templates with optional filtering and pagination |
+| `get_template` | Get a single template by ID |
+| `create_template` | Create a template from an existing project. |
+| `update_template` | Update a template — only include the fields you want to change |
+| `delete_template` 🔒 | Delete a template by ID |
+| `list_template_widgets` | List the widgets that belong to a template (optionally filtered to a single page). |
+
+### Themes
+
+| Tool | What it does |
+|---|---|
+| `list_themes` | List all themes available to the account (own + shared) |
+| `get_theme` | Get a single theme by ID |
+| `create_theme` | Create a new visual theme. Supply the complete tokens map (primary, font, radius, shadow, canvas, surface, chart1-10, etc.) — tokens are the single source of truth for every visual property. A theme… |
+| `update_theme` | Update a theme — only include the fields you want to change. |
+| `delete_theme` 🔒 | Delete a theme by ID |
+
+### Users
+
+| Tool | What it does |
+|---|---|
+| `get_current_user` | Get the currently authenticated user profile |
+| `list_users` | List all team members on the account |
+| `invite_user` | Invite a new user to join the account. admin has full account access; clients gives read+write to assigned clients; readonly is view-only on assigned clients. |
+| `update_user` | Edit a team member — only include the fields you want to change |
+| `remove_user` 🔒 | Remove a team member from the account |
+| `update_my_profile` | Update the authenticated user's profile — only include the fields you want to change |
+| `update_my_avatar` | Update the authenticated user's profile picture |
+| `change_my_email` | Change the authenticated user's email address |
+
+### Widgets
+
+| Tool | What it does |
+|---|---|
+| `list_widgets` | List all widgets for a source (project or template). |
+| `get_widget` | Get a single widget by ID. |
+| `add_title_widget` | Add a title widget to a page. Position, width, and height use sensible defaults. |
+| `add_text_widget` | Add a rich-text widget to a page. Position, width, and height use sensible defaults. |
+| `add_image_widget` | Add an image widget to a page. Position, width, and height use sensible defaults. |
+| `add_button_widget` | Add a button widget to a page. Position, width, and height use sensible defaults. |
+| `add_embed_widget` | Add an embed widget to a page. Position, width, and height use sensible defaults. |
+| `add_data_widget` | Add a DATA widget to a page and configure it, applying the same rules as the report builder: the datasource's defaults, the generated name, sort and row limit, and validation of the… |
+| `update_title_widget` | Update a TITLE widget. |
+| `update_text_widget` | Update a TEXT widget. Replaces the entire text content. |
+| `update_image_widget` | Update an IMAGE widget. |
+| `update_button_widget` | Update a BUTTON widget. |
+| `update_embed_widget` | Update an EMBED widget. |
+| `update_data_widget` | Update a DATA widget — its name, datasource, data view, metrics, dimensions, filters, advanced settings, chart type, date range, sort and row limit. |
+| `move_widget` | Move or resize a widget. Works for any widget type. Pass only the dimensions you want to change. |
+| `delete_widget` 🔒 | Delete a widget by ID. |
+| `delete_widgets` 🔒 | Delete multiple widgets by ID in one call. |
+| `refresh_widgets` | Re-fetch specific widgets with their saved config and save the results. |
+| `datasource_resources` | List the selectable values behind a widget's advanced settings and filters — campaigns, ad sets, forms, videos, alerts, and so on. |
+
+### Workflows
+
+| Tool | What it does |
+|---|---|
+| `create_client_with_project` | Create a new client and its first report/dashboard in one step. |
+| `create_project_from_template` | Create a report or dashboard for an existing client by cloning a template (its pages + widgets). |
+| `add_project_section` | Add a saved section (asset) to a project — works for both reports and dashboards. |
+| `audit_project_health` | Audit a report or dashboard: report its connected data sources and automation state, and flag likely issues (no data sources connected, paused automations). |
+
+🔒 = flagged destructive, so a client can prompt before running it.
 
 ## Conventions
 
-- **Identifiers** — tool calls return resource IDs that the agent uses to chain subsequent calls. The agent is instructed to refer to records by their human-readable name in chat, not by ID.
-- **Multi-tenancy** — every call is automatically scoped to the authenticated account. You don't pass an `account_id` or similar.
-- **Destructive actions** — delete tools are flagged as destructive so clients can prompt before running them.
+- **Identifiers** — calls return IDs the agent chains into later calls. It is instructed to refer
+  to records by name in chat, never by ID.
+- **Multi-tenancy** — every call is scoped to the authenticated account. You never pass an
+  `account_id`.
+- **Discovery first** — `datasources`, then `describe_datasource`, before configuring a data
+  widget: the second returns that datasource's data views, metrics, dimensions and required settings.
+- **Data is fetched server-side** after a widget is written. `refresh_widgets` or `refresh_project`
+  force it.
 
 ## Reference
 
-Each MCP tool wraps an Oviond REST operation. For exact parameters and response shapes, see the [API Reference](/api/introduction).
+Each tool wraps an Oviond REST operation. For exact parameters and response shapes, see the
+[API Reference](/api/introduction).

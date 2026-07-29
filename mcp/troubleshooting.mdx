@@ -1,0 +1,110 @@
+---
+title: "Troubleshooting"
+description: "What the common Oviond MCP errors mean and how to recover from them."
+---
+
+Every failure returns the standard error envelope, so an agent can read the
+message and correct itself. The ones below are the errors worth recognising.
+
+## Connection and access
+
+### "Invalid or expired token"
+
+The OAuth access token has expired or been revoked. Reconnect the connector — your
+client re-runs the sign-in flow and gets a fresh token. If it keeps happening
+immediately after connecting, check that the account still exists and the user
+still has access to it.
+
+### "Your plan does not include API/MCP access"
+
+MCP is included on subscription plans; lifetime plans need the API add-on. The
+sign-in completes and then the first tool call is rejected, so this reads like a
+broken connector when it's a billing state. Check **Settings → Billing**.
+
+### "MCP access is disabled for this account"
+
+An account-level switch under **Settings → Security** is off. Turning it off is an
+instant disconnect — existing tokens stop working straight away. Turn it back on
+and reconnect.
+
+### Rate limited (429)
+
+Programmatic access is capped at **300 requests per minute per account**, shared
+across API keys and MCP. The response carries `Retry-After`. An agent looping over
+many clients or widgets is the usual cause — batch where a bulk tool exists
+(`delete_widgets`, `delete_projects`) instead of calling one at a time.
+
+<Note>
+  The web app is never rate limited. This applies only to programmatic access.
+</Note>
+
+## Configuring data widgets
+
+### "Invalid widget configuration: …"
+
+`add_data_widget` and `update_data_widget` validate the whole selection the way
+the report builder does. The message names the specific problem — a metric that
+doesn't belong to the chosen data view, a missing required setting, a dimension
+that must be the only one.
+
+Recover by calling `describe_datasource` for that datasource. It returns the data
+views, the metrics and dimensions inside each, and the `advanced` keys a view
+requires. A metric is only valid inside its own data view.
+
+### The widget renders demo data
+
+Expected, not an error. A widget pointed at a datasource the client has not
+connected shows demo numbers so the layout is still reviewable.
+
+Fix it by connecting the datasource and linking it to that client:
+
+```
+connected_datasources   → is it connected at account level?
+link_datasource         → point this client at it
+refresh_widgets         → replace the demo numbers
+```
+
+### The widget is stuck on `loading`
+
+Give it a moment. The fetch runs server-side after the write and the tool returns
+before the numbers land.
+
+If it stays there, the fetch failed rather than the write. Run `test_connection`
+for that client and datasource — an expired token is the usual cause.
+
+## Datasources
+
+### "This … connection shows no accounts, so there is nothing to link"
+
+The connection exists but the vendor returned no accounts. That means the
+connection is broken — an expired token, revoked access, or a login with no
+accounts on it. `test_connection` says which. Reconnect it in the app.
+
+### `create_connection` refuses a datasource
+
+Google, Meta, LinkedIn, TikTok and the rest sign in on the vendor's own website,
+which needs a browser an agent doesn't have. Connect those once in the Oviond app;
+everything afterwards — linking to clients, building widgets, pulling data — works
+over MCP.
+
+### "A … connection called '…' already exists"
+
+Names identify connections, so re-using one would replace its credentials for
+every client using it. Pick a different name, or rename the existing one with
+`rename_connection`.
+
+## Permissions
+
+### "Access denied" on a client or project
+
+The signed-in user's role limits which clients they can see. A user scoped to
+specific clients can only act on those. Check the user's role under
+**Settings → Users** — the MCP connection has exactly the permissions that person
+has in the app, no more.
+
+## Still stuck
+
+- [Available tools](/mcp/tools) — the full catalog, generated from the live server
+- [Playbooks](/mcp/playbooks) — the common jobs end to end
+- [Skills](/mcp/skills) — install the workflow guide so your agent makes fewer
+  wrong turns in the first place

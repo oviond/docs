@@ -1,0 +1,69 @@
+---
+title: "Skills"
+description: "Install Oviond as a reusable skill for AI agents"
+---
+
+You can install Oviond as a reusable skill for AI agents that support the `skills`
+ecosystem. This gives your agent a versioned workflow guide for operating Oviond
+instead of leaving it to infer how the pieces fit together each time.
+
+## Install
+
+```bash
+npx skills add oviond/skills --skill oviond
+```
+
+## What the skill covers
+
+The `oviond` skill helps your agent:
+
+* understand the shape of an account — client → project → page → widget, and where
+  a datasource connection sits
+* discover a datasource's data views, metrics and dimensions before configuring a
+  widget, rather than guessing field ids
+* know that data is fetched **server-side after a widget is written**, and that
+  `refresh_widgets` / `refresh_project` re-run it — there is no ad-hoc query tool
+* connect a datasource by API key, and recognise which datasources need a browser
+  sign-in and must be handed back to the app
+* build the four widget types that are not vendor datasources — static value,
+  goals, uploaded data, calculated metrics — each of which binds differently
+* treat a date range as a preset that re-resolves ("Last 30 Days" keeps meaning
+  the last 30 days), not a fixed pair of dates
+* create automations paused, send a test, and wait for confirmation before
+  activating
+
+It also names the behaviours that read as failures but are not: demo data on a
+datasource the client has not connected, a widget briefly in `loading` while the
+fetch runs, and datasources like Stripe that have no accounts to choose from.
+
+## Why use a skill
+
+Without one, your agent has to work out Oviond's workflows from tool descriptions
+alone. A description says what one tool does; it cannot say what order to do
+things in. With a skill you give it:
+
+* a stable reference for how the product fits together
+* use-case driven guidance instead of tool-by-tool guessing
+* explicit caveats for what MCP cannot do and should hand back to the app
+* a versioned source of truth you can update as Oviond evolves
+
+## Repository
+
+The public source lives here:
+
+* [Oviond Skills on GitHub](https://github.com/oviond/skills)
+
+## Install notes
+
+* After installing, restart your AI tool if it does not pick up the new skill
+  immediately
+* Pair it with the [MCP connector](/mcp/connect) — the skill explains the
+  workflows, the connector executes them
+* The skills ecosystem is supported by Claude Code and claude.ai. If you use
+  Oviond through another client, the connector still ships the essentials in its
+  own instructions
+
+## Documentation index
+
+Agents can discover every page in these docs at
+[docs.oviond.com/llms.txt](https://docs.oviond.com/llms.txt).

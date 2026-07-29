@@ -5,19 +5,28 @@ description: "The Oviond MCP server lets Claude and other AI agents manage your 
 
 Oviond ships a **Model Context Protocol (MCP)** server so AI agents — Claude, ChatGPT, Claude Code, Codex, Cursor, VS Code, Windsurf, and any other MCP-compatible client — can manage your Oviond account programmatically. Ask your agent to *"create a new client and an agency report for them"* and it happens.
 
+<Warning>
+  Not everything in Oviond is reachable over MCP yet. Connecting an OAuth data
+  source (Google, Meta, LinkedIn, TikTok) needs a browser sign-in, file uploads
+  happen in the app, and anything that sends real email or deletes records should
+  be confirmed by a person first. [Playbooks](/mcp/playbooks) says what to hand
+  back to the app.
+</Warning>
+
 ## What you can do
 
-The MCP server exposes 20 tool categories that cover most of the Oviond surface area:
+The MCP server exposes **179 tools** covering most of the Oviond surface area:
 
 - **Clients & folders** — create, rename, delete, move, and organize clients.
-- **Projects & pages** — create reports and dashboards, add and reorder pages, duplicate layouts.
-- **Widgets** — add, update, move, and remove text, title, image, embed, goal, button, and data widgets.
+- **Projects & pages** — create reports and dashboards, add and reorder pages, duplicate layouts, change the period a report covers.
+- **Widgets** — add, update, move, and remove text, title, image, embed, button, and data widgets.
+- **Data sources** — connect one with an API key, link it to a client, test it, and refresh what it feeds.
+- **Data** — discover a datasource's metrics and dimensions, configure a data widget, and pull its numbers.
 - **Templates & themes** — browse the template library, apply themes to projects.
-- **Data** — query live metric values, test connections, list datasource accounts, refresh widgets, and manage connected data sources.
 - **Automations** — schedule, pause, and test automated report deliveries.
 - **Branding & company** — update logo, favicon, and company details.
 - **Workflows** — multi-step actions, like creating a client with a starter report or auditing a report's health.
-- **Agency, assets, media, domains, users, account**, and search.
+- **Assets, media, domains, users, goals, calculated metrics, notifications, email, billing**, and search.
 
 ## How it works
 
@@ -30,3 +39,6 @@ The MCP server exposes 20 tool categories that cover most of the Oviond surface 
 - [Connect](/mcp/connect) — wire up Claude, Cursor, or your MCP client to Oviond.
 - [Authentication](/mcp/auth) — what the OAuth flow does under the hood.
 - [Available tools](/mcp/tools) — the full catalog of MCP tools.
+- [Playbooks](/mcp/playbooks) — copy-paste prompts for common jobs.
+- [Skills](/mcp/skills) — install Oviond as a reusable skill for your agent.
+- [Troubleshooting](/mcp/troubleshooting) — what the common errors mean.

@@ -108,7 +108,7 @@ Other helpful endpoints:
 - **`POST /v1/data/resource`** — selectable sub-resource values (campaigns, ad sets, videos) for filters.
 
 <Tip>
-  Over MCP the same catalog is available as tools — `data_list_datasources` → `data_list_metrics` / `data_list_dimensions` → `data_query`. Agents call them in that order, no guessing.
+  Over MCP the same catalog is two tools — `datasources` → `describe_datasource`, which returns a datasource's data views with their metrics, dimensions and required settings in one call. Agents call them in that order, no guessing. Live values are read by configuring a saved widget (`add_data_widget`) and refreshing it, not by querying ad hoc.
 </Tip>
 
 ## Common errors
