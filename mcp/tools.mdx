@@ -46,7 +46,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `get_asset` | Get a single asset by ID. |
 | `create_asset` | Save widgets as a reusable section, the same way the editor does when you select widgets and save them: each widget is copied onto the section with a fresh id, and its type and datasources are… |
 | `update_asset` | Update asset metadata. Only include fields you want to change. |
-| `delete_asset` 🔒 | Delete an asset and its associated widget rows. |
+| `archive_asset` 🔒 | Archive a saved section and its widget rows. It goes to the archive, not away — `list_archive` shows it and `restore_from_archive` brings it back. |
 | `duplicate_asset` | Duplicate an asset (and its widgets) under a new name. |
 | `list_asset_widgets` | List the widgets that belong to an asset (useful for previewing what add_asset_to_page will instantiate). |
 | `add_asset_to_page` | Instantiate an asset's widgets onto a project page. |
@@ -60,7 +60,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `get_automation_history` | Get send history for an automation |
 | `create_automation` | Create a new automation. Pick an existing email template + sender by id (from email_templates / email_senders), or pass template_id:"custom" together with a `custom` payload to save a new named… |
 | `update_automation` | Update an existing automation — only include the fields you want to change |
-| `delete_automation` 🔒 | Delete an automation |
+| `archive_automation` 🔒 | Archive an automation, stopping its scheduled deliveries. `restore_from_archive` brings it back, rescheduled. |
 | `pause_automation` | Pause an automation |
 | `unpause_automation` | Unpause an automation |
 | `test_automation` | Send a test email for an automation |
@@ -89,7 +89,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `list_calculated_metrics` | List calculated metrics for the account (custom KPI formulas). |
 | `create_calculated_metric` | Create a calculated metric — a custom KPI from a formula over other metrics. |
 | `update_calculated_metric` | Update a calculated metric. Full replacement — you must send name, formula AND symbol. |
-| `delete_calculated_metric` 🔒 | Delete a calculated metric by ID. |
+| `archive_calculated_metric` 🔒 | Archive a calculated metric by ID. Restorable from the archive. |
 | `duplicate_calculated_metric` | Duplicate a calculated metric, optionally with a new name. |
 
 ### Clients
@@ -101,8 +101,8 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `get_client` | Get a single client by ID |
 | `create_client` | Create a new client |
 | `update_client` | Update an existing client — only include the fields you want to change |
-| `delete_client` 🔒 | Delete a client by ID |
-| `delete_clients` 🔒 | Delete multiple clients by ID |
+| `archive_client` 🔒 | Archive a client by ID, with its projects, exports and automations. Restorable from the archive. |
+| `archive_clients` 🔒 | Archive several clients by ID in one call. Restorable from the archive. |
 | `remove_client_logo` 🔒 | Remove a client's full logo (logo_url). It falls back to the agency branding. |
 | `remove_client_favicon` 🔒 | Remove a client's square logo/favicon (favicon_url). |
 | `refresh_client_favicon` | Re-derive a client's square favicon from its stored website (Google favicon service), cache-bust it, save it, and return the new favicon URL. |
@@ -125,7 +125,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `get_custom_data` | Get a single custom-data dataset by ID, including its parsed rows. |
 | `create_custom_data` | Create a custom-data dataset from parsed CSV rows (max 10,000 rows). |
 | `update_custom_data` | Update a custom-data dataset — send only the fields you want to change (e.g. &#123; raw_data, columns &#125;). |
-| `delete_custom_data` 🔒 | Delete a custom-data dataset by ID. |
+| `archive_custom_data` 🔒 | Archive a custom-data dataset by ID. Restorable from the archive. |
 | `duplicate_custom_data` | Duplicate a custom-data dataset with a new name. |
 
 ### Datasources
@@ -179,7 +179,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | Tool | What it does |
 |---|---|
 | `list_exports` | List PDF export history for a project (one row per generation attempt). |
-| `delete_export` 🔒 | Delete a PDF export record by ID. |
+| `archive_export` 🔒 | Archive a PDF export record by ID. Restorable from the archive. |
 
 ### Folders
 
@@ -197,7 +197,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `list_goals` | List goals for the account (targets tracked against a metric query). |
 | `create_goal` | Create a goal — a target value + comparison for a saved metric query. |
 | `update_goal` | Update a goal — only include the fields you want to change. |
-| `delete_goal` 🔒 | Delete a goal by ID. |
+| `archive_goal` 🔒 | Archive a goal by ID. Restorable from the archive. |
 | `duplicate_goal` | Duplicate a goal, optionally with a new name. |
 
 ### Media
@@ -206,8 +206,8 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 |---|---|
 | `list_media` | List media files |
 | `rename_media_file` | Rename a media file |
-| `delete_media_file` 🔒 | Delete a media file |
-| `delete_media_files` 🔒 | Delete multiple media files by ID in one call. |
+| `archive_media_file` 🔒 | Archive a media file. The file leaves storage only when it is permanently deleted from the archive. |
+| `archive_media_files` 🔒 | Archive several media files by ID in one call. Restorable from the archive. |
 | `move_media_to_folder` | Move one or more media files into a media folder. |
 | `list_media_folders` | List the account's media folders. |
 | `create_media_folder` | Create a new media folder. |
@@ -221,8 +221,8 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `list_notifications` | List in-app notifications for the account (paginated). |
 | `count_unread_notifications` | Get the number of unread notifications. |
 | `mark_notifications_read` | Mark notifications as read — specific ids, or all of them. |
-| `delete_notification` 🔒 | Delete a single notification by ID. |
-| `delete_notifications` 🔒 | Delete several notifications by ID in one call. |
+| `archive_notification` 🔒 | Archive a single notification by ID. It leaves the inbox but is not erased. |
+| `archive_notifications` 🔒 | Archive several notifications by ID in one call. They leave the inbox but are not erased. |
 | `clear_read_notifications` 🔒 | Delete all notifications that have already been read. |
 | `get_notification_preferences` | Get the per-event notification delivery preferences (which channels fire for each event type). |
 | `update_notification_preferences` | Change how you are notified for specific events. |
@@ -254,8 +254,8 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `get_project` | Get a single project by ID |
 | `create_project` | Create a new report/dashboard project for a client. |
 | `update_project` | Update a project — only include the fields you want to change |
-| `delete_project` 🔒 | Delete a project by ID |
-| `delete_projects` 🔒 | Delete multiple projects by ID |
+| `archive_project` 🔒 | Archive a project by ID. Its pages and widgets stay attached and come back with it. Restorable from the archive. |
+| `archive_projects` 🔒 | Archive several projects by ID in one call. Restorable from the archive. |
 | `duplicate_project` | Duplicate a project with a new name |
 | `change_project_date_range` | Set the period a project reports on. Every data widget on it is re-fetched for the new range and the results are saved — widgets on their own custom range keep it. A rolling preset ("Last 30 Days")… |
 | `refresh_project` | Re-fetch every data widget on a project with its current config and the project date range, saving the results. |
@@ -274,7 +274,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `get_template` | Get a single template by ID |
 | `create_template` | Create a template from an existing project. |
 | `update_template` | Update a template — only include the fields you want to change |
-| `delete_template` 🔒 | Delete a template by ID |
+| `archive_template` 🔒 | Archive a template by ID. Restorable from the archive. |
 | `list_template_widgets` | List the widgets that belong to a template (optionally filtered to a single page). |
 
 ### Themes
@@ -285,7 +285,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `get_theme` | Get a single theme by ID |
 | `create_theme` | Create a new visual theme. Supply the complete tokens map (primary, font, radius, shadow, canvas, surface, chart1-10, etc.) — tokens are the single source of truth for every visual property. A theme… |
 | `update_theme` | Update a theme — only include the fields you want to change. |
-| `delete_theme` 🔒 | Delete a theme by ID |
+| `archive_theme` 🔒 | Archive a theme by ID. Projects using it fall back to the default. Restorable from the archive. |
 
 ### Users
 

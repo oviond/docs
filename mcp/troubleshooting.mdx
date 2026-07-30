@@ -32,7 +32,7 @@ and reconnect.
 Programmatic access is capped at **300 requests per minute per account**, shared
 across API keys and MCP. The response carries `Retry-After`. An agent looping over
 many clients or widgets is the usual cause — batch where a bulk tool exists
-(`delete_widgets`, `delete_projects`) instead of calling one at a time.
+(`delete_widgets`, `archive_projects`) instead of calling one at a time.
 
 <Note>
   The web app is never rate limited. This applies only to programmatic access.
@@ -93,6 +93,21 @@ Names identify connections, so re-using one would replace its credentials for
 every client using it. Pick a different name, or rename the existing one with
 `rename_connection`.
 
+## Archived, not gone
+
+### "I archived the wrong thing"
+
+Anything named `archive_*` is recoverable. `list_archive` shows what's there and
+`restore_from_archive` brings it back, with its children — restoring a client
+restores its projects, restoring a project keeps its pages and widgets attached.
+
+The tools named `delete_*` really do destroy: widgets, pages, folders, media
+folders, datasource connections, notification channels, API keys, email senders
+and templates, custom domains, and removing a user. Those have no undo.
+
+`archive_notification` sits in between — it leaves your inbox and isn't erased,
+but it doesn't appear in the archive list yet either.
+
 ## Permissions
 
 ### "Access denied" on a client or project
@@ -104,7 +119,7 @@ has in the app, no more.
 
 ## Still stuck
 
-- [Available tools](/mcp/tools) — the full catalog, generated from the live server
+- [Available tools](/mcp/tools) — the full catalog
 - [Playbooks](/mcp/playbooks) — the common jobs end to end
 - [Skills](/mcp/skills) — install the workflow guide so your agent makes fewer
   wrong turns in the first place
