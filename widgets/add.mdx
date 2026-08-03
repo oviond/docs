@@ -31,7 +31,7 @@ A dashboard is capped at 50 widgets. Reports paginate instead, so they have no w
 
 `POST /v1/widgets` batch-upserts widgets. Oviond saves the whole project atomically and also auto-saves as you work.
 
-For a **data widget**, configure it with plain identifiers — pass metric and dimension **`id`s** (from [`GET /v1/data/{datasource_id}/metrics`](/api/concepts/querying-data#finding-valid-identifiers)):
+For a **data widget**, configure it with plain identifiers — pass metric and dimension **`id`s** (from [`GET /v1/datasources/{datasource_id}/describe`](/api/concepts/querying-data#finding-valid-identifiers)):
 
 ```json
 {
@@ -40,8 +40,8 @@ For a **data widget**, configure it with plain identifiers — pass metric and d
     "datasource_type": "DATASOURCE",
     "datasource_id": "gadw",
     "data_view": "ACCOUNT",
-    "metrics": ["clicks", "impressions"],
-    "dimensions": ["DATE"],
+    "metrics": [{ "value": "clicks" }, { "value": "impressions" }],
+    "dimensions": [{ "value": "DATE" }],
     "chart": "line"
   }],
   "source_type": "project",
@@ -51,7 +51,7 @@ For a **data widget**, configure it with plain identifiers — pass metric and d
 }
 ```
 
-- **`metrics` / `dimensions`** are arrays of metric/dimension `id`s.
+- **`metrics` / `dimensions`** are arrays of objects. Only `value` — the field `id` — is required; Oviond fills in the rest from the catalog. Add `label` to rename the field on the widget.
 - **`chart`** is one of `table`, `score`, `area`, `line`, `bar`, `column`, `pie`, `donut`, `funnel`, `map`.
 - **`filters`** (optional) is an array of `{ field, operator, value }`; see [Querying data](/api/concepts/querying-data) for operators.
 

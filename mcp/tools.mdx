@@ -343,6 +343,9 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
   `account_id`.
 - **Discovery first** — `datasources`, then `describe_datasource`, before configuring a data
   widget: the second returns that datasource's data views, metrics, dimensions and required settings.
+- **Metrics and dimensions are objects** — pass `[{ "value": "clicks" }]`, not `["clicks"]`. Only
+  `value` is required; Oviond fills in the rest from the catalog. The same shape is used by the
+  widget, goal and calculated-metric tools.
 - **Data is fetched server-side** after a widget is written. `refresh_widgets` or `refresh_project`
   force it.
 

@@ -1,0 +1,69 @@
+---
+title: "August 2026"
+description: "Release notes for the Oviond REST API."
+---
+
+<Update label="2026-08-03" description="Datasource discovery endpoints moved">
+
+### Datasource discovery lives under `/v1/datasources`
+
+The endpoints that describe what Oviond can report on have moved from `/v1/data/*` to `/v1/datasources/*`, alongside the connection endpoints they belong with. `POST /v1/data/query` and `POST /v1/data/resource` are unchanged.
+
+| Before | Now |
+|---|---|
+| `GET /v1/data/datasources` | `GET /v1/datasources` |
+| `GET /v1/data/{datasource_id}/describe` | `GET /v1/datasources/{datasource_id}/describe` |
+| `POST /v1/data/accounts` | `POST /v1/datasources/accounts` |
+| `GET /v1/data/{datasource_id}/metrics` | *Removed* — use `/describe` |
+| `GET /v1/data/{datasource_id}/dimensions` | *Removed* — use `/describe` |
+
+`GET /{datasource_id}/describe` replaces the separate `/metrics` and `/dimensions` calls: one request returns a datasource's data views, the advanced settings each view requires, its default view, and its metric and dimension catalogs with the flags that decide what can be combined. Pass `?data_view=ACCOUNT` to scope the response to one view.
+
+**Testing a connection has changed shape as well.** `POST /v1/data/test`, which took a `datasource_id` and a `client_id`, is replaced by `POST /v1/datasources/test`, which takes the connection itself:
+
+```json
+{ "auth_id": "auth_abc123", "datasource_id": "ga4" }
+```
+
+Connection ids come from `GET /v1/datasources/auths`. The result is recorded on the connection, so its status in the app reflects the test.
+
+See [Querying data](/api/concepts/querying-data) for the full walkthrough.
+
+</Update>
+
+<Update label="2026-08-03" description="Goals and calculated metrics are validated">
+
+### Goal and calculated-metric queries are now validated
+
+A goal's `query` and a calculated metric's `formula` were accepted without inspection, so either could name a datasource, metric or dimension that doesn't exist and nothing would report a problem until the widget rendered empty.
+
+Both are now validated on create and update, against the same catalog the report builder uses. An unknown identifier is rejected with a `400` naming the field and how to find valid values.
+
+This also fixes **creating a calculated metric over the API or MCP**, which could not succeed: a formula is an array of tokens, and the schema in front of it rejected arrays outright. A formula is now described properly — an array of `METRIC`, `NUMBER` and `OPERATOR` tokens, where a `METRIC` token carries the same query a widget does.
+
+Existing goals and calculated metrics are unaffected; the validation runs on write.
+
+</Update>
+
+<Update label="2026-08-03" description="Enumerated fields tightened">
+
+### More fields validated against a fixed set
+
+Several fields that accepted any string now accept only their documented values, so a typo returns a clear `400` instead of being stored and quietly resolving to the wrong thing:
+
+- **Date ranges** — `date_range.text` (the preset) and `date_range.compare` (the comparison mode) on projects, widgets, templates and automations. An unrecognised comparison mode previously produced no comparison at all.
+- **Metric display** — a metric's `symbol` (number format) and `summary` (how the total aggregates). Both long and short spellings stay valid, so `percent` and `%`, `currency` and `$` all continue to work.
+- **Widget type**, and the **notification channel** on channel routes (`slack`, `discord`).
+
+**One breaking change.** A metric or dimension on a widget is now always an object, never a bare id — on `POST /v1/widgets` and on the MCP widget tools alike:
+
+```json
+"metrics": [{ "value": "clicks" }],
+"dimensions": [{ "value": "DATE" }]
+```
+
+Only `value` is required; Oviond fills in the rest from the catalog, and `label` renames the field on the widget. Filters are unchanged. Widgets saved from the app were already in this shape, so only integrations that sent `["clicks"]` need updating.
+
+Beyond that, no changes are needed for integrations already sending valid values.
+
+</Update>

@@ -3,6 +3,147 @@ title: "July 2026"
 description: "Release notes for the Oviond REST API."
 ---
 
+<Update label="2026-07-31" description="Automation test sends use the automation's date range">
+
+### Test sends now match what the automation will deliver
+
+The **Send test** button on an automation produced an email whose report link opened the source dashboard on *its* date range, not the automation's. Testing a "Last 12 Months" automation showed "Last 7 Days" — the recipient was reviewing a different report from the one the schedule would send.
+
+A test now builds the same dated copy of the report a scheduled run does, resolved against the automation's own date range. Everything else about a test is unchanged: it still records a single run in the automation's history, never advances the schedule, and can be repeated as often as you like.
+
+</Update>
+
+<Update label="2026-07-31" description="Klaviyo rate-limit handling">
+
+### Klaviyo widgets survive rate limits
+
+Klaviyo enforces a strict request rate and returns a `429` with a retry delay when you exceed it — a report with several Klaviyo widgets could trip it and leave widgets in an error state.
+
+Oviond now reads the delay Klaviyo asks for, pauses every Klaviyo request for that period, and retries. Widgets that previously failed on a busy report load complete instead. No reconfiguration needed.
+
+</Update>
+
+<Update label="2026-07-31" description="SerpWatch keyword selection">
+
+### Choose which SerpWatch keywords a widget reports on
+
+SerpWatch widgets fetched every keyword on a project before filtering, which was slow on large projects and could hit the platform's rate limit.
+
+A widget now reports on up to **50 keywords**, chosen in one of two ways:
+
+- **Pick them explicitly** — the **Keywords** field in advanced settings, which now shows a `n/50` counter and stops accepting selections at the limit.
+- **Let Oviond choose** — leave Keywords empty and the top 50 are selected by the new **Sort By** (Current Position, Name, Movement, Status, Best Position) and **Order** settings, narrowed by the new **Device**, **Type** (Owner, Competitor, Paid) and **Search Engine** filters.
+
+Existing SerpWatch widgets keep their configuration and now default to the 50 best-ranking keywords.
+
+</Update>
+
+<Update label="2026-07-30" description="Ahrefs Rank Tracker requires a Project ID">
+
+### Project ID is now required for Ahrefs Rank Tracker
+
+The Ahrefs **Rank Tracker** dataview needs an Ahrefs project to query keywords against. Without one the widget returned nothing with no explanation.
+
+**Project ID** is now a required field in the widget's advanced settings for that dataview, validated before the query runs. Other Ahrefs dataviews are unaffected.
+
+</Update>
+
+<Update label="2026-07-30" description="Notification field renamed to name">
+
+### `title` on a notification is now `name`
+
+A notification's headline field is renamed from `title` to `name`, so a notification carries the same field as every other record you can list and archive.
+
+This affects the notification endpoints and the corresponding MCP tools. Update any integration that reads `notification.title` to read `notification.name`. Nothing else about the shape changed, and the in-app inbox is unaffected.
+
+</Update>
+
+<Update label="2026-07-30" description="Delete renamed to Archive where records are recoverable">
+
+### "Delete" now says "Archive" where nothing is destroyed
+
+Sixteen operations were labelled *delete* while the record actually moved to the Archive and could be restored. The names and descriptions now say what happens, and point to the Archive rather than implying the record is gone.
+
+Renamed to `archive_*`: clients, projects, assets, automations, templates, themes, goals, calculated metrics, custom data, exports, media files, and notifications — singular and bulk. The matching REST summaries and descriptions were corrected in the same pass.
+
+Operations that genuinely destroy, with no undo, keep the `delete_*` name: widgets, pages, folders, media folders, datasource connections, notification channels, API keys, email senders and templates, custom domains, and removing a user.
+
+Only the names and descriptions changed. Every endpoint behaves exactly as it did.
+
+</Update>
+
+<Update label="2026-07-29" description="Date-range presets applied over the API">
+
+### Setting a project date range to a preset now takes effect
+
+Updating a project with a preset alone — `{ "text": "Last 7 Days" }` — stored the preset without any resolved start and end dates. The project looked correct, but its widgets kept rendering their previous dates because the refresh had no window to run against.
+
+The preset is now resolved against the client's timezone before it is stored, merged over the range already on the project so a partial update keeps what it didn't mention (such as the comparison period). Widgets refresh against the resolved range, matching what the date picker in the app has always done.
+
+</Update>
+
+<Update label="2026-07-29" description="Asset data source filter fixed">
+
+### Filtering saved sections by data source returns results again
+
+The **Data source** filter in the Assets panel returned nothing. Assets record the data sources they use by display name ("Google Ads"), while the filter sent the alias id (`gadw`), so the two never matched.
+
+The filter now translates the id before matching. Saved sections filter correctly, singly or in combination.
+
+</Update>
+
+<Update label="2026-07-29" description="GA4 custom dimensions and metrics">
+
+### Google Analytics 4 custom definitions appear in the builder
+
+Custom dimensions and custom metrics defined on a GA4 property are now loaded from that property when you open the report builder, and appear alongside the standard GA4 fields.
+
+They're read live per property, so a definition added in GA4 is available in Oviond without waiting for a release. Existing GA4 widgets are unchanged.
+
+</Update>
+
+<Update label="2026-07-28" description="MCP data tools share the report builder's logic">
+
+### MCP data widgets are configured the same way the builder configures them
+
+The MCP tools that create and update DATA widgets now run the report builder's own query logic rather than their own copy of it. In practice that means an agent gets the same answers, and the same errors, a person gets in the editor:
+
+- **One discovery call.** `describe_datasource` returns a datasource's data views, the advanced settings each view requires, and its metric and dimension catalogs with the flags that decide what can be combined — a dimension that must be the only one, a dimension only offered once a particular metric is picked, deprecated fields, and per-account custom fields.
+- **Selections are validated against the catalog.** A metric or dimension that doesn't belong to the chosen data view is rejected with the valid list, instead of being saved and silently returning nothing.
+- **The cascade matches the editor.** Changing the datasource clears the data view, metrics, dimensions, filters and advanced settings, then applies that datasource's defaults; changing the data view clears metrics and dimensions.
+- **Widgets are named the same way.** An unnamed widget gets the generated name the builder would give it ("Clicks & Impressions by Date"), and a name you set is never overwritten.
+- **Display-only changes don't re-fetch.** Editing a chart type, sort order, row limit or metric label writes through without re-running the query, mirroring the builder's two panels.
+
+Datasource connections can also now be created from a tool for platforms that authenticate with an API key. Platforms that sign in on the vendor's website (Google, Meta, LinkedIn, TikTok) still need a browser and are connected in the app, then linked from a tool.
+
+</Update>
+
+<Update label="2026-07-27" description="New data source: ChatGPT Ads">
+
+### ChatGPT Ads
+
+Report on ChatGPT Ads campaign performance. Connect it with an API key from your OpenAI Ads account — the key scopes to the advertiser, so there's no account to pick after connecting.
+
+Three dataviews, each with **Impressions**, **Clicks**, **Spend**, **CTR (%)**, **Avg CPC** and **Avg CPM**:
+
+- **Campaigns** — broken down by campaign name, status, daily budget and lifetime budget. Adds **Conversions**, which the platform reports at campaign level only.
+- **Ad Groups** — by ad group name and status.
+- **Ads** — by ad name, status, URL and parent ad group.
+
+All three support a date breakdown, and widgets can be narrowed to specific campaigns, ad groups or ads in advanced settings.
+
+</Update>
+
+<Update label="2026-07-26" description="AdRoll — Conversion Events and CPA">
+
+### AdRoll gains a Conversion Events dataview
+
+A new **Conversion Events** dataview reports on the audiences and conversion rules configured in AdRoll, broken down by conversion event: **Estimated Audience Size**, **Unique Website Visitors**, **Rule**, **Type** and **Duration**.
+
+The existing **Account** dataview also picks up **CPA**. Existing AdRoll widgets are unaffected.
+
+</Update>
+
 <Update label="2026-07-25" description="Per-client number format">
 
 ### Number format per client

@@ -27,12 +27,12 @@ curl -X POST https://api.oviond.com/v1/data/query \
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `datasource_id` | ✓ | The datasource alias, e.g. `ga4`, `gadw`, `fb-ads`. **List all with [`GET /v1/data/datasources`](#finding-valid-identifiers).** |
+| `datasource_id` | ✓ | The datasource alias, e.g. `ga4`, `gadw`, `fb-ads`. **List all with [`GET /v1/datasources`](#finding-valid-identifiers).** |
 | `client_id` | ✓ | The client whose connected data source you're querying. List with `GET /v1/clients`. |
 | `date_range` | ✓ | `{ current_start, current_end }` as `YYYY-MM-DD`. Add `previous_start` / `previous_end` to get period-over-period comparison values. |
-| `metrics` | ✓ | Array of metric `id`s, e.g. `["clicks", "impressions"]`. **Get valid ids from [`GET /v1/data/{datasource_id}/metrics`](#finding-valid-identifiers).** |
-| `dimensions` | ✓ | Array of dimension `id`s, e.g. `["DATE"]` for a time series, or `[]` for a single total. **Get valid ids from [`GET /v1/data/{datasource_id}/dimensions`](#finding-valid-identifiers).** |
-| `data_view` | ✓ | The datasource view, e.g. `ACCOUNT`. Returned alongside each field by the `/metrics` and `/dimensions` endpoints above. |
+| `metrics` | ✓ | Array of metric `id`s, e.g. `["clicks", "impressions"]`. **Get valid ids from [`GET /v1/datasources/{datasource_id}/describe`](#finding-valid-identifiers).** |
+| `dimensions` | ✓ | Array of dimension `id`s, e.g. `["DATE"]` for a time series, or `[]` for a single total. **Get valid ids from [`GET /v1/datasources/{datasource_id}/describe`](#finding-valid-identifiers).** |
+| `data_view` | ✓ | The datasource view, e.g. `ACCOUNT`. A metric or dimension is only valid inside its own view — `/describe` groups them by view. |
 | `filters` | | Array of `{ field, operator, value }` filter objects. `operator` is one of `equals`, `not_equals`, `contains`, `not_contains`, `starts_with`, `ends_with`, `greater_than`, `less_than`, `greater_than_or_equal`, `less_than_or_equal`. Add `"logicalOperator": "and"` (or `"or"`) to combine multiple filters. |
 | `timezone` | | IANA timezone for date bucketing. Defaults to `UTC`. |
 
@@ -69,43 +69,52 @@ The valid `datasource_id`, `metrics`, `dimensions`, and `data_view` values are a
 **1. Find the `datasource_id`** — list every datasource Oviond supports:
 
 ```bash
-curl "https://api.oviond.com/v1/data/datasources" \
+curl "https://api.oviond.com/v1/datasources" \
   -H "Authorization: Bearer YOUR_API_KEY"
 # → [{ "id": "gadw", "name": "Google Ads", "category": "...", "data_views": [...] }, ...]
 ```
 
-**2. List its metrics and dimensions** — the `id`s you pass to the query:
+**2. Describe it** — one call returns its data views and every field you can query:
 
 ```bash
-curl "https://api.oviond.com/v1/data/gadw/metrics" \
-  -H "Authorization: Bearer YOUR_API_KEY"
-
-curl "https://api.oviond.com/v1/data/gadw/dimensions" \
+curl "https://api.oviond.com/v1/datasources/gadw/describe" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
-
-Each returns a **flat, scannable list** — every field carries its `id`, `name`, `data_view`, and `group`:
 
 ```json
 {
   "success": true,
   "data": {
-    "datasource": "gadw",
-    "data_views": ["ACCOUNT", "CAMPAIGNS", "..."],
-    "fields": [
+    "datasource_id": "gadw",
+    "default_data_view": "ACCOUNT",
+    "data_views": [
+      { "value": "ACCOUNT", "label": "Account", "required_advanced": [] },
+      { "value": "CAMPAIGNS", "label": "Campaigns", "required_advanced": [] }
+    ],
+    "metrics": [
       { "id": "impressions", "name": "Impressions", "data_view": "ACCOUNT", "group": "Basic" },
       { "id": "clicks", "name": "Clicks", "data_view": "ACCOUNT", "group": "Basic" }
+    ],
+    "dimensions": [
+      { "id": "DATE", "name": "Date", "data_view": "TIME", "group": "Time" }
     ]
   }
 }
 ```
 
-Add `?data_view=ACCOUNT` to filter to one view. Use each `id` as an entry in `metrics` / `dimensions`, and its `data_view` as `data_view`.
+Use each `id` as an entry in `metrics` / `dimensions`, and its `data_view` as `data_view`. Add `?data_view=ACCOUNT` to scope the response to one view.
+
+Three things in the response decide what you can combine:
+
+- **`data_view`** — a metric or dimension is only valid inside its own view. Mixing views in one query is rejected.
+- **`required_advanced`** — advanced settings the view can't run without (a Semrush region, a Mailchimp audience). Each entry names the `advanced` key and the message shown when it's missing.
+- **Field flags** — `single` (must be the only dimension), `deprecated` (retired by the vendor; still resolves, may return nothing) and `custom` (a per-account definition, not part of the static catalog).
 
 Other helpful endpoints:
 
 - **`GET /v1/clients/{id}/datasources`** — which sources a specific client has connected.
 - **`POST /v1/data/resource`** — selectable sub-resource values (campaigns, ad sets, videos) for filters.
+- **`POST /v1/datasources/accounts`** — the accounts, properties or pages a connection can be linked to.
 
 <Tip>
   Over MCP the same catalog is two tools — `datasources` → `describe_datasource`, which returns a datasource's data views with their metrics, dimensions and required settings in one call. Agents call them in that order, no guessing. Live values are read by configuring a saved widget (`add_data_widget`) and refreshing it, not by querying ad hoc.
@@ -117,7 +126,7 @@ Other helpful endpoints:
 |--------|-------|------------|
 | `422` | Missing/invalid field — no `metrics`, or an unknown `datasource_id`, `metric`, or `dimension` for that datasource. Identifiers are validated against the field catalog before the query runs, so a typo is rejected here rather than failing upstream. | Check the request against the table above and the [field catalog](#finding-valid-identifiers); details are in `error.details`. |
 | `404` | `client_id` doesn't exist in your account. | Verify the ID via `GET /v1/clients`. |
-| `502` | Upstream datasource error — not connected or an expired OAuth token. | Run [`POST /v1/data/test`](/api/introduction) to check the connection; if the token expired, reconnect the source in the app. |
+| `502` | Upstream datasource error — not connected or an expired OAuth token. | Run [`POST /v1/datasources/test`](/api/introduction) with the connection's `auth_id` (from `GET /v1/datasources/auths`) to check it; if the token expired, reconnect the source in the app. |
 
 <Tip>
   A `502` most often means the client's OAuth token for that datasource has expired and needs reconnecting in the app — it's not a bug in your request.
