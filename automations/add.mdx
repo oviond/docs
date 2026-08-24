@@ -3,22 +3,22 @@ title: "Add an automation"
 description: "Schedule a report or dashboard for recurring email delivery."
 ---
 
-An **automation** emails a project's report to a list of recipients on a recurring schedule — daily, weekly, or monthly. On each run, Oviond renders the report for the configured date range and emails it from the sender you choose, using the email template you select.
+An **automation** emails a report to a list of recipients on a recurring schedule — daily, weekly, or monthly. On each run, Oviond renders the report for the configured date range and emails it from the sender you choose, using the email template you select.
 
 You can create an automation two ways:
 
 - From the top-level **Automations** screen in the sidebar.
-- From the **Automations** tab inside the project editor, which pre-selects the current project.
+- From the **Automations** tab inside the report editor, which pre-selects the current report.
 
 <Steps>
   <Step title="Open Automations">
-    Click **Automations** in the left sidebar, then click **New automation**. Inside the project editor, open the **Automations** tab and click **Add automation** instead.
+    Click **Automations** in the left sidebar, then click **New automation**. Inside the report editor, open the **Automations** tab and click **Add automation** instead.
   </Step>
   <Step title="Name and schedule">
     Enter a **Name**, then set the **Frequency** (**daily**, **weekly**, or **monthly**), the day, and the send time. See [Scheduled delivery](/automations/scheduled).
   </Step>
-  <Step title="Choose the project and date range">
-    Pick the **Client** and **Project** to deliver (the project is fixed when you start from the editor tab), then choose a **Date range** such as `Last Month`. The report is rendered fresh for that range on every run.
+  <Step title="Choose the report and date range">
+    Pick the **Client** and **Report** to deliver (the report is fixed when you start from the editor tab), then choose a **Date range** such as `Last Month`. The report is rendered fresh for that range on every run.
   </Step>
   <Step title="Configure the email">
     Add **Recipients**, choose the **From** sender, and pick an **Email template** — or select **Custom message** to compose a new template inline. See [Email delivery](/automations/email).

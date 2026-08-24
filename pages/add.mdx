@@ -6,7 +6,7 @@ description: "Add a new section page to a report."
 A **page** is a section inside a report. Each page has its own grid layout and holds any number of widgets. Viewers move between pages to explore different parts of the report — for example, one page per marketing channel.
 
 <Note>
-Pages apply to **reports** only. A dashboard is a single full-screen view with no pages, so the **Pages** tab appears only for projects of type **Report**.
+Pages apply to **reports** only. A dashboard is a single full-screen view with no pages, so the **Pages** tab appears only for a **Multi-Page Report**.
 </Note>
 
 Every report starts with at least one page. Add more at any time.
@@ -15,7 +15,7 @@ Every report starts with at least one page. Add more at any time.
 
 <Steps>
   <Step title="Open the report">
-    From the client's **Projects** tab, open the report.
+    From the client's **Reports** tab, open the report.
   </Step>
   <Step title="Open the Pages tab">
     In the editor sidebar, open the **Pages** tab.
@@ -31,4 +31,4 @@ Plan pages before adding widgets. Grouping related data per page (one page per c
 
 ## API
 
-`POST /v1/pages` adds a page to a project or template.
+`POST /v1/pages` adds a page to a report or template.

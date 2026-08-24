@@ -1,7 +1,138 @@
 ---
 title: "August 2026"
-description: "Release notes for the Oviond REST API."
+description: "Product and API release notes for Oviond."
 ---
+
+<Update label="2026-08-22" description="Add Content cards for every widget source">
+
+### Goals, calculated metrics, custom data and static values are their own cards
+
+The **Add Content** panel used to list goals, calculated metrics, custom data and static values inside the data-source picker, alongside real platforms. Each is now its own card, and a widget added from one arrives already bound to it — so the data-source picker is hidden rather than offering a source you'd never pick.
+
+**New widgets preview demo data.** A widget you've just added shows sample data shaped like the thing it's about to hold, instead of an empty frame:
+
+- a **calculated metric** trends across the report's date range, because a formula is always evaluated over time
+- a **goal** draws as a gauge, not a series
+- **custom data** shows a label column plus several value columns in mixed formats, the way an imported sheet arrives
+- a **static value** renders the typed-in number
+
+The demo disappears as soon as the widget has a real source and a fetch lands.
+
+</Update>
+
+<Update label="2026-08-22" description="MCP: typed widget tools and series read-back">
+
+### One tool per widget type, and a way to read the numbers back
+
+Adding a widget over MCP went through a single generic tool. There is now one `add_` and one `update_` tool per widget type — title, text, image, button, embed, data, calculated metric, custom data, goal and static value — each taking only the fields its type actually has.
+
+**Widget data can now be read back.** Writes and refreshes stay fire-and-forget: the server fetches after the widget is saved. Previously an assistant had no way to see the result, because the editor learns about it over a realtime channel an MCP client can't subscribe to. The new `get_widget_data` returns each widget's state plus its settled numbers, waiting up to 15 seconds for in-flight fetches and returning up to 200 rows per widget — enough to draw a chart, and bounded so a poll loop terminates.
+
+Every tool also now carries a title and read-only / destructive annotations, so a client can show what a tool will do before running it. The server exposes **188 tools across 29 groups**.
+
+</Update>
+
+<Update label="2026-08-21" description="Data sources now live on the client">
+
+### Connect a data source without opening a report
+
+Data sources were reachable only from inside the report editor, which left a new client with nothing connected and nowhere obvious to start. Each client now has its own **Data sources** page at `/{client_id}/data-sources`.
+
+It lists the whole catalog as cards, connected platforms first, each reading **Connect** or **Connected** depending on what this client already has. Search matches a platform's name or category, and a **Request a data source** button files the ones we don't support yet. Clicking any card opens that platform's connections in a slide-over — the same connect flow the report editor runs — where you link, unlink, edit or refresh a profile.
+
+A client with nothing linked now lands on this page instead of an empty Reports list. Anyone who can see the client can see the page; connecting still requires edit access to that client.
+
+</Update>
+
+<Update label="2026-08-21" description="Report actions in the header">
+
+### The report header has an actions menu
+
+Viewing a report gave you no way to act on it without going back to the list. The header now carries a **⋮** menu with the same actions as the list row — duplicate, save as template, archive — built from one shared definition so the two menus can't drift apart.
+
+</Update>
+
+<Update label="2026-08-21" description="Google Ads and Google Local Services on v23">
+
+### Google Ads and Google Local Services upgraded to API v23
+
+Both moved from v21, which Google is retiring. Ad-level fields were updated for v23's breaking changes, so ad-level widgets keep returning the same columns.
+
+**Keyword rows also aggregate correctly now.** A single-dimension keyword widget listed the same keyword once per underlying match type, which split its numbers and made comparison periods format wrong. Matching keywords are combined into one row.
+
+</Update>
+
+<Update label="2026-08-20" description="Projects are now Reports">
+
+### Projects are now Reports
+
+The thing you build inside a client is a **report** everywhere — the UI, the app URLs, the REST API, and the MCP tools. This is a breaking change for anything integrating with Oviond.
+
+| Before | Now |
+|---|---|
+| `/v1/projects` | `/v1/reports` |
+| `project_id` in request and response bodies | `report_id` |
+| app URLs `/project/…` | `/report/…` |
+
+**There is no `/v1/projects` alias.** It was removed rather than deprecated, so a call to the old path returns `404`. The field rename applies to every endpoint that carried `project_id`, including `GET /v1/automations/{report_id}/history` and the PDF endpoints.
+
+**The MCP tools were renamed to match** — `create_report`, `get_report`, `list_reports`, `update_report`, `duplicate_report`, `archive_report`, `archive_reports`, `refresh_report`, `change_report_date_range`, `add_report_section`, `create_report_from_template`, `create_client_with_report` and `audit_report_health`.
+
+Two things deliberately did **not** change: database column names, so anything reading Supabase directly is unaffected; and the stored `source_type` / resource-type value `project`, which is still what a widget and an activity-log row carry. The report **type** is called *Multi-Page Report* or *Dashboard*.
+
+</Update>
+
+<Update label="2026-08-20" description="Legacy project merge tags removed">
+
+### `{{project_*}}` merge tags no longer resolve
+
+Email subjects and bodies accepted both `{{project_name}}` and `{{report_name}}` while the rename was in progress. The `project_*` aliases are gone. The supported tags are `{{report_name}}`, `{{report_type}}`, `{{report_date_range}}` and `{{report_url}}`, alongside the `{{client_*}}` and `{{account_name}}` tags, which are unchanged.
+
+Automations and templates saved from the app were already using the current names. Anything that composed a subject line by hand — over the API, or pasted in — needs the tag renamed, or it will send the literal text.
+
+</Update>
+
+<Update label="2026-08-14" description="Fixes across data sources and the editor">
+
+### Fixes
+
+**Data sources**
+
+- **BrightLocal** returned only the first page of accounts, so later ones couldn't be linked. Every page is now fetched.
+- **Pinterest Ads** dimension values were formatted wrong in tables and charts.
+- **Mailchimp** and **Ahrefs** metric formatting corrected; **Klaviyo** now retries when it hits a rate limit instead of failing the widget, and duplicate flow names are consolidated.
+- Refreshed logos for **BrightLocal**, **Advanced Web Ranking** and **SERP Watch**.
+
+**Editor**
+
+- **Goals**: the builder's display settings rendered incorrectly, and filters and advanced settings are no longer required to save a goal.
+- **Table widgets** can now be sized down to a 50px minimum column width, from 100px.
+- On an empty dashboard, dropping a widget anywhere on the canvas now places it at the top of the page — the drop area only covered part of the canvas before.
+- Currency pickers — add client, client settings, company settings and the per-widget override — share one grouped list, searchable by currency code, country or symbol. The widget override clears back to the client's currency.
+
+**Exports**
+
+- Report, client and template thumbnails are captured at half scale and encoded lossily. They look the same at display size and the stored files are a fraction of the size. PDF rendering is unchanged.
+
+</Update>
+
+<Update label="2026-08-06" description="Airtable and Omnisend">
+
+### Two new data sources
+
+**Airtable** and **Omnisend** can be connected like any other platform, per client, and reported on with the usual widgets.
+
+</Update>
+
+<Update label="2026-08-04" description="Resend a pending invite">
+
+### Resend an invite
+
+A team member who never received their invite — or let the link go stale — had to be removed and re-invited. You can now resend the invite from the users list, or over the API with `POST /v1/users/{id}/resend-invite`.
+
+The new link replaces the old one, which stops working. Resending is refused for someone who has already accepted, since they have a session. The users list marks anyone who hasn't accepted yet as pending.
+
+</Update>
 
 <Update label="2026-08-03" description="Datasource discovery endpoints moved">
 

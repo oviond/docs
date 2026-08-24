@@ -3,7 +3,7 @@ title: "Pagination, filtering & sorting"
 description: "How Oviond list endpoints page, filter, and sort results — page/limit parameters, the meta totals, search, and sort order."
 ---
 
-List endpoints (for example `GET /v1/clients`, `GET /v1/projects`) return a page of results plus a `meta` block describing the full set.
+List endpoints (for example `GET /v1/clients`, `GET /v1/reports`) return a page of results plus a `meta` block describing the full set.
 
 ## Pagination
 
@@ -42,9 +42,9 @@ Most list endpoints accept a free-text `search` parameter plus resource-specific
 | Parameter | Example endpoint | Purpose |
 |-----------|------------------|---------|
 | `search` | `GET /v1/clients?search=acme` | Free-text match on name and related fields. |
-| `client_id` | `GET /v1/projects?client_id=...` | Scope results to one client. |
+| `client_id` | `GET /v1/reports?client_id=...` | Scope results to one client. |
 | `folder_id` | `GET /v1/clients?folder_id=...` | Scope clients to a folder. |
-| `type` | `GET /v1/projects?type=DASHBOARD` | Filter by resource type. |
+| `type` | `GET /v1/reports?type=DASHBOARD` | Filter by resource type. |
 
 Filters combine with `AND`. The exact set differs per endpoint — check each endpoint's **Query Parameters** in the [API reference](/api/introduction).
 

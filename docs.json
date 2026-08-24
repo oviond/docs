@@ -64,15 +64,15 @@
             ]
           },
           {
-            "group": "Projects",
+            "group": "Reports",
             "pages": [
-              "projects/add",
-              "projects/list",
-              "projects/update",
-              "projects/duplicate",
-              "projects/bulk-delete",
-              "projects/archive",
-              "projects/share"
+              "reports/add",
+              "reports/list",
+              "reports/update",
+              "reports/duplicate",
+              "reports/bulk-delete",
+              "reports/archive",
+              "reports/share"
             ]
           },
           {
@@ -227,6 +227,7 @@
             "group": "Data Sources",
             "pages": [
               "data-sources/connect",
+              "data-sources/client-sources",
               "data-sources/list",
               "data-sources/profiles",
               "data-sources/test",
@@ -341,6 +342,15 @@
       }
     ]
   },
+  "redirects": [
+    { "source": "/projects/add", "destination": "/reports/add" },
+    { "source": "/projects/list", "destination": "/reports/list" },
+    { "source": "/projects/update", "destination": "/reports/update" },
+    { "source": "/projects/duplicate", "destination": "/reports/duplicate" },
+    { "source": "/projects/bulk-delete", "destination": "/reports/bulk-delete" },
+    { "source": "/projects/archive", "destination": "/reports/archive" },
+    { "source": "/projects/share", "destination": "/reports/share" }
+  ],
   "footer": {
     "socials": {
       "x": "https://x.com/oviond",

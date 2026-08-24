@@ -5,13 +5,20 @@ description: "Browse every soft-deleted item across your account."
 
 Most things you delete in Oviond are **soft-deleted first** — moved to the Archive rather than removed straight away. Open it from **Settings → Archive** (`/settings/archive`).
 
-The Archive lists archived items across five types:
+The Archive lists archived items by type:
 
 - **Clients**
-- **Projects** (reports and dashboards)
+- **Reports** (multi-page reports and dashboards)
 - **Media** (images and files)
 - **Automations**
 - **Templates**
+- **Goals**, **Calculated Metrics**, **Saved Metrics**
+- **Custom Data**, **Assets**, **Themes**
+- **Exports**, **Notifications**
+
+<Note>
+Over the API and MCP, the archive type for a report is still the stored value `projects`. Only the label changed with the rename.
+</Note>
 
 Each row shows the **Name**, **Type**, and the **Archived** date (`deleted_at`). From here you can **restore** an item back to its original location or **permanently delete** it.
 

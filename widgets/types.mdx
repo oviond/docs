@@ -8,6 +8,10 @@ From the **Add Content** tab you can drag in any of these content types:
 | Type | Use for |
 |---|---|
 | **Data Query** | A metric, chart, table, or KPI driven by a data source. Pick the chart type after the data is set. |
+| **Calculated Metric** | A metric built from a formula, trended over the report's date range. |
+| **Custom Data** | A chart or table over a dataset you uploaded. |
+| **Goal** | Progress towards a target, drawn as a gauge. |
+| **Static Value** | One typed-in number or piece of text as a KPI card. It never fetches. |
 | **Heading** | A section title on the page. |
 | **Textbox** | Freeform text — commentary, summaries, notes. |
 | **Image** | An image from the Media Library or a URL. |
@@ -15,7 +19,7 @@ From the **Add Content** tab you can drag in any of these content types:
 | **Embed** | Any iframe-compatible source. |
 
 <Tip>
-**Data Query** is the only type that connects to a data source. The rest are presentation widgets you can use to frame and annotate your data.
+**Data Query** is the only type that connects to a marketing platform. **Calculated Metric**, **Custom Data**, **Goal**, and **Static Value** are data widgets too, but they bind to something inside Oviond — a formula, an uploaded dataset, a saved goal, or a value you type. The rest are presentation widgets you can use to frame and annotate your data.
 </Tip>
 
 ## Variables in text
@@ -27,9 +31,9 @@ From the **Add Content** tab you can drag in any of these content types:
 | **Client Name** / **Client First Name** | The client's name |
 | **Client Website** | The client's website |
 | **Client Manager** | The team member assigned as manager |
-| **Project Type** / **Project Name** | The report or dashboard's type and name |
+| **Report Type** / **Report Name** | The report or dashboard's type and name |
 | **Date Range** | The report's active date range |
 | **Account Name** | Your workspace name |
 | **Report URL** | The shareable link to the report |
 
-For example, *Here's the* `{{Project Name}}` *update for* `{{Client Name}}` *covering* `{{Date Range}}` fills itself in for every client and every reporting period.
+For example, *Here's the* `{{Report Name}}` *update for* `{{Client Name}}` *covering* `{{Date Range}}` fills itself in for every client and every reporting period.

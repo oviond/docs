@@ -7,7 +7,7 @@ Data sources are connections between Oviond and your clients' marketing platform
 
 ## Supported data sources
 
-Oviond supports 60+ marketing platforms across categories such as paid search, paid social, analytics, SEO, email marketing, and e-commerce/CRM.
+Oviond supports 80+ marketing platforms across categories such as paid search, paid social, analytics, SEO, email marketing, e-commerce/CRM, and databases.
 
 | Category | Examples |
 |---|---|
@@ -15,11 +15,12 @@ Oviond supports 60+ marketing platforms across categories such as paid search, p
 | **Paid Social** | Facebook Ads, Instagram Ads, LinkedIn Ads, TikTok Ads, Pinterest Ads, Snapchat Ads, Twitter/X Ads |
 | **Analytics** | Google Analytics 4, Matomo, Piwik PRO, Plausible |
 | **SEO** | Google Search Console, Semrush, Ahrefs, Moz, SE Ranking, Serpstat |
-| **Email Marketing** | Mailchimp, Klaviyo, Campaign Monitor, ActiveCampaign, Vbout |
+| **Email Marketing** | Mailchimp, Klaviyo, Omnisend, Campaign Monitor, ActiveCampaign, Vbout |
 | **E-commerce & CRM** | Shopify, WooCommerce, HubSpot, Salesforce, Pipedrive, Stripe |
+| **Databases & spreadsheets** | Airtable, Google Sheets |
 
 <Note>
-  The full list of available data sources appears when you open the **Data Sources** tab in a client's project editor and search. New platforms are added regularly.
+  The full list of available data sources appears on a client's [Data sources](/data-sources/client-sources) page, and in the report editor's **Data Sources** tab. New platforms are added regularly.
 </Note>
 
 ## How data sources work
@@ -38,11 +39,11 @@ You can reuse the same connection across multiple clients. For example, if your 
 
 To see every connection across your workspace, go to **Settings → Data sources** (`/settings/data-sources`). The table lists each connected profile with its platform, profile name, token **Status** (**Token valid** or **Token expired**), the number of clients using it, and the date it was connected. Use the toolbar to search by name or filter by status and platform.
 
-To see the data sources linked to one client, open that client's project and click the **Data Sources** tab in the editor sidebar. This shows only the connections relevant to that client, with the linked profile sorted first.
+To see the data sources linked to one client, open that client and click **Data sources** in the sidebar. Platforms the client is already connected to sort to the top, each card reading **Connected**.
 
 ## Checking connection status
 
-Oviond checks token health automatically with a daily auth-test. You don't run a manual test — each connection displays a **Token valid** or **Token expired** badge. When a token expires, click **Refresh** (project tab) or **Refresh token** (Settings) to re-authorize. See [Test Connection](/data-sources/test) for details.
+Oviond checks token health automatically with a daily auth-test. You don't run a manual test — each connection displays a **Token valid** or **Token expired** badge. When a token expires, click **Refresh** (on the connection) or **Refresh token** (Settings) to re-authorize. See [Test Connection](/data-sources/test) for details.
 
 ## Unlinking and deleting
 
@@ -50,7 +51,7 @@ Oviond checks token health automatically with a daily auth-test. You don't run a
 
 ### Unlink a data source from a client
 
-1. Open the client's project and go to the **Data Sources** tab.
+1. Open the client and go to its **Data sources** page.
 2. Find the linked data source.
 3. Click **Unlink**.
 

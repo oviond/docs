@@ -1,29 +1,29 @@
 ---
 title: "Add template"
-description: "Save a project as a reusable starting point."
+description: "Save a report as a reusable starting point."
 ---
 
-A **template** is a saved project scaffold — its pages, widgets, date range, and presentation settings — that you can reuse to spin up new projects. Templates save you from rebuilding the same report or dashboard structure for every new client.
+A **template** is a saved report scaffold — its pages, widgets, date range, and presentation settings — that you can reuse to spin up new reports. Templates save you from rebuilding the same report or dashboard structure for every new client.
 
-## Create from an existing project
+## Create from an existing report
 
-You create a template by saving an existing project. There is no separate "new template" builder.
+You create a template by saving an existing report. There is no separate "new template" builder.
 
 <Steps>
-  <Step title="Open your Client Projects list">
-    Find the project whose layout you want to reuse.
+  <Step title="Open the client's Reports list">
+    Find the report whose layout you want to reuse.
   </Step>
   <Step title="Choose Save As Template">
-    Open the project's three-dot menu and click **Save As Template**. This is only available if you have permission to edit the project.
+    Open the report's three-dot menu — in the list, or the **⋮** menu in the report header — and click **Save As Template**. This is only available if you have permission to edit the report.
   </Step>
   <Step title="Name and describe it">
     In the **Save Template** dialog, enter a **Name** (e.g. *Monthly SEO Report*) and an optional **Description** so your team knows when to use it.
   </Step>
   <Step title="Review the data sources">
-    The dialog shows the **Data sources** the template uses. Oviond derives these automatically from the project's widgets — you don't set them by hand.
+    The dialog shows the **Data sources** the template uses. Oviond derives these automatically from the report's widgets — you don't set them by hand.
   </Step>
   <Step title="Save Template">
-    Click **Save Template**. The template appears in the [Templates library](/templates/list) and is available when you create new projects.
+    Click **Save Template**. The template appears in the [Templates library](/templates/list) and is available when you create new reports.
   </Step>
 </Steps>
 
@@ -31,14 +31,14 @@ You create a template by saving an existing project. There is no separate "new t
 
 - Every page and its layout.
 - Every widget — its type, data source, metrics, dimensions, and display settings (live values are stripped, so widgets ship in a demo state).
-- The project's date range, theme, orientation, and presentation settings (cover page, header, page numbers, thank-you page, and so on).
+- The report's date range, theme, orientation, and presentation settings (cover page, header, page numbers, thank-you page, and so on).
 - The list of `datasources` the template expects, derived from its widgets.
 
 ## What doesn't
 
-- **Live data and connections** — widgets ship without a client data connection. When you [use the template](/templates/apply), each widget is wired to the new project's client.
+- **Live data and connections** — widgets ship without a client data connection. When you [use the template](/templates/apply), each widget is wired to the new report's client.
 - **Cached chart values** — the template holds the structure, not the data.
 
 <Note>
-Oviond captures a **thumbnail** for the template automatically by rendering the source project. You don't upload one in the save dialog.
+Oviond captures a **thumbnail** for the template automatically by rendering the source report. You don't upload one in the save dialog.
 </Note>

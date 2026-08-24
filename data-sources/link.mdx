@@ -6,8 +6,8 @@ description: "Attach a connected data source to a specific client."
 A connection lives at the **workspace** level — one credential can be linked to many clients. Linking picks the account, property, or page for a client and makes that data source selectable in the client's widgets.
 
 <Steps>
-  <Step title="Open the Data Sources tab">
-    Open the client's project and click **Data Sources** in the editor sidebar.
+  <Step title="Open the data sources list">
+    Open the client and click **Data sources** in the sidebar — or, from inside a report, click **Data Sources** in the editor sidebar.
   </Step>
   <Step title="Select the connection">
     Under **Select Profile**, pick a connection you've already made (or click **Connect** to make a new one — see [Connect](/data-sources/connect)).
@@ -25,7 +25,7 @@ A connection lives at the **workspace** level — one credential can be linked t
 
 ## Unlink
 
-On the client's **Data Sources** tab, click **Unlink** next to a linked profile. The connection stays at the workspace level — it's just no longer available in this client. Widgets in this client's project that referenced it stop returning data.
+On the client's **Data sources** page, click **Unlink** next to a linked profile. The connection stays at the workspace level — it's just no longer available in this client. Widgets in this client's reports that referenced it stop returning data.
 
 <Note>
   Unlink takes effect immediately and isn't confirmed by a dialog. The connection remains in **Settings → Data sources** and can be linked to the same or a different client at any time.

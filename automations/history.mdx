@@ -1,9 +1,9 @@
 ---
 title: "Run history"
-description: "See every past run of a project's automations and its status."
+description: "See every past run of a report's automations and its status."
 ---
 
-The **Automation History** page lists every run recorded for a project — across all of its automations, and including both scheduled deliveries and test sends. Open it from an automation's **Executions** action, or from the row menu. The page lives at `/automations/:project_id`.
+The **Automation History** page lists every run recorded for a report — across all of its automations, and including both scheduled deliveries and test sends. Open it from an automation's **Executions** action, or from the row menu. The page lives at `/automations/:report_id`.
 
 Each row shows the run's name, **Source** (**Scheduled** or **Test**), the time it sent, its status, the report **Type**, and the **Date range** it covered. Test runs are also tagged with a **Test** badge. You can search by name and filter by report type, and the list is paginated.
 
@@ -23,7 +23,9 @@ Each row shows the run's name, **Source** (**Scheduled** or **Test**), the time 
 
 ## Endpoint
 
-The history is served by `GET /v1/automations/:project_id/history` — note that it's scoped by **project**, not by a single automation id. It aggregates the runs of every automation attached to that project into one timeline and is paginated via `page` and `limit`.
+The history is served by `GET /v1/automations/{report_id}/history` — note that it's scoped by **report**, not by a single automation id. It aggregates the runs of every automation attached to that report into one timeline and is paginated via `page` and `limit`.
+
+For a single timeline across the whole account — every automation, every report — call `GET /v1/automations/history`, which takes the same `page` and `limit` parameters. The Automations landing page uses it for its delivered count and filters.
 
 <Note>
 Archiving a run from the history list removes the underlying report snapshot for that run, not the automation itself. The automation keeps running on its schedule.

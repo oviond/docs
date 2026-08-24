@@ -21,7 +21,7 @@ Inviting users requires admin access — only users with **Admin access** can in
     Under **Permission level**, pick the access level that fits their role:
 
     - **Admin access** — full access to all features, including billing and team management.
-    - **Client access** — can view projects assigned to them.
+    - **Client access** — can view the reports for the clients assigned to them.
     - **Read-only access** — can view their assigned clients but cannot make changes.
   </Step>
   <Step title="Assign clients (Client and Read-only access only)">
@@ -33,5 +33,22 @@ Inviting users requires admin access — only users with **Admin access** can in
 </Steps>
 
 <Note>
-  Invited users have no password until they accept the invitation. They set one when they complete sign-up from the invite link. Until then, they appear in your **Users** list as not yet verified.
+  Invited users have no password until they accept the invitation. They set one when they complete sign-up from the invite link. Until then, they appear in your **Users** list as **Invited**.
 </Note>
+
+## Resend an invite
+
+If the invite never arrived, or the link went stale, resend it rather than removing and re-inviting the person.
+
+<Steps>
+  <Step title="Find the pending member">
+    In **Settings → Users**, find the row marked **Invited**.
+  </Step>
+  <Step title="Click Resend invite">
+    Oviond sends a fresh invitation to the same address.
+  </Step>
+</Steps>
+
+The new link replaces the old one — the previous invite stops working. Resending is only possible while an invite is pending: once someone has accepted, they have a session, and you'd change their access from [Update a user](/users/update) instead.
+
+Over the API, this is `POST /v1/users/{id}/resend-invite`. It returns `400` for a member who has already accepted.

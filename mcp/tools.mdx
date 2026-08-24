@@ -3,9 +3,12 @@ title: "Available tools"
 description: "The full catalog of tools the Oviond MCP server exposes."
 ---
 
-The Oviond MCP server exposes **179 tools** across 29 groups. Most map to a single REST
-operation; a few chain several. Tool names are verb-first — `create_client`, `list_projects`,
+The Oviond MCP server exposes **188 tools** across 29 groups. Most map to a single REST
+operation; a few chain several. Tool names are verb-first — `create_client`, `list_reports`,
 `add_data_widget` — so an agent can guess the right one from the action.
+
+Every tool also carries a title and read-only / destructive hints, so a client can show what a
+tool will do before it runs.
 
 ## Tool catalog
 
@@ -14,7 +17,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | Tool | What it does |
 |---|---|
 | `get_account` | Get account details for the authenticated user |
-| `get_account_usage` | Get current account usage stats (clients, projects, users, storage) |
+| `get_account_usage` | Get current account usage stats (clients, reports, users, storage) |
 
 ### Activity
 
@@ -34,7 +37,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 
 | Tool | What it does |
 |---|---|
-| `list_archive` | List soft-deleted (archived) items across clients, projects, media, automations and templates. |
+| `list_archive` | List soft-deleted (archived) items across clients, reports, media, automations and templates. |
 | `get_archive_counts` | Get the count of archived items per type. |
 | `restore_from_archive` | Restore archived items of one type back to active. |
 
@@ -46,24 +49,24 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `get_asset` | Get a single asset by ID. |
 | `create_asset` | Save widgets as a reusable section, the same way the editor does when you select widgets and save them: each widget is copied onto the section with a fresh id, and its type and datasources are… |
 | `update_asset` | Update asset metadata. Only include fields you want to change. |
-| `archive_asset` 🔒 | Archive a saved section and its widget rows. It goes to the archive, not away — `list_archive` shows it and `restore_from_archive` brings it back. |
+| `archive_asset` 🔒 | Archive a saved section and its widget rows. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. |
 | `duplicate_asset` | Duplicate an asset (and its widgets) under a new name. |
 | `list_asset_widgets` | List the widgets that belong to an asset (useful for previewing what add_asset_to_page will instantiate). |
-| `add_asset_to_page` | Instantiate an asset's widgets onto a project page. |
+| `add_asset_to_page` | Instantiate an asset's widgets onto a report page. Each widget is cloned with a fresh ID and stacked below existing widgets. Widgets whose datasource / goal / calculated metric isn't connected for… |
 | `list_asset_tags` | List every tag used across the account's saved sections (useful for filtering list_assets by tag). |
 
 ### Automations
 
 | Tool | What it does |
 |---|---|
-| `list_automations` | List automations with optional filtering by project or client |
+| `list_automations` | List automations with optional filtering by report or client |
 | `get_automation_history` | Get send history for an automation |
-| `create_automation` | Create a new automation. Pick an existing email template + sender by id (from email_templates / email_senders), or pass template_id:"custom" together with a `custom` payload to save a new named… |
-| `update_automation` | Update an existing automation — only include the fields you want to change |
-| `archive_automation` 🔒 | Archive an automation, stopping its scheduled deliveries. `restore_from_archive` brings it back, rescheduled. |
+| `create_automation` 🔒 | Create a new automation. Pick an existing email template + sender by id (from email_templates / email_senders), or pass template_id:"custom" together with a `custom` payload to save a new named… |
+| `update_automation` 🔒 | Update an existing automation — only include the fields you want to change |
+| `archive_automation` 🔒 | Archive an automation, stopping its scheduled deliveries. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back, rescheduled. |
 | `pause_automation` | Pause an automation |
-| `unpause_automation` | Unpause an automation |
-| `test_automation` | Send a test email for an automation |
+| `unpause_automation` 🔒 | Unpause an automation |
+| `test_automation` 🔒 | Send a test email for an automation |
 
 ### Billing
 
@@ -77,10 +80,10 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | Tool | What it does |
 |---|---|
 | `get_branding` | Get the account's white-label branding (logo, favicon) |
-| `update_branding` | Update branding settings — only include the fields you want to change. |
-| `refresh_account_favicon` | Re-derive the account's favicon from its website, cache-bust it, save it and return the new URL. |
+| `update_branding` | Update branding settings — only include the fields you want to change. For logo_url and favicon_url, use list_media to look up a URL from uploaded media. (Brand color is no longer configurable —… |
+| `refresh_account_favicon` | Re-derive the account's favicon from its website, cache-bust it, save it and return the new URL. Requires a website on the account (set it with update_company). |
 | `remove_account_logo` 🔒 | Remove the account's full logo. It falls back to the default Oviond branding. |
-| `remove_account_favicon` 🔒 | Remove the account's square logo (favicon). |
+| `remove_account_favicon` 🔒 | Remove the account's square logo (favicon). It falls back to the default Oviond branding. |
 
 ### Calculated metrics
 
@@ -89,7 +92,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `list_calculated_metrics` | List calculated metrics for the account (custom KPI formulas). |
 | `create_calculated_metric` | Create a calculated metric — a custom KPI from a formula over other metrics. |
 | `update_calculated_metric` | Update a calculated metric. Full replacement — you must send name, formula AND symbol. |
-| `archive_calculated_metric` 🔒 | Archive a calculated metric by ID. Restorable from the archive. |
+| `archive_calculated_metric` 🔒 | Archive a calculated metric by ID. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. |
 | `duplicate_calculated_metric` | Duplicate a calculated metric, optionally with a new name. |
 
 ### Clients
@@ -101,12 +104,12 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `get_client` | Get a single client by ID |
 | `create_client` | Create a new client |
 | `update_client` | Update an existing client — only include the fields you want to change |
-| `archive_client` 🔒 | Archive a client by ID, with its projects, exports and automations. Restorable from the archive. |
-| `archive_clients` 🔒 | Archive several clients by ID in one call. Restorable from the archive. |
+| `archive_client` 🔒 | Archive a client by ID, with its reports, exports and automations. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. |
+| `archive_clients` 🔒 | Archive several clients by ID in one call. They go to the archive, not away — list_archive shows them and restore_from_archive brings them back. |
 | `remove_client_logo` 🔒 | Remove a client's full logo (logo_url). It falls back to the agency branding. |
-| `remove_client_favicon` 🔒 | Remove a client's square logo/favicon (favicon_url). |
-| `refresh_client_favicon` | Re-derive a client's square favicon from its stored website (Google favicon service), cache-bust it, save it, and return the new favicon URL. |
-| `refresh_client_screenshot` | Re-take the screenshot of a client's website and save it, returning the new URL. |
+| `remove_client_favicon` 🔒 | Remove a client's square logo/favicon (favicon_url). It falls back to the agency branding. |
+| `refresh_client_favicon` | Re-derive a client's square favicon from its stored website (Google favicon service), cache-bust it, save it, and return the new favicon URL. Requires the client to have a website configured. |
+| `refresh_client_screenshot` | Re-take the screenshot of a client's website and save it, returning the new URL. The screenshot is generated server-side from the stored website, so the client needs one configured. Use this when the… |
 | `move_client_to_folder` | Move a client to one or more folders |
 
 ### Company
@@ -124,22 +127,22 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `list_custom_data` | List uploaded custom-data (CSV) datasets for the account — summaries without the row data. |
 | `get_custom_data` | Get a single custom-data dataset by ID, including its parsed rows. |
 | `create_custom_data` | Create a custom-data dataset from parsed CSV rows (max 10,000 rows). |
-| `update_custom_data` | Update a custom-data dataset — send only the fields you want to change (e.g. &#123; raw_data, columns &#125;). |
-| `archive_custom_data` 🔒 | Archive a custom-data dataset by ID. Restorable from the archive. |
+| `update_custom_data` | Update a custom-data dataset — send only the fields you want to change (e.g. { raw_data, columns }). |
+| `archive_custom_data` 🔒 | Archive a custom-data dataset by ID. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. |
 | `duplicate_custom_data` | Duplicate a custom-data dataset with a new name. |
 
 ### Datasources
 
 | Tool | What it does |
 |---|---|
-| `datasources` | List every datasource Oviond supports, with the `id` (the datasource_id used everywhere else — e.g. ga4, gadw, fb-ads), name, category, and data views. |
+| `datasources` | List every datasource Oviond supports, with the `id` (the datasource_id used everywhere else — e.g. ga4, gadw, fb-ads), name, category, and data views. Call this FIRST to find the datasource_id, then… |
 | `describe_datasource` | Describe a datasource the way the report builder sees it, in one call: its data views, the `advanced` settings each view requires, its default view and defaults, and its metric and dimension catalogs… |
-| `connected_datasources` | List the datasource connections this account has made. |
-| `create_connection` | Create a datasource connection from credentials — the connect panel's credential form, as a tool. |
-| `link_datasource` | Point a client at one of the account's datasource connections — the connect panel's account picker, as a tool. |
-| `test_connection` | Test whether a client's connected datasource is still working (e.g. the OAuth token is valid). |
+| `connected_datasources` | List the datasource connections this account has made. A widget can only pull real data from a datasource that is connected to its client — anything else renders demo data. |
+| `create_connection` | Create a datasource connection from credentials — the connect panel's credential form, as a tool. Call it with just datasource_id to be told which fields that datasource needs, then again with those… |
+| `link_datasource` | Point a client at one of the account's datasource connections — the connect panel's account picker, as a tool. Call it with just client_id + datasource_id to see the choices, then again with the id… |
+| `test_connection` | Test whether a stored datasource connection is still working (e.g. the OAuth token is valid). Records the outcome on the connection, so its status reflects this test. |
 | `rename_connection` | Rename a datasource connection |
-| `unlink_datasource` 🔒 | Detach a connected datasource from a client so its widgets no longer pull from that connection. |
+| `unlink_datasource` 🔒 | Detach a connected datasource from a client so its widgets no longer pull from that connection. Does not delete the connection itself. The affected widgets keep their config and fall back to demo… |
 | `delete_connection` 🔒 | Delete a datasource connection — every widget pulling data from it will break |
 
 ### Domains
@@ -154,7 +157,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 
 | Tool | What it does |
 |---|---|
-| `send_email` | Send an email. Either pass template_id (a saved template) OR subject+html (free-form). Sends are queued and paced; poll email logs for delivery. |
+| `send_email` 🔒 | Send an email. Either pass template_id (a saved template) OR subject+html (free-form). Sends are queued and paced; poll email logs for delivery. |
 | `list_email_logs` | List sent-email history / delivery logs. |
 | `list_email_senders` | List configured "From" senders and the active provider. |
 | `create_email_sender` | Create a "From" sender. |
@@ -178,8 +181,8 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 
 | Tool | What it does |
 |---|---|
-| `list_exports` | List PDF export history for a project (one row per generation attempt). |
-| `archive_export` 🔒 | Archive a PDF export record by ID. Restorable from the archive. |
+| `list_exports` | List PDF export history for a report (one row per generation attempt). |
+| `archive_export` 🔒 | Archive a PDF export record by ID. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. |
 
 ### Folders
 
@@ -197,7 +200,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `list_goals` | List goals for the account (targets tracked against a metric query). |
 | `create_goal` | Create a goal — a target value + comparison for a saved metric query. |
 | `update_goal` | Update a goal — only include the fields you want to change. |
-| `archive_goal` 🔒 | Archive a goal by ID. Restorable from the archive. |
+| `archive_goal` 🔒 | Archive a goal by ID. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. |
 | `duplicate_goal` | Duplicate a goal, optionally with a new name. |
 
 ### Media
@@ -206,8 +209,8 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 |---|---|
 | `list_media` | List media files |
 | `rename_media_file` | Rename a media file |
-| `archive_media_file` 🔒 | Archive a media file. The file leaves storage only when it is permanently deleted from the archive. |
-| `archive_media_files` 🔒 | Archive several media files by ID in one call. Restorable from the archive. |
+| `archive_media_file` 🔒 | Archive a media file. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. The file itself is only removed from storage when it is permanently deleted… |
+| `archive_media_files` 🔒 | Archive several media files by ID in one call. They go to the archive, not away — list_archive shows them and restore_from_archive brings them back. |
 | `move_media_to_folder` | Move one or more media files into a media folder. |
 | `list_media_folders` | List the account's media folders. |
 | `create_media_folder` | Create a new media folder. |
@@ -225,17 +228,17 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `archive_notifications` 🔒 | Archive several notifications by ID in one call. They leave the inbox but are not erased. |
 | `clear_read_notifications` 🔒 | Delete all notifications that have already been read. |
 | `get_notification_preferences` | Get the per-event notification delivery preferences (which channels fire for each event type). |
-| `update_notification_preferences` | Change how you are notified for specific events. |
+| `update_notification_preferences` | Change how you are notified for specific events. Pass only the events — and only the channels — you want to change; this reads your current preferences, applies the overrides, and saves the full set… |
 | `list_notification_channels` | List the account's configured Slack/Discord notification channels (webhook + enabled state). |
-| `set_notification_channel` | Configure a Slack or Discord notification channel with an incoming-webhook URL. |
+| `set_notification_channel` | Configure a Slack or Discord notification channel with an incoming-webhook URL. Enabling a channel does not turn it on for any event — set that per event via update_notification_preferences. |
 | `delete_notification_channel` 🔒 | Remove a configured Slack or Discord notification channel. |
 
 ### Pages
 
 | Tool | What it does |
 |---|---|
-| `list_pages` | List pages for a project or template, ordered by position |
-| `create_page` | Add a page to a project or template. Appended at the end by default. |
+| `list_pages` | List pages for a report or template, ordered by position |
+| `create_page` | Add a page to a report or template. Appended at the end by default. |
 | `update_page` | Update a page — only include the fields you want to change |
 | `delete_page` 🔒 | Delete a page by ID |
 
@@ -243,38 +246,38 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 
 | Tool | What it does |
 |---|---|
-| `generate_pdf` | Queue a PDF render of a project. Returns a job_id — poll get_pdf_status until it completes, then download the URL. |
+| `generate_pdf` | Queue a PDF render of a report. Returns a job_id — poll get_pdf_status until it completes, then download the URL. |
 | `get_pdf_status` | Poll a PDF job. status is pending → processing → complete (with a url) or failed. |
 
-### Projects
+### Reports
 
 | Tool | What it does |
 |---|---|
-| `list_projects` | List report/dashboard projects for the account, optionally filtered by client. |
-| `get_project` | Get a single project by ID |
-| `create_project` | Create a new report/dashboard project for a client. |
-| `update_project` | Update a project — only include the fields you want to change |
-| `archive_project` 🔒 | Archive a project by ID. Its pages and widgets stay attached and come back with it. Restorable from the archive. |
-| `archive_projects` 🔒 | Archive several projects by ID in one call. Restorable from the archive. |
-| `duplicate_project` | Duplicate a project with a new name |
-| `change_project_date_range` | Set the period a project reports on. Every data widget on it is re-fetched for the new range and the results are saved — widgets on their own custom range keep it. A rolling preset ("Last 30 Days")… |
-| `refresh_project` | Re-fetch every data widget on a project with its current config and the project date range, saving the results. |
+| `list_reports` | List reports and dashboards for the account, optionally filtered by client. |
+| `get_report` | Get a single report by ID |
+| `create_report` | Create a new report or dashboard for a client. Layout flags have sensible server defaults when omitted. |
+| `update_report` | Update a report — only include the fields you want to change |
+| `archive_report` 🔒 | Archive a report by ID. Its pages and widgets stay attached and come back with it. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. |
+| `archive_reports` 🔒 | Archive several reports by ID in one call. They go to the archive, not away — list_archive shows them and restore_from_archive brings them back. |
+| `duplicate_report` | Duplicate a report with a new name |
+| `change_report_date_range` | Set the period a report covers. Every data widget on it is re-fetched for the new range and the results are saved — widgets on their own custom range keep it. A rolling preset ("Last 30 Days") is… |
+| `refresh_report` | Re-fetch every data widget on a report with its current config and the report date range, saving the results. Pass datasource_id to refresh only the widgets fed by one datasource — what you do after… |
 
 ### Search
 
 | Tool | What it does |
 |---|---|
-| `search` | Search clients and projects by name (minimum 2 characters) |
+| `search` | Search clients and reports by name (minimum 2 characters) |
 
 ### Templates
 
 | Tool | What it does |
 |---|---|
-| `list_templates` | List project templates with optional filtering and pagination |
+| `list_templates` | List report templates with optional filtering and pagination |
 | `get_template` | Get a single template by ID |
-| `create_template` | Create a template from an existing project. |
+| `create_template` | Create a template from an existing report. Pages, widgets, and datasource categories are copied/derived from the source report automatically. |
 | `update_template` | Update a template — only include the fields you want to change |
-| `archive_template` 🔒 | Archive a template by ID. Restorable from the archive. |
+| `archive_template` 🔒 | Archive a template by ID. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. |
 | `list_template_widgets` | List the widgets that belong to a template (optionally filtered to a single page). |
 
 ### Themes
@@ -284,8 +287,8 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `list_themes` | List all themes available to the account (own + shared) |
 | `get_theme` | Get a single theme by ID |
 | `create_theme` | Create a new visual theme. Supply the complete tokens map (primary, font, radius, shadow, canvas, surface, chart1-10, etc.) — tokens are the single source of truth for every visual property. A theme… |
-| `update_theme` | Update a theme — only include the fields you want to change. |
-| `archive_theme` 🔒 | Archive a theme by ID. Projects using it fall back to the default. Restorable from the archive. |
+| `update_theme` | Update a theme — only include the fields you want to change. Supply the full tokens map when changing visual properties (partial token updates replace the entire map). Update cover_page or… |
+| `archive_theme` 🔒 | Archive a theme by ID. Reports using it fall back to the default. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. |
 
 ### Users
 
@@ -293,7 +296,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 |---|---|
 | `get_current_user` | Get the currently authenticated user profile |
 | `list_users` | List all team members on the account |
-| `invite_user` | Invite a new user to join the account. admin has full account access; clients gives read+write to assigned clients; readonly is view-only on assigned clients. |
+| `invite_user` 🔒 | Invite a new user to join the account. admin has full account access; clients gives read+write to assigned clients; readonly is view-only on assigned clients. |
 | `update_user` | Edit a team member — only include the fields you want to change |
 | `remove_user` 🔒 | Remove a team member from the account |
 | `update_my_profile` | Update the authenticated user's profile — only include the fields you want to change |
@@ -304,7 +307,7 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 
 | Tool | What it does |
 |---|---|
-| `list_widgets` | List all widgets for a source (project or template). |
+| `list_widgets` | List all widgets for a source (report or template). |
 | `get_widget` | Get a single widget by ID. |
 | `add_title_widget` | Add a title widget to a page. Position, width, and height use sensible defaults. |
 | `add_text_widget` | Add a rich-text widget to a page. Position, width, and height use sensible defaults. |
@@ -312,26 +315,35 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 | `add_button_widget` | Add a button widget to a page. Position, width, and height use sensible defaults. |
 | `add_embed_widget` | Add an embed widget to a page. Position, width, and height use sensible defaults. |
 | `add_data_widget` | Add a DATA widget to a page and configure it, applying the same rules as the report builder: the datasource's defaults, the generated name, sort and row limit, and validation of the… |
+| `add_calculated_metric_widget` | Add a Calculated Metric widget to a page: a table trended by date, showing demo data until it points at a formula. Returns the new widget_id — configure it with update_data_widget, passing the… |
+| `add_custom_data_widget` | Add a Custom Data widget to a page: a table showing demo data until it points at an uploaded CSV dataset. Returns the new widget_id — configure it with update_data_widget, passing… |
+| `add_goal_widget` | Add a Goal widget to a page: a progress gauge showing a demo target until it points at a saved goal. Returns the new widget_id — configure it with update_data_widget, passing advanced.goal_id from… |
+| `add_static_value_widget` | Add a Static Value widget to a page: one typed-in value as a KPI card — a number, an amount like "R50", or free text like "Active". It has no datasource and never fetches, so unlike the other cards… |
 | `update_title_widget` | Update a TITLE widget. |
 | `update_text_widget` | Update a TEXT widget. Replaces the entire text content. |
 | `update_image_widget` | Update an IMAGE widget. |
 | `update_button_widget` | Update a BUTTON widget. |
 | `update_embed_widget` | Update an EMBED widget. |
-| `update_data_widget` | Update a DATA widget — its name, datasource, data view, metrics, dimensions, filters, advanced settings, chart type, date range, sort and row limit. |
+| `update_data_widget` | Update a DATA widget — its name, datasource, data view, metrics, dimensions, filters, advanced settings, chart type, date range, sort and row limit. Applies the report builder's rules: a new… |
+| `update_calculated_metric_widget` | Point a Calculated Metric widget at a saved formula. Ids come from list_calculated_metrics. The series is re-fetched in the background — call get_widget_data with this id to read the numbers. |
+| `update_custom_data_widget` | Point a Custom Data widget at an uploaded CSV dataset and choose its columns. The dataset id comes from list_custom_data and the column names from get_custom_data — a dataset has no fixed catalog, so… |
+| `update_goal_widget` | Point a Goal widget at a saved goal. Ids come from list_goals. The goal carries its own metric query, target and comparison, so nothing else is needed; the gauge is re-fetched in the background. |
+| `update_static_value_widget` | Set the value on a Static Value widget — a number, an amount like "R50", or free text like "Active". It has no datasource and never fetches, so the value is shown exactly as passed. |
 | `move_widget` | Move or resize a widget. Works for any widget type. Pass only the dimensions you want to change. |
 | `delete_widget` 🔒 | Delete a widget by ID. |
 | `delete_widgets` 🔒 | Delete multiple widgets by ID in one call. |
-| `refresh_widgets` | Re-fetch specific widgets with their saved config and save the results. |
-| `datasource_resources` | List the selectable values behind a widget's advanced settings and filters — campaigns, ad sets, forms, videos, alerts, and so on. |
+| `refresh_widgets` | Re-fetch specific widgets with their saved config and save the results. Configuring a widget with update_data_widget already refreshes it, so this is for re-reading without a config change. Returns… |
+| `get_widget_data` | Read the numbers behind data widgets, for charting them. Returns one entry per widget: its name, its saved chart type, its state, and — once its fetch has landed — the metric and dimension labels… |
+| `datasource_resources` | List the selectable values behind a widget's advanced settings and filters — campaigns, ad sets, forms, videos, alerts, and so on. describe_datasource says WHICH advanced keys a data view requires… |
 
 ### Workflows
 
 | Tool | What it does |
 |---|---|
-| `create_client_with_project` | Create a new client and its first report/dashboard in one step. |
-| `create_project_from_template` | Create a report or dashboard for an existing client by cloning a template (its pages + widgets). |
-| `add_project_section` | Add a saved section (asset) to a project — works for both reports and dashboards. |
-| `audit_project_health` | Audit a report or dashboard: report its connected data sources and automation state, and flag likely issues (no data sources connected, paused automations). |
+| `create_client_with_report` | Create a new client and its first report or dashboard in one step. The first report is resolved from the inputs: template_id clones that template; blank:true creates an empty report; with neither, a… |
+| `create_report_from_template` | Create a report or dashboard for an existing client by cloning a template (its pages + widgets). Find the template first with list_templates — filter by datasources + type (e.g. datasources=gadw… |
+| `add_report_section` | Add a saved section (asset) to a report — works for both reports and dashboards. Find the section first with list_assets (filter by name, type, or datasource). Page handling is automatic: a… |
+| `audit_report_health` | Audit a report or dashboard: list its connected data sources and automation state, and flag likely issues (no data sources connected, paused automations). Read-only. |
 
 🔒 = flagged destructive, so a client can prompt before running it.
 
@@ -346,8 +358,13 @@ operation; a few chain several. Tool names are verb-first — `create_client`, `
 - **Metrics and dimensions are objects** — pass `[{ "value": "clicks" }]`, not `["clicks"]`. Only
   `value` is required; Oviond fills in the rest from the catalog. The same shape is used by the
   widget, goal and calculated-metric tools.
-- **Data is fetched server-side** after a widget is written. `refresh_widgets` or `refresh_project`
-  force it.
+- **One tool per widget type** — `add_data_widget` for a datasource-backed widget, and
+  `add_calculated_metric_widget`, `add_custom_data_widget`, `add_goal_widget` and
+  `add_static_value_widget` for the four sources that aren't a platform. Each takes only the fields
+  its type has, and each has a matching `update_` tool.
+- **Data is fetched server-side** after a widget is written. `refresh_widgets` or `refresh_report`
+  force it. Reading it back is `get_widget_data`, which waits briefly for in-flight fetches and
+  returns each widget's state plus its rows — up to 200 per widget.
 
 ## Reference
 

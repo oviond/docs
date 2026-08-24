@@ -1,9 +1,9 @@
 ---
 title: "Connect"
-description: "Authorize Oviond to pull data from Google Ads, Facebook, and 60+ other platforms."
+description: "Authorize Oviond to pull data from Google Ads, Facebook, and 80+ other platforms."
 ---
 
-Connecting a marketing platform to a client is a two-step process that happens inside a client's project editor. First, you authorize the platform — through OAuth or an API key — which creates a reusable **connection** (an auth profile) in your workspace. Second, you link a specific account, property, or page from that connection to the client. Once linked, that data source is available when you build widgets for that client.
+Connecting a marketing platform to a client is a two-step process. First, you authorize the platform — through OAuth or an API key — which creates a reusable **connection** (an auth profile) in your workspace. Second, you link a specific account, property, or page from that connection to the client. Once linked, that data source is available when you build widgets for that client.
 
 <Note>
   Oviond requests read-only access to the platforms you connect. Oviond cannot make changes to your campaigns, budgets, or account settings.
@@ -11,16 +11,17 @@ Connecting a marketing platform to a client is a two-step process that happens i
 
 ## Where data sources live
 
-You manage data sources in two places:
+You manage data sources in three places:
 
-- **A project's Data Sources tab** — open a client's project, then click **Data Sources** in the editor sidebar. This is where you connect platforms and link them to the client. It's the primary place to wire up data.
-- **Settings → Data sources** (`/settings/data-sources`) — a workspace-wide table of every connection. Use it to rename, refresh, or delete connections and to see which clients use each one. You cannot create new connections here; the empty state points you back to a project editor: *Connect data sources from a client project editor.*
+- **A client's Data sources page** — open the client and click **Data sources** in the sidebar. Every platform is listed as a card, connected ones first. This is the primary place to wire up data, and it works before the client has a single report. See [Client Data Sources](/data-sources/client-sources).
+- **A report's Data Sources tab** — open a report, then click **Data Sources** in the editor sidebar. The same flow, scoped to that report's client, for when you're already building.
+- **Settings → Data sources** (`/settings/data-sources`) — a workspace-wide table of every connection. Use it to rename, refresh, or delete connections and to see which clients use each one.
 
 ## Step 1: Connect the platform
 
 <Steps>
-  <Step title="Open the Data Sources tab">
-    Open a client's project and click **Data Sources** in the editor sidebar.
+  <Step title="Open the data sources list">
+    Open the client and click **Data sources** in the sidebar — or, from inside a report, click **Data Sources** in the editor sidebar.
   </Step>
   <Step title="Find the platform">
     Use the **Search data sources...** box to find the platform you want (for example, Google Ads or Facebook Ads).
@@ -74,10 +75,10 @@ OAuth tokens expire or are revoked when you change a password, revoke app access
 
 <Steps>
   <Step title="Find the connection">
-    Open the project's **Data Sources** tab (or **Settings → Data sources**) and look for a connection showing **Token Expired**.
+    Open the client's **Data sources** page (or **Settings → Data sources**) and look for a connection showing **Token Expired**.
   </Step>
   <Step title="Refresh">
-    Click **Refresh** (in the project tab) or **Refresh token** (in Settings). Oviond reopens the OAuth popup.
+    Click **Refresh** (on the connection) or **Refresh token** (in Settings). Oviond reopens the OAuth popup.
   </Step>
   <Step title="Re-authorize">
     Complete the OAuth flow again with the same account. Oviond updates the connection with a fresh token, and the badge returns to **Token Valid**.
@@ -95,7 +96,7 @@ OAuth tokens expire or are revoked when you change a password, revoke app access
     If you have multiple accounts on a platform (for example, both a personal and a work Google account), the OAuth popup may default to the wrong one. To fix this:
 
     1. Delete the incorrect connection from **Settings → Data sources** (**Delete profile**).
-    2. Start **Connect** again in the project's **Data Sources** tab.
+    2. Start **Connect** again from the client's **Data sources** page.
     3. In the OAuth window, use the account switcher or **Use a different account** and log in with the correct credentials.
   </Accordion>
 

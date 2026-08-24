@@ -3,21 +3,18 @@ title: "Connect Google Analytics 4"
 description: "End-to-end GA4 setup for a client — from OAuth to your first widget."
 ---
 
-Google Analytics 4 is one of the most common data sources in Oviond reports. This guide walks through connecting GA4 to a client inside a project and adding a first widget. GA4 uses a two-step account selection: you pick the analytics **account**, then the **property** inside it.
+Google Analytics 4 is one of the most common data sources in Oviond reports. This guide walks through connecting GA4 to a client and adding a first widget. GA4 uses a two-step account selection: you pick the analytics **account**, then the **property** inside it.
 
 ## Before you start
 
 - You have at least **Viewer** access to the GA4 property you want to report on.
-- You've already created an Oviond [client](/clients/add) and a [project](/projects/add) for this customer. You connect data sources from inside the project editor.
+- You've already created an Oviond [client](/clients/add). You can connect data sources from the client's [Data sources](/data-sources/client-sources) page before building a [report](/reports/add), or from inside the report editor.
 
 ## 1. Start the connection
 
 <Steps>
-  <Step title="Open the project">
-    From the client's **Projects** tab, open the project you want to report in.
-  </Step>
-  <Step title="Open the Data sources tab">
-    In the editor sidebar, click **Data sources**.
+  <Step title="Open the data sources list">
+    Open the client and click **Data sources** in the sidebar — or, from inside a report, click **Data sources** in the editor sidebar.
   </Step>
   <Step title="Find Google Analytics 4">
     Use the **Search data sources...** box, then click **Connect** next to Google Analytics 4.
@@ -94,7 +91,7 @@ If the profile shows **Token Expired**, click **Refresh** on the profile to reop
 </Steps>
 
 <Note>
-Set the project's date range to a relative period (for example, last 30 days) so the widget auto-updates each time the report is opened. Oviond auto-saves the editor as you work.
+Set the report's date range to a relative period (for example, last 30 days) so the widget auto-updates each time the report is opened. Oviond auto-saves the editor as you work.
 </Note>
 
 ## Common follow-ups

@@ -7,7 +7,7 @@ A **widget** is an individual block on a page. A data widget connects to a data 
 
 <Steps>
   <Step title="Open the report or dashboard">
-    From the client's **Projects** tab, open the project.
+    From the client's **Reports** tab, open the report.
   </Step>
   <Step title="Select the page">
     For a report, click the page you want to add the widget to. (A dashboard is a single view.)
@@ -16,10 +16,10 @@ A **widget** is an individual block on a page. A data widget connects to a data 
     In the editor sidebar, open the **Add Content** tab.
   </Step>
   <Step title="Drag a content type onto the canvas">
-    Drag **Data Query**, **Heading**, **Textbox**, **Image**, **Button**, or **Embed** onto the grid where you want it. See [Content types](/widgets/types).
+    Drag a card onto the grid where you want it: **Data Query**, **Calculated Metric**, **Custom Data**, **Goal**, **Static Value**, **Heading**, **Textbox**, **Image**, **Button**, or **Embed**. See [Content types](/widgets/types).
   </Step>
   <Step title="Configure it">
-    For a Data Query, pick the data source, metric, and optional dimension, then set the data. See [Configure a widget](/widgets/configure).
+    For a Data Query, pick the data source, metric, and optional dimension, then set the data. A new data widget shows demo data until it has a source. See [Configure a widget](/widgets/configure).
   </Step>
 </Steps>
 
@@ -29,7 +29,7 @@ A dashboard is capped at 50 widgets. Reports paginate instead, so they have no w
 
 ## API
 
-`POST /v1/widgets` batch-upserts widgets. Oviond saves the whole project atomically and also auto-saves as you work.
+`POST /v1/widgets` batch-upserts widgets. Oviond saves the whole report atomically and also auto-saves as you work.
 
 For a **data widget**, configure it with plain identifiers — pass metric and dimension **`id`s** (from [`GET /v1/datasources/{datasource_id}/describe`](/api/concepts/querying-data#finding-valid-identifiers)):
 
@@ -45,7 +45,7 @@ For a **data widget**, configure it with plain identifiers — pass metric and d
     "chart": "line"
   }],
   "source_type": "project",
-  "source_id": "prj_...",
+  "source_id": "rpt_...",
   "client_id": "cli_...",
   "page_id": "pg_..."
 }
@@ -53,6 +53,7 @@ For a **data widget**, configure it with plain identifiers — pass metric and d
 
 - **`metrics` / `dimensions`** are arrays of objects. Only `value` — the field `id` — is required; Oviond fills in the rest from the catalog. Add `label` to rename the field on the widget.
 - **`chart`** is one of `table`, `score`, `area`, `line`, `bar`, `column`, `pie`, `donut`, `funnel`, `map`.
+- **`source_type`** is `project` or `template`. `project` is a stored value that predates the rename to *report* — it still means a report, and it was left as-is rather than migrating every widget row.
 - **`filters`** (optional) is an array of `{ field, operator, value }`; see [Querying data](/api/concepts/querying-data) for operators.
 
 Over MCP, the equivalent is `add_data_widget` with the same `datasource_id`, `metrics`, `dimensions` and `chart`.

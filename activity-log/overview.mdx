@@ -5,7 +5,7 @@ description: "Audit meaningful actions taken in your account."
 
 The **Activity log** records who did what and when across your account. Open it from **Settings → Activity log** (`/settings/activity-log`). Use it to:
 
-- Trace when a client, project, or report was created, updated, or deleted
+- Trace when a client, report, or data source was created, updated, or deleted
 - See which team member changed a role or removed a user
 - Correlate a change with a recent data source action
 
@@ -27,7 +27,7 @@ Each record also stores `resource_id` and an optional `details` object internall
 ## Filter and search
 
 - **Search** by resource name or action.
-- **Filter by type** — one resource type at a time: `client`, `project`, `media`, `automation`, `user`, `auth`, or `email`.
+- **Filter by type** — one resource type at a time: `client`, `project`, `media`, `automation`, `user`, `auth`, or `email`. `project` is the stored value for a **report** — it predates the rename and was left alone rather than rewriting every logged row.
 
 ## Who can see what
 

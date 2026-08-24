@@ -1,0 +1,44 @@
+---
+title: "Client Data Sources"
+description: "Connect a client's platforms from the client's own Data sources page."
+---
+
+Every client has a **Data sources** page listing the whole catalog of platforms Oviond supports. It's where you connect a client's accounts — you don't need to open a report first.
+
+Reach it from the client's sidebar, or go straight to `/{client_id}/data-sources`.
+
+<Note>
+A client with nothing connected lands on this page instead of an empty Reports list. Once the client has at least one data source linked, opening the client goes to **Reports** as usual.
+</Note>
+
+## The card grid
+
+Each platform is a card showing its logo, name, and category. Platforms this client already uses sort to the top, and the rest follow alphabetically.
+
+| Card state | Meaning |
+|---|---|
+| **Connect** | This client has no connection for the platform yet. |
+| **Connected** | The client has a linked connection. Hover or focus the card and the button reads **Open**. |
+
+Clicking anywhere on a card — in either state — opens the same thing: that platform's connections.
+
+## Search
+
+The search box matches a platform's **name** or **category**, so *analytics* surfaces every analytics platform. If nothing matches, the empty state offers **Request a data source**, which opens the feature-request board where you can file or vote for the integration.
+
+## Connecting
+
+Clicking a card opens a slide-over running the same connect flow as the report editor — OAuth popup or API-key form, then the account, property, or page picker.
+
+Because you started from a client, the client is fixed for the whole flow: you don't pick one. The slide-over opens directly on the chosen platform's **profiles** view, listing the connections you already hold for it, each with **Link**, **Unlink**, **Edit**, and **Refresh**. A platform with no connections yet goes straight to naming and authorizing one.
+
+Once a connection is linked to the client, the slide-over closes and the grid updates.
+
+## Permissions
+
+Anyone who can see the client can open this page. Connecting, linking, and unlinking require **edit** access to that client — read-only users and users scoped to other clients see the cards and their state, without the actions.
+
+## Where else connections live
+
+- **The report editor** — open a report and click **Data Sources** in the editor sidebar. Same flow, same connections, scoped to the report's client. See [Connect a Data Source](/data-sources/connect).
+- **Settings → Data sources** — a workspace-wide table of every connection with its token status and the clients using it, for renaming, refreshing, and deleting. See [List Data Sources](/data-sources/list).

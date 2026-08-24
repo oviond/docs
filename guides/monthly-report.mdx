@@ -7,40 +7,40 @@ This guide sets up a monthly automated report that delivers to your client's inb
 
 ## Before you start
 
-- You have a [project](/projects/add) — report or dashboard — ready to send.
+- You have a [report](/reports/add) — multi-page report or dashboard — ready to send.
 - You've configured a [sender](/email-settings/senders) so the email comes from your own domain (optional — Oviond falls back to a default address).
-- You've tested the project's widgets with live data.
+- You've tested the report's widgets with live data.
 
 ## 1. Verify the report is ready to send
 
 <Steps>
-  <Step title="Open the project">
+  <Step title="Open the report">
     Make sure every widget is configured against the right data source and date range.
   </Step>
   <Step title="Use a relative date range">
     Plan to set the automation's date range to a relative period such as **Last Month**. Relative dates are essential for automations — each monthly run pulls its own month's data.
   </Step>
   <Step title="Preview a PDF">
-    Open the project's **Share** dialog, switch to the **Download** tab, and click **Generate New PDF**. Generation runs in the background; check that the rendered report looks clean. See [PDF export](/automations/pdf).
+    Open the report's **Share** dialog, switch to the **Download** tab, and click **Generate New PDF**. Generation runs in the background; check that the rendered report looks clean. See [PDF export](/automations/pdf).
   </Step>
 </Steps>
 
 ## 2. Create the automation
 
-You can create an automation from the top-level **Automations** screen or from the project editor's **Automations** tab. See [Add an automation](/automations/add).
+You can create an automation from the top-level **Automations** screen or from the report editor's **Automations** tab. See [Add an automation](/automations/add).
 
 <Steps>
   <Step title="Open Automations">
-    Click **Automations** in the left sidebar, then click **New automation**. (From the project editor's **Automations** tab, click **Add automation** instead, and the project is pre-selected.)
+    Click **Automations** in the left sidebar, then click **New automation**. (From the report editor's **Automations** tab, click **Add automation** instead, and the report is pre-selected.)
   </Step>
   <Step title="Name and set the schedule">
     Enter a **Name**. Set **Frequency** to **Monthly**, **Day of month** to `1`, and **Send at** to a morning hour. The schedule is evaluated against your account timezone. See [Scheduled delivery](/automations/scheduled).
   </Step>
-  <Step title="Pick the project and date range">
-    Choose the **Client** and **Project** you validated, then set **Date range** to **Last Month**. The report is rendered fresh for that range on every run.
+  <Step title="Pick the report and date range">
+    Choose the **Client** and **Report** you validated, then set **Date range** to **Last Month**. The report is rendered fresh for that range on every run.
   </Step>
   <Step title="Configure the email">
-    Add the client contact under **Recipients** (you can add several). Choose the **From** sender, and pick an **Email template** — or choose **Custom message** to compose a **Subject** and **Message** inline. Placeholders like the client name and date range fill in from the project. See [Email delivery](/automations/email).
+    Add the client contact under **Recipients** (you can add several). Choose the **From** sender, and pick an **Email template** — or choose **Custom message** to compose a **Subject** and **Message** inline. Placeholders like the client name and date range fill in from the report. See [Email delivery](/automations/email).
   </Step>
   <Step title="Create">
     Click **Create**. The automation is saved and the next run is scheduled automatically.
@@ -73,7 +73,7 @@ After the first scheduled delivery (on the 1st of next month):
 
 <Steps>
   <Step title="Open run history">
-    From an automation, click **Executions**, or open the project's run history. See [Run history](/automations/history).
+    From an automation, click **Executions**, or open the report's run history. See [Run history](/automations/history).
   </Step>
   <Step title="Check the status">
     **Success** — the run rendered and sent. **Failed** — a rendering or delivery problem; the error detail is stored with the run. **Skipped** — the run was skipped, e.g. the automation was paused when it was due.

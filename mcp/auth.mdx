@@ -32,7 +32,7 @@ The only supported scope is `mcp`, and the only supported PKCE method is `S256`.
 
 Access tokens are scoped to **the signed-in user's role and account**. The MCP server:
 
-- Sees only clients, projects, and data the authenticated user can see in the web app.
+- Sees only clients, reports, and data the authenticated user can see in the web app.
 - Inherits the user's role (carried as a claim in the access token).
 - Is scoped to a single account — you don't pass an `account_id`.
 

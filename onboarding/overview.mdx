@@ -5,7 +5,7 @@ description: "The 6-step setup flow shown after your first sign-in."
 
 After your first sign-in, Oviond opens a full-page setup flow at `/onboarding`. It walks you through six steps: your details, your company, and your first client. The flow is blocking — until you finish it, every other page redirects you back here, and there is no skip or dismiss control. Most steps are a single field, so the whole thing takes about a minute.
 
-Once you finish, Oviond creates your account, company, theme, first client, and a starter project, then drops you on that client's **Projects** page. The flow is gated by the `account.onboarding` flag, which the backend sets when your account is created, so the flow never appears again.
+Once you finish, Oviond creates your account, company, theme, first client, and a starter report, then drops you on that client's **Reports** page. The flow is gated by the `account.onboarding` flag, which the backend sets when your account is created, so the flow never appears again.
 
 ## The 6 steps
 
@@ -26,7 +26,7 @@ Once you finish, Oviond creates your account, company, theme, first client, and 
     Enter your first client's details. **Client Name** and **Client Website** are required. You can also set **Select Currency** and **Client Timezone**. This step only collects the details — Oviond creates the client in the final step.
   </Step>
   <Step title="Almost done">
-    Oviond finalizes your setup automatically. You'll see **Setting up your workspace** while it detects your branding, applies your theme, and prepares your first project. No action is needed.
+    Oviond finalizes your setup automatically. You'll see **Setting up your workspace** while it detects your branding, applies your theme, and prepares your first report. No action is needed.
   </Step>
 </Steps>
 
@@ -43,9 +43,9 @@ When you finish, Oviond makes a single `POST /v1/onboarding` call that:
 - Creates your account and saves your name, company name, and website.
 - Records your client-count bucket on the account.
 - Applies a default theme.
-- Creates your first client and a starter project.
+- Creates your first client and a starter report.
 - Sets the account's `onboarding` flag to done so the flow doesn't show again.
-- Sends you to the new client's **Projects** page.
+- Sends you to the new client's **Reports** page.
 
 You can update your name later under [My account](/account/overview) and your company details under [Company](/company/overview).
 

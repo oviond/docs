@@ -9,7 +9,7 @@ Oviond renders any report as a PDF on demand. Generation runs asynchronously in 
 
 <Steps>
   <Step title="Open the share dialog">
-    From the project, open **Share** and switch to the **Download** tab.
+    From the report, open **Share** and switch to the **Download** tab.
   </Step>
   <Step title="Click Generate New PDF">
     Oviond queues a generation job. The button shows **Generating** (or a queued count) while it works, and a new entry appears in the **Download History** list in a processing state.
@@ -25,10 +25,10 @@ The list reflects each generation attempt's state — **processing**, **complete
 
 Generation is a two-step asynchronous flow:
 
-1. `POST /v1/pdf/generate` validates the request and enqueues the job, returning a `job_id`. The request specifies the `project_id`, `client_id`, a page `format` (**A4** or **Letter**), and `orientation` (**portrait** or **landscape**). The defaults are `A4` and `portrait`.
+1. `POST /v1/pdf/generate` validates the request and enqueues the job, returning a `job_id`. The request specifies the `report_id`, `client_id`, a page `format` (**A4** or **Letter**), and `orientation` (**portrait** or **landscape**). The defaults are `A4` and `portrait`.
 2. `GET /v1/pdf/status/:job_id` is polled until `status` is `complete` (which returns the file `url`) or `failed`.
 
-Each attempt is recorded in the project's export history, which the **Download History** list reads from.
+Each attempt is recorded in the report's export history, which the **Download History** list reads from.
 
 <Note>
 PDF generation requires Oviond's file storage (S3) to be configured. If it isn't, the generate request is rejected.

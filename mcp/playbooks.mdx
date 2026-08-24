@@ -6,29 +6,29 @@ description: "Copy-paste prompts for common Oviond jobs an AI agent can do over 
 These playbooks are prompts you can give an MCP client (Claude, Cursor, etc.) connected to Oviond. Each lists the tools the agent will reach for and any safety note. Tool names and the full catalog are on [Available tools](/mcp/tools).
 
 <Note>
-  Every call is automatically scoped to your authenticated account — you never pass an account ID, and the agent can only see your own clients and projects.
+  Every call is automatically scoped to your authenticated account — you never pass an account ID, and the agent can only see your own clients and reports.
 </Note>
 
 ## 1. List and inspect clients
 
-> "List my Oviond clients grouped by folder, and tell me which ones have no active projects."
+> "List my Oviond clients grouped by folder, and tell me which ones have no active reports."
 
-**Tools:** `list_clients`, `list_folders`, `list_projects`, `search`
-**What happens:** the agent pages through your clients, groups them by folder, and cross-references each client's projects. Read-only — nothing changes.
+**Tools:** `list_clients`, `list_folders`, `list_reports`, `search`
+**What happens:** the agent pages through your clients, groups them by folder, and cross-references each client's reports. Read-only — nothing changes.
 
 ## 2. Create a client with a report (from a template)
 
 > "Create a client called Acme Demo with a Google Ads dashboard."
 
-**Tools:** `list_templates` (find the template) → `create_client_with_project`
-**What happens:** the agent finds the matching template with `list_templates` (filter `datasources=gadw`, `type=DASHBOARD` → "Google Ads Dashboard"), then `create_client_with_project` creates the client and clones that template into the first project — pages and widgets included.
+**Tools:** `list_templates` (find the template) → `create_client_with_report`
+**What happens:** the agent finds the matching template with `list_templates` (filter `datasources=gadw`, `type=DASHBOARD` → "Google Ads Dashboard"), then `create_client_with_report` creates the client and clones that template into the first report — pages and widgets included.
 
-The create step is smart about the project:
+The create step is smart about the report:
 - **"…with a Google dashboard"** → the agent passes the matched `template_id`.
-- **"…with a blank report"** → pass `blank: true` for an empty project.
+- **"…with a blank report"** → pass `blank: true` for an empty report.
 - **"…with a report"** (unspecified) → a matching **Starter** template is cloned automatically.
 
-To add a template-based report to an **existing** client, use `create_project_from_template`.
+To add a template-based report to an **existing** client, use `create_report_from_template`.
 
 <Warning>
   This creates real records in your account. Confirm the client and report names before the agent runs it.
@@ -38,15 +38,15 @@ To add a template-based report to an **existing** client, use `create_project_fr
 
 > "Duplicate the 'Monthly Marketing Overview' report for the client Beta Corp."
 
-**Tools:** `search` / `list_projects` → `duplicate_project` → `update_project`
+**Tools:** `search` / `list_reports` → `duplicate_report` → `update_report`
 **What happens:** the agent finds the source report, duplicates it, and re-points the copy at the new client. Layout and widgets carry over.
 
 ## 4. Add a saved section to a report or dashboard
 
 > "Add my 'Executive Summary' section to the Acme dashboard."
 
-**Tools:** `list_assets` (find the section) → `add_project_section`
-**What happens:** the agent finds the saved section with `list_assets` (search by name), then `add_project_section` places its widgets on the project. A single-page project (typical dashboard) uses its one page automatically; a multi-page report returns its pages so the agent can pick the right `page_id`.
+**Tools:** `list_assets` (find the section) → `add_report_section`
+**What happens:** the agent finds the saved section with `list_assets` (search by name), then `add_report_section` places its widgets on the report. A single-page report (typical dashboard) uses its one page automatically; a multi-page report returns its pages so the agent can pick the right `page_id`.
 
 ## 5. Apply branding
 
@@ -84,15 +84,15 @@ To add a template-based report to an **existing** client, use `create_project_fr
 
 > "Switch the Acme monthly report to last 7 days."
 
-**Tools:** `change_project_date_range` (or `refresh_project` to re-pull the current period)
-**What happens:** the range is stored as the preset itself, so "Last 7 Days" keeps meaning the last 7 days as the calendar moves. The server resolves it to concrete dates and refreshes every widget on the project.
+**Tools:** `change_report_date_range` (or `refresh_report` to re-pull the current period)
+**What happens:** the range is stored as the preset itself, so "Last 7 Days" keeps meaning the last 7 days as the calendar moves. The server resolves it to concrete dates and refreshes every widget on the report.
 
 ## 9. Audit a report's health
 
 > "Audit the 'Monthly Marketing Overview' report — what data sources are connected and are any automations paused?"
 
-**Tools:** `audit_project_health` (one call), or `get_project` + `connected_datasources` + `list_automations`
-**What happens:** the `audit_project_health` workflow tool gathers the connected data sources and automation state in one step and flags likely issues (nothing connected, paused automations). Read-only.
+**Tools:** `audit_report_health` (one call), or `get_report` + `connected_datasources` + `list_automations`
+**What happens:** the `audit_report_health` workflow tool gathers the connected data sources and automation state in one step and flags likely issues (nothing connected, paused automations). Read-only.
 
 ## 10. Schedule a monthly report (with confirmation)
 

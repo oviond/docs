@@ -11,14 +11,11 @@ description: "Upload a CSV or JSON dataset to report on data that doesn't live i
 
 ## Where it lives
 
-Custom data isn't a standalone page in the sidebar. You reach it from the **Data Query** widget while editing a project:
+Custom data isn't a standalone page in the sidebar. You reach it from a **Custom Data** widget while editing a report:
 
 <Steps>
-  <Step title="Add a Data Query widget">
-    In the project editor, add (or select) a **Data Query** widget to open the query builder in the left panel.
-  </Step>
-  <Step title="Pick Custom Data as the source">
-    In the widget's data-source dropdown, choose **Custom Data**. The picker also lists your connected data sources, **Static Value**, **Calculated Metrics**, and **Goals**.
+  <Step title="Add a Custom Data widget">
+    In the report editor, open **Add Content** and add a **Custom Data** widget — one of the four cards that aren't a platform, alongside **Calculated Metric**, **Goal**, and **Static Value**. Selecting it opens the query builder in the left panel. A new widget shows demo data until you point it at a dataset.
   </Step>
   <Step title="Choose or upload a dataset">
     Pick an existing dataset from the **Dataset** dropdown, or use the **Upload New File** drop-zone below the **OR** divider. You can drag a file in or click to open the file picker.
@@ -39,7 +36,7 @@ Uploads accept `.csv` and `.json` files, up to **5 MB** each.
 Once you select a dataset, its `custom_data_id` is stored on the widget query, and you map the dataset's columns to the widget's metrics and dimensions. The widget then queries the dataset alongside your connected data sources.
 
 <Note>
-Custom data is account-level — any client's project can reference any dataset you've uploaded. A dataset can hold at most **10,000 rows**.
+Custom data is account-level — any client's report can reference any dataset you've uploaded. A dataset can hold at most **10,000 rows**.
 </Note>
 
 ## Custom data vs a data source

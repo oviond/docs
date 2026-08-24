@@ -8,7 +8,7 @@ Oviond checks the health of each connection's token automatically. A daily auth-
 - **Token Valid** — the token is authorized and data should flow.
 - **Token Expired** — the token has expired or been revoked; refresh it.
 
-You'll see this badge on the **Data Sources** tab in a client's project and in **Settings → Data sources** (where it appears as **Token valid** / **Token expired**, and you can filter the table by status).
+You'll see this badge on a client's **Data sources** page, in a report's **Data Sources** tab, and in **Settings → Data sources** (where it appears as **Token valid** / **Token expired**, and you can filter the table by status).
 
 ## Where to look
 
@@ -20,7 +20,7 @@ In each case, open the connection in the **Data Sources** tab or in **Settings �
 
 ## If a connection shows Token Expired
 
-1. Click **Refresh** (project tab) or **Refresh token** (Settings) to start a fresh OAuth flow. Your account selection is preserved.
+1. Click **Refresh** (on the connection) or **Refresh token** (Settings) to start a fresh OAuth flow. Your account selection is preserved.
 2. Complete the OAuth flow with the same login. The badge returns to **Token Valid**.
 3. If refresh doesn't resolve it, the authorizing user's access in the source platform may have been revoked — check the platform's admin for the token's status.
 
