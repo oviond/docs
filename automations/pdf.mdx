@@ -3,7 +3,11 @@ title: "PDF export"
 description: "Generate a downloadable PDF of a report on demand."
 ---
 
-Oviond renders any report as a PDF on demand. Generation runs asynchronously in the background, so large reports don't block your browser — Oviond queues a job, renders the report headlessly, and stores the finished file for download.
+Oviond renders a **Multi-Page Report** as a PDF on demand. Generation runs asynchronously in the background, so large reports don't block your browser — Oviond queues a job, renders the report headlessly, and stores the finished file for download.
+
+<Note>
+PDF export is for Multi-Page Reports only. A Dashboard is a single continuous view with no page boundaries, so there's nothing to paginate — dashboards show no **Download** tab and no **Allow PDF Download** option.
+</Note>
 
 ## Generate a PDF
 

@@ -246,7 +246,7 @@ tool will do before it runs.
 
 | Tool | What it does |
 |---|---|
-| `generate_pdf` | Queue a PDF render of a report. Returns a job_id — poll get_pdf_status until it completes, then download the URL. |
+| `generate_pdf` | Queue a PDF render of a multi-page report. Returns a job_id — poll get_pdf_status until it completes, then download the URL. Dashboards have no pages to paginate and are rejected. |
 | `get_pdf_status` | Poll a PDF job. status is pending → processing → complete (with a url) or failed. |
 
 ### Reports
@@ -255,7 +255,7 @@ tool will do before it runs.
 |---|---|
 | `list_reports` | List reports and dashboards for the account, optionally filtered by client. |
 | `get_report` | Get a single report by ID |
-| `create_report` | Create a new report or dashboard for a client. Layout flags have sensible server defaults when omitted. |
+| `create_report` | Create a new report or dashboard for a client. Presentation toggles have server defaults when omitted. A report is created on the grid layout or the free canvas; a dashboard is always grid. |
 | `update_report` | Update a report — only include the fields you want to change |
 | `archive_report` 🔒 | Archive a report by ID. Its pages and widgets stay attached and come back with it. It goes to the archive, not away — list_archive shows it and restore_from_archive brings it back. |
 | `archive_reports` 🔒 | Archive several reports by ID in one call. They go to the archive, not away — list_archive shows them and restore_from_archive brings them back. |

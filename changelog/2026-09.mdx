@@ -1,0 +1,212 @@
+---
+title: "September 2026"
+description: "Product and API release notes for Oviond."
+---
+
+<Update label="2026-09-16" description="Free canvas layout for multi-page reports">
+
+### Place widgets anywhere on the page
+
+A new Multi-Page Report is now built on a **free canvas**: widgets go anywhere on the page, at any size, instead of snapping to rows and columns. Drag one and alignment hairlines appear against the page edges, its centre lines and every other widget; equal gaps snap and label themselves in pixels. Rubber-band select a group and move it as one, or drag a widget straight onto another page.
+
+The **New Report** flow asks which you want when you start from scratch — **Free canvas** or **Grid** — with a preview of each. Free canvas is the default.
+
+Existing reports and all dashboards stay on the grid, unchanged. The choice is made once, at creation: widget positions are stored in the units they were authored in, so a report can't switch engines afterwards.
+
+</Update>
+
+<Update label="2026-09-16" description="Resize a whole selection at once">
+
+### A group resizes as one object
+
+Select several widgets on a free canvas and the selection draws a box with its own handles. Drag one and every widget scales together — and so do the gaps between them, so the arrangement keeps its shape instead of the widgets growing into each other.
+
+Shrinking stops when the **first** widget reaches its own minimum size, rather than letting one be squashed past the point of being readable while the rest still have room.
+
+</Update>
+
+<Update label="2026-09-16" description="Both layouts share one Pages panel and one Add Content">
+
+### The grid report gets the canvas's editing surface
+
+Everything that isn't widget geometry is now the same in both layouts:
+
+- the **Pages panel** — cover, contents, every page and thank-you in one list, each with its settings inline
+- the **page tab** on the selected page — rename in place, add after, duplicate, reorder, delete
+- a **New page** button below the last page, so you can add one from where the report actually ends
+- the **empty-page card**, which offers the first widget outright rather than telling you to drag something
+- the selected-page ring, and square page corners
+
+**Add Content** is one catalog in one order for both, so the cards don't differ depending on which layout you opened.
+
+</Update>
+
+<Update label="2026-09-16" description="Per-report cover and thank-you overrides">
+
+### Override the theme on a single report
+
+A report's cover heading, subheading and artwork — and its thank-you heading and message — can now be set on the report itself, overriding whatever the theme says. Leave a field blank and it goes back to inheriting the theme, so one report can depart from a shared theme without cloning it.
+
+</Update>
+
+<Update label="2026-09-16" description="Contents pages that spill onto a second sheet">
+
+### Every contents sheet is its own page
+
+A long report's table of contents runs to more than one sheet. Those extra sheets were part of the finished document and you could scroll to them, but they never appeared in the page list. Each now gets its own row — in the editor's Pages panel and in the reader's navigation — labelled **Table of Contents continued**, numbered, and clickable.
+
+</Update>
+
+<Update label="2026-09-16" description="Reading a report">
+
+### A cleaner reading view
+
+Opening a report to read it, rather than edit it:
+
+- the header spans the window and the page list sits beneath it, as part of the document rather than a second piece of app chrome
+- page names show a tooltip, so a long one can be read in full
+- on mobile the page list stays collapsed to numbers instead of taking a third of the screen, and a phone gets the page list in a sheet
+
+</Update>
+
+<Update label="2026-09-16" description="Date range changes save from the header">
+
+### Changing the date range outside edit mode saves
+
+The date picker in the report header carried a note saying view-only changes weren't saved. They always were — the range is written straight through and every data widget re-fetches. The note was wrong and is gone.
+
+</Update>
+
+<Update label="2026-09-16" description="PDF export is Multi-Page Reports only">
+
+### Dashboards no longer export to PDF
+
+A Dashboard is one continuous scrolling view with no page boundaries, so there is nothing to paginate — rendering one produced a single over-long sheet. PDF export is now a Multi-Page Report feature.
+
+Dashboards no longer show the **Download** tab, the **Allow PDF Download** option, or the download button on a shared link. Any dashboard that still had **Allow PDF Download** switched on has had it cleared — the setting no longer applies to it.
+
+<Warning>
+`POST /v1/pdf/generate` now returns **400** for a dashboard, and the MCP `generate_pdf` tool rejects one. The same applies to the shared-link download endpoint, so an old public link can't queue a dashboard PDF either. If you generate dashboard PDFs through the API or an assistant, those calls will start failing.
+</Warning>
+
+</Update>
+
+<Update label="2026-09-16" description="MCP: layout, cover overrides and canvas widget placement">
+
+### Assistants can build free-canvas reports
+
+`create_report` takes a `layout` — `grid` or `canvas` — so an assistant can create a free-canvas report rather than always landing on the grid. It also takes the cover and thank-you overrides, and `update_report` takes the overrides (not the layout, which is fixed at creation).
+
+**Widgets added to a free-canvas report are now sized correctly.** The server placed every widget using grid units; on a canvas page those numbers are read as pixels, so an assistant-added widget arrived a few pixels wide in the top-left corner. It is now converted to the page's own pixels.
+
+</Update>
+
+<Update label="2026-09-16" description="Renaming and deleting pages through the API fixed">
+
+### Page updates over the API no longer fail
+
+Renaming or deleting a page through `PUT /v1/pages/{page_id}` or `DELETE /v1/pages/{page_id}` returned **403 Forbidden**, even for a page in your own report. The MCP `pages_update` and `pages_delete` tools hit the same wall, so an assistant couldn't rename or remove a page.
+
+The check that confirms a page belongs to your account was looking the report up under its old name, found nothing, and read that as "not yours". Editing pages in the app was never affected — it saves through a different route.
+
+</Update>
+
+<Update label="2026-09-16" description="Editor fixes">
+
+### Two smaller editor fixes
+
+**A dashboard now scrolls clear of the floating dock.** The last row of widgets ended underneath it.
+
+**Loading placeholders match the page that's coming.** A report showed a dashboard-shaped grid of blocks while it loaded, then reflowed into pages. It now shows page sheets at the report's own orientation and paper size.
+
+</Update>
+
+<Update label="2026-09-08" description="New Report flow rebuilt">
+
+### Starting a report
+
+The **New Report** flow was rebuilt: pick how to start, pick the type, name it, and go. An empty reports table now offers a way out instead of a dead end, and its wording is corrected in every language.
+
+</Update>
+
+<Update label="2026-09-08" description="Keyboard shortcuts in the editor">
+
+### Shortcuts, and a list of them
+
+The editor dock has a shortcuts helper, and each dock button's tooltip shows its key so you can learn them as you work.
+
+</Update>
+
+<Update label="2026-09-08" description="Trendline on area and column charts">
+
+### Trendline toggle on more chart types
+
+The trendline option now appears on **area** and **column** charts, not just line and bar.
+
+</Update>
+
+<Update label="2026-09-08" description="Google Ads video metrics fixed">
+
+### Google Ads video metrics report real numbers again
+
+**Video views** and **Video view rate** queried Google Ads' `video_views` and `video_view_rate`, which v23 no longer returns for these reports — the widgets came back empty. Both now request the TrueView fields the API actually serves, so existing video widgets fill in again with no change needed at your end.
+
+</Update>
+
+<Update label="2026-09-04" description="LinkedIn showcase and brand pages fixed">
+
+### LinkedIn followers and posts work on showcase pages
+
+A LinkedIn showcase or brand page is stored as an `organizationBrand` URN, but two of LinkedIn's endpoints — follower counts and posts by author — only accept an `organization` URN. Those two calls failed for any showcase page, so followers and posts came back empty. They are now converted before the call, and the posts request sends the API version header it requires.
+
+</Update>
+
+<Update label="2026-09-04" description="Charts with nested dimension groups fixed">
+
+### LinkedIn follower statistics can be charted
+
+Some data views list their dimensions grouped by metric rather than as a flat list — LinkedIn's **Follower statistics** is one. The chart builder only understood the flat shape, so it read those views as having no dimensions and refused to draw. Both shapes now work.
+
+</Update>
+
+<Update label="2026-08-31" description="Goal widget currency fixed">
+
+### Goal widgets show the right currency
+
+A goal measured in money always drew its value and target with a dollar sign, ignoring the client's currency. Both now use the widget's own currency symbol.
+
+</Update>
+
+<Update label="2026-08-31" description="Share from the Oviond domain when you have custom domains">
+
+### Choose the Oviond domain for a single client
+
+Once an account had a custom domain, every client's share links used one — there was no way to send a particular client a plain Oviond link. A client's domain picker now offers **No custom domain**, which forces that client's links back to the Oviond host, and the default option names the domain it actually resolves to instead of just saying "Default domain".
+
+</Update>
+
+<Update label="2026-08-24" description="Table row details">
+
+### Open a table row to see its details
+
+Clicking a row in a table widget opens a slide-over with that row's full detail, themed to match the report it sits in.
+
+</Update>
+
+<Update label="2026-09-02" description="YouTube video thumbnails in previews">
+
+### Video thumbnails in YouTube previews
+
+YouTube preview widgets carry a video thumbnail dimension, so a preview shows the video rather than a bare row.
+
+</Update>
+
+<Update label="2026-08-25" description="Two new data sources">
+
+### Nozzle and Airtable
+
+**Nozzle** — SERP and keyword tracking, on Nozzle's v2 API, as a single data view. A segment is required when you configure it.
+
+**Airtable** — pull records from an Airtable base into a widget.
+
+</Update>
