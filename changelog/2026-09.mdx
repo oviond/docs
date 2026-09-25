@@ -3,6 +3,77 @@ title: "September 2026"
 description: "Product and API release notes for Oviond."
 ---
 
+<Update label="2026-09-25" description="MCP: 151 tools, a report preview, and a read-only data query">
+
+### The connector got smaller, and three things it was missing
+
+**188 tools became 151.** Over 39 days of connector traffic, 81 tools were never
+called once. The account-administration surface — notifications, API keys,
+billing, branding, company, custom domains, folders, media folders and email
+composing — is gone from MCP and stays in the app. That keeps 99.7% of the calls
+agents actually make, and cuts the tool list every connection has to read from
+285 KB to 227 KB.
+
+**`query_data`** reads live metric values for any date range without touching a
+report. Previously the only route to fresh numbers was `refresh_widgets`, which
+writes results back onto the report — so a read-only ChatGPT or Claude
+connection correctly declined it and could do no analysis at all. The REST
+endpoint behind it, `POST /v1/data/query`, is unchanged.
+
+**`preview_report`** renders the live report inside the conversation, branded as
+the client sees it. Layout problems — overlapping widgets, a cut-off heading,
+bad spacing — are invisible in a widget list and obvious in the page.
+
+**`whoami`** answers "which account am I connected to?" in one call: the user,
+the account, the plan and its usage.
+
+### Text widgets accept Markdown
+
+`add_text_widget` and `update_text_widget` now render `#` `##` `###` headings,
+lists, `**bold**`, `*italic*`, quotes, code and links — so an executive summary
+written over MCP looks like one written by hand. Reading a text widget returns
+Markdown too, which makes "update the summary" an edit rather than a rewrite.
+Merge tags like `{{client_name}}` survive that round trip.
+
+### Parameter renames
+
+The same object had two names depending on which tool you were holding, and
+callers were rejected for using the one they had just been given.
+
+| Tool | Was | Now |
+|---|---|---|
+| `get_widget`, `move_widget`, `delete_widget`, every `update_*_widget` | `id` | `widget_id` |
+| `delete_widgets` | `ids` | `widget_ids` |
+| `get_report`, `update_report`, `archive_report`, `duplicate_report`, `refresh_report`, `change_report_date_range`, `audit_report_health` | `id` | `report_id` |
+| `archive_reports` | `ids` | `report_ids` |
+| `test_connection` | `auth_id` | `connection_id` |
+| `rename_connection`, `delete_connection` | `id` | `connection_id` |
+| `list_widgets`, `list_pages` | `source_id` (+ `source_type`) | `report_id` |
+
+`list_widgets` and `list_pages` are now report-only; templates use
+`list_template_widgets` and the new `list_template_pages`. MCP clients read the
+schema each session, so nothing needs reconfiguring — but a saved prompt that
+names the old fields should be updated.
+
+### Fixes
+
+- **PDF status** — `get_pdf_status` succeeded about one time in seven. Job state
+  lived in one server's memory while the API runs across several, so the poll
+  usually landed somewhere that had never seen the job. It now reads the export
+  record, which is shared. This affected the app's endpoint too, not just MCP.
+- **Page ordering** — `position` was written without moving anything else, so
+  inserting at an occupied slot left two pages claiming it. Inserting now opens
+  a gap and moving closes one.
+- **Deleting a page** left its widgets behind, attached to a page that no longer
+  existed. They now go with it, and are restorable from the report's history.
+- **Widget date ranges** — a widget reading "Last 30 Days" reported the window
+  from whenever it was last saved. The numbers were always correct; the dates
+  shown alongside them are now resolved the same way.
+- `get_widget_data` returns data only. It used to lead with an instruction about
+  how to present the results, which could override what was actually asked for.
+
+</Update>
+
 <Update label="2026-09-16" description="Free canvas layout for multi-page reports">
 
 ### Place widgets anywhere on the page
