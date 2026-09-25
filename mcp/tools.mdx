@@ -334,6 +334,7 @@ tool will do before it runs.
 | `delete_widgets` 🔒 | Delete multiple widgets by ID in one call. |
 | `refresh_widgets` | Re-fetch specific widgets with their saved config and save the results. Configuring a widget with update_data_widget already refreshes it, so this is for re-reading without a config change. Returns… |
 | `get_widget_data` | Read the numbers behind data widgets, for charting them. Returns one entry per widget: its name, its saved chart type, its state, and — once its fetch has landed — the metric and dimension labels… |
+| `query_data` | Pull live metric values from a client's connected datasource for any date range, without touching a report. Nothing is saved — use this for ad-hoc analysis and period comparisons. To read the numbers a report already holds, use get_widget_data instead… |
 | `datasource_resources` | List the selectable values behind a widget's advanced settings and filters — campaigns, ad sets, forms, videos, alerts, and so on. describe_datasource says WHICH advanced keys a data view requires… |
 
 ### Workflows
@@ -365,6 +366,11 @@ tool will do before it runs.
 - **Data is fetched server-side** after a widget is written. `refresh_widgets` or `refresh_report`
   force it. Reading it back is `get_widget_data`, which waits briefly for in-flight fetches and
   returns each widget's state plus its rows — up to 200 per widget.
+- **`query_data` is the read-only way to pull figures.** It returns live metric values for any
+  date range straight from the client's connected datasource and saves nothing, so it works on a
+  read-only connection — unlike `refresh_widgets`, which writes the results back onto the report
+  and a read-only client will rightly decline. Use `get_widget_data` to read what a report already
+  holds, and `query_data` for ad-hoc analysis and period comparisons.
 
 ## Reference
 
