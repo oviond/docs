@@ -22,7 +22,9 @@ endpoint behind it, `POST /v1/data/query`, is unchanged.
 
 **`preview_report`** renders the live report inside the conversation, branded as
 the client sees it. Layout problems — overlapping widgets, a cut-off heading,
-bad spacing — are invisible in a widget list and obvious in the page.
+bad spacing — are invisible in a widget list and obvious in the page. Hosts that
+don't allow an external page to be embedded get the report's shareable URL
+instead.
 
 **`whoami`** answers "which account am I connected to?" in one call: the user,
 the account, the plan and its usage.
