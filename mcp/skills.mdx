@@ -11,7 +11,12 @@ instead of leaving it to infer how the pieces fit together each time.
 
 ```bash
 npx skills add oviond/skills --skill oviond
+npx skills add oviond/skills --skill fix-broken-report
+npx skills add oviond/skills --skill write-executive-summary
 ```
+
+Install the ones you need. `oviond` is the general guide; the other two are
+task-shaped and load when the work matches them.
 
 ## What the skill covers
 
@@ -22,7 +27,8 @@ The `oviond` skill helps your agent:
 * discover a datasource's data views, metrics and dimensions before configuring a
   widget, rather than guessing field ids
 * know that data is fetched **server-side after a widget is written**, and that
-  `refresh_widgets` / `refresh_report` re-run it — there is no ad-hoc query tool
+  `refresh_widgets` / `refresh_report` re-run it, and that `query_data` reads
+  live figures for any period without touching a report
 * connect a datasource by API key, and recognise which datasources need a browser
   sign-in and must be handed back to the app
 * build the four widget types that are not vendor datasources — static value,
@@ -35,6 +41,25 @@ The `oviond` skill helps your agent:
 It also names the behaviours that read as failures but are not: demo data on a
 datasource the client has not connected, a widget briefly in `loading` while the
 fetch runs, and datasources like Stripe that have no accounts to choose from.
+
+## The task skills
+
+### `fix-broken-report`
+
+For "this report looks wrong", "it's showing the wrong numbers", or "the email
+never arrived". Walks the four causes in the order worth checking them: an
+unlinked datasource (which renders demo numbers by design, and is the usual
+answer), a failed fetch, stale numbers nothing has refreshed, and a paused
+automation. It also says what not to do — rebuilding widgets whose
+configuration was never the problem.
+
+### `write-executive-summary`
+
+For the prose beside the numbers. Summarises from `get_widget_data`, so the
+words agree with the charts underneath rather than being pulled from a separate
+query that will eventually disagree. Covers the Markdown a text widget renders,
+the merge tags that survive an edit, and never summarising a widget that is
+showing demo data.
 
 ## Why use a skill
 

@@ -45,8 +45,8 @@ To add a template-based report to an **existing** client, use `create_report_fro
 
 > "Add my 'Executive Summary' section to the Acme dashboard."
 
-**Tools:** `list_assets` (find the section) → `add_report_section`
-**What happens:** the agent finds the saved section with `list_assets` (search by name), then `add_report_section` places its widgets on the report. A single-page report (typical dashboard) uses its one page automatically; a multi-page report returns its pages so the agent can pick the right `page_id`.
+**Tools:** `list_assets` (find the section) → `list_pages` → `add_asset_to_page`
+**What happens:** the agent finds the saved section with `list_assets` (search by name), reads the report's pages with `list_pages`, then `add_asset_to_page` clones the section's widgets onto the page — each with a fresh id, stacked below what is already there.
 
 ## 5. Apply branding
 
