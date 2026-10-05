@@ -189,7 +189,7 @@ tool will do before it runs.
 
 | Tool | What it does |
 |---|---|
-| `generate_pdf` | Queue a PDF render of a multi-page report. Returns a job_id — poll get_pdf_status until it completes, then download the URL. Dashboards have no pages to paginate and are rejected. |
+| `generate_pdf` | Queue a PDF render of a report or dashboard. Returns a job_id — poll get_pdf_status until it completes, then download the URL. A multi-page report prints page by page; a dashboard prints as one long page. |
 | `get_pdf_status` | Poll a PDF job with the job_id generate_pdf returned. status is processing → complete (with a url) or failed. |
 
 ### Reports
