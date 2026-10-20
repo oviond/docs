@@ -1,0 +1,64 @@
+---
+title: "Klaviyo"
+description: "How Klaviyo data is synced into Oviond, and its limits."
+---
+
+Klaviyo is a **synced** data source. Oviond doesn't ask Klaviyo for data each time a report opens. A background sync copies your Klaviyo data into Oviond, and your widgets read that copy. This keeps reports fast and stays within Klaviyo's request limits.
+
+## How syncing works
+
+- **Widgets show only what's synced.** A day that hasn't synced yet shows `0`. A table with nothing synced for its dates shows **No data yet for these dates**.
+- **History:** Oviond keeps the last **24 months** (730 days). Dates older than that show no data.
+- **Newest first:** the first sync loads the most recent days first, so recent reports fill in long before the full history is loaded.
+- **Sync frequency:** you pick it when you link a client: every hour, 3 hours, 6 hours, 12 hours, or once a day. When several clients use the same Klaviyo connection, it syncs at the fastest frequency any of them picked.
+
+## Connect Klaviyo
+
+<Steps>
+  <Step title="Add your API key">
+    In the client's **Data sources**, open **Klaviyo**, name the connection and paste a Klaviyo private API key.
+  </Step>
+  <Step title="Pick the Revenue metric">
+    Choose the metric Klaviyo counts conversions and revenue with — usually **Placed Order**. Klaviyo's own email and SMS events (sent, opened, clicked) aren't offered, because they aren't conversions.
+  </Step>
+  <Step title="Pick the sync frequency and save">
+    Choose how often to sync and click **Save**. Saving starts the first sync straight away.
+  </Step>
+</Steps>
+
+## Klaviyo's limits
+
+- **Report requests:** Klaviyo allows **2 a minute and 225 a day**. Campaign and flow reports use them, so the first full load of a big account can take a while.
+- **Campaign reports** refresh at most **every 6 hours**, to stay within the daily limit. The sync re-checks the last 30 days of campaigns, because their stats keep changing after a send.
+- **Flows and event counts** can refresh every hour.
+- **Email campaigns only.** SMS campaigns aren't included in campaign reports.
+- **Unique counts** (for example unique opens) are counted per day, so over several days they can run slightly high.
+
+## Changing the Revenue metric
+
+Changing the Revenue metric **changes the sync**:
+
+- The sync **stops** loading campaign and flow data for the old Revenue metric — unless another client using the same connection still picks it — and **starts** loading it for the new one from the beginning.
+- The data already loaded for the old one is **kept**. If you switch back, the sync carries on from where it stopped.
+- If a sync is already running, it picks up the change within a few minutes. You don't need to start a new one.
+
+Other Klaviyo data (event counts, campaign and flow lists) doesn't depend on the Revenue metric and keeps syncing as normal.
+
+## Sync History
+
+Open the Klaviyo connection and click **Sync History** to see:
+
+- **Status:** Synced, Syncing, Syncing history (with how far it has got), Waiting for provider limits, Sync problem, or Paused.
+- **Actions** (admins only): **Sync now** gets the latest days, **Pause** / **Resume** stops or restarts all syncs, and **Re-sync** loads the whole history again.
+- **Recent syncs:** the last 50 syncs, with how many rows each one saved.
+
+## When something goes wrong
+
+- **Klaviyo refuses or limits requests:** the sync waits and tries again on its own. Your reports keep showing the data already synced.
+- **The sync keeps failing:** after 3 failures in a row, you get one notification. Check the API key in the connection.
+- **A sync is interrupted** (for example a server restart): the next sync carries on from where it stopped.
+
+## Unlink or delete
+
+- **Unlinking a client** keeps the connection and its synced data. Linking again carries on from where it stopped.
+- **Deleting the connection** deletes all of its synced data. Connecting again loads the full history from the start.

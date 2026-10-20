@@ -232,7 +232,8 @@
               "data-sources/profiles",
               "data-sources/test",
               "data-sources/link",
-              "data-sources/delete"
+              "data-sources/delete",
+              "data-sources/klaviyo"
             ]
           },
           {
