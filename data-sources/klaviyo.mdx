@@ -10,7 +10,7 @@ Klaviyo is a **synced** data source. Oviond doesn't ask Klaviyo for data each ti
 - **Widgets show only what's synced.** A day that hasn't synced yet shows `0`. A table with nothing synced for its dates shows **No data yet for these dates**.
 - **History:** Oviond keeps the last **24 months** (730 days). Dates older than that show no data.
 - **Newest first:** the first sync loads the most recent days first, so recent reports fill in long before the full history is loaded.
-- **Sync frequency:** you pick it when you link a client: every hour, 3 hours, 6 hours, 12 hours, or once a day. When several clients use the same Klaviyo connection, it syncs at the fastest frequency any of them picked.
+- **Sync frequency:** you pick it when you link a client: every 3 hours, every 6 hours (the default), every 12 hours, or once a day. Everything syncs on the one you pick. When several clients use the same Klaviyo connection, it syncs at the fastest frequency any of them picked.
 
 ## Connect Klaviyo
 
@@ -28,9 +28,8 @@ Klaviyo is a **synced** data source. Oviond doesn't ask Klaviyo for data each ti
 
 ## Klaviyo's limits
 
-- **Report requests:** Klaviyo allows **2 a minute and 225 a day**. Campaign and flow reports use them, so the first full load of a big account can take a while.
-- **Campaign reports** refresh at most **every 6 hours**, to stay within the daily limit. The sync re-checks the last 30 days of campaigns, because their stats keep changing after a send.
-- **Flows and event counts** can refresh every hour.
+- **The first sync can take a while.** Klaviyo only lets us request reports **2 times a minute and 225 times a day**. Loading 24 months of history takes many requests, so the first sync of a big account can take a while. After that, each sync only fetches the latest days and is much quicker.
+- **Campaign numbers keep growing after you send.** People open, click and buy for days after a campaign goes out. So every sync updates the numbers of campaigns sent in the last 30 days.
 - **Email campaigns only.** SMS campaigns aren't included in campaign reports.
 - **Unique counts** (for example unique opens) are counted per day, so over several days they can run slightly high.
 
@@ -56,7 +55,7 @@ Open the Klaviyo connection and click **Sync History** to see:
 
 - **Klaviyo refuses or limits requests:** the sync waits and tries again on its own. Your reports keep showing the data already synced.
 - **The sync keeps failing:** after 3 failures in a row, you get one notification. Check the API key in the connection.
-- **A sync is interrupted** (for example a server restart): the next sync carries on from where it stopped.
+- **A sync is interrupted** (for example a server restart): when the server is back, the sync restarts on its own within a few minutes and carries on from where it stopped.
 
 ## Unlink or delete
 
