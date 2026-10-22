@@ -233,7 +233,8 @@
               "data-sources/test",
               "data-sources/link",
               "data-sources/delete",
-              "data-sources/klaviyo"
+              "data-sources/klaviyo",
+              "data-sources/ip-allowlist"
             ]
           },
           {

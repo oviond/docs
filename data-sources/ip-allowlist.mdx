@@ -1,0 +1,65 @@
+---
+title: "Allow Oviond's IP addresses"
+description: "Let Oviond through your firewall or IP restrictions so your data sources can connect and load data."
+---
+
+Oviond fetches report data from your data sources over the internet. If a data source only accepts requests from approved IP addresses, or sits behind a firewall, a security plugin (like Wordfence) or Cloudflare rules, Oviond can get blocked. When that happens, the connection fails or widgets show no data.
+
+To fix it, allow Oviond's IP addresses.
+
+## Oviond's IP addresses
+
+Oviond sends every data source request from these addresses:
+
+```text
+162.220.234.241
+152.55.180.240
+152.55.180.242
+```
+
+<Warning>
+  Allow **all three**. Oviond spreads its requests across them, so allowing only one still lets some requests get blocked.
+</Warning>
+
+These addresses are only for requests **from** Oviond to your data sources. You can't use them to reach Oviond.
+
+## When you need this
+
+- **Your own website or server**, for example a WooCommerce store on your WordPress site, protected by a firewall, security plugin or Cloudflare.
+- **A platform account with IP restrictions**, where API access is limited to a list of approved IP addresses.
+
+Most data sources don't need this. If yours connects and loads data, you don't need to do anything.
+
+## Allow them
+
+<Tabs>
+  <Tab title="Server firewall">
+    Add an allow rule for each of the three addresses on HTTPS (port `443`). Ask your hosting provider if you don't manage the firewall yourself.
+  </Tab>
+  <Tab title="WordPress security plugin">
+    In your security plugin (for example Wordfence, Sucuri or iThemes Security), find its **allowlist** (sometimes called **whitelist**) of IP addresses and add all three.
+  </Tab>
+  <Tab title="Cloudflare">
+    1. In Cloudflare, open your site and go to **Security → WAF → Tools**.
+    2. Under **IP Access Rules**, add each address with the action **Allow**.
+    3. If **Bot Fight Mode** is on, it can still block Oviond. Add a WAF custom rule that skips it for these three addresses.
+  </Tab>
+  <Tab title="Platform IP restrictions">
+    In the platform's security or API settings, find its list of allowed IP addresses and add all three.
+  </Tab>
+</Tabs>
+
+After you allow the addresses, try connecting the data source again. If it was already connected, open a report that uses it and check that the widgets load.
+
+## WooCommerce
+
+Oviond reads your store through the WooCommerce REST API, at `https://<your store>/wp-json/wc/v3/`. As well as allowing the addresses, make sure:
+
+- Your firewall or security plugin doesn't block `/wp-json/` for these addresses.
+- Your store uses **HTTPS**. The **Shop URL** you enter in Oviond must start with `https://`.
+- The **Consumer Key** and **Consumer Secret** you entered have **Read** access.
+
+## Good to know
+
+- **The addresses are shared.** Oviond's hosting provider gives other customers these same addresses too. They're fixed, but they aren't used only by Oviond. If your security team needs addresses used only by Oviond, [talk to us](https://www.oviond.com/contact/).
+- **They rarely change.** If they ever do, this page is updated. Check here if a connection that worked before starts failing.
