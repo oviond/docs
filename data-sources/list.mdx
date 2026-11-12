@@ -7,18 +7,22 @@ Data sources are connections between Oviond and your clients' marketing platform
 
 ## Supported data sources
 
-Oviond supports 92 platforms across categories such as paid search, paid social, analytics, SEO, email marketing, e-commerce/CRM, customer support, and databases.
+Oviond supports 104 platforms. You can also bring in your own numbers with [Custom Data](/custom-data/upload), [Calculated Metrics](/calculated-metrics/overview) and [Goals](/goals/overview).
 
-| Category | Examples |
+| Category | Platforms |
 |---|---|
-| **Paid Search** | Google Ads, Microsoft Ads, ChatGPT Ads |
-| **Paid Social** | Facebook Ads, Instagram Ads, LinkedIn Ads, TikTok Ads, Pinterest Ads, Snapchat Ads, X Ads |
-| **Analytics** | Google Analytics 4, Matomo, Piwik PRO, Plausible |
-| **SEO** | Google Search Console, Semrush, Ahrefs, Moz, SE Ranking, Serpstat, Appfigures |
-| **Email Marketing** | Mailchimp, Klaviyo, Omnisend, Campaign Monitor, ActiveCampaign, Vbout |
-| **E-commerce & CRM** | Shopify, WooCommerce, HubSpot, Salesforce, Pipedrive, Close CRM, Copper CRM, Stripe, Paddle |
-| **Customer support & project management** | Help Scout Mailbox, Help Scout Docs, SimpleSat, Jira, ClickUp |
-| **Databases & spreadsheets** | Airtable, Google Sheets |
+| **Advertising** | ChatGPT Ads, Google Ads, Google Local Services Ads, Instagram Ads, LinkedIn Ads, Meta Ads, Microsoft Ads, Pinterest Ads, Snapchat Ads, TikTok Ads, X Ads, AdRoll, Adtraction |
+| **Social media** | Facebook, Instagram, LinkedIn, Mention, Pinterest, TikTok, X, YouTube |
+| **Analytics** | Amplitude, Google Analytics 4 (GA4), Matomo, Microsoft Clarity, Piwik Pro, Plausible |
+| **SEO and local** | Advanced Web Ranking, Ahrefs, Bing Webmaster Tools, BrightLocal, Google Business Profile, Google Search Console, Keyword.com, Moz, Nozzle, SE Ranking, SEOcrawl, Semrush, Serpstat, SerpWatch, Surnex |
+| **Email marketing** | Brevo, Drip, Encharge, GetResponse, Kit, lemlist, Mailchimp, Mailer Lite, Moosend, Omnisend, Sendgrid, VBOUT |
+| **Marketing automation** | Active Campaign, Campaign Monitor, Go High Level, Klaviyo, Make, Mautic, Pabbly Connect |
+| **CRM** | ChartMogul, Close CRM, Copper CRM, HubSpot, Intercom, Pipedrive, Salesforce, Zoho CRM |
+| **E-commerce and payments** | BigCommerce, Paddle, PayPal, Shopify, Stripe, WooCommerce, Xero |
+| **Calls, support and reviews** | Call Rail, Endorsal, Freshdesk, Help Scout Docs, Help Scout Mailbox, SimpleSat, Typeform, WhatConverts |
+| **Projects and teams** | Asana, Basecamp, ClickUp, Clockify, Harvest, Jira, Monday, Slack, Teamwork, Twilio |
+| **Video, web and links** | Google Page Speed, Pingdom, Switchy, UptimeRobot, Vimeo, Wistia, WordPress |
+| **Spreadsheets and apps** | Airtable, Appfigures, Google Sheets |
 
 <Note>
   The full list of available data sources appears on a client's [Data sources](/data-sources/client-sources) page, and in the report editor's **Data Sources** tab. New platforms are added regularly.
@@ -30,7 +34,7 @@ When you connect a data source, Oviond guides you through an OAuth flow — or, 
 
 After connecting, you link a specific account, property, or page (for example, a particular Google Ads account or GA4 property) to a client. That linked data source then becomes available when you build widgets for that client.
 
-### Connections (auth profiles)
+### Connections (profiles)
 
 A connection represents one authorized credential for a platform — typically tied to one login. If you manage multiple clients' accounts through a single login (such as a Google Ads manager account), one connection can cover all of those sub-accounts.
 
@@ -38,34 +42,34 @@ You can reuse the same connection across multiple clients. For example, if your 
 
 ## Listing your connections
 
-To see every connection across your workspace, go to **Settings → Data sources** (`/settings/data-sources`). The table lists each connected profile with its platform, profile name, token **Status** (**Token valid** or **Token expired**), the number of clients using it, and the date it was connected. Use the toolbar to search by name or filter by status and platform.
+To see every connection across your workspace, go to **Settings → Data sources** (`/settings/data-sources`). The table has a row per connection: **Data source**, **Profile**, **Clients** (how many use it), **Status** and **Connected** (the date). Search by name, or use **Filters** to show one status or one platform. Click a row, or **Manage**, to open the connection's panel. The **Connect** button adds a new one.
 
 To see the data sources linked to one client, open that client and click **Data sources** in the sidebar. Platforms the client is already connected to sort to the top, each card reading **Connected**.
 
 ## Checking connection status
 
-Oviond checks token health automatically with a daily auth-test. You don't run a manual test — each connection displays a **Token valid** or **Token expired** badge. When a token expires, click **Refresh** (on the connection) or **Refresh token** (Settings) to re-authorize. See [Test Connection](/data-sources/test) for details.
+Every connection shows **Working** or **Needs attention**. Oviond checks them every day on its own, and you can click **Test** in a connection's panel at any time. To fix one that needs attention, see [Test Connection](/data-sources/test).
 
-## Unlinking and deleting
+## Disconnecting and deleting
 
-**Unlinking** removes a data source from a specific client but keeps the connection available for reuse. **Deleting** a connection removes it from your workspace entirely and disconnects every client that used it.
+**Disconnecting** removes a data source from one client but keeps the connection for reuse. **Deleting** a connection removes it from your workspace and from every client that used it.
 
-### Unlink a data source from a client
+### Disconnect a data source from a client
 
 1. Open the client and go to its **Data sources** page.
-2. Find the linked data source.
-3. Click **Unlink**.
+2. Open the platform.
+3. Click **Disconnect** on the connected profile.
 
-The connection remains available and can be linked to the same or a different client at any time.
+The connection stays available and can be linked to the same or a different client at any time.
 
 ### Delete a connection
 
 <Warning>
-  Deleting a connection removes it permanently and may affect widgets that use it. Widgets that relied on it stop displaying data. This cannot be undone.
+  Deleting a connection removes it for good and may affect widgets that use it. Widgets that relied on it stop showing data. This can't be undone.
 </Warning>
 
-1. Go to **Settings → Data sources**.
-2. Find the connection and click **Delete profile**.
+1. Go to **Settings → Data sources** and click the connection.
+2. Click **Delete profile**.
 3. Type `DELETE` to confirm, then click **Delete profile**.
 
 ## Next steps

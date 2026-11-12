@@ -1,23 +1,21 @@
 ---
-title: "Delete custom data"
-description: "Permanently remove an uploaded dataset."
+title: "Archive custom data"
+description: "Archive an uploaded dataset. You can restore it later."
 ---
 
-Deleting a dataset removes its rows and metadata. Widgets that referenced the dataset no longer resolve their data until you re-wire them to a different source.
-
-<Warning>
-Deletion is permanent — custom data is hard-deleted, with no Archive recovery. Keep a copy of the original file if you might need it later.
-</Warning>
+Archiving a dataset moves it to the [Archive](/archive/view). Widgets that use it stop showing its data until you restore it or point them at another dataset.
 
 <Steps>
   <Step title="Open Manage Custom Data">
-    From the **Data Query** widget's **Custom Data** source, click **Manage** next to the **Dataset** label.
+    From a **Custom Data** widget, click **Manage** next to the **Dataset** label.
   </Step>
-  <Step title="Choose Delete">
-    Select the dataset and choose **Delete**. Confirm when prompted.
+  <Step title="Choose Archive">
+    On the dataset's row, choose **Archive** and confirm in the **Archive Dataset** dialog.
   </Step>
 </Steps>
 
+To bring it back, go to **Settings → Archive**, find the dataset and click **Restore**. Deleting it from the Archive removes it for good.
+
 ## API
 
-`DELETE /v1/custom-data/{id}` permanently removes the dataset. It returns `404` if the dataset doesn't exist in your account.
+`DELETE /v1/custom-data/{id}` archives the dataset. It returns `404` if the dataset doesn't exist in your account.

@@ -1,62 +1,119 @@
 ---
 title: "Configure a widget"
-description: "Set the data, date range, chart type, and appearance of a widget."
+description: "Every setting a widget has: its data, date range, chart type, display options, and the settings of text, heading, image, button and embed widgets."
 ---
 
-Click any widget to open its settings.
+Click any widget while editing to open its settings in the sidebar. A data widget has two parts: **Data** (what it shows) and **Display** (how it looks).
 
 ## Data
 
 For a **Data Query** widget:
 
-- **Data source** — the connected source the widget reads from. Only sources linked to this client are available.
-- **Metric** — what the widget measures.
-- **Dimension** — an optional breakdown (for example, by campaign or by day).
+- **Data Source** — the platform the widget reads from. Only sources linked to this client are listed. **Link New Data Source** connects another one without leaving the report.
+- **Metrics** — what the widget measures. You can pick several.
+- **Dimension** — an optional breakdown, for example by date, campaign or country.
+- **Filter** — click **Add Filter** to keep only some rows. Pick a **Field**, an **Operator** and a **Value**. With several filters, choose **AND** (all must match) or **OR** (any can match). **Reset** clears them.
+- **Format** and **Summary** — per metric, how values show (**Number**, **Percent**, **Currency**, **Text**, **Link** or **Date**) and how the total is worked out (**Sum**, **Average**, **Min** or **Max**).
+- **Show Advanced Settings** — extra options some platforms need, for example which campaigns, accounts or properties to include.
+
+Click **Set Data** to apply. Connected widgets then fetch fresh data on their own.
 
 <Note>
-Metrics and dimensions shown in **red** have been retired by the provider. They stay selectable so existing widgets keep working, but the provider may return no data for them. Prefer a current equivalent when you're building something new.
+Metrics and dimensions shown in **red** have been retired by the platform. They stay selectable so existing widgets keep working, but the platform may return no data for them. Prefer a current one when you build something new.
 </Note>
+
+**Calculated Metric**, **Goal** and **Custom Data** widgets pick a saved metric, goal or dataset instead of a data source. A **Static Value** widget takes a **Value** you type; it never fetches.
 
 ## Date range
 
-Each widget inherits the report-level date range by default. Override it per widget when you need a different period — for example a year-over-year comparison tile.
+A widget follows the report's date range unless you give it its own. The date picker offers **Today**, **Yesterday**, **Last 7 Days**, **Last 30 Days**, **Custom Days** (the last N days), **This Month**, **Custom Months** (the last N months), **Last Month**, **This Year**, **Last Year** and **Custom** (fixed dates). Tick **Include Today** to count today too.
 
-## Chart type
+**Compare** adds a comparison period: **Previous Period**, **Previous Month** (with *Last Month*), **Previous Year** or **Custom**. Choose **None** to turn it off.
 
-Switch the visualization (KPI, line, bar, table, and so on) without losing your data configuration.
+## Display
 
-## Appearance
+### Chart type
 
-Set the title and per-type display options such as colors and formatting.
+Under **Visualization Type**, pick how the data is drawn: **Scorecard**, **Line Chart**, **Area Chart** (also **Stacked Area** and **Percentage Area**), **Bar Chart** (also **Stacked Bar**), **Column** (also **Stacked Column** and **100% Stacked Column**), **Pie**, **Donut**, **Funnel Chart**, **Table** or **Geo Map**. Changing it keeps your data settings. Lines can be **Linear** or **Smooth**.
 
-## Metric settings
+### Name, description and icon
 
-Under **Display**, each metric on the widget gets its own row in **Metric Settings**. Expand a metric to override:
+- **Name** — the widget's title. **Show Name** turns it on or off.
+- **Description** — a short note under the title. **Show Description** turns it on or off.
+- **Show Icon** — the data source's logo in the widget's footer. **Show Date** — shows the widget's date range.
+- **Show Header** — the widget's header bar. **Show Container** draws the border and background around the widget.
 
-- **Name** — a custom label that replaces the metric's default name.
-- **Format** — how the value renders: numeric, decimal, percentage, currency, or time.
-- **Comparison Indicator** — whether a rise in this metric is good or bad.
+### Options
 
-**Higher is better** is the default: a rise shows green, a fall red. Switch to **Lower is better** for cost-style metrics — cost, CPC, bounce rate — so a falling figure reads as a win. Only the colour changes; the arrow and the sign always follow the actual movement.
+What you see depends on the chart type:
 
-<Tip>
-The comparison indicator applies to scorecards and to the KPI figures shown on chart widgets, so a dashboard of cost tiles reads correctly at a glance.
-</Tip>
+| Option | What it does |
+|---|---|
+| **Show KPI** | The total figure above a chart. |
+| **Show Totals** | A totals row at the bottom of a table. |
+| **Show Search** | A search box above a table, so viewers can filter rows. On by default. |
+| **Sort By**, **Ascending** / **Descending** | The order of rows or bars. |
+| **Limit** | How many rows or items to show. |
+| **Legend** | Shows or hides the chart's legend. Where it sits depends on the chart type. |
+| **Show Label List** | The value printed on each bar or slice. |
+| **Show Grid Lines** | Background lines on charts. |
+| **Show x-axis Label** / **Show y-axis Label** | Axis titles. |
+| **Show Multiple Axes** | A separate axis for each metric, when their sizes differ a lot. |
+| **Show Logarithmic** | A log scale, for values that range from small to huge. |
+| **Invert Y Axis** | Flips the axis, useful for rankings where 1 is best. |
+| **Show Trendline** | A trend line through the data. |
+| **Currency** | The currency for money values. **Default (client currency)** uses the client's. |
 
-## Comparison display
+### Comparison display
 
-When a comparison period is active, choose what each row or data point shows:
+When a comparison period is on, **Comparison Display** sets what each row or point shows:
 
-- **Previous Value** — the raw figure from the previous period. This is the default.
+- **Previous Value** — the figure from the previous period. This is the default.
 - **Percentage Change** — the change against the previous period.
-- **Both** — the previous value and the percentage change side by side.
+- **Both** — the two side by side.
 
-Available on tables and on line, area, and bar charts. Pie, funnel, map, and scorecard widgets don't render side-by-side comparisons, so the setting is hidden for them.
+Available on tables and on line, area and bar charts.
 
-## Table options
+### Metric settings
 
-- **Show Search** — a search box above the table, letting viewers filter rows. Enabled by default.
+Under **Metric Settings**, each metric has its own row. Expand one to change:
 
-<Note>
-Connected data widgets refetch in the background after a save, so the latest data appears without a manual refresh.
-</Note>
+- **Name** — a custom label instead of the metric's own name.
+- **Format** — **Number**, **Percent**, **Currency**, and so on.
+- **Comparison Indicator** — **Higher is better** (the default: a rise is green) or **Lower is better** (for costs, CPC, bounce rate: a fall is green). Only the colour changes; the arrow always follows the real movement.
+
+## Other widget types
+
+### Heading
+
+- **Text** — the heading.
+- **Heading Level** — **H1 — Main Title**, **H2 — Section**, **H3 — Subsection** or **H4 — Sub-subsection**.
+- **Link URL** — makes the heading a link.
+
+### Text
+
+Type straight into the widget. The toolbar has the block type (paragraph, headings, lists), **Bold**, **Italic**, **Underline**, **Strikethrough**, **Inline Code**, **Link**, **Alignment**, **Insert Table** (add or remove rows and columns), **Undo** and **Redo**. **Insert Variable** adds live values such as the client name or the date range — see [Content types](/widgets/types#variables-in-text).
+
+### Image
+
+- **Upload image**, **Change image** or **Remove image** — pick from or add to the Media Library.
+- **Object Fit** — how the image fills its box: **Contain**, **Cover**, **Fill** or **None**.
+- **Link URL** — makes the image a link.
+
+### Button
+
+- **Button Text** and **Link URL**.
+- **Open Link In** — **Same Window** or **New Window**.
+- **Size** — **Small**, **Medium** or **Large**. **Width** — **Auto** or **Full Width**. **Style** — **Primary** or **Secondary**.
+
+### Embed
+
+Choose the **Type**:
+
+- **URL** — paste a link to embed, for example YouTube, Vimeo or Google Maps.
+- **iFrame** — paste the full iFrame code from any service.
+- **HTML** — custom HTML shown inside the widget.
+
+## Saving
+
+Changes save as you work. Connected data widgets fetch again in the background after a change, so the latest data appears without a manual refresh.

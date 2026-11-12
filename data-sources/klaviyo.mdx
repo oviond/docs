@@ -10,7 +10,7 @@ Klaviyo is a **synced** data source. Oviond doesn't ask Klaviyo for data each ti
 - **Widgets show only what's synced.** A day that hasn't synced yet shows `0`. A table with nothing synced for its dates shows **No data yet for these dates**.
 - **History:** Oviond keeps the last **24 months** (730 days). Dates older than that show no data.
 - **Newest first:** the first sync loads the most recent days first, so recent reports fill in long before the full history is loaded.
-- **Sync frequency:** you pick it when you link a client: every 3 hours, every 6 hours (the default), every 12 hours, or once a day. Everything syncs on the one you pick. When several clients use the same Klaviyo connection, it syncs at the fastest frequency any of them picked.
+- **Sync frequency:** you pick it when you link a client: every 3 hours, every 6 hours (the default), every 12 hours, or once a day. Everything syncs on the one you pick. When several clients use the same Klaviyo connection, it syncs at the fastest frequency any of them picked. If automatic syncs are switched off for now, the connection says so — use **Sync now** in **Sync History** to get new data.
 
 ## Connect Klaviyo
 
@@ -57,7 +57,7 @@ Open the Klaviyo connection and click **Sync History** to see:
 - **The sync keeps failing:** after 3 failures in a row, you get one notification. Check the API key in the connection.
 - **A sync is interrupted** (for example a server restart): when the server is back, the sync restarts on its own within a few minutes and carries on from where it stopped.
 
-## Unlink or delete
+## Disconnect or delete
 
-- **Unlinking a client** keeps the connection and its synced data. Linking again carries on from where it stopped.
+- **Disconnecting a client** keeps the connection and its synced data. Connecting again carries on from where it stopped.
 - **Deleting the connection** deletes all of its synced data. Connecting again loads the full history from the start.

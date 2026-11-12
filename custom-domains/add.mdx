@@ -25,23 +25,23 @@ A custom domain replaces `app.oviond.com` with a URL you own on shared report li
 
 ## DNS records
 
-Oviond registers the domain with Vercel and returns the records you need to add:
+Oviond shows the records you need to add. Copy them exactly as shown:
 
 | Record | Purpose |
 |---|---|
-| `CNAME` | Points your subdomain at Vercel (`cname.vercel-dns.com`) so it can serve your reports and provision SSL. |
-| `TXT` | An ownership challenge (`_vercel`), returned only when the domain is already attached to another Vercel account. It can be removed once the domain is verified. |
+| `CNAME` | Points your subdomain at Oviond so it can serve your reports over a secure (SSL) link. |
+| `TXT` | Proves you own the domain. Only shown when the domain is already in use somewhere else. You can remove it once the domain is verified. |
 
 <Note>
   You always add DNS records yourself in your provider's admin. Oviond detects which provider you use but never writes records on your behalf.
 </Note>
 
 <Note>
-  On **Cloudflare**, set the record's proxy status to **DNS only** (grey cloud). With the proxy enabled, Vercel can't issue the SSL certificate.
+  On **Cloudflare**, set the record's proxy status to **DNS only** (grey cloud). With the proxy on, the SSL certificate can't be issued.
 </Note>
 
 <Note>
-  SSL is provisioned automatically by Vercel once the domain verifies. You don't need to set up a certificate manually.
+  SSL is set up automatically once the domain verifies. You don't need to set up a certificate manually.
 </Note>
 
 Your account's first custom domain is set as the default automatically, so shared URLs have a domain to resolve against. The number of custom domains you can add depends on your plan.

@@ -3,17 +3,16 @@ title: "Rename media"
 description: "Change the display name of a media item."
 ---
 
-Renaming a media item updates its display name only. The underlying file keeps the same `url`, so widgets and branding that reference the item don't need to be re-wired.
+Renaming a media item changes only its name. The file and its link stay the same, so widgets and logos that use it keep working.
 
 ## What rename changes
 
-- The `name` shown in the Media Library, in image pickers, and in search.
+- The name shown in the Media Library, in image pickers, and in search.
 
 ## What rename doesn't change
 
-- The file's `url` and S3 `key` (both are immutable).
-- The `size` or `mime_type`.
-- Any widget or branding that references the file — it keeps working.
+- The file itself, its link, its size or its type.
+- Any widget or logo that uses the file — it keeps working.
 
 <Note>
 Renaming also runs as part of the upload flow: after the file uploads, Oviond confirms the item's display name with the same update call.

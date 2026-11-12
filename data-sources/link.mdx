@@ -3,30 +3,30 @@ title: "Link to Client"
 description: "Attach a connected data source to a specific client."
 ---
 
-A connection lives at the **workspace** level — one credential can be linked to many clients. Linking picks the account, property, or page for a client and makes that data source selectable in the client's widgets.
+A connection lives at the **workspace** level — one login can be linked to many clients. Linking picks the account, property, or page for a client and makes that data source available in the client's widgets.
 
 <Steps>
   <Step title="Open the data sources list">
-    Open the client and click **Data sources** in the sidebar — or, from inside a report, click **Data Sources** in the editor sidebar.
+    Open the client and click **Data sources** in the sidebar — or, from inside a report, click **Data Sources** in the editor sidebar. Click the platform.
   </Step>
   <Step title="Select the connection">
-    Under **Select Profile**, pick a connection you've already made (or click **Connect** to make a new one — see [Connect](/data-sources/connect)).
+    Under **Select Profile**, find a connection you've already made, or click **Add New** to make a new one — see [Connect](/data-sources/connect).
   </Step>
-  <Step title="Click Link">
-    Click **Link** on the connection. Oviond loads the available accounts.
+  <Step title="Click Connect">
+    Click **Connect** on the connection. Oviond loads the available accounts.
   </Step>
   <Step title="Pick the account">
     Under **Select Account**, choose which ad account, property, or page maps to this client. See [Profiles](/data-sources/profiles).
   </Step>
   <Step title="Save">
-    Click **Save**. Every widget you build for this client can now pull from the linked data source.
+    Click **Save**. The connection shows **Connected**, and every widget you build for this client can pull from it.
   </Step>
 </Steps>
 
-## Unlink
+## Disconnect
 
-On the client's **Data sources** page, click **Unlink** next to a linked profile. The connection stays at the workspace level — it's just no longer available in this client. Widgets in this client's reports that referenced it stop returning data.
+On the client's **Data sources** page, open the platform and click **Disconnect** on the connected profile. The connection stays in your workspace — it's just no longer linked to this client. Widgets in this client's reports that use it stop returning data.
 
 <Note>
-  Unlink takes effect immediately and isn't confirmed by a dialog. The connection remains in **Settings → Data sources** and can be linked to the same or a different client at any time.
+  Disconnect takes effect at once, with no dialog to confirm. The connection stays in **Settings → Data sources** and can be linked to the same or a different client at any time.
 </Note>

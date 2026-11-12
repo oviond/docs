@@ -1,45 +1,55 @@
 ---
 title: "PDF export"
-description: "Generate a downloadable PDF of a report on demand."
+description: "Make a downloadable PDF of a report or dashboard."
 ---
 
-Oviond renders a **Multi-Page Report** or a **Dashboard** as a PDF on demand. Generation runs asynchronously in the background, so large reports don't block your browser — Oviond queues a job, renders the report headlessly, and stores the finished file for download.
+Oviond makes a PDF of a **Multi-Page Report** or a **Dashboard** in the background, so a big report doesn't slow your browser down.
 
 <Note>
-A Multi-Page Report prints page by page. A Dashboard has no page boundaries, so it prints as one long page sized to the whole dashboard — nothing is split across pages.
+A Multi-Page Report prints page by page. A Dashboard has no pages, so it prints as one long page the size of the whole dashboard — nothing is split.
 </Note>
 
-## Generate a PDF
+## The PDF shows the saved data
+
+The PDF prints the numbers saved in the report at that moment. It doesn't fetch new data while it prints. This makes PDFs faster, and they match what you see in the report.
+
+So if the numbers look old, refresh the report first, then make the PDF. The Download tab reminds you:
+
+> The PDF uses the data saved in the report right now. If numbers look old, refresh the report first.
+
+On a shared link, viewers see: *The PDF shows the report as it was last saved. It may not match the dates or numbers you see here.*
+
+## Make a PDF
 
 <Steps>
   <Step title="Open the share dialog">
     From the report, open **Share** and switch to the **Download** tab.
   </Step>
   <Step title="Click Generate New PDF">
-    Oviond queues a generation job. The button shows **Generating** (or a queued count) while it works, and a new entry appears in the **Download History** list in a processing state.
+    The button shows **Generating** (or how many are **Queued**) while it works. A new row appears in the list, marked **Processing...**.
   </Step>
   <Step title="Download">
-    When the job completes, the history row flips to a success state and a **Download** link appears. Use the trash icon to remove an export and its stored file.
+    When it's ready, click **Download** on the row. The PDF opens in a new tab.
   </Step>
 </Steps>
 
-The list reflects each generation attempt's state — **processing**, **completed**, or **failed**.
+To remove a PDF from the list, click **Archive** on its row and confirm in the **Archive PDF** dialog. It moves to the [Archive](/archive/view).
 
-## How it works
+A PDF that isn't ready after 30 minutes is marked as failed. Make a new one.
 
-Generation is a two-step asynchronous flow:
+## Over the API
 
-1. `POST /v1/pdf/generate` validates the request and enqueues the job, returning a `job_id`. The request specifies the `report_id`, `client_id`, a page `format` (**A4** or **Letter**), and `orientation` (**portrait** or **landscape**). The defaults are `A4` and `portrait`.
-2. `GET /v1/pdf/status/:job_id` is polled until `status` is `complete` (which returns the file `url`) or `failed`.
+Making a PDF takes two calls:
 
-Each attempt is recorded in the report's export history, which the **Download History** list reads from.
+1. `POST /v1/pdf/generate` queues the job and returns a `job_id`. Send the `report_id`, `client_id`, the page `format` (**A4** or **Letter**) and the `orientation` (**portrait** or **landscape**). The defaults are `A4` and `portrait`.
+2. `GET /v1/pdf/status/:job_id` until `status` is `complete` (with the file `url`) or `failed`.
 
-<Note>
-PDF generation requires Oviond's file storage (S3) to be configured. If it isn't, the generate request is rejected.
-</Note>
+Every attempt is saved in the report's export history, which is the list on the Download tab.
 
 ## Troubleshooting
 
-**Generation fails or times out** — Very large reports with many widgets can occasionally fail to render. Try again, or split the report across more pages. Failed attempts show a **failed** state in the history list.
+**The PDF fails** — very large reports can sometimes fail. Try again, or spread the widgets over more pages.
 
-**Images or logos missing** — Make sure all image URLs in your report are publicly accessible. Private or expired URLs won't render in the headless browser.
+**Numbers are old or missing** — refresh the report, wait for the widgets to load, then make the PDF again.
+
+**Images or logos are missing** — check that every image in the report can be opened publicly. Private or expired image links can't be printed.

@@ -5,7 +5,11 @@ description: "Add the from-addresses Oviond uses for outgoing email."
 
 A **sender** is a from-address (for example, `reports@youragency.com`) that Oviond sends email from. Each sender is tied to a transport — your verified **sending domain** or your own **SMTP server**. Manage senders in the **Sender addresses** section of **Settings → Email settings** (`/settings/email-settings`).
 
-The built-in Oviond sender (`noreply@oviond.com`) is always available and is shown read-only. It isn't available on lifetime plans, which must send from their own SMTP server.
+The built-in Oviond sender (`noreply@oviond.com`) is always available, on every plan, and is shown read-only.
+
+## Daily sending limit
+
+Email sent through Oviond — the built-in sender or a sender on your verified sending domain — counts toward a daily limit of recipients, based on your plan. The count resets at midnight UTC. Emails over the limit aren't sent that day. Email sent through your own [SMTP server](/email-settings/smtp) doesn't count, so use SMTP if you need to send more.
 
 ## Add a sender
 
@@ -16,24 +20,15 @@ The built-in Oviond sender (`noreply@oviond.com`) is always available and is sho
   <Step title="Add an email address">
     Click **Add Email Address**, then choose the source — **Sending domain** (an address on your verified domain) or **SMTP server** (your own server).
   </Step>
-  <Step title="Enter the from details">
-    Set the **from name** and **from email**. For a sending-domain sender, the `from_email` must be on your verified domain. You can also set an optional **nickname**, **reply-to**, and a physical **address**, **city**, and **country**.
+  <Step title="Enter the details">
+    Enter the **Sender name** (the name people see) and the **Email address**. For a sending-domain sender, the address must be on your verified domain.
   </Step>
   <Step title="Save">
-    The sender becomes selectable when sending email. Your first saved sender is set as the default automatically.
+    The sender can now be picked when sending email. Your first saved sender becomes the default automatically.
   </Step>
 </Steps>
 
-## Fields
-
-| Field | Notes |
-|---|---|
-| `source` | `resend` (sending domain) or `smtp` — the transport the sender uses. |
-| `from_name` | The display name recipients see. |
-| `from_email` | The from-address. For a sending-domain sender, must be on your verified domain. |
-| `nickname` | Optional internal label. |
-| `reply_to` | Optional reply-to address. |
-| `address`, `city`, `country` | Optional physical address. |
+Each sender in the list shows its **Address** and whether it's **Ready**, **Needs DNS** or **Not configured**.
 
 ## Default sender
 

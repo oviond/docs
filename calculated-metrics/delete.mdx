@@ -1,23 +1,25 @@
 ---
-title: "Delete a calculated metric"
-description: "Remove a calculated metric you no longer need."
+title: "Archive a calculated metric"
+description: "Archive a calculated metric you no longer need. You can restore it later."
 ---
 
-Deleting removes the calculated metric from the report.
+Archiving a calculated metric moves it to the [Archive](/archive/view). You can restore it from there at any time.
 
 <Steps>
   <Step title="Open the Calculated Metrics tab">
     In the report editor, open the **Calculated Metrics** tab.
   </Step>
-  <Step title="Delete the metric">
-    Open the metric's menu and choose **Delete**.
+  <Step title="Archive the metric">
+    On the metric's row, click **Archive**, then confirm in the **Archive Calculated Metric** dialog.
   </Step>
 </Steps>
 
 <Warning>
-Widgets that referenced the deleted metric stop resolving until you point them at another metric.
+Widgets that use the archived metric stop showing data until you restore it or point them at another metric.
 </Warning>
+
+To bring it back, go to **Settings → Archive**, find the metric and click **Restore**.
 
 ## API
 
-`DELETE /v1/calculated-metrics/{id}` removes a calculated metric.
+`DELETE /v1/calculated-metrics/{id}` archives a calculated metric.

@@ -1,29 +1,35 @@
 ---
 title: "Arrange & resize widgets"
-description: "Position widgets on the grid and select several at once."
+description: "Move, resize and line up widgets, and select several at once."
 ---
 
-Widgets use a drag-and-drop grid.
+How widgets move depends on the report's layout, chosen when it was made:
+
+- **Grid** (every dashboard, and Grid reports) — widgets snap to rows and 12 columns, and move up to fill gaps.
+- **Free Canvas** reports — place widgets anywhere on the page, at any size.
 
 ## Move and resize
 
-- **Move** — drag a widget to a new position on the grid.
-- **Resize** — drag a corner handle. Widgets snap to the grid.
+- **Move** — drag a widget to a new place.
+- **Resize** — drag a corner handle.
 
-## Spacing and measuring (reports)
+## Spacing and measuring (Free Canvas reports)
 
-On a report page, red lines show the gaps between the widget you're moving, its neighbours and the page edges. Matching gaps are marked too.
+On a Free Canvas page, red lines show the gaps between the widget you're moving, its neighbours and the page edges. Matching gaps are marked too.
 
-Hold **Option** (Mac) or **Alt** (Windows) to turn off snapping and see the distances while you drag, nudge with the arrow keys, or just have a widget selected.
+- Use the **arrow keys** to nudge selected widgets by 1 px (hold **Shift** for 10 px).
+- Hold **Option** (Mac) or **Alt** (Windows) to turn off snapping and see the distances while you drag, nudge, or just have a widget selected.
+
+If a page has no room left for a new widget, Oviond tells you **Page is full** — add a new page or make room.
 
 ## Dashboard capacity
 
-A dashboard holds up to 50 widgets. While editing, a counter on the canvas shows how many slots are used — it turns amber as you approach the cap and red once it's reached, so you can rebalance the layout before you run out of room. Reports paginate across pages and have no cap.
+A dashboard holds up to 50 widgets. While editing, a counter on the canvas shows how many slots are used — it turns amber as you get close and red once it's full. Reports spread across pages and have no cap.
 
-## Multi-select
+## Select several widgets
 
-Turn on **Multi Select** in the floating toolbar, then click each widget to add it to the selection. With a selection active you can [duplicate](/widgets/duplicate) or [delete](/widgets/delete) the chosen widgets in one action.
+Turn on **Multi Select** in the floating toolbar, or Ctrl/⌘ + click widgets, to select several. With a selection you can [duplicate](/widgets/duplicate) or [delete](/widgets/delete) them in one go, or **Clear Selection**. See [Keyboard shortcuts](/reports/keyboard-shortcuts).
 
 ## Saving
 
-Oviond saves the whole report atomically — **every page and every widget** is persisted in one operation — and also auto-saves as you work.
+Oviond saves as you work. Press Ctrl/⌘ + S to save at once. Every change is kept in [Version history](/reports/version-history).

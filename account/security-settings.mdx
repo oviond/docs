@@ -1,0 +1,25 @@
+---
+title: "Security settings"
+description: "Turn API and MCP access on or off, manage connected AI apps, and see who signed in."
+---
+
+**Settings → Security** controls how outside tools reach your account and shows recent sign-ins. It needs **Admin access**.
+
+## Access controls
+
+| Switch | What it does |
+|---|---|
+| **MCP access** | Lets AI apps (ChatGPT, Claude and others) connect to your account through the [MCP server](/mcp/overview). Turning it off disconnects every connected app at once. It also hides [Ask Oviond](/ask-oviond/overview), which works through MCP. |
+| **API access** | Lets [API keys](/api-keys/list) call the Oviond REST API. Turning it off stops every API key on the account. Manage single keys in **Settings → API keys**. |
+
+## MCP connections
+
+The AI apps connected to your account, with who connected each and when. **Revoke** disconnects one app until it's connected again; **Revoke all** disconnects them all.
+
+## Sign-in history
+
+Recent sign-ins and sign-in attempts by everyone in your account.
+
+## Active sessions
+
+Who is signed in to the web app right now, and on what device. **Sign out everyone** signs every session out — useful if a password may have leaked.

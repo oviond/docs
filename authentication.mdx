@@ -6,19 +6,19 @@ description: "Oviond authenticates API requests with Bearer tokens. Learn how to
 Oviond's REST API uses Bearer token authentication. Every request must include a token in the `Authorization` header. For programmatic access, generate an API key from your settings. This page explains how to create an API key and pass it correctly in your requests.
 
 <Note>
-  The Oviond web app signs in with Supabase Auth and sends a session JWT as its Bearer token. For your own scripts and integrations, use an API key instead, as described below.
+  The Oviond web app signs you in with a secure session token. For your own scripts and integrations, use an API key instead, as described below.
 </Note>
 
 ## Generate an API key
 
-API keys require the **Manage API keys** permission, so you must be an account owner or admin.
+Managing API keys needs **Admin access**.
 
 <Steps>
   <Step title="Open API key settings">
     In the Oviond app, go to **Settings → API keys**.
   </Step>
   <Step title="Create a new key">
-    Click **Create**. Give it a descriptive name (for example, "Zapier integration" or "Custom dashboard") so you can identify it later. Choose an access level: **View**, **Edit**, or **Full**. The key inherits your role and client access, capped at the access level you pick.
+    Click **Create key**. Give it a descriptive name (for example, "Zapier integration" or "Custom dashboard") so you can identify it later. Choose an access level: **View**, **Edit**, or **Full**. The key inherits your role and client access, capped at the access level you pick.
   </Step>
   <Step title="Copy and store the key">
     Your key is shown once and starts with `oviond_`. Copy it and store it securely — you won't be able to see the full key again after you close this dialog.

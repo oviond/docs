@@ -1,12 +1,12 @@
 ---
 title: "Bulk delete"
-description: "Soft-delete multiple media items at once."
+description: "Archive several media items at once."
 ---
 
 Bulk delete is the fastest way to clear out leftover screenshots, duplicate uploads, or files from an offboarded client.
 
 <Warning>
-Media is **soft-deleted** — each row is marked deleted (`is_deleted`) and the underlying S3 file is retained. Anything that references a deleted item shows a broken image until you point it at a different file. Review references first if you're removing a file currently in use.
+Archived media goes to the **Archive**, where you can restore it. Anything that uses a deleted item shows a broken image until you point it at a different file. Review references first if you're removing a file currently in use.
 </Warning>
 
 ## In the Media Library
@@ -19,12 +19,12 @@ Media is **soft-deleted** — each row is marked deleted (`is_deleted`) and the 
     Check the checkbox on each tile you want to remove. Selecting two or more enables the bulk action.
   </Step>
   <Step title="Archive">
-    Click **Archive (N)** to soft-delete the selected items.
+    Click **Archive (N)** to archive the selected items.
   </Step>
 </Steps>
 
 <Note>
-Bulk archiving requires the **Edit shared assets** permission. Uploading and selecting media are open to all roles.
+Archiving needs **Admin access** or **Client access**; **Read-only access** can't archive. Uploading and selecting media are open to everyone.
 </Note>
 
 Archived items are recoverable from **Settings → Archive** — filter by **Media** and restore.

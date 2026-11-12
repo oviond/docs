@@ -1,36 +1,61 @@
 ---
 title: "Update Report"
-description: "Rename a report and configure its settings."
+description: "Rename a report and change its settings, date range, page setup and sharing."
 ---
 
-Report **Settings** cover everything outside the report canvas — name, default date range, theme, cover page, header, sharing, and PDF export options.
+A report's settings are in three places in the report editor:
+
+| Where | What you change there |
+|---|---|
+| **Settings** tab | Name, description, logo source, automatic data refresh, and (dashboards only) section links. |
+| **Pages** tab (Multi-Page Reports) | Cover page, table of contents, thank-you page, paper size, orientation, page header and page numbers. |
+| **Share** dialog | The public link, password, PDF download and date selector. See [Share a report](/reports/share). |
+
+The date range is in the report header.
+
+## Settings tab
 
 <Steps>
   <Step title="Open the report">
-    From the client's **Reports** tab, click the report you want to edit.
+    From the client's **Reports** tab, open the report you want to change.
   </Step>
   <Step title="Open the Settings tab">
-    In the report editor, open the **Settings** tab.
+    In the editor sidebar, open **Settings**.
   </Step>
-  <Step title="Rename">
-    Edit the **Report name** field. The new name appears on the shared link, in PDF exports, and in the email subject when the report is automated.
+  <Step title="Report details">
+    Change the **Report name** and add a short **Report description** so your team knows what the report is for. The name appears on the shared link, in PDF exports and in the email subject of automations.
   </Step>
-  <Step title="Set the default date range">
-    Pick a fixed range or a relative range (like *Last 30 Days*) — every widget that uses the report-level date inherits it. Changing the range refetches every connected data widget.
-
-    You can also change it from the date picker in the report header, without opening **Settings** or entering edit mode. It saves either way.
+  <Step title="Logo source">
+    Under **Use logos from**, choose **Client** or **Agency**. It starts with the source set in the client's settings; choosing one here changes it for this report only.
   </Step>
-  <Step title="Configure cover page and header">
-    Toggle the cover page, header, page numbers, table of contents, and thank-you page (multi-page reports only), and choose what each shows.
+  <Step title="Data refresh">
+    Turn on **Refresh data automatically** to keep connected widgets up to date, and pick the **Refresh schedule**: **Hourly** or **Daily**.
   </Step>
-  <Step title="Configure PDF export">
-    Enable PDF export, and for multi-page reports set the paper size (A4 or Letter) and orientation (portrait or landscape). See [PDF Export](/automations/pdf).
-  </Step>
-  <Step title="Save">
-    Click **Save** to apply.
+  <Step title="Dashboard navigation (dashboards only)">
+    Turn on **Show section links** to add quick links so viewers can jump between the dashboard's sections.
   </Step>
 </Steps>
 
+Changes save with the report, like every other edit.
+
+## Date range
+
+Use the date picker in the report header to set the report's date range, for example *Last 30 Days*. Every widget that uses the report's date follows it, and connected widgets fetch fresh data. It saves straight away; you don't need to be in edit mode.
+
+## Pages tab (Multi-Page Reports)
+
+- Turn the **Cover page**, **Table of contents** and **Thank you page** on or off.
+- Under **Document settings**:
+  - **Page setup**: **Paper size** (A4 or Letter) and **Orientation** (Portrait or Landscape). Changing the orientation moves widgets to fit the new page size.
+  - **Page header**: show the **Logo**, **Report title** and **Date range** at the top of each page.
+  - **Page numbers**: show a number on each page.
+
+The cover and thank-you pages take their look (artwork, heading and colours) from the report's [theme](/themes/update).
+
+## PDF download
+
+Whether viewers of the shared link may download a PDF is the **Allow PDF Download** switch in the **Share** dialog. See [PDF Export](/automations/pdf).
+
 <Note>
-A report belongs to the client you create it under, and it can't be reassigned to a different client. To report on the same structure for another client, recreate the report under that client — or save it as a [template](/templates/add) first and apply it there.
+A report belongs to the client you create it under, and it can't be moved to a different client. To use the same layout for another client, save it as a [template](/templates/add) and create the report from that template under the other client.
 </Note>

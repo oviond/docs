@@ -29,10 +29,11 @@ and reconnect.
 
 ### Rate limited (429)
 
-Programmatic access is capped at **300 requests per minute per account**, shared
-across API keys and MCP. The response carries `Retry-After`. An agent looping over
-many clients or widgets is the usual cause — batch where a bulk tool exists
-(`delete_widgets`, `archive_reports`) instead of calling one at a time.
+MCP calls are capped at **300 requests per minute per account** by default. API
+keys have their own, separate limit. The response carries `Retry-After`. An agent
+looping over many clients or widgets is the usual cause — use a bulk tool where one
+exists (`add_widgets`, `update_widgets`, `delete_widgets`, `archive_reports`)
+instead of calling one at a time.
 
 <Note>
   The web app is never rate limited. This applies only to programmatic access.
@@ -42,10 +43,11 @@ many clients or widgets is the usual cause — batch where a bulk tool exists
 
 ### "Invalid widget configuration: …"
 
-`add_data_widget` and `update_data_widget` validate the whole selection the way
-the report builder does. The message names the specific problem — a metric that
-doesn't belong to the chosen data view, a missing required setting, a dimension
-that must be the only one.
+`add_widgets` and `update_widgets` validate each data widget's whole selection
+the way the report builder does. The message names the specific problem — a
+metric that doesn't belong to the chosen data view, a missing required setting,
+a dimension that must be the only one. Only the wrong item is skipped; the
+others in the same call are still written.
 
 Recover by calling `describe_datasource` for that datasource. It returns the data
 views, the metrics and dimensions inside each, and the `advanced` keys a view

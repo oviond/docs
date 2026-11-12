@@ -1,23 +1,25 @@
 ---
-title: "Delete a goal"
-description: "Remove a goal you no longer need."
+title: "Archive a goal"
+description: "Archive a goal you no longer need. You can restore it later."
 ---
 
-Deleting removes the goal from the report.
+Archiving a goal moves it to the [Archive](/archive/view). You can restore it from there at any time.
 
 <Steps>
   <Step title="Open the Goals tab">
     In the report editor, open the **Goals** tab.
   </Step>
-  <Step title="Delete the goal">
-    Open the goal's menu and choose **Delete**.
+  <Step title="Archive the goal">
+    On the goal's row, click **Archive**, then confirm in the **Archive Goal** dialog.
   </Step>
 </Steps>
 
 <Warning>
-Widgets that displayed the deleted goal stop showing its progress until you point them at another goal.
+Widgets that show the archived goal stop showing its progress until you restore it or point them at another goal.
 </Warning>
+
+To bring it back, go to **Settings → Archive**, find the goal and click **Restore**.
 
 ## API
 
-`DELETE /v1/goals/{id}` removes a goal.
+`DELETE /v1/goals/{id}` archives a goal.

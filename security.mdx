@@ -11,7 +11,7 @@ There are three separate ways to reach Oviond, each with its own credential:
 
 | Surface | Credential | Used by |
 |---------|-----------|---------|
-| Web app | Supabase-issued session JWT (ES256) | The Oviond product UI. |
+| Web app | A secure, signed session token | The Oviond product UI. |
 | REST API | An Oviond API key (`oviond_…`) as a Bearer token | Your scripts and integrations. See [Authentication](/authentication). |
 | MCP | OAuth 2.1 + PKCE access token | AI agents. See [MCP authentication](/mcp/auth). |
 
@@ -54,7 +54,7 @@ Programmatic API and MCP traffic is rate-limited per account to protect the plat
 
 ## Data retention
 
-Oviond retains your account's data — clients, reports, connected data sources, and media — for as long as your account exists. There is no automatic expiry; your data stays until you delete it. Deleting an individual resource removes it immediately, and [deleting your account](/account/delete) permanently and irreversibly purges everything associated with it: all data across every table, all team members, media files, and connected-source credentials.
+Oviond retains your account's data — clients, reports, connected data sources, and media — for as long as your account exists. There is no automatic expiry; your data stays until you delete it. Deleting most things — clients, reports, templates, media and more — moves them to the [Archive](/archive/view) first, where they can be restored; deleting them from the Archive removes them for good. [Deleting your account](/account/delete) permanently and irreversibly purges everything associated with it: all data across every table, all team members, media files, and connected-source credentials.
 
 ## Questions & disclosure
 

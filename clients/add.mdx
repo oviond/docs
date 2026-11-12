@@ -3,37 +3,36 @@ title: "Create a client"
 description: "Add a new client in a few fields."
 ---
 
-From the Clients list, click **Add Client** to open the **Add client** panel. **Client Name** and **Client Website** are required; the rest are optional.
+On the Clients page, click **Add Client** to open the **Add Client** panel. **Client name** and **Website** are required. Everything under **Setup details** is optional.
+
+## Required
 
 <Steps>
-  <Step title="Client Name">
-    The client's name appears on the client card, in the sidebar, and on report headers. You can rename it later without affecting existing reports.
+  <Step title="Client name">
+    The client's name appears on the client card, in the sidebar and on report headers. You can rename it later without changing existing reports.
   </Step>
-  <Step title="Client Website">
-    Enter the client's domain (for example, `oviond.com`). Oviond uses the website to generate a card screenshot and derive a favicon automatically on the server — there's no separate screenshot, logo, or favicon field on this form. The screenshot appears on the card once it finishes generating.
-  </Step>
-  <Step title="Select Currency (optional)">
-    Defaults to `USD`. Sets the default currency used by money widgets in this client's reports.
-  </Step>
-  <Step title="Client Timezone (optional)">
-    Defaults to your browser's timezone. Sets the default timezone for dates and scheduled delivery windows in this client's reports.
-  </Step>
-  <Step title="Number format (optional)">
-    Defaults to `en-US` (`1,234.56`). Sets the thousands and decimal separators used across this client's reports — for example `1.234,56` for a German locale — independently of the currency. You can change it later under the client's **Settings → General**.
-  </Step>
-  <Step title="Manager (optional)">
-    Assign a team member as the manager. Defaults to **No manager**.
-  </Step>
-  <Step title="Client folder (optional)">
-    Assign the client to one or more [folders](/clients/folders) to organize it. This field accepts multiple folders.
+  <Step title="Website">
+    Enter the client's domain (for example, `oviond.com`). Oviond uses it to make the card screenshot and to find the client's icon. The screenshot appears on the card once it's ready.
   </Step>
 </Steps>
 
-Click **Create Client** to save. Once saved, the client has an empty workspace. Next steps are usually:
+## Setup details (optional)
 
-1. [Connect a Data Source](/data-sources/client-sources) — the client's card on the Clients list offers **Connect a data source** until one is linked
-2. [Create your first Report](/reports/list) — a Multi-Page Report or Dashboard
+| Field | What it does |
+|---|---|
+| **Contact first name** | The first name of your contact at the client, for example `Sarah`. Text widgets and emails can use it with the **Client First Name** variable. |
+| **Client manager** | The team member who looks after this client. Defaults to **No manager**. |
+| **Default currency** | The currency used by money widgets in this client's reports. Starts from your account's default currency. |
+| **Reporting timezone** | The timezone used for dates and scheduled sends. Starts from your company timezone. |
+| **Client folder** | One [folder](/clients/folders) to put the client in. You can add more folders later in the client's settings. |
+| **Report domain** | The [custom domain](/custom-domains/list) used for this client's shared links. Defaults to **Default domain**. |
+| **Client theme** | The [theme](/themes/apply) new reports for this client start with. |
+
+Click **Create Client** to save. Next steps are usually:
+
+1. [Connect a data source](/data-sources/client-sources). The client's card offers **Connect a data source** until one is linked.
+2. [Create your first report](/reports/add): a Multi-Page Report or a Dashboard.
 
 <Note>
-Logo, favicon, theme, and branding are configured later in the client's **Settings**, not on the Add client form.
+Logos, the number format (for example `1.234,56`), and branding are set later in the client's [Settings](/clients/settings), not on this panel.
 </Note>

@@ -1,57 +1,37 @@
 ---
 title: "Onboarding"
-description: "The 6-step setup flow shown after your first sign-in."
+description: "The one-screen setup shown after your first sign-in: your name, your company and its website."
 ---
 
-After your first sign-in, Oviond opens a full-page setup flow at `/onboarding`. It walks you through six steps: your details, your company, and your first client. The flow is blocking — until you finish it, every other page redirects you back here, and there is no skip or dismiss control. Most steps are a single field, so the whole thing takes about a minute.
+After your first sign-in, Oviond opens a short setup screen, **Let’s set up your Oviond workspace**. It asks for three things and takes less than a minute. Until you finish it, other pages bring you back here.
 
-Once you finish, Oviond creates your account, company, theme, first client, and a starter report, then drops you on that client's **Reports** page. The flow is gated by the `account.onboarding` flag, which the backend sets when your account is created, so the flow never appears again.
+## The setup screen
 
-## The 6 steps
+| Field | What to enter |
+|---|---|
+| **Your name** | Your name as it appears in the app and in the activity log. |
+| **Company name** | Your agency or company name. |
+| **Company website** | Your website, for example `www.acme.com`. If you leave off `https://`, Oviond adds it. Oviond uses it to set up your first demo report. |
 
-<Steps>
-  <Step title="What should we call you?">
-    Enter your **Full Name**. This is your name as it appears throughout the app and in activity-log entries.
-  </Step>
-  <Step title="What is the name of your company?">
-    Enter your **Company name**. This is the company name used on report headers, email footers, and shared links unless you override it with [white-label branding](/company/branding).
-  </Step>
-  <Step title="What is your company's website?">
-    Enter your **Website** (for example, `yourcompany.com`). If you leave off `http://` or `https://`, Oviond adds `https://` automatically.
-  </Step>
-  <Step title="How many clients do you report for?">
-    Pick one option: **1 - 5**, **6 - 20**, **21 - 100**, or **100+**. This isn't a hard limit — it's used to tailor your setup.
-  </Step>
-  <Step title="Add your first client">
-    Enter your first client's details. **Client Name** and **Client Website** are required. You can also set **Select Currency** and **Client Timezone**. This step only collects the details — Oviond creates the client in the final step.
-  </Step>
-  <Step title="Almost done">
-    Oviond finalizes your setup automatically. You'll see **Setting up your workspace** while it detects your branding, applies your theme, and prepares your first report. No action is needed.
-  </Step>
-</Steps>
+Click **Continue to your Dashboard** when all three are filled in.
 
-## Buttons
+## What Oviond sets up
 
-- Steps 1 to 4 show a **Continue** button. It stays disabled until the field is filled in and valid. Pressing Enter also advances these steps.
-- Step 5 shows a **Finish** button. It stays disabled until the client form is valid.
-- Step 6 has no buttons. If finalizing fails, it shows a **Retry** button.
+While you wait, you see **Building your starter dashboard…**. Oviond then:
 
-## What happens next
+- Saves your name, company name and website.
+- Adds Oviond's starter themes to your account, and picks up your website's icon for your agency branding.
+- Creates your **first client**: your own company, using the name and website you entered. It uses your browser's timezone and US dollars. You can change both later in the client's settings.
+- Adds a starter dashboard to that client, built from the **Digital Marketing Dashboard** template. It shows demo numbers until you connect your data sources.
 
-When you finish, Oviond makes a single `POST /v1/onboarding` call that:
+When it's done, you land on the **Clients** page, where you can see your first client.
 
-- Creates your account and saves your name, company name, and website.
-- Records your client-count bucket on the account.
-- Applies a default theme.
-- Creates your first client and a starter report.
-- Sets the account's `onboarding` flag to done so the flow doesn't show again.
-- Sends you to the new client's **Reports** page.
+<Tip>
+Want to report on a real client straight away? Click **Add Client** on the Clients page. See [Add a client](/clients/add).
+</Tip>
 
-You can update your name later under [My account](/account/overview) and your company details under [Company](/company/overview).
+## If setup fails
 
-## Troubleshooting
+If Oviond can't finish, you see **We couldn't finish setup** with a **Retry** button. Click **Retry**. What you typed is kept, so you don't need to type it again.
 
-- **You can't advance** — each step validates its field before you can continue. Fix any inline error, then the button becomes active.
-- **Website rejected** — enter a simple domain (for example, `yourcompany.com`). Leave off paths and trailing slashes.
-- **The flow reappears on a different device** — it follows your account, not the device. Finish it on this device and it syncs.
-- **Setup failed** — if the final step shows an error, click **Retry**. If your email is already registered, sign in instead of going through onboarding again.
+You can change your name later under [My account](/account/overview), and your company details under [Company](/company/overview).

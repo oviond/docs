@@ -6,7 +6,7 @@ description: "Verify a sending domain so Oviond can send mail from your own addr
 A **sending domain** is a domain authorized to send mail through Oviond's managed provider. Verifying it means adding DNS records so recipient providers trust messages from your domain. You can register one sending domain per account from **Settings → Email settings** (`/settings/email-settings`).
 
 <Note>
-  Lifetime plans are SMTP-only and can't register a sending domain — they send from their own [SMTP server](/email-settings/smtp) instead.
+  Lifetime plans can't register a sending domain. They send from the built-in Oviond sender or from their own [SMTP server](/email-settings/smtp).
 </Note>
 
 ## Add a sending domain
@@ -32,12 +32,17 @@ The records table shows **Type**, **Host/Name**, **Value**, **TTL**, **Priority*
 
 ## Status
 
-| Status | Meaning |
+A message above the records shows where the domain is:
+
+| Message | Meaning |
 |---|---|
-| **Not started** | Domain added but verification hasn't run. |
-| **Pending** | Records aren't fully visible yet. |
-| **Verified** | All required records resolve — senders on this domain can send. |
-| **Failed** | Verification didn't complete. Re-check the records and click **Verify domain** again. |
+| *Add the DNS records below, then click Verify to complete setup.* | The domain is added; verification hasn't run yet. |
+| *Not verified yet. Add the DNS records below to your DNS provider, then click Verify.* | The records aren't all visible yet. DNS changes can take a while. |
+| *Domain verified and ready to send email.* | Every record resolves — senders on this domain can send. |
+
+If it stays unverified, check each record matches exactly and click **Verify domain** again.
+
+In the **Sender addresses** section, the sending domain shows **Ready**, **Needs DNS** or **Not configured**.
 
 When the domain verifies, Oviond switches the account's active provider to the sending domain so your verified senders are used.
 

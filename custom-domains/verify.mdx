@@ -3,7 +3,7 @@ title: "Verify domain"
 description: "Confirm DNS records are live so your custom domain activates."
 ---
 
-After you [add a domain](/custom-domains/add), Oviond reconciles its status against Vercel. Once the records resolve and SSL is provisioned, the domain becomes **Active** and shared links start rendering under it.
+After you [add a domain](/custom-domains/add), Oviond keeps checking it. Once the records resolve and SSL is provisioned, the domain becomes **Active** and shared links start rendering under it.
 
 ## Statuses
 
@@ -28,7 +28,7 @@ In the list, these collapse into a single badge: **Active** (green), **Verificat
     Click **Show DNS records** on the domain to expand the records to add.
   </Step>
   <Step title="Verify the domain">
-    Click **Verify domain**. Oviond re-queries Vercel and updates the status. It also keeps the status in sync automatically via a webhook when Vercel confirms ownership or provisions the certificate.
+    Click **Verify domain**. Oviond checks again and updates the status. It also updates on its own as soon as ownership is confirmed and the certificate is ready.
   </Step>
 </Steps>
 

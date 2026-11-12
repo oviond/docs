@@ -7,11 +7,11 @@ The **Email** step of an automation controls who receives the report and how the
 
 ## Recipients
 
-Add one or more recipient email addresses in the **Recipients** field. These are stored as `recipients` and are who the scheduled report is sent to. A [test send](/automations/test) can target a different address without changing this list.
+Add one or more email addresses in the **Recipients** field. These are the people the scheduled report is sent to. A [test send](/automations/test) can target a different address without changing this list.
 
 ## Sender
 
-Choose who the email comes **From**. The dropdown lists your saved senders by name and address (for example `Reports <reports@youragency.com>`), stored as `sender_id`. If no sender resolves, Oviond falls back to its default address, so an automation can still send before you've configured a sender.
+Choose who the email comes **From**. The dropdown lists your saved senders by name and address (for example `Reports <reports@youragency.com>`). If no sender is set, Oviond uses its own default address, so an automation can still send before you've configured a sender.
 
 <Note>
 An automation with no usable sender shows a **No sender** status on the Automations list and won't deliver until one is set.
@@ -19,13 +19,13 @@ An automation with no usable sender shows a **No sender** status on the Automati
 
 ## Email template
 
-Pick an **Email template** for the message body and subject, stored as `template_id`:
+Pick an **Email template** for the message body and subject:
 
 - **Saved template** — select any template from the list. The default is marked `(default)`.
-- **Custom message** — choose **Custom message** to compose a new one. Enter a **Template name**, **Subject**, and **Message**. The custom message is saved as a new, reusable email template in your templates list and the automation references it by id.
+- **Custom message** — choose **Custom message** to compose a new one. Enter a **Template name**, **Subject**, and **Message**. The custom message is saved as a new email template in your templates list, so you can reuse it.
 
 The composer preview fills in placeholders — client name, report name, date range, and so on — using the selected report so you can see the real values before sending.
 
 ## Date range
 
-The **Date range** you choose (stored as `date_text`) is passed to the report on every run, so the email always reflects the correct reporting period. See [Scheduled delivery](/automations/scheduled).
+The **Date range** you choose is used for the report on every run, so the email always reflects the correct reporting period. See [Scheduled delivery](/automations/scheduled).

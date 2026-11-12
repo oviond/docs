@@ -23,13 +23,13 @@ By default Oviond sends email through its managed provider. If you need every em
 
 | Field | Notes |
 |---|---|
-| `host` | SMTP server hostname. |
-| `port` | Server port. Most servers use `587` (STARTTLS); `465` uses implicit TLS. |
-| `username` | SMTP auth username. |
-| `password` | SMTP auth password. Stored encrypted and never returned by the API. |
-| `secure` | Whether to connect over TLS. The server derives this from the port — `465` uses implicit TLS; `587`/`25` upgrade via STARTTLS — regardless of the **Use TLS/SSL** checkbox. |
-| `from_email` | The default from-address for SMTP sends. |
-| `from_name` | Optional display name. |
+| **SMTP host** | Your mail server's address, for example `smtp.yourmail.com`. |
+| **Port** | Most servers use `587`; some use `465`. |
+| **Username** | Usually the same as the from email. |
+| **Password** | Kept encrypted. It's never shown again after you save. |
+| **Use TLS/SSL (recommended)** | Sends email over a secure connection. Leave it on unless your server needs otherwise. |
+| **From email** | The address your emails come from. |
+| **From name** | The name people see. Optional. |
 
 ## Connection test
 

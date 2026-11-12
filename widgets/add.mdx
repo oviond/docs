@@ -16,7 +16,7 @@ A **widget** is an individual block on a page. A data widget connects to a data 
     In the editor sidebar, open the **Add Content** tab.
   </Step>
   <Step title="Drag a content type onto the canvas">
-    Drag a card onto the grid where you want it: **Data Query**, **Calculated Metric**, **Custom Data**, **Goal**, **Static Value**, **Heading**, **Textbox**, **Image**, **Button**, or **Embed**. See [Content types](/widgets/types).
+    Drag a card onto the grid where you want it: **Data Query**, **Calculated Metric**, **Custom Data**, **Goal**, **Static Value**, **Heading**, **Text**, **Image**, **Button**, or **Embed**. See [Content types](/widgets/types).
   </Step>
   <Step title="Configure it">
     For a Data Query, pick the data source, metric, and optional dimension, then set the data. A new data widget shows demo data until it has a source. See [Configure a widget](/widgets/configure).
@@ -29,7 +29,7 @@ A dashboard is capped at 50 widgets. Reports paginate instead, so they have no w
 
 ## Add from the + menu
 
-Select a widget and click **+** to add a new one right below it. Under **Data Query**, **Assets** lists your saved assets. **Calculated Metric** and **Goal** list your saved ones, already set up. Choose **Start from Blank** for an empty widget.
+Select a widget and click **+** to add a new one right below it. Under **Data Query**, **Assets** lists your [saved assets](/widgets/assets). **Calculated Metric** and **Goal** list your saved ones, already set up. Choose **Start from Blank** for an empty widget.
 
 ## API
 
@@ -60,4 +60,4 @@ For a **data widget**, configure it with plain identifiers — pass metric and d
 - **`source_type`** is `project` or `template`. `project` is a stored value that predates the rename to *report* — it still means a report, and it was left as-is rather than migrating every widget row.
 - **`filters`** (optional) is an array of `{ field, operator, value }`; see [Querying data](/api/concepts/querying-data) for operators.
 
-Over MCP, the equivalent is `add_data_widget` with the same `datasource_id`, `metrics`, `dimensions` and `chart`.
+Over MCP, the equivalent is `add_widgets`. It adds many widgets in one call — a whole report at once — each with its own `page_id`, and places them on the page for you. A data widget takes the same `datasource_id`, `metrics`, `dimensions` and `chart`.

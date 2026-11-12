@@ -1,29 +1,38 @@
 ---
 title: "Test Connection"
-description: "Check whether a connection's authorization is still valid."
+description: "Check that a connection still works, and fix it when it needs attention."
 ---
 
-Oviond checks the health of each connection's token automatically. A daily auth-test pings each platform with the stored credentials, and the OAuth refresher updates the status when a token refresh fails. You don't run a manual test in the app — instead, each connection shows a status badge:
+Every connection shows its health in one of two words:
 
-- **Token Valid** — the token is authorized and data should flow.
-- **Token Expired** — the token has expired or been revoked; refresh it.
+- **Working** — the connection is fine and data should flow.
+- **Needs attention** — the login expired or was revoked, or the stored details stopped working. Widgets that use it can show old data or none.
 
-You'll see this badge on a client's **Data sources** page, in a report's **Data Sources** tab, and in **Settings → Data sources** (where it appears as **Token valid** / **Token expired**, and you can filter the table by status).
+Oviond checks every connection once a day, and again whenever it tries to refresh a login, so the status updates on its own. You can also test a connection yourself at any time.
 
-## Where to look
+## Test a connection
 
-- A widget shows a data error and you want to know whether re-authorization is needed.
-- You just refreshed a connection and want to confirm it's working.
-- You're debugging a report that depends on a specific connection.
+<Steps>
+  <Step title="Open Settings → Data sources">
+    The table lists every connection with its **Status**. Use the status filter to show only the ones marked **Needs attention**.
+  </Step>
+  <Step title="Open the connection">
+    Click the row, or **Manage**. A panel opens with the connection's details: **Authentication** (OAuth 2.0 or API key), **Linked clients**, **Connected** and **Last tested**.
+  </Step>
+  <Step title="Click Test">
+    Oviond tries the connection now. You see **Connection is working**, or **Connection failed** with the reason.
+  </Step>
+</Steps>
 
-In each case, open the connection in the **Data Sources** tab or in **Settings → Data sources** and read its status badge.
+## Fix a connection that needs attention
 
-## If a connection shows Token Expired
+- **Sign-in platforms (OAuth)** — click **Refresh connection** and sign in again with the same account. Your account picks stay as they were.
+- **API-key platforms** — click **Edit connection details**, enter all the details again, and click **Save and test**. For safety, stored details are never shown.
 
-1. Click **Refresh** (on the connection) or **Refresh token** (Settings) to start a fresh OAuth flow. Your account selection is preserved.
-2. Complete the OAuth flow with the same login. The badge returns to **Token Valid**.
-3. If refresh doesn't resolve it, the authorizing user's access in the source platform may have been revoked — check the platform's admin for the token's status.
+Fixing a connection fixes it for every client and widget that uses it — you don't need to link each client again.
+
+If it still fails, the person who connected it may have lost access in the platform. Check their access there, or connect again with an account that has access.
 
 <Note>
-  The API exposes a `POST /v1/datasources/test` endpoint that takes an `auth_id` and a `datasource_id` and returns `connected` plus a `message`. The result is recorded on the connection, so its status in the app reflects the test. See the API reference for details.
+  Over the API, `POST /v1/datasources/test` takes an `auth_id` and a `datasource_id` and returns `connected` plus a `message`. The result is saved on the connection, so its status in the app shows the test.
 </Note>

@@ -28,7 +28,7 @@ The create step is smart about the report:
 - **"…with a blank report"** → pass `blank: true` for an empty report.
 - **"…with a report"** (unspecified) → a matching **Starter** template is cloned automatically.
 
-To add a template-based report to an **existing** client, use `create_report_from_template`.
+To add a template-based report to an **existing** client, use `create_report` with a `template_id` (find one with `list_templates`).
 
 <Warning>
   This creates real records in your account. Confirm the client and report names before the agent runs it.
@@ -73,8 +73,8 @@ To add a template-based report to an **existing** client, use `create_report_fro
 
 > "Add a GA4 sessions-by-day chart to the Acme dashboard for the last 30 days."
 
-**Tools:** `datasources` → `describe_datasource` → `add_data_widget` → `refresh_widgets`
-**What happens:** the agent looks up the `datasource_id`, then `describe_datasource` returns that datasource's data views with their metrics, dimensions and any required settings — so nothing is guessed. `add_data_widget` writes the widget, and **the series is fetched server-side straight after the write**. `refresh_widgets` re-runs it on demand.
+**Tools:** `datasources` → `describe_datasource` → `add_widgets` → `refresh_widgets`
+**What happens:** the agent looks up the `datasource_id`, then `describe_datasource` returns that datasource's data views with their metrics, dimensions and any required settings — so nothing is guessed. `add_widgets` writes the widgets — one or a whole report's worth in one call — and **the series is fetched server-side straight after the write**. The call waits up to 10 seconds and returns each widget's state and totals. `refresh_widgets` re-runs it on demand.
 
 <Note>
   A widget pointed at a datasource the client hasn't connected renders **demo data**. That's the product behaviour, not an error — link the datasource and refresh to replace it with real numbers.

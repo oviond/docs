@@ -1,9 +1,9 @@
 ---
 title: "Delete media"
-description: "Soft-delete a single media item."
+description: "Archive a media item. You can restore it later."
 ---
 
-Deleting a media item soft-deletes it: the row is marked deleted (`is_deleted`) and the underlying S3 file is retained, so nothing is permanently destroyed at this step. You can restore it later from **Settings → Archive**.
+Archiving a media item moves it to the Archive — nothing is deleted for good at this step. You can restore it later from **Settings → Archive**.
 
 <Steps>
   <Step title="Open the Library tab">
@@ -13,17 +13,17 @@ Deleting a media item soft-deletes it: the row is marked deleted (`is_deleted`) 
     Click the `⋯` menu on the tile.
   </Step>
   <Step title="Choose Archive">
-    The item is soft-deleted and removed from the library grid.
+    The item moves to the Archive and leaves the library grid.
   </Step>
 </Steps>
 
 <Note>
-Archiving a media item requires the **Edit shared assets** permission.
+Archiving needs **Admin access** or **Client access**; **Read-only access** can't archive.
 </Note>
 
 ## Restore an archived item
 
-Soft-deleted media stays recoverable. Go to **Settings → Archive**, filter by **Media**, and restore the item to return it to the library.
+Archived media can be restored. Go to **Settings → Archive**, filter by **Media**, and restore the item to return it to the library.
 
 ## What references see
 

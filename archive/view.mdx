@@ -1,9 +1,9 @@
 ---
 title: "View archive"
-description: "Browse every soft-deleted item across your account."
+description: "Browse every archived item across your account."
 ---
 
-Most things you delete in Oviond are **soft-deleted first** — moved to the Archive rather than removed straight away. Open it from **Settings → Archive** (`/settings/archive`).
+Most things you delete in Oviond are **archived first** — moved to the Archive rather than removed straight away. Open it from **Settings → Archive** (`/settings/archive`).
 
 The Archive lists archived items by type:
 
@@ -16,11 +16,7 @@ The Archive lists archived items by type:
 - **Custom Data**, **Assets**, **Themes**
 - **Exports**, **Notifications**
 
-<Note>
-Over the API and MCP, the archive type for a report is still the stored value `projects`. Only the label changed with the rename.
-</Note>
-
-Each row shows the **Name**, **Type**, and the **Archived** date (`deleted_at`). From here you can **restore** an item back to its original location or **permanently delete** it.
+Each row shows the **Name**, **Type**, and the **Archived** date. From here you can **restore** an item back to its original location or **permanently delete** it.
 
 ## Find what you're looking for
 
@@ -29,5 +25,5 @@ Each row shows the **Name**, **Type**, and the **Archived** date (`deleted_at`).
 - Sort by name or archived date (newest archived first by default).
 
 <Note>
-The Archive is admin-only. Members without the **manage archive** permission don't see it in the sidebar or have access to the page.
+The Archive needs **Admin access**. Other members don't see it in Settings and can't open the page.
 </Note>

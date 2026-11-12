@@ -14,7 +14,7 @@ When you create or edit an automation, the **Schedule** step controls when it se
 - **Day of month** — shown for **monthly** automations (day `1`–`31`).
 - **Send at** — the hour, minute (`00` or `30`), and `AM`/`PM`.
 
-The schedule is stored as `frequency`, `day`, `hours`, `minutes`, and `time_format`, and is evaluated against the account's `timezone`. The send time is shown in that timezone in the automation's details.
+The time uses the client's **Reporting timezone** (for an agency report, or a client without one, your company timezone). The send time is shown in that timezone in the automation's details.
 
 <Note>
 Oviond checks for due automations every minute, so a run starts shortly after its scheduled time rather than exactly on the second.
@@ -22,7 +22,7 @@ Oviond checks for due automations every minute, so a run starts shortly after it
 
 ## Date range
 
-The **Date range** (for example `Last Month`) is stored as `date_text` and decides which period the report covers. It's resolved fresh on every run, so a monthly automation set to `Last Month` always sends the most recent complete month.
+The **Date range** (for example `Last Month`) decides which period the report covers. It's worked out fresh on every run, so a monthly automation set to `Last Month` always sends the most recent complete month.
 
 ## After it's scheduled
 

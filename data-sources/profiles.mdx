@@ -11,7 +11,7 @@ A single connection can see every account the authorizing login has access to. L
 
 - **Google Ads** — a Customer ID per ad account
 - **Google Analytics 4** — a Property per site
-- **Facebook Ads** — an Ad Account per business
+- **Meta Ads** — an Ad Account per business
 - **Google Business Profile** — one or more Locations per account
 
 ## Link a profile to a client
@@ -21,7 +21,7 @@ A single connection can see every account the authorizing login has access to. L
     Open the client and click **Data sources** in the sidebar — or, from inside a report, click **Data Sources** in the editor sidebar.
   </Step>
   <Step title="Select the profile">
-    Under **Select Profile**, pick the connection to use, then click **Link**.
+    Under **Select Profile**, pick the connection to use, then click **Connect**.
   </Step>
   <Step title="Select the account">
     Under **Select Account**, choose the account, property, or page for this client. Some platforms (GA4, Google Business Profile, Meta/Instagram Ads) use a two-step pick. Click **Save**.
@@ -35,7 +35,7 @@ Widgets configured with this data source now pull from the account you selected.
 Give each connection a clear label (for example, *Acme — Main Site*) so your team picks the right one when linking.
 
 - You set the name when you first connect, in the **Profile Name** field.
-- To rename an existing connection, go to **Settings → Data sources**, click **Rename profile** on the row, enter a **New name**, and click **Save changes**. The rename applies everywhere the connection is used.
+- To rename an existing connection, go to **Settings → Data sources**, click the connection, then **Rename**. Enter the new **Profile name** and click **Save**. The new name shows everywhere the connection is used.
 
 <Note>
   A profile name can't contain `.` or `$` characters.
@@ -43,4 +43,10 @@ Give each connection a clear label (for example, *Acme — Main Site*) so your t
 
 ## Manage a profile
 
-From **Settings → Data sources**, open a connection to bring up its profile manager. In one panel you can review the profile's **status**, see the **clients linked** to it, and edit its **credentials** inline — so you can re-authorize an expired token or repoint a connection without leaving the page.
+From **Settings → Data sources**, click a connection (or **Manage**) to open its panel. It shows:
+
+- Its status, **Working** or **Needs attention**, and the **Authentication** type (OAuth 2.0 or API key).
+- **Linked clients** — every client that uses it, with a search box. Click a client to open its reports.
+- When it was **Connected** and **Last tested**.
+
+And its actions: **Test**, **Rename**, **Refresh connection** (sign-in platforms), **Edit connection details** (API-key platforms) and **Delete profile**. See [Test Connection](/data-sources/test) and [Delete](/data-sources/delete).

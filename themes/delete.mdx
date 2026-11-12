@@ -1,26 +1,28 @@
 ---
-title: "Delete theme"
-description: "Remove a theme from your account."
+title: "Archive theme"
+description: "Archive a theme you no longer need. You can restore it later."
 ---
 
-Deleting a theme removes it from your account's Themes panel. The reports themselves aren't touched — a report that referenced the deleted theme falls back to a default theme on its next render.
+Archiving a theme removes it from your account's Themes panel and moves it to the [Archive](/archive/view). Reports aren't changed — a report that used the theme falls back to a default theme the next time it opens.
 
 <Steps>
   <Step title="Open the report's Themes panel">
     In the report editor sidebar, open the **Themes** panel.
   </Step>
-  <Step title="Delete the theme">
-    Hover the theme row and click the **Delete** (trash) action.
+  <Step title="Archive the theme">
+    Hover the theme row and click **Archive**.
   </Step>
   <Step title="Confirm">
-    In the **Delete theme** dialog, confirm. Deleting a theme can't be undone.
+    Confirm in the **Archive theme** dialog.
   </Step>
 </Steps>
 
+To bring it back, go to **Settings → Archive**, find the theme and click **Restore**.
+
 <Warning>
-If the deleted theme was your account **default**, or was set as a **Client theme**, those references fall back to a default theme. Already-styled reports keep their own theme until you re-apply another one.
+If the archived theme was your account **default**, or a **Client theme**, those fall back to a default theme.
 </Warning>
 
 <Note>
-Deleting themes requires permission to manage shared assets.
+Archiving themes needs **Admin access** or **Client access**.
 </Note>

@@ -7,8 +7,8 @@ This guide takes you from a fresh Oviond account to a live, shareable report for
 
 ## Before you start
 
-- You've signed up for Oviond and completed [onboarding](/onboarding/overview) — your name, company, website, client count, and first client.
-- You have OAuth access (or an API key) to at least one data source, such as Google Ads, Google Analytics 4, or Facebook Ads.
+- You've signed up for Oviond and completed [onboarding](/onboarding/overview) — your name, company and website.
+- You have OAuth access (or an API key) to at least one data source, such as Google Ads, Google Analytics 4, or Meta Ads.
 
 ## 1. Add a client
 
@@ -48,12 +48,12 @@ You wire up data from the client's **Data sources** page, or inside the report e
     Search for the platform — e.g. Google Analytics 4 — and click **Connect**. Name the connection profile, then run the OAuth flow (or enter an API key). Oviond requests read-only access.
   </Step>
   <Step title="Link an account to this client">
-    Under **Select Profile**, choose the connection and click **Link**. Then under **Select Account**, pick the specific account, property, or page for this client and click **Save**.
+    Under **Select Profile**, choose the connection and click **Connect**. Then under **Select Account**, pick the specific account, property, or page for this client and click **Save**.
   </Step>
 </Steps>
 
 <Note>
-Each connection shows a **Token Valid** or **Token Expired** badge. If a token expires, click **Refresh** to re-authorize. See [Connect](/data-sources/connect).
+Each connection shows **Working** or **Needs attention**. If it needs attention, click **Refresh** to sign in again. See [Test Connection](/data-sources/test).
 </Note>
 
 ## 4. Add pages and content
@@ -96,7 +96,7 @@ See [Share Report](/reports/share). Click **Share** in the top-right of the edit
 
 <Steps>
   <Step title="Copy the link">
-    On the **Link** tab, keep **Link is Active** on and click **Copy**. The link points to `/shared/{nano_id}` on your share host.
+    On the **Link** tab, keep **Link is Active** on and click **Copy**, then send the link to your client.
   </Step>
   <Step title="Set the options">
     Toggle **Show Date Selector**, **Allow PDF Download**, or **Enable Password** as needed.

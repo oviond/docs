@@ -1,0 +1,32 @@
+---
+title: "Widget messages and fixes"
+description: "What each message on a data widget means, and how to fix it."
+---
+
+When a data widget can't show its numbers, it says why. Here's what each message means and what to do.
+
+| Message | What it means | What to do |
+|---|---|---|
+| **Your {platform} connection expired** — *Reconnect it to load this data* | The login to the platform expired or was revoked. | Fix the connection: see [Test Connection](/data-sources/test). The notification bell also offers **Reconnect**. |
+| **No access to this {platform} account** — *Reconnect with an account that has access* | The login works, but it can't see this account. | Connect again with a login that has access, or pick another account. |
+| **This {platform} account or property wasn't found** — *Check the widget's settings* | The account, property or page was removed or renamed. | Open the widget and pick an account that exists. |
+| **These settings aren't supported by {platform}** — *Edit the widget to choose others* | This mix of metrics, dimension or filters isn't allowed by the platform. | Open the widget and change the metrics or dimension. |
+| **{platform} is busy right now** — *Try again in a moment* | The platform is limiting requests. | Wait a moment, then refresh the report. |
+| **{platform} isn't responding** — *Try again in a few minutes* | The platform is down or slow. | Try again in a few minutes. |
+| **{platform} isn't included in your plan** — *Upgrade to load this data* | The platform needs a plan or add-on you don't have. | See [Plans](/billing/plans). |
+| **We couldn't load this data** — *Try again* | An error we couldn't name. | Refresh the report. If it keeps happening, contact support. |
+
+When the platform isn't known, the message is general, for example *A data source connection expired*.
+
+**Data temporarily unavailable** — *Please check back soon* is what your **clients** see on a shared link or in a PDF, whatever the problem. It hides the details from them. Open the report in Oviond to see the real message.
+
+<Note>
+A widget that shows **demo** numbers isn't broken: its data source isn't connected to this client yet. Connect it on the client's **Data sources** page and the real numbers replace the demo ones. See [Connect](/data-sources/connect).
+</Note>
+
+## Numbers look wrong or empty
+
+- **Check the date range.** The widget may have its own date range, or the period may have no activity. See [Configure a widget](/widgets/configure#date-range).
+- **Check the account.** Make sure the client is linked to the right account or property. See [Profiles](/data-sources/profiles).
+- **Synced data sources** (Klaviyo) only show what has synced so far. See [Klaviyo](/data-sources/klaviyo).
+- **PDFs** print the data saved in the report. Refresh the report first. See [PDF export](/automations/pdf).

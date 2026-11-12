@@ -28,13 +28,22 @@ Share a report with a client, stakeholder, or prospect via a public URL. The rec
 The Share panel has four tabs:
 
 - **Link** — copy the public link and configure sharing options.
-- **Email** — send the report to recipients by email.
+- **Email** — send the report now: choose who it's **From**, add **Recipients**, pick an email template or write a **Custom message**, then **Send via Email**. To send it on a schedule, use an [automation](/automations/add).
 - **Download** — generate a PDF (available when **Allow PDF Download** is on). A Multi-Page Report prints page by page; a dashboard prints as one long page.
 - **Embed** — copy an `<iframe>` snippet to embed the report in another site.
 
 ## Custom domain
 
 Share links never expose the Oviond app domain. The link host resolves in order: the client's custom domain, then your account's default custom domain, then an unbranded platform fallback. Set up a [Custom Domain](/custom-domains/list) to serve links from your own white-label host. Your logo, favicon, and brand colors render on the share page out of the box.
+
+## What your client sees
+
+- **A password, if you set one.** The link asks them to **Enter password** and click **Unlock**. After too many wrong tries it asks them to wait a minute.
+- **The report, with your branding.** A Multi-Page Report has a list of its pages to jump between; a dashboard can show section links (turn on **Show section links** in the report's [Settings](/reports/update)).
+- **A date picker**, if you turned on **Show Date Selector**. Their changes are only for them — your report isn't changed.
+- **A PDF button**, if you turned on **Allow PDF Download**. The PDF shows the report as it was last saved.
+- **Present** — shows the report full screen, for meetings.
+- If a widget can't load its data, they see *Data temporarily unavailable* instead of the technical reason. See [Widget messages](/widgets/troubleshooting).
 
 ## Live vs snapshot
 

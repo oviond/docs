@@ -45,7 +45,7 @@ After authorizing, you tell Oviond which analytics account and property belong t
 
 <Steps>
   <Step title="Select the profile">
-    Under **Select Profile**, choose the connection you just authorized, then click **Link**.
+    Under **Select Profile**, choose the connection you just authorized, then click **Connect**.
   </Step>
   <Step title="Select the account">
     Under **Select Account**, pick the GA4 analytics account. Use **Search...** to narrow the list, then click **Next**.
@@ -55,20 +55,20 @@ After authorizing, you tell Oviond which analytics account and property belong t
   </Step>
 </Steps>
 
-Oviond links the property to the client and shows a *Google Analytics 4 linked* confirmation. The linked profile sorts to the top of the list with a **Linked** tag and shows the selected **Account** and **Property**.
+Oviond links the property to the client and shows a *Google Analytics 4 connected* confirmation. The linked profile sorts to the top of the list marked **Connected**, and shows the selected **Account** and **Property**.
 
 ## 4. Check the connection status
 
-Each profile shows a status badge so you can tell its token is healthy:
+In **Settings → Data sources**, every connection shows a status:
 
-- **Token Valid** — the connection is authorized and data should flow.
-- **Token Expired** — the token expired or was revoked; refresh it.
+- **Working** — the connection is fine and data should flow.
+- **Needs attention** — the Google login expired or was revoked; fix it below.
 
-Status is set automatically by a daily auth-test check and the OAuth token refresher.
+Oviond checks every connection once a day. To check now, click the connection and then **Test**.
 
-## 5. Refresh an expired connection
+## 5. Fix a connection that needs attention
 
-If the profile shows **Token Expired**, click **Refresh** on the profile to reopen the Google sign-in popup and re-authorize with the same account. The badge returns to **Token Valid**. There is no separate "test" or "reconnect" action — **Refresh** handles re-authorization.
+Click **Refresh** on the profile (or **Refresh connection** in its panel in **Settings → Data sources**) to reopen the Google sign-in popup, and sign in again with the same account. The status goes back to **Working**. See [Test Connection](/data-sources/test).
 
 ## 6. Build your first GA4 widget
 
@@ -103,6 +103,6 @@ Set the report's date range to a relative period (for example, last 30 days) so 
 ## Troubleshooting
 
 - **No data returned** — the property is connected but empty for the selected period. Check the widget's date range and that you linked the right property.
-- **Token Expired** — the OAuth token expired or access was revoked. Click **Refresh** on the profile and re-authorize.
+- **Needs attention** — the Google login expired or access was revoked. Click **Refresh** on the profile and sign in again.
 - **Property missing from the list** — the authorizing Google account doesn't have access to that property in GA4. Re-authorize with an account that does, or click **Refresh**.
 - **Accounts won't load** — Oviond shows *Unable to load accounts for Google Analytics 4.* Click **Refresh** and try again.

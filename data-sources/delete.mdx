@@ -6,18 +6,18 @@ description: "Remove a data source connection from your workspace."
 Deleting a connection removes it from your workspace and unlinks it from every client that used it. Widgets that referenced it stop displaying data until they're re-wired.
 
 <Warning>
-  Deleting a connection may affect widgets that use it. If the connection feeds active reports, those widgets break on the next render. To remove it from one client only, **Unlink** it from that client's **Data Sources** tab instead — see [Link to Client](/data-sources/link).
+  Deleting a connection may affect widgets that use it. If the connection feeds active reports, those widgets break on the next render. To remove it from one client only, **Disconnect** it on that client's **Data sources** page instead — see [Link to Client](/data-sources/link#disconnect).
 </Warning>
 
 <Steps>
   <Step title="Open Settings → Data sources">
     Go to **Settings → Data sources** (`/settings/data-sources`).
   </Step>
-  <Step title="Click Delete profile">
-    Find the connection in the table and click **Delete profile** on its row.
+  <Step title="Open the connection">
+    Click the connection in the table (or **Manage**) to open its panel, then click **Delete profile**.
   </Step>
   <Step title="Confirm">
-    Type `DELETE` in the confirmation field, then click **Delete profile**.
+    In the **Delete profile?** dialog, type `DELETE`, then click **Delete profile**. Choose **Keep profile** to cancel.
   </Step>
   <Step title="Optional: revoke in the source platform">
     To be thorough, also remove Oviond from the authorized-apps list in the source platform (for example, Google Account → Third-party apps).
@@ -25,5 +25,5 @@ Deleting a connection removes it from your workspace and unlinks it from every c
 </Steps>
 
 <Note>
-  Deleting and renaming connections requires account-management permissions. Connecting and unlinking data sources happens on a client's **Data sources** page or in the report editor.
+  Deleting and renaming connections needs **Admin access**. Connecting and disconnecting data sources happens on a client's **Data sources** page or in the report editor.
 </Note>

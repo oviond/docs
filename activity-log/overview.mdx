@@ -13,22 +13,28 @@ The **Activity log** records who did what and when across your account. Open it 
 
 The table has a row per action with these columns:
 
-| Column | Field | Description |
-|---|---|---|
-| **User** | `user_id` | The team member who performed the action, with their name and email. |
-| **Action** | `action` | What happened (for example `created`, `updated`, `deleted`, `restored`). |
-| **Type** | `resource_type` | The kind of resource affected. |
-| **Source** | `source` | Where the action came from — `app`, `api`, `mcp`, or `system`. |
-| **Resource** | `resource_name` | The name of the affected item (falls back to `—`). |
-| **Date** | `created_at` | When it happened, in your account timezone. |
-
-Each record also stores `resource_id` and an optional `details` object internally.
+| Column | Description |
+|---|---|
+| **User** | The team member who did it, with their name and email. |
+| **Action** | What happened, for example created, updated, deleted or restored. |
+| **Type** | The kind of item, for example a client or a report. |
+| **Source** | Where it came from: the app, the API, an AI app (MCP), or Oviond itself (system). |
+| **Resource** | The name of the item (or `—`). |
+| **Date** | When it happened, in your account timezone. |
 
 ## Filter and search
 
 - **Search** by resource name or action.
-- **Filter by type** — one resource type at a time: `client`, `project`, `media`, `automation`, `user`, `auth`, or `email`. `project` is the stored value for a **report** — it predates the rename and was left alone rather than rewriting every logged row.
+- **Filter by type** — one type at a time: Client, Report, Page, Template, Theme, Asset, Goal, Calculated Metric, Saved Metric, Custom Data, Data Source, Automation, PDF, Export, Media, Folder, User, API Key, Custom Domain, Branding, Company, Email Provider or Email Sender.
+
+<Note>
+Over the API, a report's type is the stored value `project`. It's older than the rename to *report* and was kept so old log rows still match.
+</Note>
 
 ## Who can see what
 
 Admins see the whole account's activity. Other members see only their own actions.
+
+## Ask Oviond questions
+
+Questions asked in [Ask Oviond](/ask-oviond/overview), with the tools each one used and what it cost, have their own log in **Settings → Ask Oviond**. See [Ask Oviond balance](/ask-oviond/balance).
