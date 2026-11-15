@@ -21,6 +21,13 @@ Duplicating copies a widget along with its data configuration and appearance.
 Duplicate a configured Data Query widget, then change only its metric or data source to build a row of related tiles quickly.
 </Tip>
 
+On a Free Canvas report, the copies keep their size and arrangement and go into the page's free space, below the originals when there is room. If the page is full, they go on the next page that has room, or on a new page if none does. The editor then opens that page.
+
+On a Grid report, each copy goes right below its widget. If a copy would not fit on the page, nothing is copied:
+
+- For one widget, Oviond shows **Page is full**. Click **New Page** to put the copy on a new page after this one.
+- For several widgets, Oviond tells you there isn't enough room for the copies. Add a page, or duplicate them one at a time.
+
 <Note>
 Duplicating counts against a dashboard's 50-widget cap. If a copy would push the dashboard past it, nothing is duplicated. Reports paginate instead and have no cap.
 </Note>
