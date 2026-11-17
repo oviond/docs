@@ -42,6 +42,8 @@ Changes save with the report, like every other edit.
 
 Use the date picker in the report header to set the report's date range, for example *Last 30 Days*. Every widget that uses the report's date follows it, and connected widgets fetch fresh data. It saves straight away; you don't need to be in edit mode.
 
+A date range can't go past today. Some data sources, like Microsoft Ads, refuse future dates, and all the widgets on a report share one range. The same rule applies to the API, MCP and Ask Oviond.
+
 ## Pages tab (Multi-Page Reports)
 
 - Turn the **Cover page**, **Table of contents** and **Thank you page** on or off.

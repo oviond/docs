@@ -3,6 +3,35 @@ title: "November 2026"
 description: "Product and API release notes for Oviond."
 ---
 
+<Update label="2026-11-17" description="Share link analytics, media folders, dimension names and more">
+
+### See who opens your share links
+
+A report's share link now shows who opened it and what they did. On the **Link** tab, the **Report analytics** card shows the newest visit. Click **See analytics** for the last 30 days: views, visitors, time per view, PDF downloads, pages, devices, countries, and every visit step by step. The client's **Reports** tab also shows **Views (30 days)** and **Last viewed**. See [Share link analytics](/reports/share#share-link-analytics).
+
+### Folders in the media library
+
+Put your images in folders. Create, rename and delete folders, move files into a folder or take them out, and uploads go into the folder you have open. See [Folders](/media/folders).
+
+### Rename dimensions
+
+The **Display** tab has a new **Dimension Settings** section. Give a dimension your own name, for example **Channel** instead of **Source / Medium**. Tables show it as the column header. See [Configure a widget](/widgets/configure).
+
+### Filter and sort goals and calculated metrics
+
+In the report editor, the **Goals** and **Calculated Metrics** panels now have **Filter** (by data source) and **Sort** (**Newest**, **Oldest**, **Name A-Z**, **Name Z-A**), like the **Assets** panel. See [Goals](/goals/overview) and [Calculated metrics](/calculated-metrics/overview).
+
+### Date ranges can't go past today
+
+The API, MCP and Ask Oviond now follow the same rule as the date picker: a date range can't include a day after today. Some data sources, like Microsoft Ads, refuse future dates, and all the widgets on a report share one range. See [Date range](/reports/update#date-range).
+
+### Data source fixes
+
+- **Active Campaign:** the **Contacts** view has a new **Contact Tags** dimension, and you can show only the contacts with one tag.
+- **Instagram:** posts and reels are now picked separately in the advanced settings. A post or reel that was deleted, or isn't available any more, shows in red, so you can remove it.
+
+</Update>
+
 <Update label="2026-11-15" description="Agency tools removed">
 
 ### Agency tools is gone

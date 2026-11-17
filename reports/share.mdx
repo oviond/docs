@@ -27,10 +27,39 @@ Share a report with a client, stakeholder, or prospect via a public URL. The rec
 
 The Share panel has four tabs:
 
-- **Link** — copy the public link and configure sharing options.
+- **Link** — copy the public link, configure sharing options, and see **Report analytics**. See [Share link analytics](#share-link-analytics).
 - **Email** — send the report now: choose who it's **From**, add **Recipients**, pick an email template or write a **Custom message**, then **Send via Email**. To send it on a schedule, use an [automation](/automations/add).
 - **Download** — generate a PDF (available when **Allow PDF Download** is on). A Multi-Page Report prints page by page; a dashboard prints as one long page.
 - **Embed** — copy an `<iframe>` snippet to embed the report in another site.
+
+## Share link analytics
+
+On the **Link** tab, under **Sharing Options**, the **Report analytics** card (**Client opens** — who opened the share link and what they did) shows **Last from:** and the country of the newest visit, when it is known.
+
+Click **See analytics** to see more about the last 30 days in the same panel. Click the back arrow to return. It has two parts:
+
+**Overview** adds up all visits:
+
+- **Views** — how many times the link was opened. Opening it again within 30 minutes counts as the same view.
+- **Visitors** — how many different people (browsers) opened it.
+- **Avg. time per view**, **PDF downloads** (PDFs visitors downloaded from the link), and when the link was **Last viewed**.
+- **Views by day** — a chart of views for each day.
+- **Pages** — how many times each page was viewed, and how long people stayed on it.
+- **Devices** and **Countries** — desktop, mobile or tablet, and where people opened the link from.
+
+**Visits** lists every visit, newest first, grouped by day. Each visit shows the time, the device, the country, how many pages, how long, and how many actions. Click a visit to see what that person did, step by step: each page they opened and for how long, and each action — a click on a button or link, **Present**, a new date range, **Refresh** or a PDF download. Click **Show more** to see older visits.
+
+On a link with a password, the visit starts with **Password screen**, then each click on **Unlock**: **Clicked Unlock: wrong password** or **Clicked Unlock: right password**, then the report's pages. The visit shows how many wrong passwords there were. Someone who never gets past the password shows in **Visits** as **Stopped at the password screen**, but is not counted as a view. The password they typed is never saved.
+
+What is not counted:
+
+- **People signed in to Oviond.** Only visitors who are not signed in are counted. Oviond can only see a sign-in when the link opens on the Oviond app's own address. On your share address (your custom domain, or the default share domain), your team's visits are counted like anyone else's.
+- **A visit that never gets past the password**, in the views, the chart and the reports list. It shows in **Visits** only.
+- **PDFs and scheduled emails.** Their pages are made by Oviond, not opened by a person.
+
+We don't save visitors' IP addresses. The country comes from the visitor's network, and the device from their browser. When you delete a report for good, its analytics are deleted too.
+
+The client's **Reports** tab also shows each report's **Views (30 days)** and **Last viewed**. See [List reports](/reports/list).
 
 ## Custom domain
 

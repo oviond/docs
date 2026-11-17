@@ -29,7 +29,7 @@ curl -X POST https://api.oviond.com/v1/data/query \
 |-------|----------|-------------|
 | `datasource_id` | ✓ | The datasource alias, e.g. `ga4`, `gadw`, `fb-ads`. **List all with [`GET /v1/datasources`](#finding-valid-identifiers).** |
 | `client_id` | ✓ | The client whose connected data source you're querying. List with `GET /v1/clients`. |
-| `date_range` | ✓ | `{ current_start, current_end }` as `YYYY-MM-DD`. Add `previous_start` / `previous_end` to get period-over-period comparison values. |
+| `date_range` | ✓ | `{ current_start, current_end }` as `YYYY-MM-DD`. Add `previous_start` / `previous_end` to get period-over-period comparison values. No date can be after today: some data sources (like Microsoft Ads) refuse future dates, so a range with a future day is refused. |
 | `metrics` | ✓ | Array of metric `id`s, e.g. `["clicks", "impressions"]`. **Get valid ids from [`GET /v1/datasources/{datasource_id}/describe`](#finding-valid-identifiers).** |
 | `dimensions` | ✓ | Array of dimension `id`s, e.g. `["DATE"]` for a time series, or `[]` for a single total. **Get valid ids from [`GET /v1/datasources/{datasource_id}/describe`](#finding-valid-identifiers).** |
 | `data_view` | ✓ | The datasource view, e.g. `ACCOUNT`. A metric or dimension is only valid inside its own view — `/describe` groups them by view. |

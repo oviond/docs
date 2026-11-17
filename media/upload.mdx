@@ -18,9 +18,11 @@ Files upload straight from your browser to Oviond's secure storage.
     Drag images onto the drop-zone or click to open the file picker. You can select multiple files at once.
   </Step>
   <Step title="Upload">
-    Click **Upload files**. Each file uploads in parallel, then appears in the **Library** tab.
+    Click **Upload files**. The files upload one after another, then appear in the **Library** tab.
   </Step>
 </Steps>
+
+If a folder is open in the **Library** tab, new files go into that folder. See [Folders](/media/folders).
 
 ## Supported files
 
@@ -37,4 +39,4 @@ For logos and branding, prefer **SVG** — it stays crisp at every report resolu
 
 ## API
 
-The upload flow is two steps. `POST /v1/media/presigned-url` (send `file_name`, `content_type`, and `size`) creates the media row and returns an `upload_url`, the S3 `key`, and the new `media_id`. Upload the file with an HTTP `PUT` to `upload_url`, then confirm the display name with `PUT /v1/media/{id}`.
+The upload flow is two steps. `POST /v1/media/presigned-url` (send `file_name`, `content_type`, `size`, and optionally `folder_id`) creates the media row and returns an `upload_url`, the S3 `key`, and the new `media_id`. Upload the file with an HTTP `PUT` to `upload_url`, then confirm the display name with `PUT /v1/media/{id}`.

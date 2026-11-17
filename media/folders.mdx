@@ -1,34 +1,51 @@
 ---
 title: "Folders"
-description: "Group related media into folders via the API."
+description: "Group your media into folders."
 ---
 
-Media folders group related items in your library.
+Folders keep your **Media Library** tidy. Each file is in one folder at a time, or in none. The folder list is on the left of the **Library** tab.
 
-<Note>
-Folders are an API-level feature. The in-app **Media Library** modal shows a single flat grid and doesn't expose folder browsing or management — use the API to create, rename, and assign folders.
-</Note>
+## Open a folder
+
+Click a folder to see only its files. Click **All files** to see every file again. **Search media…** searches inside the open folder.
 
 ## Create a folder
 
-`POST /v1/media/folders` with a `name` creates a folder and returns its `id`.
+Click **New folder** at the bottom of the folder list, type a name, and click **Create**. The folder is added to the list.
 
-## List folders
+## Upload into a folder
 
-`GET /v1/media/folders` returns your folders, newest first.
+Open the folder, then switch to the **Upload** tab. The footer shows **Uploading to** and the folder name. New files go into that folder.
 
-## Rename a folder
+A cropped copy of an image goes into the same folder as the image.
 
-`PUT /v1/media/folders/{id}` with a new `name` renames the folder. Returns `404` if the folder doesn't exist in your account.
+## Move files into a folder
 
-## Delete a folder
+- **One file:** open the tile's `⋯` menu and click **Move to folder**. Pick the folder and click **Confirm**.
+- **Many files:** tick two or more tiles, then click **Move** in the footer.
 
-`DELETE /v1/media/folders/{id}` deletes the folder. The folder's `id` is removed from every media item's `folders` array first, so no items are left pointing at a deleted folder.
+Moving a file takes it out of its old folder.
+
+To take a file out of its folder, open its `⋯` menu and click **Remove from folder**. The file stays in **All files**.
+
+## Rename or delete a folder
+
+Hover a folder, open its `⋯` menu, and click **Rename** or **Delete**.
 
 <Note>
-Deleting a folder **does not delete the media inside it** — those items remain in your library with the folder removed from their `folders`.
+Deleting a folder **does not delete its files**. They stay in **All files**, in no folder.
 </Note>
 
-## Move items into a folder
+## Who can manage folders
 
-`PUT /v1/media/group` with `ids` (the media items to move) and `folder_id` sets each item's folder membership to that single folder. This replaces any existing folder assignment rather than appending.
+Everyone can open folders and upload into them. Creating, renaming and deleting folders, and moving files, needs permission to edit shared assets. View-Only users don't see these buttons.
+
+## API
+
+- `GET /v1/media/folders` lists your folders, A to Z.
+- `POST /v1/media/folders` with a `name` creates a folder and returns its `id`. The name is trimmed and can be up to 100 characters.
+- `PUT /v1/media/folders/{id}` with a new `name` renames a folder. Returns `404` if the folder isn't in your account.
+- `DELETE /v1/media/folders/{id}` deletes a folder. Its files stay, in no folder.
+- `PUT /v1/media/group` with `ids` and `folder_id` moves files into that folder. Send `folder_id: null` to take them out of every folder.
+- `GET /v1/media?folder_id=…` lists the files in one folder.
+- `POST /v1/media/presigned-url` takes an optional `folder_id` to upload straight into a folder.
