@@ -3,6 +3,18 @@ title: "November 2026"
 description: "Product and API release notes for Oviond."
 ---
 
+<Update label="2026-11-18" description="Date ranges can end in the future">
+
+### Date ranges can end in the future
+
+A date range can now end after today, for example a season from 1 Sep to 31 Aug. Widgets show data up to today, and each day one more day is added, so you never have to change the dates. A range that hasn't started yet shows no data. This replaces the rule from 17 November that a range can't go past today. See [Date range](/reports/update#date-range).
+
+### Dates follow the client's timezone
+
+"Today" and every day in a chart now always follow the client's timezone (if the client has none, the account's, then UTC). In the API, `timezone` is no longer taken on `POST /v1/data/query` or `POST /v1/widgets/refresh`, and MCP `query_data` and `refresh_widgets` no longer have it: if you send it, it's ignored. See [Querying data](/api/concepts/querying-data).
+
+</Update>
+
 <Update label="2026-11-17" description="Share link analytics, media folders, dimension names and more">
 
 ### See who opens your share links

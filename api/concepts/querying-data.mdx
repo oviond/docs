@@ -29,12 +29,13 @@ curl -X POST https://api.oviond.com/v1/data/query \
 |-------|----------|-------------|
 | `datasource_id` | ✓ | The datasource alias, e.g. `ga4`, `gadw`, `fb-ads`. **List all with [`GET /v1/datasources`](#finding-valid-identifiers).** |
 | `client_id` | ✓ | The client whose connected data source you're querying. List with `GET /v1/clients`. |
-| `date_range` | ✓ | `{ current_start, current_end }` as `YYYY-MM-DD`. Add `previous_start` / `previous_end` to get period-over-period comparison values. No date can be after today: some data sources (like Microsoft Ads) refuse future dates, so a range with a future day is refused. |
+| `date_range` | ✓ | `{ current_start, current_end }` as `YYYY-MM-DD`. Add `previous_start` / `previous_end` to get period-over-period comparison values. A range may end in the future: data is returned up to today, and the comparison period is cut so it is no longer than the days so far (and never past today). A range that starts after today returns no data, and a comparison period that starts after today is left out. |
 | `metrics` | ✓ | Array of metric `id`s, e.g. `["clicks", "impressions"]`. **Get valid ids from [`GET /v1/datasources/{datasource_id}/describe`](#finding-valid-identifiers).** |
 | `dimensions` | ✓ | Array of dimension `id`s, e.g. `["DATE"]` for a time series, or `[]` for a single total. **Get valid ids from [`GET /v1/datasources/{datasource_id}/describe`](#finding-valid-identifiers).** |
 | `data_view` | ✓ | The datasource view, e.g. `ACCOUNT`. A metric or dimension is only valid inside its own view — `/describe` groups them by view. |
 | `filters` | | Array of `{ field, operator, value }` filter objects. `operator` is one of `equals`, `not_equals`, `contains`, `not_contains`, `starts_with`, `ends_with`, `greater_than`, `less_than`, `greater_than_or_equal`, `less_than_or_equal`. Add `"logicalOperator": "and"` (or `"or"`) to combine multiple filters. |
-| `timezone` | | IANA timezone for date bucketing. Defaults to `UTC`. |
+
+Dates are always read in the client's timezone (set on the client; if it has none, the account's, then UTC). "Today" and each day of a `DATE` breakdown follow that timezone.
 
 ## Response
 
