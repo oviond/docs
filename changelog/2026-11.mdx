@@ -3,6 +3,52 @@ title: "November 2026"
 description: "Product and API release notes for Oviond."
 ---
 
+<Update label="2026-11-25" description="Data source pages and links from the widget editor">
+
+### A docs page for every data source
+
+Every data source now has its own page in [Data Sources](/data-sources/list): how you connect it, how it works, its limits, and every metric and dimension, with a search box and a menu of data views.
+
+### Links from the widget editor
+
+Hover a metric or dimension in the widget editor, then click the book icon to open its data source's page. On a **Deprecated** one, click the red note to see in the changelog when the vendor retired it.
+
+### Retired metrics in the changelog
+
+Metrics and dimensions that vendors retired are now listed in this changelog on the day each vendor retired them, back to 2023. Fields with no vendor date are listed under [17 July 2026](/changelog/2026-07#fields-retired-with-no-vendor-date).
+
+### Instagram Profile Visits in Meta Ads
+
+Meta Ads has a new metric, **Instagram Profile Visits**. It counts how many times people visited your Instagram profile after interacting with your ad, for example by clicking its call-to-action button, profile picture or username. It's in the **Clicks** group of the Account, Campaigns, Ad Sets and Ads views. See [Meta Ads](/data-sources/meta-ads).
+
+</Update>
+
+<Update label="2026-11-23" description="Metric details on hover, and filter rules">
+
+### See what a metric means before you pick it
+
+In the widget editor, hover a metric or dimension to see what it means, its format with an example number, how its total is worked out, and its ID with a copy button.
+
+### Filters only use the widget's own fields
+
+A filter's field must be one of the widget's metrics or dimensions. To filter on another dimension, add it to the widget first. The API, MCP and Ask Oviond now follow this rule too, so they no longer save filters the editor can't show. See [Configure a widget](/widgets/configure).
+
+</Update>
+
+<Update label="2026-11-19" description="Instagram daily metrics, GA4 and Google Sheets fixes">
+
+### Instagram account metrics by day, month or year
+
+The Instagram **Performance** view now shows account numbers by day, month or year: Followers, New Followers, Followers Lost, Net Followers, Posts, Reels, Posted Content, Likes, Comments, Saves, Shares, Reposts, Engagement, Accounts Engaged, Post Engagements, Reels Engagements, Views, Reach, Unique Reach and Visits. Profile Views works again, as **Visits**. New Followers now works for date ranges older than 30 days. Your widgets keep working; their metric IDs didn't change.
+
+### Data source fixes
+
+- **Google Analytics 4:** the account picker now lists every account, not just the first 200.
+- **Google Sheets:** the folder picker shows only folders that hold a spreadsheet, so large Drives no longer load forever.
+- **Google Sheets:** a column you pick gets the **Text** format right away, so **Set Data** no longer fails with "Choose symbol for …".
+
+</Update>
+
 <Update label="2026-11-18" description="Date ranges can end in the future">
 
 ### Date ranges can end in the future
@@ -41,6 +87,11 @@ The API, MCP and Ask Oviond now follow the same rule as the date picker: a date 
 
 - **Active Campaign:** the **Contacts** view has a new **Contact Tags** dimension, and you can show only the contacts with one tag.
 - **Instagram:** posts and reels are now picked separately in the advanced settings. A post or reel that was deleted, or isn't available any more, shows in red, so you can remove it.
+- **LinkedIn Pages and LinkedIn Ads:** widgets work again. LinkedIn turned off the API version we used on 16 November.
+
+### Views left the reports list
+
+The client's **Reports** list no longer has the **Views** and **Last viewed** columns. You find who opened a report in its share link's analytics.
 
 </Update>
 
