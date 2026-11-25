@@ -291,7 +291,49 @@ When a vendor retires a metric, it is now marked with a `deprecated` flag in the
 
 The change removes a long-standing annoyance: the old suffix was copied into a widget's saved metric label at the moment it was picked, so every deprecation round left stale labels behind in saved reports. The flag lives only in the catalog, so it can never go out of date.
 
-Applied across Ahrefs, Facebook Pages, Google Analytics 4, Google Ads, Google Business Profile, Google Local Services Ads, Instagram, Instagram Ads, Keywords, Salesforce, Shopify, Twitter Ads, WooCommerce, and YouTube. No metrics were added or removed.
+Applied across Ahrefs, Facebook, Google Analytics 4 (GA4), Google Ads, Google Business Profile, Google Local Services Ads, Instagram, Instagram Ads, Keyword.com, Salesforce, Shopify, X Ads, WooCommerce, and YouTube. No metrics were added or removed.
+
+Fields with a published retirement date are listed on that date's page of this changelog.
+
+### Fields retired with no vendor date
+
+These fields stopped returning data, but the vendor never published a date. Oviond marked them **Deprecated** on this day.
+
+**Facebook**
+
+- Net Likes (`net_likes`), New Page Likes (`page_fan_adds`), New Likes (Unique Users) (`page_fan_adds_unique`), Unlikes (`page_fan_removes`)
+- Page Positive Feedback by Answer (`page_positive_feedback_by_answer`), by Claim (`page_positive_feedback_by_claim`), by Comment (`page_positive_feedback_by_comment`), by Reactions (`page_positive_feedback_by_like`), by Share (`page_positive_feedback_by_link`), by Other (`page_positive_feedback_by_other`), by RSVP (`page_positive_feedback_by_rsvp`)
+- Reaction by Like (`page_actions_post_reactions_like_total`), Love (`page_actions_post_reactions_love_total`), Haha (`page_actions_post_reactions_haha_total`), Sad (`page_actions_post_reactions_sorry_total`), Wow (`page_actions_post_reactions_wow_total`), Angry (`page_actions_post_reactions_anger_total`)
+- Organic Impressions (`page_impressions_organic`), Organic Reach (`page_impressions_organic_unique`)
+- Post Engaged Users (`post_engaged_users`), Post Negative Feedback (`post_negative_feedback`), Unique Post Negative Feedback (`post_negative_feedback_unique`), Unique Post Clicks (`post_clicks_unique`)
+- People Reached (`people_reached`), People Engaged (`people_engaged`), and the Age (`age`) and Gender (`gender`) dimensions
+
+**Instagram**
+
+- Reel Shares (`reels_shares`), Reel Comments (`reels_comments`), Reel Likes (`reels_likes`), Story Replies (`story_replies`)
+- Engagement (`media_engagement` and `media_engagement_v2`), and the Language dimension (`audience_locale`)
+
+**Instagram Ads** — the Gender (`gender`), Age (`age`), Country (`country`) and Region (`region`) dimensions
+
+**Google Business Profile** — Searches (`SEARCHES`), Views (`VIEWS`), Calls (`CALLS`)
+
+**Google Analytics 4 (GA4)** — Event Revenue (`eventRevenue`)
+
+**Google Ads** — Phone Calls (`phone_calls`), and the Device dimension (`device`) in the Locations view
+
+**Google Local Services Ads** — the Lead Category (`leadCategory`) and GEO (`geo`) dimensions
+
+**Keyword.com** — Backlinks (`backlinks`)
+
+**Salesforce** — Expected Revenue (`opportunity_ExpectedRevenue`), Total Opportunity Quantity (`opportunity_TotalOpportunityQuantity`), Fax (`lead_Fax`)
+
+**Shopify** — the Sales view dimensions Channel Name (`channel_name`), Referrer URL (`referrerUrl`), Landing Page URL (`landingPageUrl`), Landing Page Display Text (`landingPageDisplayText`), Top Marketing Channels (`top_marketing_channels`), Address 1 (`address1`), Address 2 (`address2`), City (`city`), Country (`country`), Province (`province`), Zip (`zip`), Display Name (`display_name`), Email Address (`email`), Phone (`phone`), Order ID (`id`), Order Name (`name`)
+
+**X Ads** — Engagement Rate (`engagement_rate`), Views MRC (`video_mrc_views`)
+
+**WooCommerce** — Avg. Gross Daily Sales (`avg_gross_daily_sales`), Net Sale (`net_sales`), Avg. Net Daily Sale (`avg_net_daily_sales`), Total Refunded (`refunded`), Total Revenue (`total_revenue`)
+
+**YouTube** — Playlist Start (`playlistStarts`), Views Per Playlist Start (`viewsPerPlaylistStart`), AVG. Time In Playlist (`averageTimeInPlaylist`)
 
 </Update>
 

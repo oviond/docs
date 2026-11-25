@@ -1,84 +1,123 @@
 ---
-title: "List Data Sources"
-description: "Every marketing platform connected to your Oviond workspace."
+title: "Data Sources"
+description: "Every platform Oviond reports on: how to connect it, how it works, its limits, and all its metrics and dimensions."
 ---
 
-Data sources are connections between Oviond and your clients' marketing platforms. Once connected, Oviond pulls live data from those platforms into your reports and dashboards — no manual exports or copy-pasting required. Each data source is linked on a per-client basis, so the data in a report always belongs to the client that report is built for.
+{/* generated:start — written by `npm run docs:data-sources` (workspaces.oviond.com). Edit outside this block. */}
 
-## Supported data sources
+import { SourceCard, SourceGrid } from "/snippets/data-sources/components.jsx";
 
-Oviond supports 104 platforms. You can also bring in your own numbers with [Custom Data](/custom-data/upload), [Calculated Metrics](/calculated-metrics/overview) and [Goals](/goals/overview).
+Oviond connects to **104** data sources. Pick one to see how you connect it, how it works, its limitations, and every metric and dimension it offers.
 
-| Category | Platforms |
-|---|---|
-| **Advertising** | ChatGPT Ads, Google Ads, Google Local Services Ads, Instagram Ads, LinkedIn Ads, Meta Ads, Microsoft Ads, Pinterest Ads, Snapchat Ads, TikTok Ads, X Ads, AdRoll, Adtraction |
-| **Social media** | Facebook, Instagram, LinkedIn, Mention, Pinterest, TikTok, X, YouTube |
-| **Analytics** | Amplitude, Google Analytics 4 (GA4), Matomo, Microsoft Clarity, Piwik Pro, Plausible |
-| **SEO and local** | Advanced Web Ranking, Ahrefs, Bing Webmaster Tools, BrightLocal, Google Business Profile, Google Search Console, Keyword.com, Moz, Nozzle, SE Ranking, SEOcrawl, Semrush, Serpstat, SerpWatch, Surnex |
-| **Email marketing** | Brevo, Drip, Encharge, GetResponse, Kit, lemlist, Mailchimp, Mailer Lite, Moosend, Omnisend, Sendgrid, VBOUT |
-| **Marketing automation** | Active Campaign, Campaign Monitor, Go High Level, Klaviyo, Make, Mautic, Pabbly Connect |
-| **CRM** | ChartMogul, Close CRM, Copper CRM, HubSpot, Intercom, Pipedrive, Salesforce, Zoho CRM |
-| **E-commerce and payments** | BigCommerce, Paddle, PayPal, Shopify, Stripe, WooCommerce, Xero |
-| **Calls, support and reviews** | Call Rail, Endorsal, Freshdesk, Help Scout Docs, Help Scout Mailbox, SimpleSat, Typeform, WhatConverts |
-| **Projects and teams** | Asana, Basecamp, ClickUp, Clockify, Harvest, Jira, Monday, Slack, Teamwork, Twilio |
-| **Video, web and links** | Google Page Speed, Pingdom, Switchy, UptimeRobot, Vimeo, Wistia, WordPress |
-| **Spreadsheets and apps** | Airtable, Appfigures, Google Sheets |
+<SourceGrid>
+  <SourceCard name="Active Campaign" category="Marketing Automation" logo="/images/data-sources/active-campaign.svg" href="/data-sources/active-campaign" />
+  <SourceCard name="AdRoll" category="Retargeting" logo="/images/data-sources/adroll.svg" href="/data-sources/adroll" />
+  <SourceCard name="Adtraction" category="Affiliate Marketing" logo="/images/data-sources/adtraction.svg" href="/data-sources/adtraction" />
+  <SourceCard name="Advanced Web Ranking" category="SEO" logo="/images/data-sources/advanced-web-ranking.svg" href="/data-sources/advanced-web-ranking" />
+  <SourceCard name="Ahrefs" category="SEO" logo="/images/data-sources/ahrefs.svg" href="/data-sources/ahrefs" />
+  <SourceCard name="Airtable" category="Database" logo="/images/data-sources/airtable.svg" href="/data-sources/airtable" />
+  <SourceCard name="Amplitude" category="Analytics" logo="/images/data-sources/amplitude.svg" href="/data-sources/amplitude" />
+  <SourceCard name="Appfigures" category="App Store Intelligence" logo="/images/data-sources/appfigures.svg" href="/data-sources/appfigures" />
+  <SourceCard name="Asana" category="Project Management" logo="/images/data-sources/asana.svg" href="/data-sources/asana" />
+  <SourceCard name="Basecamp" category="Project Management" logo="/images/data-sources/basecamp.svg" href="/data-sources/basecamp" />
+  <SourceCard name="BigCommerce" category="E-commerce" logo="/images/data-sources/bigcommerce.svg" href="/data-sources/bigcommerce" />
+  <SourceCard name="Bing Webmaster Tools" category="SEO" logo="/images/data-sources/bing-webmaster-tools.svg" href="/data-sources/bing-webmaster-tools" />
+  <SourceCard name="Brevo" category="Email Marketing" logo="/images/data-sources/brevo.svg" href="/data-sources/brevo" />
+  <SourceCard name="BrightLocal" category="SEO" logo="/images/data-sources/brightlocal.svg" href="/data-sources/brightlocal" />
+  <SourceCard name="Call Rail" category="Call Tracking" logo="/images/data-sources/call-rail.svg" href="/data-sources/call-rail" />
+  <SourceCard name="Campaign Monitor" category="Marketing Automation" logo="/images/data-sources/campaign-monitor.svg" href="/data-sources/campaign-monitor" />
+  <SourceCard name="ChartMogul" category="CRM" logo="/images/data-sources/chartmogul.svg" href="/data-sources/chartmogul" />
+  <SourceCard name="ChatGPT Ads" category="Advertising" logo="/images/data-sources/chatgpt-ads.svg" href="/data-sources/chatgpt-ads" />
+  <SourceCard name="ClickUp" category="Project Management" logo="/images/data-sources/clickup.svg" href="/data-sources/clickup" />
+  <SourceCard name="Clockify" category="Time Tracking" logo="/images/data-sources/clockify.svg" href="/data-sources/clockify" />
+  <SourceCard name="Close CRM" category="CRM" logo="/images/data-sources/close-crm.svg" href="/data-sources/close-crm" />
+  <SourceCard name="Copper CRM" category="CRM" logo="/images/data-sources/copper-crm.svg" href="/data-sources/copper-crm" />
+  <SourceCard name="Drip" category="Email Marketing" logo="/images/data-sources/drip.svg" href="/data-sources/drip" />
+  <SourceCard name="Encharge" category="Email Marketing" logo="/images/data-sources/encharge.svg" href="/data-sources/encharge" />
+  <SourceCard name="Endorsal" category="Reviews" logo="/images/data-sources/endorsal.svg" href="/data-sources/endorsal" />
+  <SourceCard name="Facebook" category="Social Media" logo="/images/data-sources/facebook.svg" href="/data-sources/facebook" />
+  <SourceCard name="Freshdesk" category="Customer Support" logo="/images/data-sources/freshdesk.svg" href="/data-sources/freshdesk" />
+  <SourceCard name="GetResponse" category="Email Marketing" logo="/images/data-sources/getresponse.svg" href="/data-sources/getresponse" />
+  <SourceCard name="Go High Level" category="Marketing Automation" logo="/images/data-sources/go-high-level.svg" href="/data-sources/go-high-level" />
+  <SourceCard name="Google Ads" category="Advertising" logo="/images/data-sources/google-ads.svg" href="/data-sources/google-ads" />
+  <SourceCard name="Google Analytics 4 (GA4)" category="Analytics" logo="/images/data-sources/google-analytics-4-ga4.svg" href="/data-sources/google-analytics-4-ga4" />
+  <SourceCard name="Google Business Profile" category="Local Business" logo="/images/data-sources/google-business-profile.svg" href="/data-sources/google-business-profile" />
+  <SourceCard name="Google Local Services Ads" category="Advertising" logo="/images/data-sources/google-local-services-ads.svg" href="/data-sources/google-local-services-ads" />
+  <SourceCard name="Google Page Speed" category="Performance Monitoring" logo="/images/data-sources/google-page-speed.svg" href="/data-sources/google-page-speed" />
+  <SourceCard name="Google Search Console" category="SEO" logo="/images/data-sources/google-search-console.svg" href="/data-sources/google-search-console" />
+  <SourceCard name="Google Sheets" category="Spreadsheet" logo="/images/data-sources/google-sheets.svg" href="/data-sources/google-sheets" />
+  <SourceCard name="Harvest" category="Project Management" logo="/images/data-sources/harvest.svg" href="/data-sources/harvest" />
+  <SourceCard name="Help Scout Docs" category="Customer Support" logo="/images/data-sources/help-scout-docs.svg" href="/data-sources/help-scout-docs" />
+  <SourceCard name="Help Scout Mailbox" category="Customer Support" logo="/images/data-sources/help-scout-mailbox.svg" href="/data-sources/help-scout-mailbox" />
+  <SourceCard name="HubSpot" category="CRM" logo="/images/data-sources/hubspot.svg" href="/data-sources/hubspot" />
+  <SourceCard name="Instagram" category="Social Media" logo="/images/data-sources/instagram.svg" href="/data-sources/instagram" />
+  <SourceCard name="Instagram Ads" category="Advertising" logo="/images/data-sources/instagram-ads.svg" href="/data-sources/instagram-ads" />
+  <SourceCard name="Intercom" category="CRM" logo="/images/data-sources/intercom.svg" href="/data-sources/intercom" />
+  <SourceCard name="Jira" category="Project Management" logo="/images/data-sources/jira.svg" href="/data-sources/jira" />
+  <SourceCard name="Keyword.com" category="SEO" logo="/images/data-sources/keyword-com.svg" href="/data-sources/keyword-com" />
+  <SourceCard name="Kit" category="Email Marketing" logo="/images/data-sources/kit.svg" href="/data-sources/kit" />
+  <SourceCard name="Klaviyo" category="Marketing Automation" logo="/images/data-sources/klaviyo.svg" href="/data-sources/klaviyo" />
+  <SourceCard name="lemlist" category="Email Marketing" logo="/images/data-sources/lemlist.svg" href="/data-sources/lemlist" />
+  <SourceCard name="LinkedIn" category="Social Media" logo="/images/data-sources/linkedin.svg" href="/data-sources/linkedin" />
+  <SourceCard name="LinkedIn Ads" category="Advertising" logo="/images/data-sources/linkedin-ads.svg" href="/data-sources/linkedin-ads" />
+  <SourceCard name="Mailchimp" category="Email Marketing" logo="/images/data-sources/mailchimp.svg" href="/data-sources/mailchimp" />
+  <SourceCard name="Mailer Lite" category="Email Marketing" logo="/images/data-sources/mailer-lite.svg" href="/data-sources/mailer-lite" />
+  <SourceCard name="Make" category="Marketing Automation" logo="/images/data-sources/make.svg" href="/data-sources/make" />
+  <SourceCard name="Matomo" category="Analytics" logo="/images/data-sources/matomo.svg" href="/data-sources/matomo" />
+  <SourceCard name="Mautic" category="Marketing Automation" logo="/images/data-sources/mautic.svg" href="/data-sources/mautic" />
+  <SourceCard name="Mention" category="Social Media" logo="/images/data-sources/mention.svg" href="/data-sources/mention" />
+  <SourceCard name="Meta Ads" category="Advertising" logo="/images/data-sources/meta-ads.svg" href="/data-sources/meta-ads" />
+  <SourceCard name="Microsoft Ads" category="Paid Search" logo="/images/data-sources/microsoft-ads.svg" href="/data-sources/microsoft-ads" />
+  <SourceCard name="Microsoft Clarity" category="Analytics" logo="/images/data-sources/microsoft-clarity.svg" href="/data-sources/microsoft-clarity" />
+  <SourceCard name="Monday" category="Project Management" logo="/images/data-sources/monday.svg" href="/data-sources/monday" />
+  <SourceCard name="Moosend" category="Email Marketing" logo="/images/data-sources/moosend.svg" href="/data-sources/moosend" />
+  <SourceCard name="Moz" category="SEO" logo="/images/data-sources/moz.svg" href="/data-sources/moz" />
+  <SourceCard name="Nozzle" category="SEO" logo="/images/data-sources/nozzle.svg" href="/data-sources/nozzle" />
+  <SourceCard name="Omnisend" category="Email Marketing" logo="/images/data-sources/omnisend.svg" href="/data-sources/omnisend" />
+  <SourceCard name="Pabbly Connect" category="Marketing Automation" logo="/images/data-sources/pabbly-connect.svg" href="/data-sources/pabbly-connect" />
+  <SourceCard name="Paddle" category="Payments" logo="/images/data-sources/paddle.svg" href="/data-sources/paddle" />
+  <SourceCard name="PayPal" category="Payments" logo="/images/data-sources/paypal.svg" href="/data-sources/paypal" />
+  <SourceCard name="Pingdom" category="Performance Monitoring" logo="/images/data-sources/pingdom.svg" href="/data-sources/pingdom" />
+  <SourceCard name="Pinterest" category="Social Media" logo="/images/data-sources/pinterest.svg" href="/data-sources/pinterest" />
+  <SourceCard name="Pinterest Ads" category="Advertising" logo="/images/data-sources/pinterest-ads.svg" href="/data-sources/pinterest-ads" />
+  <SourceCard name="Pipedrive" category="CRM" logo="/images/data-sources/pipedrive.svg" href="/data-sources/pipedrive" />
+  <SourceCard name="Piwik Pro" category="Analytics" logo="/images/data-sources/piwik-pro.svg" href="/data-sources/piwik-pro" />
+  <SourceCard name="Plausible" category="Analytics" logo="/images/data-sources/plausible.svg" href="/data-sources/plausible" />
+  <SourceCard name="Salesforce" category="CRM" logo="/images/data-sources/salesforce.svg" href="/data-sources/salesforce" />
+  <SourceCard name="SE Ranking" category="SEO" logo="/images/data-sources/se-ranking.svg" href="/data-sources/se-ranking" />
+  <SourceCard name="Semrush" category="SEO" logo="/images/data-sources/semrush.svg" href="/data-sources/semrush" />
+  <SourceCard name="Sendgrid" category="Email Marketing" logo="/images/data-sources/sendgrid.svg" href="/data-sources/sendgrid" />
+  <SourceCard name="SEOcrawl" category="SEO" logo="/images/data-sources/seocrawl.svg" href="/data-sources/seocrawl" />
+  <SourceCard name="Serpstat" category="SEO" logo="/images/data-sources/serpstat.svg" href="/data-sources/serpstat" />
+  <SourceCard name="SerpWatch" category="SEO" logo="/images/data-sources/serpwatch.svg" href="/data-sources/serpwatch" />
+  <SourceCard name="Shopify" category="E-commerce" logo="/images/data-sources/shopify.svg" href="/data-sources/shopify" />
+  <SourceCard name="SimpleSat" category="Customer Satisfaction" logo="/images/data-sources/simplesat.svg" href="/data-sources/simplesat" />
+  <SourceCard name="Slack" category="Communication" logo="/images/data-sources/slack.svg" href="/data-sources/slack" />
+  <SourceCard name="Snapchat Ads" category="Social Media" logo="/images/data-sources/snapchat-ads.svg" href="/data-sources/snapchat-ads" />
+  <SourceCard name="Stripe" category="Payments" logo="/images/data-sources/stripe.svg" href="/data-sources/stripe" />
+  <SourceCard name="Surnex" category="SEO" logo="/images/data-sources/surnex.svg" href="/data-sources/surnex" />
+  <SourceCard name="Switchy" category="Link Management" logo="/images/data-sources/switchy.svg" href="/data-sources/switchy" />
+  <SourceCard name="Teamwork" category="Project Management" logo="/images/data-sources/teamwork.svg" href="/data-sources/teamwork" />
+  <SourceCard name="TikTok" category="Social Media" logo="/images/data-sources/tiktok.svg" href="/data-sources/tiktok" />
+  <SourceCard name="TikTok Ads" category="Advertising" logo="/images/data-sources/tiktok-ads.svg" href="/data-sources/tiktok-ads" />
+  <SourceCard name="Twilio" category="Communication" logo="/images/data-sources/twilio.svg" href="/data-sources/twilio" />
+  <SourceCard name="Typeform" category="Forms &amp; Surveys" logo="/images/data-sources/typeform.svg" href="/data-sources/typeform" />
+  <SourceCard name="UptimeRobot" category="Uptime Monitoring" logo="/images/data-sources/uptimerobot.svg" href="/data-sources/uptimerobot" />
+  <SourceCard name="VBOUT" category="Email Marketing" logo="/images/data-sources/vbout.svg" href="/data-sources/vbout" />
+  <SourceCard name="Vimeo" category="Video Marketing" logo="/images/data-sources/vimeo.svg" href="/data-sources/vimeo" />
+  <SourceCard name="WhatConverts" category="Call Tracking" logo="/images/data-sources/whatconverts.svg" href="/data-sources/whatconverts" />
+  <SourceCard name="Wistia" category="Video Marketing" logo="/images/data-sources/wistia.svg" href="/data-sources/wistia" />
+  <SourceCard name="WooCommerce" category="E-commerce" logo="/images/data-sources/woocommerce.svg" href="/data-sources/woocommerce" />
+  <SourceCard name="WordPress" category="Content Management" logo="/images/data-sources/wordpress.svg" href="/data-sources/wordpress" />
+  <SourceCard name="X" category="Social Media" logo="/images/data-sources/x.svg" href="/data-sources/x" />
+  <SourceCard name="X Ads" category="Social Media" logo="/images/data-sources/x-ads.svg" href="/data-sources/x-ads" />
+  <SourceCard name="Xero" category="Accounting" logo="/images/data-sources/xero.svg" href="/data-sources/xero" />
+  <SourceCard name="YouTube" category="Social Media" logo="/images/data-sources/youtube.svg" href="/data-sources/youtube" />
+  <SourceCard name="Zoho CRM" category="CRM" logo="/images/data-sources/zoho-crm.svg" href="/data-sources/zoho-crm" />
+</SourceGrid>
+
+{/* generated:end */}
 
 <Note>
-  The full list of available data sources appears on a client's [Data sources](/data-sources/client-sources) page, and in the report editor's **Data Sources** tab. New platforms are added regularly.
+  New to data sources? Start with [Connect](/data-sources/connect). Numbers that don't come from a platform? Use [Custom Data](/custom-data/upload), [Calculated Metrics](/calculated-metrics/overview) or [Goals](/goals/overview).
 </Note>
-
-## How data sources work
-
-When you connect a data source, Oviond guides you through an OAuth flow — or, for some platforms, an API-key form — where you authorize Oviond to read your data. Oviond stores the result as a reusable **connection** (an auth profile).
-
-After connecting, you link a specific account, property, or page (for example, a particular Google Ads account or GA4 property) to a client. That linked data source then becomes available when you build widgets for that client.
-
-### Connections (profiles)
-
-A connection represents one authorized credential for a platform — typically tied to one login. If you manage multiple clients' accounts through a single login (such as a Google Ads manager account), one connection can cover all of those sub-accounts.
-
-You can reuse the same connection across multiple clients. For example, if your workspace has a single Google Ads manager account containing sub-accounts for 10 clients, you authorize Google Ads once and then link each client to their respective sub-account — without re-authenticating.
-
-## Listing your connections
-
-To see every connection across your workspace, go to **Settings → Data sources** (`/settings/data-sources`). The table has a row per connection: **Data source**, **Profile**, **Clients** (how many use it), **Status** and **Connected** (the date). Search by name, or use **Filters** to show one status or one platform. Click a row, or **Manage**, to open the connection's panel. The **Connect** button adds a new one.
-
-To see the data sources linked to one client, open that client and click **Data sources** in the sidebar. Platforms the client is already connected to sort to the top, each card reading **Connected**.
-
-## Checking connection status
-
-Every connection shows **Working** or **Needs attention**. Oviond checks them every day on its own, and you can click **Test** in a connection's panel at any time. To fix one that needs attention, see [Test Connection](/data-sources/test).
-
-## Disconnecting and deleting
-
-**Disconnecting** removes a data source from one client but keeps the connection for reuse. **Deleting** a connection removes it from your workspace and from every client that used it.
-
-### Disconnect a data source from a client
-
-1. Open the client and go to its **Data sources** page.
-2. Open the platform.
-3. Click **Disconnect** on the connected profile.
-
-The connection stays available and can be linked to the same or a different client at any time.
-
-### Delete a connection
-
-<Warning>
-  Deleting a connection removes it for good and may affect widgets that use it. Widgets that relied on it stop showing data. This can't be undone.
-</Warning>
-
-1. Go to **Settings → Data sources** and click the connection.
-2. Click **Delete profile**.
-3. Type `DELETE` to confirm, then click **Delete profile**.
-
-## Next steps
-
-<CardGroup cols={2}>
-  <Card title="Connect a data source" icon="plug" href="/data-sources/connect">
-    Step-by-step guide to connecting a platform and linking it to a client.
-  </Card>
-  <Card title="Calculated metrics" icon="sliders" href="/calculated-metrics/overview">
-    Combine metrics across data sources into custom KPIs.
-  </Card>
-</CardGroup>

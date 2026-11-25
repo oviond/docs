@@ -1,0 +1,7 @@
+**Limits set by Matomo**
+
+- **Reports show the top 100 rows.** Matomo's API returns the top 100 rows of a report by default, so **Referrers**, **User Country**, **Devices Detection** and **Actions** list at most 100 rows.
+- **Unique visitors may be missing for date ranges.** Matomo only works out unique visitors for custom date ranges when the setting `enable_processing_unique_visitors_range` is turned on. It is off by default, and it can't be turned on in Matomo Cloud. Without it, unique visitors show 0 in widgets not split by date, month or year.
+- **Numbers depend on your Matomo's report processing.** Matomo builds reports from raw visits (archiving). If archiving is behind, recent days can be missing or low.
+
+Matomo's pages: [reporting API](https://developer.matomo.org/api-reference/reporting-api), [unique visitors for date ranges](https://matomo.org/faq/faq_113/).

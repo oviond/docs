@@ -1,0 +1,11 @@
+**Limits set by Airtable**
+
+- **5 requests a second per base.** Airtable allows 5 requests a second for each base, and 50 a second for all requests made with one person's tokens. A big table, or many Airtable widgets loading at once, can show **Airtable is busy right now**.
+- **Monthly API limits on Free and Team plans.** Airtable counts API calls per workspace each month, and resets them on the first day of the month (UTC).
+  - Free: 1,000 calls. Past that, a one-time 30-day grace period starts. After it, calls are blocked until the month resets.
+  - Team: 100,000 calls. Past that, calls slow down to 2 a second.
+  - Business and Enterprise Scale: no monthly cap.
+
+  Each widget load uses 1 call per 100 records (twice that when it compares with an earlier period). A 1,000-record table uses 10 calls per load, or 20 with a comparison.
+
+Airtable's pages: [rate limits](https://airtable.com/developers/web/api/rate-limits), [API call limits](https://support.airtable.com/docs/managing-api-call-limits-in-airtable).

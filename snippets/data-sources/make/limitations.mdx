@@ -1,0 +1,7 @@
+**Limits set by Make**
+
+- **Run history is kept for a limited time.** Make keeps scenario run history for a number of days that depends on your plan. **Executions** shows nothing for older dates.
+- **Requests per minute by plan.** Make allows 60 API requests a minute on Core, 120 on Pro, 240 on Teams and 1,000 on Enterprise. **Executions** reads each scenario's logs 50 at a time, so a team with many busy scenarios can show **Make is busy right now**.
+- **Your zone must match.** Make keeps each organization in one zone (for example `us1` or `eu1`). The **Zone** you enter when connecting must match, or the connection fails. With no zone, Oviond uses `us1`.
+
+Make's pages: [API rate limiting](https://developers.make.com/api-documentation/getting-started/rate-limiting), [pricing parameters (log storage)](https://make.com/en/help/general/pricing-parameters).

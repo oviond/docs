@@ -1,0 +1,12 @@
+/* Tab bars: hide the scrollbar until you hover the tabs, like the sidebar.
+   Only the colour changes, so the tabs never move when it shows. */
+[data-component-part="tabs-list"] {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+[data-component-part="tabs-list"]:hover {
+  scrollbar-color: rgb(0 0 0 / 0.25) transparent;
+}
+.dark [data-component-part="tabs-list"]:hover {
+  scrollbar-color: rgb(255 255 255 / 0.25) transparent;
+}
