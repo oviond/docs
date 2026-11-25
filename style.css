@@ -10,3 +10,9 @@
 .dark [data-component-part="tabs-list"]:hover {
   scrollbar-color: rgb(255 255 255 / 0.25) transparent;
 }
+
+/* A page that starts with a callout (Note, Tip, …): no extra space above it, so it
+   sits as far under the title as a first paragraph does. */
+#content > .callout:first-child {
+  margin-top: 0;
+}
