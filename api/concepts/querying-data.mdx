@@ -33,7 +33,7 @@ curl -X POST https://api.oviond.com/v1/data/query \
 | `metrics` | ✓ | Array of metric `id`s, e.g. `["clicks", "impressions"]`. **Get valid ids from [`GET /v1/datasources/{datasource_id}/describe`](#finding-valid-identifiers).** |
 | `dimensions` | ✓ | Array of dimension `id`s, e.g. `["DATE"]` for a time series, or `[]` for a single total. **Get valid ids from [`GET /v1/datasources/{datasource_id}/describe`](#finding-valid-identifiers).** |
 | `data_view` | ✓ | The datasource view, e.g. `ACCOUNT`. A metric or dimension is only valid inside its own view — `/describe` groups them by view. |
-| `filters` | | Array of `{ field, operator, value }` filter objects. `operator` is one of `equals`, `not_equals`, `contains`, `not_contains`, `starts_with`, `ends_with`, `greater_than`, `less_than`, `greater_than_or_equal`, `less_than_or_equal`. Add `"logicalOperator": "and"` (or `"or"`) to combine multiple filters. |
+| `filters` | | Array of `{ field, operator, value }` filter objects. `field` must be one of the request's `metrics` or `dimensions` — to filter on another dimension, add it to `dimensions` too. `operator` is one of `equals`, `not_equals`, `contains`, `not_contains`, `starts_with`, `ends_with`, `greater_than`, `less_than`, `greater_than_or_equal`, `less_than_or_equal`. Add `"logicalOperator": "and"` (or `"or"`) to combine multiple filters. |
 
 Dates are always read in the client's timezone (set on the client; if it has none, the account's, then UTC). "Today" and each day of a `DATE` breakdown follow that timezone.
 

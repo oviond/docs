@@ -1,0 +1,9 @@
+**Limits set by Shopify**
+
+If you connect with an **API Key** and **API Secret** (an app made in your Shopify Dev Dashboard), these apply. A store connected by installing Oviond from the Shopify App Store doesn't need them.
+
+- **The app must belong to the store's organization.** Shopify only gives a sign-in for an API Key and API Secret to an app made in the same organization that owns the store, and installed on it. So an agency can't use its own app on a client's store: the app must be made in the client's organization, or the client installs Oviond from the Shopify App Store.
+- **The app needs report access.** Shopify's reports need the app to have the `read_reports` access scope and access to protected customer data (Level 2: name, address, phone and email). Without them, widgets show an error. A scope added later needs a new app version, approved on the store.
+- **Removing the app stops the connection.** If the app is uninstalled or its secret changes, the connection stops working.
+
+Shopify's pages: [ShopifyQL query](https://shopify.dev/docs/api/admin-graphql/latest/queries/shopifyqlQuery), [client credentials](https://shopify.dev/docs/apps/build/authentication-authorization/access-tokens/client-credentials-grant).

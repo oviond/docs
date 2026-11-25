@@ -1,0 +1,13 @@
+**Limits set by Google**
+
+- **Recent data can change.** Google takes 24–48 hours to process data, and some data arrives up to 7 days late. Numbers for the last few days can still go up.
+- **Rows with few users can be hidden.** To protect privacy, Google can leave out rows with only a few users. This is called thresholding. It mostly happens with age, gender, interests or Google signals.
+- **"(other)" rows.** When a report has too many different values (for example thousands of page paths), Google groups the rest into one **(other)** row. It is more likely with a second dimension, filters or comparisons, and with dimensions that have more than 500 values a day. Filters can't look inside the (other) row.
+- **Request limits.** Google gives each property a request budget for each hour and each day (10 times bigger on Analytics 360). Each app that reads the property also has its own smaller hourly budget for it, so everyone who reads that property through Oviond shares one. When a budget runs out, widgets show **Google Analytics 4 (GA4) is busy right now** until it resets.
+- **Big reports can be sampled.** For very large or complex reports, Google can work the numbers out from part of the data, not all of it. Then they can differ a little from Google Analytics.
+- **User and session counts are close, not exact.** Google estimates counts like **Active Users** and **Sessions** to stay fast. Google Analytics does the same.
+- **Adding a dimension can change the totals.** Google only counts events that have a value for every dimension in the widget. So a widget split by a dimension can show smaller totals than one without it.
+- **The reporting identity setting changes user counts.** Your property's **Reporting identity** (for example Blended or Device-based) decides how users are counted. If someone changes it, user numbers change in Oviond and in Google Analytics alike.
+- **Your data retention setting doesn't matter here.** Google says the retention setting doesn't change standard reports. It only limits Explorations and funnel reports in Google Analytics.
+
+Google's pages: [data freshness](https://support.google.com/analytics/answer/11198161), [processing and limits](https://developers.google.com/analytics/devguides/reporting/data/v1/reporting-data-expectations), [request limits](https://developers.google.com/analytics/devguides/reporting/data/v1/quotas), [the (other) row](https://support.google.com/analytics/answer/13331684), [data retention](https://support.google.com/analytics/answer/7667196).
