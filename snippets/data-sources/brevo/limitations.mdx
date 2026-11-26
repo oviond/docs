@@ -1,5 +1,11 @@
+**Campaigns follow their sent date**
+
+- **Only campaigns sent in the report's dates are listed.** **Email Campaign** and **SMS Campaign** widgets show the campaigns sent between the report's first and last day. Drafts and scheduled campaigns are not listed, because they have no sent date yet. Days are counted in UTC time, so a campaign sent close to midnight can fall on the day before or after.
+- **A campaign's numbers are its totals.** Brevo gives one total per campaign, not a number per day. A campaign sent on the last day of the report still counts opens and clicks that came after that day.
+
 **Limits set by Brevo**
 
+- **Email campaigns: 2 years at most.** Brevo refuses a date range longer than 2 years for email campaigns, so a longer range shows an error on **Email Campaign** widgets.
 - **About 100 requests an hour for campaigns.** On most plans, Brevo allows about 100 requests an hour to its campaign lists. Several **Email Campaign** or **SMS Campaign** widgets can show **Brevo is busy right now**. Contact lists have a much higher limit.
 - **Email numbers cover the last 6 months.** Brevo's campaign numbers only count events (opens, clicks and so on) from the last 6 months, so older campaigns can show low numbers or 0.
 
